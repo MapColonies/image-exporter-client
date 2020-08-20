@@ -12,8 +12,9 @@ import '@map-colonies/react-core/dist/menu/styles';
 import '@map-colonies/react-core/dist/select/styles';
 import '@map-colonies/react-core/dist/circular-progress/styles';
 import '@map-colonies/react-core/dist/typography/styles';
+import '@map-colonies/react-core/dist/dialog/styles';
 
-import ConflictsView from './conflicts/views/conflicts-view';
+import ExporterView from './conflicts/views/exporter-view';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -27,7 +28,7 @@ const App: React.FC = () => {
     >
       <RMWCThemeProvider options={theme}>
         <CssBaseline />
-        <ConflictsView />
+        <ExporterView />
       </RMWCThemeProvider>
     </RMWCProvider>
   );

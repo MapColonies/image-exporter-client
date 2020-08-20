@@ -2,28 +2,23 @@ import React from 'react';
 import {
   VectorLayer,
   VectorSource,
-  MapFilterContainer,
   GeoJSONFeature,
 } from '@map-colonies/react-components';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../models/rootStore';
-// import { DateFilter } from '../components/date-filter';
-// import { HasResolvedFilter } from '../components/has-resolved-filter';
-// import { ConflictsTable } from '../components/conflicts-table';
+import { MapContainer } from '../components/map-container';
 
-const ConflictsView: React.FC = observer(() => {
+const ExporterView: React.FC = observer(() => {
   const { conflictsStore } = useStore();
   const handleExport = () => {
     console.log('conflictsStore.searchParams--->', conflictsStore.searchParams);
   }
   return (
-    <MapFilterContainer
+    <MapContainer
       handlePolygonSelected={conflictsStore.searchParams.setLocation}
       handlePolygonReset={conflictsStore.searchParams.resetLocation.bind(
         conflictsStore.searchParams
       )}
-      // children={<ConflictsTable />}
-      // filters={[<DateFilter />, <HasResolvedFilter />]}
       filters={[<div style={{width:'50px',height:'36px',backgroundColor: 'red'}} onClick={handleExport}/>]}
       mapContent={
         <VectorLayer>
@@ -38,4 +33,4 @@ const ConflictsView: React.FC = observer(() => {
   );
 });
 
-export default ConflictsView;
+export default ExporterView;
