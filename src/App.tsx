@@ -13,6 +13,7 @@ import '@map-colonies/react-core/dist/select/styles';
 import '@map-colonies/react-core/dist/circular-progress/styles';
 import '@map-colonies/react-core/dist/typography/styles';
 import '@map-colonies/react-core/dist/dialog/styles';
+import '@map-colonies/react-core/dist/textfield/styles';
 
 import ExporterView from './conflicts/views/exporter-view';
 

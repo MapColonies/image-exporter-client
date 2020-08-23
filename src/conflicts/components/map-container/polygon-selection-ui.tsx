@@ -3,12 +3,7 @@ import { Polygon } from 'geojson';
 import { Menu, 
   MenuItem,
   Button,
-  Tooltip,
-  Dialog, 
-  DialogTitle, 
-  DialogContent, 
-  DialogActions, 
-  DialogButton } from '@map-colonies/react-core';
+  Tooltip } from '@map-colonies/react-core';
 import '@map-colonies/react-core/dist/button/styles';
 import '@map-colonies/react-core/dist/tooltip/styles';
 import '@map-colonies/react-core/dist/menu/styles';
@@ -16,6 +11,7 @@ import '@map-colonies/react-core/dist/menu/styles';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { Box, DrawType } from '@map-colonies/react-components';
+import { DialogBBox } from './dialog-bbox';
 
 const WIDTH_SPACING_FACTOR = 18;
 const useStyle = makeStyles((theme: Theme) =>
@@ -78,35 +74,11 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
             Draw AOI
           </Button>
         </Tooltip>
-        <Dialog
-          open={open}
-          onClose={evt => {
-            const SAMPLE_POLYGON: Polygon={
-              type:"Polygon",
-              coordinates:[[
-                  [34.70371442859832,32.022954156119006],
-                  [35.146463443653914,32.022954156119006],
-                  [35.146463443653914,32.23608887564354],
-                  [34.70371442859832,32.23608887564354],
-                  [34.70371442859832,32.022954156119006]
-              ]]
-            };
-          
-            console.log(evt.detail.action);
-            onPolygonUpdate(SAMPLE_POLYGON);
-            setOpen(false);
-          }}
-          onClosed={evt => console.log(evt.detail.action)}
-        >
-          <DialogTitle>Define bbox coordinates</DialogTitle>
-          <DialogContent>This is a standard dialog.</DialogContent>
-          <DialogActions>
-            <DialogButton action="close">Cancel</DialogButton>
-            <DialogButton raised action="accept" isDefaultAction>
-              Ok
-            </DialogButton>
-          </DialogActions>
-        </Dialog>
+        <DialogBBox 
+          isOpen={open}
+          onSetOpen={setOpen}
+          onPolygonUpdate={onPolygonUpdate}>
+        </DialogBBox>
         <Menu
           className={classes.fullWidth}
           open={Boolean(anchorEl)}
