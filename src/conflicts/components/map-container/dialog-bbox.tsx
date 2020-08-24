@@ -78,13 +78,13 @@ interface BBoxCornersError {
 const validate = (values: BBoxCorners): BBoxCornersError => {
   const errors: BBoxCornersError = {latDistance: '', lonDistance: ''};
 
-  const xDistance = distance(
-    [values.bottomLeftLat, values.bottomLeftLon],
-    [values.topRightLat, values.bottomLeftLon]);
-  
   const yDistance = distance(
-    [values.bottomLeftLat, values.bottomLeftLon],
-    [values.bottomLeftLat, values.topRightLon]);
+    [values.bottomLeftLon, values.bottomLeftLat],
+    [values.bottomLeftLon, values.topRightLat]);
+  
+  const xDistance = distance(
+    [values.bottomLeftLon, values.bottomLeftLat],
+    [values.topRightLon, values.bottomLeftLat]);
 
   if (xDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_X){
     errors.latDistance = 'X distance is exceeded the limit'
@@ -127,8 +127,8 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       //   ]]
       // };
       const line = turf.lineString([
-        [values.bottomLeftLat, values.bottomLeftLon],
-        [values.topRightLat, values.topRightLon], 
+        [values.bottomLeftLon, values.bottomLeftLat],
+        [values.topRightLon, values.topRightLat], 
       ]);
       const polygon = bboxPolygon(bbox(line));
       console.log('polygon', polygon.geometry);
@@ -157,7 +157,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
         <form onSubmit={formik.handleSubmit}>
           <Box style={{display: 'flex', marginBottom: '16px'}}>
             <TextField 
-              label="Right Top Lat" 
+              label="Top Right Lat" 
               id="topRightLat"
               name="topRightLat"
               type="number"
@@ -166,7 +166,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               className={classes.spacer}
             />
             <TextField 
-              label="Right Top Lon" 
+              label="Top Right Lon" 
               id="topRightLon"
               name="topRightLon"
               type="number"
@@ -178,7 +178,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           </Box>
           <Box style={{display: 'flex'}}>
           <TextField 
-              label="Left Bottom Lat" 
+              label="Bottom Left Lat" 
               id="bottomLeftLat"
               name="bottomLeftLat"
               type="number"
@@ -187,7 +187,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               className={classes.spacer}
             />
             <TextField 
-              label="Left Bottom Lon" 
+              label="Bottom Left Lon" 
               id="bottomLeftLon"
               name="bottomLeftLon"
               type="number"
