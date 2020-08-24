@@ -116,16 +116,6 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       topRightLon: 0,
     },
     onSubmit: values => {
-      // const SAMPLE_POLYGON: Polygon={
-      //   type:"Polygon",
-      //   coordinates:[[
-      //       [34.70371442859832,32.022954156119006],
-      //       [35.146463443653914,32.022954156119006],
-      //       [35.146463443653914,32.23608887564354],
-      //       [34.70371442859832,32.23608887564354],
-      //       [34.70371442859832,32.022954156119006]
-      //   ]]
-      // };
       const line = turf.lineString([
         [values.bottomLeftLon, values.bottomLeftLat],
         [values.topRightLon, values.topRightLat], 
