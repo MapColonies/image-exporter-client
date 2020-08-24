@@ -58,7 +58,7 @@ export const MapContainer: React.FC<MapContainerProps> = (
   return (
     <div className={classes.map}>
       <div className={`${classes.absolute}`}>
-        <div className={classes.filtersContainer}> {/*Paper*/}
+        <div className={classes.filtersContainer}>
           <PolygonSelectionUi
             onCancelDraw={(): void => setDrawType(undefined)}
             onReset={onReset}
