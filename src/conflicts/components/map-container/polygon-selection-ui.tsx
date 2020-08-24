@@ -84,14 +84,6 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
           open={Boolean(anchorEl)}
           onClose={handleClose}
         >
-          {/* <MenuItem
-            onClick={(): void => {
-              onStartDraw(DrawType.POLYGON);
-              handleClose();
-            }}
-          >
-            Polygon
-          </MenuItem> */}
           <MenuItem
             onClick={(): void => {
               onStartDraw(DrawType.BOX);
