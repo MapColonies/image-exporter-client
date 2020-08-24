@@ -102,9 +102,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
           </MenuItem>
           <MenuItem
             onClick={(): void => {
-              // onStartDraw(DrawType.BOX);
               setOpen(true);
-              handleClose();
             }}
           >
             Box by coordinates

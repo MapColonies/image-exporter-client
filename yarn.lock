@@ -1004,10 +1004,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.0", "@babel/runtime@^7.8.3", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.10.3", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.8.3", "@babel/runtime@^7.9.6":
   version "7.10.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.5.tgz#303d8bd440ecd5a491eae6117fd3367698674c5c"
   integrity sha512-otddXKhdNn7d0ptoFRHtMLa8LqDxLYwTjB4nYgM1yy5N6gU/MUf8zqyyLltCH3yAVitBzmwK4us+DD0l/MauAg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.6.0":
+  version "7.11.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha512-TeWkU52so0mPtDcaCTxNBI/IHiz0pZgr8VEFqXFtZWpYD08ZB6FaSwVAS8MKRQAP3bYKiVjwysOJgMFY28o6Tw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1507,9 +1514,9 @@
   integrity sha1-zlblOfg1UrWNENZy6k1vya3HsjQ=
 
 "@mapbox/mapbox-gl-style-spec@^13.14.0":
-  version "13.16.0"
-  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-style-spec/-/mapbox-gl-style-spec-13.16.0.tgz#fe0dc62c22697ff3e38966a3f44e57ade48b4260"
-  integrity sha512-HtQCLg8NLgnYI0uOSbMNtTcwiCJc9WR5uZekhFaXbyjUWwZVNMW7ElKrDLYkaZ4lvUvbqjotyvZC2Holn/yhpg==
+  version "13.17.0"
+  resolved "https://registry.yarnpkg.com/@mapbox/mapbox-gl-style-spec/-/mapbox-gl-style-spec-13.17.0.tgz#4b9f16e4cc94ce13a254d61a139b28c716925de4"
+  integrity sha512-ZxOdHiuUmDcvQNc1uTnBLVJZxiQVYvoNZaQVxWwl+6Id6tjGQFtieZxXiv/RXIOpQQT35JuioatTKdsjpMsULA==
   dependencies:
     "@mapbox/jsonlint-lines-primitives" "~2.0.2"
     "@mapbox/point-geometry" "^0.1.0"
@@ -2357,6 +2364,14 @@
   dependencies:
     "@turf/helpers" "^5.1.5"
 
+"@turf/distance@6.2.0-alpha.2":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/distance/-/distance-6.2.0-alpha.2.tgz#b62b25cf5145dd4233ce5bd5e061c8513faefb9c"
+  integrity sha512-gfCN8b3il37KTplYxcxh2jv+kDt47rPD7QtDMK4yjxFaK/9Zqdc+rUVMVOC/nhO4cvIa+zS3d+CT2ncEIfWWGA==
+  dependencies:
+    "@turf/helpers" "^6.2.0-alpha.2"
+    "@turf/invariant" "^6.2.0-alpha.2"
+
 "@turf/helpers@6.x", "@turf/helpers@^6.1.4":
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.1.4.tgz#d6fd7ebe6782dd9c87dca5559bda5c48ae4c3836"
@@ -2367,12 +2382,24 @@
   resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-5.1.5.tgz#153405227ab933d004a5bb9641a9ed999fcbe0cf"
   integrity sha1-FTQFInq5M9AEpbuWQantmZ/L4M8=
 
+"@turf/helpers@^6.2.0-alpha.2":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/helpers/-/helpers-6.2.0-alpha.2.tgz#3a17ecd4e906bc5e3ceedd68664341d25b514da3"
+  integrity sha512-YW7Tk75XTbJh3ZBwdo29QE/N4HjxApNV4ZUVJaukBm2Kns/sGMJh9RQPuITOlB5+tW6FUVTMlZYK1PejiVNeAQ==
+
 "@turf/invariant@^5.1.5":
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/@turf/invariant/-/invariant-5.2.0.tgz#f0150ff7290b38577b73d088b7932c1ee0aa90a7"
   integrity sha1-8BUP9ykLOFd7c9CIt5MsHuCqkKc=
   dependencies:
     "@turf/helpers" "^5.1.5"
+
+"@turf/invariant@^6.2.0-alpha.2":
+  version "6.2.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@turf/invariant/-/invariant-6.2.0-alpha.2.tgz#b42e973160dfb516453c2e8e7626a299eef5676e"
+  integrity sha512-o4PDDR8LByDFAvLMmra9EkmxaRIbykxrFlRBuWt/uMF2OQ8AMfF3BGbfyCHU9p+0zAskNBhS5SvmLB3e+PcE3A==
+  dependencies:
+    "@turf/helpers" "^6.2.0-alpha.2"
 
 "@turf/meta@6.x":
   version "6.0.2"
@@ -10036,18 +10063,18 @@ obuf@^1.0.0, obuf@^1.1.2:
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
 ol-mapbox-style@^6.1.1:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-6.1.2.tgz#611f918c2b713fb66de0ee85bc688aebbbb290af"
-  integrity sha512-0n+6K1dhMH7/AMA1eAEb1Pt4ZRFWr1fiJWSgwHfDFQpK4yuhJgtLcn9dtxprB1NOpTHeJ5XbTKOrgTY/DR0oxQ==
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/ol-mapbox-style/-/ol-mapbox-style-6.1.4.tgz#5caec1e26e45371091cb68488541b0f9d56d531f"
+  integrity sha512-XyOk6oGTGtFnj6gRvMwdKZft9s1QeSh9toQRGT7vFr8fS9yV8fSVJnrdmicGTYDYkUVmL+B3Sebi2jc1oEdouQ==
   dependencies:
     "@mapbox/mapbox-gl-style-spec" "^13.14.0"
     mapbox-to-css-font "^2.4.0"
     webfont-matcher "^1.1.0"
 
 ol@^6.3.1:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.4.0.tgz#f4783e7e08caeb7b54f5dbc41507bc19731db1eb"
-  integrity sha512-eZv9kwxpwF2YsOoBKPlyp8BtxHGDGL+cQqzrpirQzHFZnwKomSVWF4Xbr7llreJDvyd63SKqrQS9cAxy9jrkKQ==
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.4.3.tgz#2277bb583fe2848e4b2062f85f1c5136b4b0c1b2"
+  integrity sha512-JcoZ/VJE9cUoxfhpa2EFYH0AHFYty1x47aITsQgLkyvWIWWigWp1N9LBcCSlCuu2QkE+DutomI2oKfnFbQA/xw==
   dependencies:
     ol-mapbox-style "^6.1.1"
     pbf "3.2.1"

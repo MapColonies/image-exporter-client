@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as  turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
+import distance  from '@turf/distance/dist/js';
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -9,10 +10,10 @@ import {
   Dialog, 
   DialogTitle, 
   DialogContent, 
-  DialogActions, 
-  DialogButton, 
-  TextField } from '@map-colonies/react-core';
+  TextField, 
+  Button} from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
+import EXPORTER_CONFIG from '../../../common/config';
 
   const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,12 +50,52 @@ import { Box } from '@map-colonies/react-components';
         right: 0   
       }
     },
-    spacer:{
+    spacer: {
       marginRight: '16px'
+    },
+    errorContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      marginRight: 'auto',
+      color: theme.palette.error.main,
     }
 
   })
 );
+
+interface BBoxCorners {
+  bottomLeftLat: number;
+  bottomLeftLon: number;
+  topRightLat: number;
+  topRightLon: number;
+}
+
+interface BBoxCornersError {
+  latDistance: string;
+  lonDistance: string;
+}
+
+const validate = (values: BBoxCorners): BBoxCornersError => {
+  const errors: BBoxCornersError = {latDistance: '', lonDistance: ''};
+
+  const xDistance = distance(
+    [values.bottomLeftLat, values.bottomLeftLon],
+    [values.topRightLat, values.bottomLeftLon]);
+  
+  const yDistance = distance(
+    [values.bottomLeftLat, values.bottomLeftLon],
+    [values.bottomLeftLat, values.topRightLon]);
+
+  if (xDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_X){
+    errors.latDistance = 'X distance is exceeded the limit'
+  }
+  if (yDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_Y){
+    errors.lonDistance = 'Y distance is exceeded the limit'
+  }
+
+  return errors;
+};
+
 
 interface DialogBBoxProps {
   isOpen: boolean;
@@ -75,7 +116,6 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       topRightLon: 0,
     },
     onSubmit: values => {
-      // alert(JSON.stringify(values, null, 2));
       // const SAMPLE_POLYGON: Polygon={
       //   type:"Polygon",
       //   coordinates:[[
@@ -86,7 +126,6 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       //       [34.70371442859832,32.022954156119006]
       //   ]]
       // };
-
       const line = turf.lineString([
         [values.bottomLeftLat, values.bottomLeftLon],
         [values.topRightLat, values.topRightLon], 
@@ -94,21 +133,28 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       const polygon = bboxPolygon(bbox(line));
       console.log('polygon', polygon.geometry);
     
-      onPolygonUpdate(polygon.geometry);
+      const err = validate(values);
+      if(!err.latDistance && !err.lonDistance){
+        onPolygonUpdate(polygon.geometry);
+        handleClose(false);
+      }
+      else{
+        setFormErrors(err);
+      }
+
     },
   });
+
+  const [formErrors, setFormErrors] = useState({latDistance: '', lonDistance: ''});
+  
+  const handleClose = (isOpened:boolean):void => {
+    onSetOpen(isOpened);
+  }
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Dialog
-        open={isOpen}
-        onClose={evt => {
-          console.log(evt.detail.action);
-          onSetOpen(false);
-        }}
-        onClosed={evt => console.log(evt.detail.action)}
-      >
+      <Dialog open={isOpen}>
         <DialogTitle>Define bbox coordinates</DialogTitle>
         <DialogContent>
+        <form onSubmit={formik.handleSubmit}>
           <Box style={{display: 'flex', marginBottom: '16px'}}>
             <TextField 
               label="Right Top Lat" 
@@ -151,15 +197,20 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
             />
             <div className={`${classes.bbox} ${classes.bboxLeftBottomCorner}`}></div>
           </Box>
+          <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
+            {
+              (!!formErrors.latDistance || !!formErrors.lonDistance) ? 
+              <div className={classes.errorContainer}>
+                {`Error: ${formErrors.latDistance} ${formErrors.lonDistance}`}
+              </div> : 
+              null
+            }
+            <Button type="button" onClick={()=>{handleClose(false);}}>Cancel</Button>
+            <Button raised type="submit">Ok</Button>
+          </Box>
+        </form>
         </DialogContent>
-        <DialogActions>
-          <DialogButton action="close" type="button">Cancel</DialogButton>
-          <DialogButton raised action="accept" type="submit" isDefaultAction>
-            Ok
-          </DialogButton>
-        </DialogActions>
       </Dialog>
-    </form>
 
   );
-}  
+}
