@@ -18,10 +18,11 @@ import '@map-colonies/react-core/dist/textfield/styles';
 
 import ExporterView from './conflicts/views/exporter-view';
 import MESSAGES from './common/i18n';
+import EXPORTER_CONFIG from './common/config';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [lang, setLang] = useState('he');
+  const [lang, setLang] = useState(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE);
   const theme = prefersDarkMode ? Themes.darkTheme : Themes.lightTheme;
   
   useLayoutEffect(()=>{

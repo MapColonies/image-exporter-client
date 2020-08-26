@@ -7,6 +7,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider, rootStore } from './conflicts/models/rootStore';
 import { ConflictResponse } from './conflicts/models/conflictStore';
+import EXPORTER_CONFIG from './common/config';
 
 const store = rootStore.create(
   {},
@@ -18,7 +19,7 @@ const store = rootStore.create(
 
 // REMARK IIFE to discard language presentation logic
 ((): void=>{
-  const lang = 'he';//navigator.language.split(/[-_]/)[0];  // language without region code
+  const lang = EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE;//navigator.language.split(/[-_]/)[0];  // language without region code
 
   document.documentElement.lang = lang;
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
