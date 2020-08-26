@@ -11,7 +11,7 @@ import EXPORTER_CONFIG from '../../common/config';
 
 const ExporterView: React.FC = observer(() => {
   const { conflictsStore } = useStore();
-  const handleExport = () => {
+  const handleExport = ():void => {
     console.log('conflictsStore.searchParams--->', conflictsStore.searchParams);
   }
 

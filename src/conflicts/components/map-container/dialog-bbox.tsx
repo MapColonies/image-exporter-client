@@ -210,7 +210,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               </div> : 
               null
             }
-            <Button type="button" onClick={()=>{handleClose(false);}}>
+            <Button type="button" onClick={(): void =>{handleClose(false);}}>
               <FormattedMessage id="general.cancel-btn.text"/>
             </Button>
             <Button raised type="submit">

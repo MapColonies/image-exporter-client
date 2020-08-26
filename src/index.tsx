@@ -17,10 +17,11 @@ const store = rootStore.create(
 );
 
 // REMARK IIFE to discard language presentation logic
-(()=>{
+((): void=>{
   const lang = 'he';//navigator.language.split(/[-_]/)[0];  // language without region code
 
   document.documentElement.lang = lang;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if(lang === 'he'){
     document.body.dir = 'rtl';  
   }

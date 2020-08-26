@@ -1,3 +1,4 @@
+/*eslint-disable */
 const EXPORTER_CONFIG = {
   BOUNDARIES: {
     MAX_X_KM: 100,
