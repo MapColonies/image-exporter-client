@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as  turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
-import distance  from '@turf/distance/dist/js';
+import distance  from '@turf/distance/dist/js'; //TODO: make a consumption "REGULAR"
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
