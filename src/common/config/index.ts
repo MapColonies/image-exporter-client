@@ -1,7 +1,7 @@
 const EXPORTER_CONFIG = {
   BOUNDARIES: {
-    MAX_X: 100,
-    MAX_Y: 100,
+    MAX_X_KM: 100,
+    MAX_Y_KM: 100,
   },
   WMTS_LAYER: {
     ATTRIBUTIONS:

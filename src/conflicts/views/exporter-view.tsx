@@ -1,8 +1,5 @@
 import React from 'react';
 import {
-  // VectorLayer,
-  // VectorSource,
-  // GeoJSONFeature,
   TileLayer,
   TileWMTS,
   getWMTSOptions
@@ -34,13 +31,6 @@ const ExporterView: React.FC = observer(() => {
       )}
       filters={[<div style={{width:'50px',height:'36px',backgroundColor: 'red'}} onClick={handleExport}/>]}
       mapContent={
-        // <VectorLayer>
-        //   <VectorSource>
-        //     {conflictsStore.conflicts.map((conflict, index) => (
-        //       <GeoJSONFeature key={index} geometry={conflict.location} />
-        //     ))}
-        //   </VectorSource>
-        // </VectorLayer>
         <TileLayer>
           <TileWMTS options={wmtsOptions}/>
         </TileLayer>

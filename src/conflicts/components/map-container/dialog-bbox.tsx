@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as  turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
-import distance  from '@turf/distance/dist/js';
+import distance  from '@turf/distance/dist/js'; //TODO: make a consumption "REGULAR"
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -80,19 +80,29 @@ interface BBoxCornersError {
 const validate = (values: BBoxCorners, intl: IntlShape): BBoxCornersError => {
   const errors: BBoxCornersError = {latDistance: '', lonDistance: ''};
 
-  const yDistance = distance(
-    [values.bottomLeftLon, values.bottomLeftLat],
-    [values.bottomLeftLon, values.topRightLat]);
-  
-  const xDistance = distance(
-    [values.bottomLeftLon, values.bottomLeftLat],
-    [values.topRightLon, values.bottomLeftLat]);
+  try{
+    turf.lineString([
+      [values.bottomLeftLon, values.bottomLeftLat],
+      [values.topRightLon, values.topRightLat], 
+    ]);
 
-  if (yDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_Y){
-    errors.latDistance = intl.formatMessage({id: 'custom-bbox.form-error.y-distance.text'});
+    const yDistance = distance(
+      [values.bottomLeftLon, values.bottomLeftLat],
+      [values.bottomLeftLon, values.topRightLat]);
+    
+    const xDistance = distance(
+      [values.bottomLeftLon, values.bottomLeftLat],
+      [values.topRightLon, values.bottomLeftLat]);
+  
+    if (yDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_Y_KM){
+      errors.latDistance = intl.formatMessage({id: 'custom-bbox.form-error.y-distance.text'});
+    }
+    if (xDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_X_KM){
+      errors.lonDistance = intl.formatMessage({id: 'custom-bbox.form-error.x-distance.text'});
+    }
   }
-  if (xDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_X){
-    errors.lonDistance = intl.formatMessage({id: 'custom-bbox.form-error.x-distance.text'});
+  catch(err){
+    errors.latDistance = 'Not valid coordinates';
   }
 
   return errors;
@@ -119,15 +129,15 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       topRightLon: 0,
     },
     onSubmit: values => {
-      const line = turf.lineString([
-        [values.bottomLeftLon, values.bottomLeftLat],
-        [values.topRightLon, values.topRightLat], 
-      ]);
-      const polygon = bboxPolygon(bbox(line));
-      console.log('polygon', polygon.geometry);
-    
       const err = validate(values, intl);
       if(!err.latDistance && !err.lonDistance){
+        const line = turf.lineString([
+          [values.bottomLeftLon, values.bottomLeftLat],
+          [values.topRightLon, values.topRightLat], 
+        ]);
+        const polygon = bboxPolygon(bbox(line));
+        console.log('polygon', polygon.geometry);
+  
         onPolygonUpdate(polygon.geometry);
         handleClose(false);
       }
