@@ -15,6 +15,16 @@ const store = rootStore.create(
       Axios.post(url, params).then((res) => res.data as ConflictResponse),
   }
 );
+
+// REMARK IIFE to discard language presentation logic
+(()=>{
+  const lang = 'he';//navigator.language.split(/[-_]/)[0];  // language without region code
+
+  document.documentElement.lang = lang;
+  if(lang === 'he'){
+    document.body.dir = 'rtl';  
+  }
+})();
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider value={store}>
