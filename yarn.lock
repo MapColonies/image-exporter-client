@@ -1496,8 +1496,10 @@
     eslint-plugin-import "^2.22.0"
     eslint-plugin-jest "^23.20.0"
 
-"@map-colonies/react-components@file:../shared-components/packages/react-components":
-  version "1.0.1"
+"@map-colonies/react-components@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@map-colonies/react-components/-/react-components-2.0.0.tgz#a531d26a6e85ed5762385d2b8a52e28609cd3279"
+  integrity sha512-8XsA4IzsdHEDZsaj2HJX6j+WhqkPf47OhUnZ1WorDhgajKKIniS1u5T0B+t6t6pdrKE07ew//Z9dElmr4Rk/Lg==
   dependencies:
     "@date-io/date-fns" "^1.3.13"
     "@material-ui/core" "^4.11.0"
@@ -1524,8 +1526,10 @@
     rimraf "3.0.2"
     typescript "~3.7.2"
 
-"@map-colonies/react-core@file:../shared-components/packages/react-ui-components":
-  version "1.0.1"
+"@map-colonies/react-core@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@map-colonies/react-core/-/react-core-2.0.0.tgz#d3ee299ceacc1a021393ff1294ec58e6a8689715"
+  integrity sha512-RuB99kzkmdR9t07Ly4wo0JdHevoUe5mL0E1RoiSXYNhkucZxsDgDDO5qw2gHQ6vj7byKJ+B1PR4izBKOVkW1nw==
   dependencies:
     "@testing-library/jest-dom" "^4.2.4"
     "@testing-library/react" "^9.3.2"
