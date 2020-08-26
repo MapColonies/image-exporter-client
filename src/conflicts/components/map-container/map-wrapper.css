@@ -1,0 +1,13 @@
+.ol-zoom {
+  top: 2.5em;
+  right: 0.5em;
+  left: unset;
+}
+
+.mdc-dialog__title + .mdc-dialog__content{
+  padding-top: 20px;
+}
+
+.mdc-dialog__actions{
+  padding-right: 24px;
+}
