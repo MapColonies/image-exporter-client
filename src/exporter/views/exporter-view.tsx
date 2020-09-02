@@ -12,12 +12,14 @@ import { observer } from 'mobx-react-lite';
 import { useStore } from '../models/rootStore';
 import { MapContainer } from '../components/map-container';
 import EXPORTER_CONFIG from '../../common/config';
+import { Button } from '@map-colonies/react-core';
+import { FormattedMessage } from 'react-intl';
 
 const ExporterView: React.FC = observer(() => {
-  const { conflictsStore } = useStore();
+  const { exporterStore } = useStore();
   const handleExport = ():void => {
-    console.log('conflictsStore.searchParams--->', conflictsStore.searchParams);
-    conflictsStore.startExportGeoPackage(); 
+    console.log('exporterStore.searchParams--->', exporterStore.searchParams);
+    exporterStore.startExportGeoPackage(); 
   }
 
   const wmtsOptions = getWMTSOptions({
@@ -44,11 +46,18 @@ const ExporterView: React.FC = observer(() => {
 
   return (
     <MapContainer
-      handlePolygonSelected={conflictsStore.searchParams.setLocation}
-      handlePolygonReset={conflictsStore.searchParams.resetLocation.bind(
-        conflictsStore.searchParams
+      handlePolygonSelected={exporterStore.searchParams.setLocation}
+      handlePolygonReset={exporterStore.searchParams.resetLocation.bind(
+        exporterStore.searchParams
       )}
-      filters={[<div style={{width:'50px',height:'36px',backgroundColor: 'red'}} onClick={handleExport}/>]}
+      filters={[
+        <Button 
+          raised 
+          disabled={exporterStore.searchParams.geojson ? false : true} 
+          onClick={handleExport}>
+          <FormattedMessage id="export.export-btn.text"/>
+        </Button>
+      ]}
       mapContent={
         <>
           <TileLayer>

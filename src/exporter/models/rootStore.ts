@@ -1,41 +1,42 @@
 import { types, Instance, getEnv, onAction } from 'mobx-state-tree';
 import { useContext, createContext } from 'react';
 import { ResponseState } from '../../common/models/ResponseState';
-import { conflictStore, ConflictResponse } from './conflictStore';
+// import { conflictStore, ConflictResponse } from './conflictStore';
+import { exporterStore, ExporterResponse } from './exporterStore';
 
-type FetchConflicts = (
+type FetchAction = (
   url: string,
   params: Record<string, unknown>
-) => Promise<ConflictResponse>;
+) => Promise<ExporterResponse>;
 
 export const baseRootStore = types
   .model({
-    conflictsStore: types.optional(conflictStore, {
+    exporterStore: types.optional(exporterStore, {
       state: ResponseState.PENDING,
       searchParams: {},
     }),
     // mapStore: types.optional(ConflictMapState, {})
   })
   .views((self) => ({
-    get fetch(): FetchConflicts {
-      const env: { fetch: FetchConflicts } = getEnv(self);
+    get fetch(): FetchAction {
+      const env: { fetch: FetchAction } = getEnv(self);
       return env.fetch;
     },
   }));
 
 export const rootStore = baseRootStore.actions((self) => ({
   afterCreate(): void {
-    self.conflictsStore.fetchConflicts().catch(console.error);
+    // self.exporterStore.fetchConflicts().catch(console.error);
 
-    onAction(
-      self,
-      (call) => {
-        if (call.name === 'setItemsPerPage' || call.name === 'setPage') {
-          self.conflictsStore.fetchConflicts().catch(console.error);
-        }
-      },
-      true
-    );
+    // onAction(
+    //   self,
+    //   (call) => {
+    //     if (call.name === 'setItemsPerPage' || call.name === 'setPage') {
+    //       self.exporterStore.fetchConflicts().catch(console.error);
+    //     }
+    //   },
+    //   true
+    // );
   },
 }));
 export interface IBaseRootStore extends Instance<typeof baseRootStore> {}
