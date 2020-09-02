@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useLayoutEffect } from 'react';
+import { IntlProvider } from 'react-intl';
 import './App.css';
 
 // Import from react core components
@@ -16,22 +17,31 @@ import '@map-colonies/react-core/dist/dialog/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
 
 import ExporterView from './conflicts/views/exporter-view';
+import MESSAGES from './common/i18n';
+import EXPORTER_CONFIG from './common/config';
 
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [lang, setLang] = useState(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE);
   const theme = prefersDarkMode ? Themes.darkTheme : Themes.lightTheme;
+  
+  useLayoutEffect(()=>{
+    setLang(document.documentElement.lang);
+  },[]);
 
   return (
-    <RMWCProvider 
-      typography={{
-        body1: 'p'
-      }}
-    >
-      <RMWCThemeProvider options={theme}>
-        <CssBaseline />
-        <ExporterView />
-      </RMWCThemeProvider>
-    </RMWCProvider>
+    <IntlProvider locale={lang} messages={MESSAGES[lang]}>
+      <RMWCProvider 
+        typography={{
+          body1: 'p'
+        }}
+      >
+        <RMWCThemeProvider options={theme}>
+          <CssBaseline />
+          <ExporterView />
+        </RMWCThemeProvider>
+      </RMWCProvider>
+    </IntlProvider>
   );
 };
 

@@ -12,6 +12,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { Box, DrawType } from '@map-colonies/react-components';
 import { DialogBBox } from './dialog-bbox';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 const WIDTH_SPACING_FACTOR = 18;
 const useStyle = makeStyles((theme: Theme) =>
@@ -39,6 +40,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
 ) => {
   const classes = useStyle();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const intl = useIntl();
   const { isSelectionEnabled, onCancelDraw, onStartDraw, onReset, onPolygonUpdate } = props;
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -53,9 +55,12 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
 
   if (isSelectionEnabled) {
     return (
-      <Tooltip content="Cancel the ongoing draw" align={'bottomLeft'}>
+      <Tooltip 
+        content={intl.formatMessage({id: 'polygon-selection.cancel-btn.tooltip'})} 
+        align={'bottomLeft'}
+      >
         <Button className={classes.drawingButton} raised onClick={onCancelDraw}>
-          Cancel Draw
+          <FormattedMessage id="polygon-selection.cancel-btn.text"/>
         </Button>
       </Tooltip>
     );
@@ -63,7 +68,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
     return (
       <Box position="relative">
         <Tooltip
-          content="draw an Area of interest to limit the search"
+          content={intl.formatMessage({id: 'polygon-selection.draw-btn.tooltip'})}
           align={'bottomLeft'}
         >
           <Button
@@ -71,7 +76,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
             raised
             onClick={handleClick}
           >
-            Draw AOI
+            <FormattedMessage id="polygon-selection.draw-btn.text"/>
           </Button>
         </Tooltip>
         <DialogBBox 
@@ -90,14 +95,14 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
               handleClose();
             }}
           >
-            Box
+            <FormattedMessage id="polygon-selection.box-menu_option.text"/>
           </MenuItem>
           <MenuItem
             onClick={(): void => {
               setOpen(true);
             }}
           >
-            Box by coordinates
+            <FormattedMessage id="polygon-selection.box_coorinate-menu_option.text"/>
           </MenuItem>
           <MenuItem
             onClick={(): void => {
@@ -105,7 +110,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
               handleClose();
             }}
           >
-            Clear
+            <FormattedMessage id="polygon-selection.clear-menu_option.text"/>
           </MenuItem>
         </Menu>
       </Box>

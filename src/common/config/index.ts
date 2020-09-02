@@ -1,4 +1,8 @@
+/*eslint-disable */
 const EXPORTER_CONFIG = {
+  I18N:{
+    DEFAULT_LANGUAGE: 'en'
+  },
   BOUNDARIES: {
     MAX_X_KM: 100,
     MAX_Y_KM: 100,

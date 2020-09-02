@@ -1,34 +1,9 @@
 import React, { useState } from 'react';
 import { Polygon } from 'geojson';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { DrawType } from  '@map-colonies/react-components'; 
 import { PolygonSelectionUi } from './polygon-selection-ui';
 import { MapWrapper } from './map-wrapper';
-
-const PLACEMENT_SPACING_FACTOR = 1.5;
-const WIDTH_SPACING_FACTOR = 80;
-const useStyle = makeStyles((theme: Theme) =>
-  createStyles({
-    map: {
-      height: '100%',
-      width: '100%',
-      position: 'fixed',
-    },
-    absolute: {
-      position: 'absolute',
-      zIndex: 1000,
-      left: theme.spacing(PLACEMENT_SPACING_FACTOR),
-      top: theme.spacing(PLACEMENT_SPACING_FACTOR),
-    },
-    filtersContainer: {
-      display: 'flex',
-      padding: theme.spacing(1),
-    },
-    filtersMargin: {
-      marginLeft: theme.spacing(1),
-    },
-  })
-);
+import './map-container.css';
 
 export interface MapContainerProps {
   handlePolygonSelected: (polygon: Polygon) => void;
@@ -42,7 +17,6 @@ export const MapContainer: React.FC<MapContainerProps> = (
 ) => {
   const [drawType, setDrawType] = useState<DrawType>();
   const [selectionPolygon, setSelectionPolygon] = useState<Polygon>();
-  const classes = useStyle();
 
   const onPolygonSelection = (polygon: Polygon): void => {
     setSelectionPolygon(polygon);
@@ -56,9 +30,9 @@ export const MapContainer: React.FC<MapContainerProps> = (
   };
 
   return (
-    <div className={classes.map}>
-      <div className={`${classes.absolute}`}>
-        <div className={classes.filtersContainer}>
+    <div className="map">
+      <div className="filtersPosition">
+        <div className="filtersContainer">
           <PolygonSelectionUi
             onCancelDraw={(): void => setDrawType(undefined)}
             onReset={onReset}
@@ -67,7 +41,7 @@ export const MapContainer: React.FC<MapContainerProps> = (
             onPolygonUpdate={onPolygonSelection}
           />
           {props.filters?.map((filter, index) => (
-            <div key={index} className={classes.filtersMargin}>
+            <div key={index} className="filtersMargin">
               {filter}
             </div>
           ))}
