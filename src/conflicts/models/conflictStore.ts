@@ -8,7 +8,7 @@ import {
   onSnapshot,
   getSnapshot,
 } from 'mobx-state-tree';
-import { feature } from '@turf/helpers';
+import { feature, Polygon } from '@turf/helpers';
 import { Feature } from 'geojson';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { PaginationResult } from '../../common/models/pagination-result';
@@ -99,6 +99,34 @@ export const conflictStore = types
       }
     );
 
+    const startExportGeoPackage: () => Promise<void> = flow(
+      function* startExportGeoPackage(): Generator<
+        Promise<ConflictResponse>,
+        void,
+        ConflictResponse
+      > {
+        self.conflicts = cast([]);
+        self.state = ResponseState.PENDING;
+        const snapshot = getSnapshot(self.searchParams);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const params: Record<string, unknown> = {};
+        params.layers = [{layerType: 'raster', layerUrl: 'http://alex.rasterLayerUrl.com'}];
+        params.bbox = [
+          (snapshot.geojson as Polygon).coordinates[0], 
+          (snapshot.geojson as Polygon).coordinates[2]
+        ];
+
+        try {
+          const result = yield self.root.fetch('/geoPackageExporter', params);
+          const responseBody = result.data.data;
+          self.state = ResponseState.DONE;
+        } catch (error) {
+          console.error(error);
+          self.state = ResponseState.ERROR;
+        }
+      }
+    );
+
     const afterCreate = (): void => {
       onSnapshot(self.searchParams, () => {
         if (self.searchParams.isDateRangeValid) {
@@ -114,6 +142,7 @@ export const conflictStore = types
       selectConflict,
       resetSelectedConflict,
       afterCreate,
+      startExportGeoPackage,
     };
   });
 
