@@ -66,7 +66,7 @@ const ExporterView: React.FC = observer(() => {
           <TileLayer options={{opacity:0.5}}>
             <TileWMS options={wmsOptions}/>
           </TileLayer>
-          <TileLayer>
+          <TileLayer options={{opacity:0.5}}>
             <TileXYZ options={xyzOptions}/>
           </TileLayer>
         </>
