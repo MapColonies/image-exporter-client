@@ -13,6 +13,7 @@ import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 
 export interface ExportResult {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
 }
 
@@ -50,7 +51,7 @@ export const exporterStore = types
 
         try {
           const result = yield self.root.fetch('/geoPackageExporter', params);
-          const responseBody = result.data.data;
+          // const responseBody = result.data.data;
           self.state = ResponseState.DONE;
         } catch (error) {
           console.error(error);

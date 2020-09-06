@@ -1,4 +1,4 @@
-import { types, Instance, getEnv, onAction } from 'mobx-state-tree';
+import { types, Instance, getEnv } from 'mobx-state-tree';
 import { useContext, createContext } from 'react';
 import { ResponseState } from '../../common/models/ResponseState';
 // import { conflictStore, ConflictResponse } from './conflictStore';
@@ -24,21 +24,7 @@ export const baseRootStore = types
     },
   }));
 
-export const rootStore = baseRootStore.actions((self) => ({
-  afterCreate(): void {
-    // self.exporterStore.fetchConflicts().catch(console.error);
-
-    // onAction(
-    //   self,
-    //   (call) => {
-    //     if (call.name === 'setItemsPerPage' || call.name === 'setPage') {
-    //       self.exporterStore.fetchConflicts().catch(console.error);
-    //     }
-    //   },
-    //   true
-    // );
-  },
-}));
+export const rootStore = baseRootStore;
 export interface IBaseRootStore extends Instance<typeof baseRootStore> {}
 export interface IRootStore extends Instance<typeof rootStore> {}
 const rootStoreContext = createContext<null | IRootStore | IBaseRootStore>(

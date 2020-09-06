@@ -19,7 +19,7 @@ const ExporterView: React.FC = observer(() => {
   const { exporterStore } = useStore();
   const handleExport = ():void => {
     console.log('exporterStore.searchParams--->', exporterStore.searchParams);
-    exporterStore.startExportGeoPackage(); 
+    void exporterStore.startExportGeoPackage(); 
   }
 
   const wmtsOptions = getWMTSOptions({
@@ -32,6 +32,7 @@ const ExporterView: React.FC = observer(() => {
 
   const wmsOptions = getWMSOptions({
     url: 'https://ahocevar.com/geoserver/wms',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     params: {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': true},
     serverType: 'geoserver',
     // Countries have transparency, so do not fade tiles:
