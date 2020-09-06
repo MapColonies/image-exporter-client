@@ -13,8 +13,8 @@ import {
   TextField, 
   Button} from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
-import EXPORTER_CONFIG from '../../../common/config';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
+import EXPORTER_CONFIG from '../../../common/config';
 
   const useStyle = makeStyles((theme: Theme) =>
   createStyles({

@@ -9,11 +9,11 @@ import {
   getXYZOptions
 } from '@map-colonies/react-components';
 import { observer } from 'mobx-react-lite';
+import { Button } from '@map-colonies/react-core';
+import { FormattedMessage } from 'react-intl';
 import { useStore } from '../models/rootStore';
 import { MapContainer } from '../components/map-container';
 import EXPORTER_CONFIG from '../../common/config';
-import { Button } from '@map-colonies/react-core';
-import { FormattedMessage } from 'react-intl';
 
 const ExporterView: React.FC = observer(() => {
   const { exporterStore } = useStore();

@@ -11,8 +11,8 @@ import '@map-colonies/react-core/dist/menu/styles';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 
 import { Box, DrawType } from '@map-colonies/react-components';
-import { DialogBBox } from './dialog-bbox';
 import { useIntl, FormattedMessage } from 'react-intl';
+import { DialogBBox } from './dialog-bbox';
 
 const WIDTH_SPACING_FACTOR = 18;
 const useStyle = makeStyles((theme: Theme) =>
