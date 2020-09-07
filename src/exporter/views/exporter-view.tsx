@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   TileLayer,
   TileWMTS,
@@ -15,14 +15,7 @@ import { useStore } from '../models/rootStore';
 import { MapContainer } from '../components/map-container';
 import EXPORTER_CONFIG from '../../common/config';
 
-const ExporterView: React.FC = observer(() => {
-  const { exporterStore } = useStore();
-  const handleExport = ():void => {
-    console.log('exporterStore.searchParams--->', exporterStore.searchParams);
-    void exporterStore.startExportGeoPackage(); 
-  }
-
-  const wmtsOptions = getWMTSOptions({
+const wmtsOptions = getWMTSOptions({
     attributions: EXPORTER_CONFIG.WMTS_LAYER.ATTRIBUTIONS,
     url: EXPORTER_CONFIG.WMTS_LAYER.URL,
     layer: EXPORTER_CONFIG.WMTS_LAYER.LAYER,
@@ -30,7 +23,7 @@ const ExporterView: React.FC = observer(() => {
     format: EXPORTER_CONFIG.WMTS_LAYER.FORMAT,
   });
 
-  const wmsOptions = getWMSOptions({
+const wmsOptions = getWMSOptions({
     url: 'https://ahocevar.com/geoserver/wms',
     // eslint-disable-next-line @typescript-eslint/naming-convention
     params: {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': true},
@@ -39,12 +32,21 @@ const ExporterView: React.FC = observer(() => {
     transition: 0.5,
   });
 
-  const xyzOptions = getXYZOptions({
+const xyzOptions =  getXYZOptions({
     url:
     'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
     '?apikey=0e6fc415256d4fbb9b5166a718591d71',
   });
 
+const tileOtions = {opacity:0.5};
+
+const ExporterView: React.FC = observer(() => {
+  const { exporterStore } = useStore();
+  const handleExport = ():void => {
+    console.log('exporterStore.searchParams--->', exporterStore.searchParams);
+    void exporterStore.startExportGeoPackage(); 
+  }
+  
   return (
     <MapContainer
       handlePolygonSelected={exporterStore.searchParams.setLocation}
@@ -64,10 +66,10 @@ const ExporterView: React.FC = observer(() => {
           <TileLayer>
             <TileWMTS options={wmtsOptions}/>
           </TileLayer>
-          <TileLayer options={{opacity:0.5}}>
+          <TileLayer options={tileOtions}>
             <TileWMS options={wmsOptions}/>
           </TileLayer>
-          <TileLayer options={{opacity:0.5}}>
+          <TileLayer options={tileOtions}>
             <TileXYZ options={xyzOptions}/>
           </TileLayer>
         </>
