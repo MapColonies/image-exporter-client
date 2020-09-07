@@ -1,9 +1,15 @@
 import React, { useMemo } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-
 interface BBoxCornerProps {
   corner: Corner;
+}
+
+export enum Corner {
+  TOP_RIGHT = 'TOP_RIGHT',
+  BOTTOM_RIGHT = 'BOTTOM_RIGHT',
+  BOTTOM_LEFT = 'BOTTOM_LEFT',
+  TOP_LEFT = 'TOP_LEFT',
 }
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -72,32 +78,24 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-export enum Corner {
-  TOP_RIGHT = 'TOP_RIGHT',
-  BOTTOM_RIGHT = 'BOTTOM_RIGHT',
-  BOTTOM_LEFT = 'BOTTOM_LEFT',
-  TOP_LEFT = 'TOP_LEFT',
-}
+const getCornerClass = (classes: Record<string,string>, cornerToIndicate: Corner): string => {
+  switch(cornerToIndicate){
+    case Corner.TOP_RIGHT:
+      return classes.bboxRightTopCorner;
+    case Corner.TOP_LEFT:
+      return classes.bboxLeftTopCorner;
+    case Corner.BOTTOM_RIGHT:
+      return classes.bboxRightBottomCorner;
+    case Corner.BOTTOM_LEFT:
+      return classes.bboxLeftBottomCorner;
+    default:
+      return '';
+  }
+};
 
-export const BBoxCorner: React.FC<BBoxCornerProps> = (
-  { corner }
-) => {
-  const getCornerClass = (cornerToIndicate: Corner): string => {
-    switch(cornerToIndicate){
-      case Corner.TOP_RIGHT:
-        return classes.bboxRightTopCorner;
-      case Corner.TOP_LEFT:
-        return classes.bboxLeftTopCorner;
-      case Corner.BOTTOM_RIGHT:
-        return classes.bboxRightBottomCorner;
-      case Corner.BOTTOM_LEFT:
-        return classes.bboxLeftBottomCorner;
-      default:
-        return '';
-    }
-  };
+export const BBoxCorner: React.FC<BBoxCornerProps> = ({ corner }) => {
   const classes = useStyle();
-  const bboxCorner = useMemo(() => getCornerClass(corner), [corner])
+  const bboxCorner = useMemo(() => getCornerClass(classes, corner), [classes, corner]);
   return (
     <div className={`${classes.bbox} ${bboxCorner}`}></div>
   );
