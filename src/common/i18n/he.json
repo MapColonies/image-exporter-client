@@ -12,12 +12,20 @@
     "polygon-selection.clear-menu_option.text": "נקה",
 
     "custom-bbox.dialog.title": "הגדר קוורדינתות אזור היצוא",
-    "custom-bbox.dialog-field.top_right_lat.text": "רוחב נק' ימין עליונה",
-    "custom-bbox.dialog-field.top_right_lon.text": "ארך נק' ימין עליונה",
-    "custom-bbox.dialog-field.bottom_left_lat.text": "רוחב נק' שמאל תחתונה",
-    "custom-bbox.dialog-field.bottom_left_lon.text": "ארך נק' שמאל תחתונה",
+    "custom-bbox.dialog-field.top_right_lat.label": "רוחב נק' ימין עליונה",
+    "custom-bbox.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
+    "custom-bbox.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
+    "custom-bbox.dialog-field.bottom_left_lon.label": "ארך נק' שמאל תחתונה",
     "custom-bbox.form-error.x-distance.text": "ארך מעל המותר",
     "custom-bbox.form-error.y-distance.text": "רוחב מעל המותר",
 
-    "export.export-btn.text": "יצוא"
+    "export.export-btn.text": "יצוא",
+    "export.dialog.title": "יצוא גאופאקג'",
+    "export.dialog-field.top_right_lat.label": "רוחב נק' ימין עליונה",
+    "export.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
+    "export.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
+    "export.dialog-field.bottom_left_lon.label": "ארך נק' שמאל תחתונה",
+    "export.dialog-field.package_name.placeholder": "שם גאופאקג'",
+    "export.dialog-field.min_zoom.label": "זום מינימלי",
+    "export.dialog-field.max_zoom.label": "זום מקסימלי"
 }

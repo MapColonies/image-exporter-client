@@ -11,9 +11,11 @@ import {
 import { observer } from 'mobx-react-lite';
 import { Button } from '@map-colonies/react-core';
 import { FormattedMessage } from 'react-intl';
+import { Polygon } from 'geojson';
 import { useStore } from '../models/rootStore';
 import { MapContainer } from '../components/map-container';
 import EXPORTER_CONFIG from '../../common/config';
+import { ExportDialog } from '../components/export/export-dialog';
 
 const wmtsOptions = getWMTSOptions({
     attributions: EXPORTER_CONFIG.WMTS_LAYER.ATTRIBUTIONS,
@@ -43,10 +45,11 @@ const tileOtions = {opacity:0.5};
 const ExporterView: React.FC = observer(() => {
   const { exporterStore } = useStore();
   const handleExport = ():void => {
-    console.log('exporterStore.searchParams--->', exporterStore.searchParams);
-    void exporterStore.startExportGeoPackage(); 
+    // console.log('exporterStore.searchParams--->', exporterStore.searchParams);
+    // void exporterStore.startExportGeoPackage(); 
+    setOpen(true);
   }
-  
+  const [open, setOpen] = React.useState(false);
   return (
     <MapContainer
       handlePolygonSelected={exporterStore.searchParams.setLocation}
@@ -54,12 +57,21 @@ const ExporterView: React.FC = observer(() => {
         exporterStore.searchParams
       )}
       filters={[
-        <Button 
-          raised 
-          disabled={exporterStore.searchParams.geojson ? false : true} 
-          onClick={handleExport}>
-          <FormattedMessage id="export.export-btn.text"/>
-        </Button>
+        <>
+          <Button 
+            raised 
+            disabled={exporterStore.searchParams.geojson ? false : true} 
+            onClick={handleExport}>
+            <FormattedMessage id="export.export-btn.text"/>
+          </Button>
+          {
+            exporterStore.searchParams.geojson && <ExportDialog 
+              isOpen={open}
+              onSetOpen={setOpen}
+              selectedPolygon={exporterStore.searchParams.geojson as Polygon}>
+            </ExportDialog>
+          }
+        </>
       ]}
       mapContent={
         <>
