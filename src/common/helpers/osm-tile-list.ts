@@ -52,10 +52,6 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
 
   zooms.forEach(function (z) {
     //   polygons.forEach(function(poly) {
-    // if (argv.tileBuffer > 0) {
-    //   var dist = (256 * argv.tileBuffer) * (256/180)/Math.pow(2,z)
-    //   poly = buffer(poly, dist, 'degrees').geometry
-    // }
     const line = turf.lineString(polygon.coordinates[0]);
     const boundingBox = limitBounds(bbox(line));
     const top = lat2tile(boundingBox[3], z);
@@ -68,7 +64,6 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
         const cornersWithCenter = tileCornersWithCenter(z, x, y);
         const anyPointIn = cornersWithCenter.some((pt) => booleanPointInPolygon(pt, polygon));
         if (anyPointIn) {
-          //   console.log([z,x,y].join('/') + '.png');
           res.push([z, x, y].join('/') + '.png');
         }
         if (!anyPointIn && !onlyCorners) {
@@ -78,14 +73,13 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
             polygon.coordinates[0].slice(0, -1),
             cornersWithCenter.slice(0, cornersWithCenter.length - 1)); //remove ctr
           if (int) {
-            //   console.log([z,x,y].join('/') + '.png');
             res.push([z, x, y].join('/') + '.png');
           }
         }
       }
     }
     //   })
-  })
+  });
   return res;
 }
 

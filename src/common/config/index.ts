@@ -7,6 +7,9 @@ const EXPORTER_CONFIG = {
     MAX_X_KM: 100,
     MAX_Y_KM: 100,
   },
+  EXPORT: {
+    AVG_TILE_SIZE_KB: 0.02
+  },
   WMTS_LAYER: {
     ATTRIBUTIONS:
       'Tiles © <a href="https://services.arcgisonline.com/arcgis/rest/' +

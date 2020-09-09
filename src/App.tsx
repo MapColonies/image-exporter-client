@@ -33,7 +33,12 @@ const App: React.FC = () => {
     <IntlProvider locale={lang} messages={MESSAGES[lang]}>
       <RMWCProvider 
         typography={{
-          body1: 'p'
+          body1: 'span',
+          body2: ({ children, ...rest }) => (
+            <span>
+              <b>{children}</b>
+            </span>
+          )
         }}
       >
         <RMWCThemeProvider options={theme}>

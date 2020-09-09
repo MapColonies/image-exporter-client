@@ -27,5 +27,7 @@
     "export.dialog-field.bottom_left_lon.label": "ארך נק' שמאל תחתונה",
     "export.dialog-field.package_name.placeholder": "שם גאופאקג'",
     "export.dialog-field.min_zoom.label": "זום מינימלי",
-    "export.dialog-field.max_zoom.label": "זום מקסימלי"
+    "export.dialog-field.max_zoom.label": "זום מקסימלי",
+    "export.dialog-info.label": "מידע על חבילה:",
+    "export.dialog-info.link.label": "לינק:"
 }

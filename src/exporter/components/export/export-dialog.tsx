@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as  turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
@@ -11,13 +11,15 @@ import {
   DialogTitle,
   DialogContent,
   TextField,
-  Button
+  Button,
+  Typography
 } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { NotchLabel } from './notch-label';
 import getTiles from '../../../common/helpers/osm-tile-list';
+import EXPORTER_CONFIG from '../../../common/config';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,9 +37,25 @@ const useStyle = makeStyles((theme: Theme) =>
     },
     readOnly: {
       backgroundColor: 'transparent !important',
-    }
+    },
+    infoLabel: {
+      width: '110px',
+    },
   })
 );
+
+const isValidPackName = (e: React.ChangeEvent<any>) => {
+  const data = (e.nativeEvent as any).data;
+  if(!data)
+    return true;
+
+  const charIdx = data.search(/[a-zA-Z0-9]+/i);
+  return (charIdx === 0);
+};
+
+const isValidZoomValue = (zoom: number) => {
+  return zoom >=1 && zoom <= 20;
+}
 
 interface ExportDialogProps {
   isOpen: boolean;
@@ -82,12 +100,30 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
 
     },
   });
+  const [numTiles, setNumTiles] = useState(0);
+  useEffect(()=>{
+    if( isValidZoomValue(formik.values.minZoom) &&
+        isValidZoomValue(formik.values.maxZoom) && 
+        formik.values.maxZoom >= formik.values.minZoom ){
+      const tiles = getTiles(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
+      setNumTiles(tiles.length);
+      setFormErrors({ minMaxZooms: '' });
+      // console.log(tiles.length, tiles);
+    }else{
+      setFormErrors({ minMaxZooms: 'Enter valid zoom values' });
+    }
+  },[formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
 
-  const [formErrors, setFormErrors] = useState({ latDistance: '', lonDistance: '' });
+  const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
 
   const handleClose = (isOpened: boolean): void => {
     onSetOpen(isOpened);
-  }
+  };
+
+  const checkPackName = (e: React.ChangeEvent<any>) => {
+    return isValidPackName(e) ? formik.handleChange(e) : false;
+  };
+
   return (
     <Dialog open={isOpen}>
       <DialogTitle>
@@ -101,7 +137,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               id="packageName"
               name="packageName"
               type="text"
-              onChange={formik.handleChange}
+              onChange={checkPackName}
               value={formik.values.packageName}
               fullwidth
             />
@@ -156,7 +192,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
             />
             <BBoxCorner corner={Corner.BOTTOM_LEFT} />
           </Box>
-          <Box style={{ display: 'flex' }}>
+          <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
               label={intl.formatMessage({ id: 'export.dialog-field.min_zoom.label' })}
               id="minZoom"
@@ -178,18 +214,38 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
             <BBoxCorner corner={Corner.UNKNOWN} className={classes.noBorder} />
           </Box>
 
+          <Box style={{ display: 'flex' }}>
+            <Typography use="body1" className={classes.infoLabel}>
+              <FormattedMessage id="export.dialog-info.label" />
+            </Typography>
+            <Typography use="body2">
+              ~{numTiles} tiles,&nbsp;
+            </Typography>
+            <Typography use="body2" style={{marginLeft: '32px'}}>
+              ~{Math.ceil(numTiles*EXPORTER_CONFIG.EXPORT.AVG_TILE_SIZE_KB)}Mb
+            </Typography>
+          </Box>
+          <Box style={{ display: 'flex' }}>
+            <Typography use="body1" className={classes.infoLabel}>
+              <FormattedMessage id="export.dialog-info.link.label" /> 
+            </Typography>
+            <Typography use="body2">
+              https://packages/{formik.values.packageName}.gpkg
+            </Typography>
+          </Box>
+
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
             {
-              (!!formErrors.latDistance || !!formErrors.lonDistance) ?
+              (!!formErrors.minMaxZooms) ?
                 <div className={classes.errorContainer}>
-                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.latDistance} ${formErrors.lonDistance}`}
+                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.minMaxZooms}`}
                 </div> :
                 null
             }
             <Button type="button" onClick={(): void => { handleClose(false); }}>
               <FormattedMessage id="general.cancel-btn.text" />
             </Button>
-            <Button raised type="submit">
+            <Button raised type="submit" disabled={!!formErrors.minMaxZooms || !formik.values.packageName}>
               <FormattedMessage id="general.ok-btn.text" />
             </Button>
           </Box>
