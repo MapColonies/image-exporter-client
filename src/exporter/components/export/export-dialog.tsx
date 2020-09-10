@@ -13,10 +13,10 @@ import {
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
-import { NotchLabel } from './notch-label';
 import getTiles from '../../../common/helpers/osm-tile-list';
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
+import { NotchLabel } from './notch-label';
 
 const FIRST_CHAR_IDX = 0;
 const useStyle = makeStyles((theme: Theme) =>
