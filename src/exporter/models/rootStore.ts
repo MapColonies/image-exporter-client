@@ -12,7 +12,7 @@ type FetchAction = (
 export const baseRootStore = types
   .model({
     exporterStore: types.optional(exporterStore, {
-      state: ResponseState.PENDING,
+      state: ResponseState.IDLE,
       searchParams: {},
     }),
     // mapStore: types.optional(ConflictMapState, {})

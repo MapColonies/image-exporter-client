@@ -29,5 +29,10 @@
     "export.dialog-field.min_zoom.label": "Min Zoom",
     "export.dialog-field.max_zoom.label": "Max Zoom",
     "export.dialog-info.label": "Package info:",
-    "export.dialog-info.link.label": "Link:"
+    "export.dialog-info.link.label": "Link:",
+    "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+
+    "snack.message.success": "Export SUCCEEDED",
+    "snack.message.failed": "Export FAILED",
+    "snack.dismiss-btn.text": "Dismiss"
 }

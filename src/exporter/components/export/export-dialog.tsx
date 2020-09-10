@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import * as  turf from '@turf/helpers';
-import bbox from '@turf/bbox';
-import bboxPolygon from '@turf/bbox-polygon';
-import distance from '@turf/distance/dist/js'; //TODO: make a consumption "REGULAR"
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -15,12 +11,14 @@ import {
   Typography
 } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
-import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { NotchLabel } from './notch-label';
 import getTiles from '../../../common/helpers/osm-tile-list';
 import EXPORTER_CONFIG from '../../../common/config';
+import { PackageInfo } from '../../models/exporterStore';
 
+const FIRST_CHAR_IDX = 0;
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
     spacer: {
@@ -44,29 +42,32 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-const isValidPackName = (e: React.ChangeEvent<any>) => {
-  const data = (e.nativeEvent as any).data;
+// eslint-disable-next-line
+const isValidPackName = (e: React.ChangeEvent<any>): boolean => {
+  // eslint-disable-next-line
+  const data:string = (e.nativeEvent as any).data;
   if(!data)
     return true;
 
   const charIdx = data.search(/[a-zA-Z0-9]+/i);
-  return (charIdx === 0);
+  return (charIdx === FIRST_CHAR_IDX);
 };
 
-const isValidZoomValue = (zoom: number) => {
-  return zoom >=1 && zoom <= 20;
+const isValidZoomValue = (zoom: number): boolean => {
+  return zoom >=EXPORTER_CONFIG.EXPORT.MIN_ZOOM && zoom <= EXPORTER_CONFIG.EXPORT.MAX_ZOOM;
 }
 
 interface ExportDialogProps {
   isOpen: boolean;
   selectedPolygon: Polygon;
   onSetOpen: (open: boolean) => void;
+  handleExport: (packInfo: PackageInfo) => void;
 }
 
 export const ExportDialog: React.FC<ExportDialogProps> = (
   props
 ) => {
-  const { isOpen, onSetOpen, selectedPolygon } = props;
+  const { isOpen, onSetOpen, selectedPolygon, handleExport } = props;
   const classes = useStyle();
   const intl = useIntl();
   const formik = useFormik({
@@ -80,27 +81,18 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       packageName: ''
     },
     onSubmit: values => {
-      const tiles = getTiles(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
-      console.log(tiles.length, tiles);
-      // const err = validate(values, intl);
-      // if (!err.latDistance && !err.lonDistance) {
-      //   const line = turf.lineString([
-      //     [values.bottomLeftLon, values.bottomLeftLat],
-      //     [values.topRightLon, values.topRightLat],
-      //   ]);
-      //   const polygon = bboxPolygon(bbox(line));
-      //   console.log('polygon', polygon.geometry);
+      void handleExport({
+        packName: formik.values.packageName,
+        minZoom: formik.values.minZoom,
+        maxZoom: formik.values.maxZoom,
+      });
 
-      //   onPolygonUpdate(polygon.geometry);
-      //   handleClose(false);
-      // }
-      // else {
-      //   setFormErrors(err);
-      // }
-
+      handleClose(false);
     },
   });
-  const [numTiles, setNumTiles] = useState(0);
+  // eslint-disable-next-line
+  const [numTiles, setNumTiles] = useState<number>(0);
+
   useEffect(()=>{
     if( isValidZoomValue(formik.values.minZoom) &&
         isValidZoomValue(formik.values.maxZoom) && 
@@ -108,7 +100,6 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       const tiles = getTiles(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
       setNumTiles(tiles.length);
       setFormErrors({ minMaxZooms: '' });
-      // console.log(tiles.length, tiles);
     }else{
       setFormErrors({ minMaxZooms: 'Enter valid zoom values' });
     }
@@ -120,6 +111,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
     onSetOpen(isOpened);
   };
 
+  // eslint-disable-next-line
   const checkPackName = (e: React.ChangeEvent<any>) => {
     return isValidPackName(e) ? formik.handleChange(e) : false;
   };
@@ -230,13 +222,13 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               <FormattedMessage id="export.dialog-info.link.label" /> 
             </Typography>
             <Typography use="body2">
-              https://packages/{formik.values.packageName}.gpkg
+              {intl.formatMessage({ id: 'export.dialog-info.link.pattern' }, {packageName: formik.values.packageName})}
             </Typography>
           </Box>
 
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
             {
-              (!!formErrors.minMaxZooms) ?
+              (formErrors.minMaxZooms) ?
                 <div className={classes.errorContainer}>
                   {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.minMaxZooms}`}
                 </div> :

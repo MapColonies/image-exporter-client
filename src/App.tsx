@@ -15,6 +15,8 @@ import '@map-colonies/react-core/dist/circular-progress/styles';
 import '@map-colonies/react-core/dist/typography/styles';
 import '@map-colonies/react-core/dist/dialog/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
+import '@map-colonies/react-core/dist/snackbar/styles';
+import '@map-colonies/react-core/dist/icon/styles';
 
 import ExporterView from './exporter/views/exporter-view';
 import MESSAGES from './common/i18n';

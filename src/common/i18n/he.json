@@ -29,5 +29,10 @@
     "export.dialog-field.min_zoom.label": "זום מינימלי",
     "export.dialog-field.max_zoom.label": "זום מקסימלי",
     "export.dialog-info.label": "מידע על חבילה:",
-    "export.dialog-info.link.label": "לינק:"
+    "export.dialog-info.link.label": "לינק:",
+    "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+
+    "snack.message.success": "יצוא היתחיל בהצלחה",
+    "snack.message.failed": "יצוא ניחשל",
+    "snack.dismiss-btn.text": "אישור"
 }
