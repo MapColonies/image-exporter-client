@@ -10,7 +10,7 @@ const EXPORTER_CONFIG = {
   EXPORT: {
     AVG_TILE_SIZE_KB: 0.02,
     MIN_ZOOM: 1,
-    MAX_ZOOM: 20,
+    MAX_ZOOM: 21,
   },
   WMTS_LAYER: {
     ATTRIBUTIONS:

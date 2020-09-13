@@ -16,10 +16,10 @@ const limitBounds = (bbox: Array<number>) => {
 
 // get tile corner points and center
 const tileCornersWithCenter = (z: number, x: number, y: number) => {
-  var top = tile2lat(y, z)
-  var left = tile2long(x, z)
-  var bottom = tile2lat(y + 1, z)
-  var right = tile2long(x + 1, z)
+  const top = tile2lat(y, z);
+  const left = tile2long(x, z);
+  const bottom = tile2lat(y + 1, z);
+  const right = tile2long(x + 1, z);
   return [
     [left, bottom],
     [right, bottom],
@@ -35,16 +35,20 @@ const tileCornersWithCenter = (z: number, x: number, y: number) => {
 const long2tile = (lon: number, zoom: number) => {
   return (Math.floor((lon + 180) / 360 * Math.pow(2, zoom)));
 }
+
 const lat2tile = (lat: number, zoom: number) => {
   return (Math.floor((1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom)));
 }
+
 const tile2long = (x: number, z: number) => {
   return (x / Math.pow(2, z) * 360 - 180);
 }
+
 const tile2lat = (y: number, z: number) => {
-  var n = Math.PI - 2 * Math.PI * y / Math.pow(2, z);
+  const n = Math.PI - 2 * Math.PI * y / Math.pow(2, z);
   return (180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))));
 }
+
 const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<string> => {
   const res = new Array<string>();
   const onlyCorners = false;

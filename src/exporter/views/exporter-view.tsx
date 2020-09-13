@@ -50,8 +50,6 @@ interface SnackDetails {
 const ExporterView: React.FC = observer(() => {
   const { exporterStore } = useStore();
   const onExportClick = ():void => {
-    // console.log('exporterStore.searchParams--->', exporterStore.searchParams);
-    // void exporterStore.startExportGeoPackage({packName: 'ALEX'}); 
     setOpen(true);
   }
   const [open, setOpen] = useState(false);

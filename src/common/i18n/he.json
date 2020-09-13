@@ -11,7 +11,7 @@
     "polygon-selection.box_coorinate-menu_option.text": "מלבן לפי נק'",
     "polygon-selection.clear-menu_option.text": "נקה",
 
-    "custom-bbox.dialog.title": "הגדר קוורדינתות אזור היצוא",
+    "custom-bbox.dialog.title": "הגדר קואורדינטות אזור היצוא",
     "custom-bbox.dialog-field.top_right_lat.label": "רוחב נק' ימין עליונה",
     "custom-bbox.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
     "custom-bbox.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
@@ -29,10 +29,10 @@
     "export.dialog-field.min_zoom.label": "זום מינימלי",
     "export.dialog-field.max_zoom.label": "זום מקסימלי",
     "export.dialog-info.label": "מידע על חבילה:",
-    "export.dialog-info.link.label": "לינק:",
+    "export.dialog-info.link.label": "קישור:",
     "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
 
-    "snack.message.success": "יצוא היתחיל בהצלחה",
-    "snack.message.failed": "יצוא ניחשל",
+    "snack.message.success": "יצוא התחיל בהצלחה",
+    "snack.message.failed": "יצוא ניכשל",
     "snack.dismiss-btn.text": "אישור"
 }
