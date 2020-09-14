@@ -13,7 +13,7 @@ import {
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
-import getTiles from '../../../common/helpers/osm-tile-list';
+import getTiles from '../../../common/helpers/estimated-tile-list';
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
 import { NotchLabel } from './notch-label';

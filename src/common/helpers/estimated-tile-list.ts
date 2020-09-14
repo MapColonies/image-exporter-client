@@ -3,7 +3,7 @@ import { Polygon } from "@turf/helpers";
 import * as turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import booleanPointInPolygon from '@turf/boolean-point-in-polygon';
-const clipper = require('greiner-hormann/dist/greiner-hormann');
+import intersect from '@turf/intersect';
 
 const limitBounds = (bbox: Array<number>) => {
   return [
@@ -73,9 +73,16 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
         if (!anyPointIn && !onlyCorners) {
           // if tile covers polygon (like river) points would not be inside
           // but intersects with polygon
-          const int = clipper.intersection(
-            polygon.coordinates[0].slice(0, -1),
-            cornersWithCenter.slice(0, cornersWithCenter.length - 1)); //remove ctr
+          const int = intersect(
+            {
+              type: 'Polygon',
+              coordinates: polygon.coordinates,
+            },
+            {
+              type: 'Polygon',
+              coordinates: [cornersWithCenter],
+            });
+            
           if (int) {
             res.push([z, x, y].join('/') + '.png');
           }
