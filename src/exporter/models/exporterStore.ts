@@ -17,6 +17,12 @@ export interface ExportResult {
   data: any;
 }
 
+export interface PackageInfo {
+  packName: string;
+  minZoom?: number;
+  maxZoom?: number;
+}
+
 export type ExporterResponse = ApiHttpResponse<ExportResult>;
 
 export const exporterStore = types
@@ -33,8 +39,8 @@ export const exporterStore = types
     },
   }))
   .actions((self) => {
-    const startExportGeoPackage: () => Promise<void> = flow(
-      function* startExportGeoPackage(): Generator<
+    const startExportGeoPackage: (packInfo: PackageInfo) => Promise<void> = flow(
+      function* startExportGeoPackage(packInfo: PackageInfo): Generator<
         Promise<ExporterResponse>,
         void,
         ExporterResponse
@@ -43,6 +49,9 @@ export const exporterStore = types
         const snapshot = getSnapshot(self.searchParams);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const params: Record<string, unknown> = {};
+        params.packName = packInfo.packName;
+        params.minZoom = packInfo.minZoom;
+        params.maxZoom = packInfo.maxZoom;
         params.layers = [{layerType: 'raster', layerUrl: 'http://alex.rasterLayerUrl.com'}];
         params.bbox = [
           (snapshot.geojson as Polygon).coordinates[0], 
@@ -50,6 +59,7 @@ export const exporterStore = types
         ];
 
         try {
+          console.log('Fetch params--->',params);
           const result = yield self.root.fetch('/geoPackageExporter', params);
           // const responseBody = result.data.data;
           self.state = ResponseState.DONE;

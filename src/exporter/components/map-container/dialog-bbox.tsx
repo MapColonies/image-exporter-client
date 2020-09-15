@@ -130,7 +130,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
         <form onSubmit={formik.handleSubmit}>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
-              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lat.text' })}
+              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lat.label' })}
               id="topRightLat"
               name="topRightLat"
               type="number"
@@ -139,7 +139,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               className={classes.spacer}
             />
             <TextField
-              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lon.text' })}
+              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lon.label' })}
               id="topRightLon"
               name="topRightLon"
               type="number"
@@ -151,7 +151,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           </Box>
           <Box style={{ display: 'flex' }}>
             <TextField
-              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lat.text' })}
+              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lat.label' })}
               id="bottomLeftLat"
               name="bottomLeftLat"
               type="number"
@@ -160,7 +160,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               className={classes.spacer}
             />
             <TextField
-              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lon.text' })}
+              label={intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lon.label' })}
               id="bottomLeftLon"
               name="bottomLeftLon"
               type="number"

@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 interface BBoxCornerProps {
   corner: Corner;
+  className?: string;
 }
 
 export enum Corner {
@@ -10,6 +11,7 @@ export enum Corner {
   BOTTOM_RIGHT = 'BOTTOM_RIGHT',
   BOTTOM_LEFT = 'BOTTOM_LEFT',
   TOP_LEFT = 'TOP_LEFT',
+  UNKNOWN = 'UNKNOWN',
 }
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -93,10 +95,10 @@ const getCornerClass = (classes: Record<string,string>, cornerToIndicate: Corner
   }
 };
 
-export const BBoxCorner: React.FC<BBoxCornerProps> = ({ corner }) => {
+export const BBoxCorner: React.FC<BBoxCornerProps> = ({ corner, className }) => {
   const classes = useStyle();
   const bboxCorner = useMemo(() => getCornerClass(classes, corner), [classes, corner]);
   return (
-    <div className={`${classes.bbox} ${bboxCorner}`}></div>
+    <div className={`${classes.bbox} ${bboxCorner} ${className ?? ''}`}></div>
   );
 }

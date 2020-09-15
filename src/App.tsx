@@ -15,6 +15,8 @@ import '@map-colonies/react-core/dist/circular-progress/styles';
 import '@map-colonies/react-core/dist/typography/styles';
 import '@map-colonies/react-core/dist/dialog/styles';
 import '@map-colonies/react-core/dist/textfield/styles';
+import '@map-colonies/react-core/dist/snackbar/styles';
+import '@map-colonies/react-core/dist/icon/styles';
 
 import ExporterView from './exporter/views/exporter-view';
 import MESSAGES from './common/i18n';
@@ -33,7 +35,12 @@ const App: React.FC = () => {
     <IntlProvider locale={lang} messages={MESSAGES[lang]}>
       <RMWCProvider 
         typography={{
-          body1: 'p'
+          body1: 'span',
+          body2: ({ children, ...rest }) => (
+            <span>
+              <b>{children}</b>
+            </span>
+          )
         }}
       >
         <RMWCThemeProvider options={theme}>
