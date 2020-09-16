@@ -11,6 +11,7 @@ import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
+import EXPORTER_CONFIG from '../../common/config';
 
 export interface ExportResult {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -52,7 +53,8 @@ export const exporterStore = types
         // Prepare body data for request
         params.fileName = packInfo.packName;
         params.directoryName = 'test';
-        params.exportedLayers = [{exportType: 'raster', url: 'http://alex.rasterLayerUrl.com'}];
+        console.log(EXPORTER_CONFIG.EXPORT.RASTER_URL);
+        params.exportedLayers = [{exportType: 'raster', url: EXPORTER_CONFIG.EXPORT.RASTER_URL}];
         const first = (snapshot.geojson as Polygon).coordinates[0][0];
         const second = (snapshot.geojson as Polygon).coordinates[0][2];
         params.bbox = `${first[0]},${first[1]},${second[0]},${second[1]}`;

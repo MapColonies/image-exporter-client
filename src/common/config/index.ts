@@ -11,6 +11,7 @@ const EXPORTER_CONFIG = {
     AVG_TILE_SIZE_KB: 0.02,
     MIN_ZOOM: 1,
     MAX_ZOOM: 21,
+    RASTER_URL: 'http://alex.rasterLayerUrl.com',
   },
   WMTS_LAYER: {
     ATTRIBUTIONS:
