@@ -60,7 +60,7 @@ export const exporterStore = types
 
         try {
           console.log('Fetch params--->',params);
-          const result = yield self.root.fetch('/geoPackageExporter', params);
+          const result = yield self.root.fetch('/exportGeopackage', params);
           // const responseBody = result.data.data;
           self.state = ResponseState.DONE;
         } catch (error) {
