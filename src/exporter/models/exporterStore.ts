@@ -49,14 +49,13 @@ export const exporterStore = types
         const snapshot = getSnapshot(self.searchParams);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const params: Record<string, unknown> = {};
-        params.packName = packInfo.packName;
-        params.minZoom = packInfo.minZoom;
-        params.maxZoom = packInfo.maxZoom;
-        params.layers = [{layerType: 'raster', layerUrl: 'http://alex.rasterLayerUrl.com'}];
-        params.bbox = [
-          (snapshot.geojson as Polygon).coordinates[0], 
-          (snapshot.geojson as Polygon).coordinates[2]
-        ];
+        // Prepare body data for request
+        params.fileName = packInfo.packName;
+        params.directoryName = 'test';
+        params.exportedLayers = [{exportType: 'raster', url: 'http://alex.rasterLayerUrl.com'}];
+        const first = (snapshot.geojson as Polygon).coordinates[0][0];
+        const second = (snapshot.geojson as Polygon).coordinates[0][2];
+        params.bbox = `${first[0]},${first[1]},${second[0]},${second[1]}`;
 
         try {
           console.log('Fetch params--->',params);
