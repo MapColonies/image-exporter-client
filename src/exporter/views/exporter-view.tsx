@@ -27,18 +27,21 @@ const wmtsOptions = getWMTSOptions({
   });
 
 const wmsOptions = getWMSOptions({
-    url: 'https://ahocevar.com/geoserver/wms',
+    //url: 'https://ahocevar.com/geoserver/wms',
+    url: 'http://10.28.11.125/blue_m_flat2d-v001/wms',
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    params: {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': true},
+    // params: {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': true},
+    params: {'LAYERS': '[blue_m_flat2d-v001]:1002', 'TILED': true},
     serverType: 'geoserver',
     // Countries have transparency, so do not fade tiles:
     transition: 0.5,
   });
 
 const xyzOptions =  getXYZOptions({
-    url:
-    'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
-    '?apikey=0e6fc415256d4fbb9b5166a718591d71',
+    // url:
+    // 'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
+    // '?apikey=0e6fc415256d4fbb9b5166a718591d71',
+    url: 'http://10.28.11.125/blue_m_flat2d-v001/query?request=ImageryMaps&channel=1002&version=1&x={x}&y={y}&z={z}',
   });
 
 const tileOtions = {opacity:0.5};
@@ -115,12 +118,12 @@ const ExporterView: React.FC = observer(() => {
       ]}
       mapContent={
         <>
-          <TileLayer>
+          {/* <TileLayer>
             <TileWMTS options={wmtsOptions}/>
-          </TileLayer>
-          <TileLayer options={tileOtions}>
+          </TileLayer> */}
+          {/* <TileLayer options={tileOtions}>
             <TileWMS options={wmsOptions}/>
-          </TileLayer>
+          </TileLayer> */}
           <TileLayer options={tileOtions}>
             <TileXYZ options={xyzOptions}/>
           </TileLayer>
