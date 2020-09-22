@@ -3,10 +3,8 @@ import { Geometry } from 'geojson';
 import rewind from '@turf/rewind';
 import { Polygon } from 'geojson';
 import { Map,
-  TileLayer,
   VectorSource,
   GeoJSONFeature,
-  TileOsm,
   VectorLayer,
   DrawInteraction,
   DrawType
@@ -27,9 +25,6 @@ export const MapWrapper: React.FC<MapWrapperProps> = (props) => {
 
   return (
     <Map allowFullScreen={true} showMousePosition={true}>
-      <TileLayer>
-        <TileOsm />
-      </TileLayer>
       {props.selectionPolygon && (
         <VectorLayer>
           <VectorSource>

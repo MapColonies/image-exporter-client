@@ -4,6 +4,7 @@ import {
   TileWMTS,
   TileWMS,
   TileXYZ,
+  TileOsm,
   getWMTSOptions,
   getWMSOptions,
   getXYZOptions
@@ -18,6 +19,8 @@ import EXPORTER_CONFIG from '../../common/config';
 import { ExportDialog } from '../components/export/export-dialog';
 import { ResponseState } from '../../common/models/ResponseState';
 
+type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
+
 const wmtsOptions = getWMTSOptions({
     attributions: EXPORTER_CONFIG.WMTS_LAYER.ATTRIBUTIONS,
     url: EXPORTER_CONFIG.WMTS_LAYER.URL,
@@ -27,22 +30,17 @@ const wmtsOptions = getWMTSOptions({
   });
 
 const wmsOptions = getWMSOptions({
-    //url: 'https://ahocevar.com/geoserver/wms',
-    url: 'http://10.28.11.125/blue_m_flat2d-v001/wms',
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    // params: {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': true},
-    params: {'LAYERS': '[blue_m_flat2d-v001]:1002', 'TILED': true},
-    serverType: 'geoserver',
-    // Countries have transparency, so do not fade tiles:
-    transition: 0.5,
-  });
+  attributions: EXPORTER_CONFIG.WMS_LAYER.ATTRIBUTIONS,
+  url: EXPORTER_CONFIG.WMS_LAYER.URL,
+  params: EXPORTER_CONFIG.WMS_LAYER.PARAMS,
+  serverType: EXPORTER_CONFIG.WMS_LAYER.SERVERTYPE as ServerType,
+  transition: EXPORTER_CONFIG.WMS_LAYER.TRANSITION,
+});
 
 const xyzOptions =  getXYZOptions({
-    // url:
-    // 'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
-    // '?apikey=0e6fc415256d4fbb9b5166a718591d71',
-    url: 'http://10.28.11.125/blue_m_flat2d-v001/query?request=ImageryMaps&channel=1002&version=1&x={x}&y={y}&z={z}',
-  });
+  attributions: EXPORTER_CONFIG.XYZ_LAYER.ATTRIBUTIONS,
+  url: EXPORTER_CONFIG.XYZ_LAYER.URL,
+});
 
 const tileOtions = {opacity:0.5};
 
@@ -118,15 +116,27 @@ const ExporterView: React.FC = observer(() => {
       ]}
       mapContent={
         <>
-          {/* <TileLayer>
-            <TileWMTS options={wmtsOptions}/>
-          </TileLayer> */}
-          {/* <TileLayer options={tileOtions}>
-            <TileWMS options={wmsOptions}/>
-          </TileLayer> */}
-          <TileLayer options={tileOtions}>
-            <TileXYZ options={xyzOptions}/>
-          </TileLayer>
+          {
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'OSM_DEFAULT' && <TileLayer>
+              <TileOsm />
+            </TileLayer>
+          }
+          {
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'WMTS_LAYER' && <TileLayer>
+              <TileWMTS options={wmtsOptions}/>
+            </TileLayer> 
+          }
+          {
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'WMS_LAYER' && <TileLayer options={tileOtions}>
+              <TileWMS options={wmsOptions}/>
+            </TileLayer>
+          }
+
+          {
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'XYZ_LAYER' &&<TileLayer options={tileOtions}>
+              <TileXYZ options={xyzOptions}/>
+            </TileLayer> 
+          }
         </>
       
       }

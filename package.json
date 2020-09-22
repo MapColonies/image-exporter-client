@@ -27,7 +27,9 @@
     "eject": "react-scripts eject",
     "release": "standard-version",
     "eslint-fix": "npx eslint --fix",
-    "eslint-check": "npx eslint . --ext .ts,.tsx"
+    "eslint-check": "npx eslint . --ext .ts,.tsx",
+    "prettier:fix": "prettier --write .",
+    "prettier:check": "prettier --check ."
   },
   "jest": {
     "transformIgnorePatterns": [
