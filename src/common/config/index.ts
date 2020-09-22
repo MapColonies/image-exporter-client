@@ -1,5 +1,7 @@
 /*eslint-disable */
 const EXPORTER_CONFIG = {
+  SERVICE_PROTOCOL: 'http://',
+  SERVICE_NAME: 'localhost:8000',
   I18N:{
     DEFAULT_LANGUAGE: 'en'
   },
