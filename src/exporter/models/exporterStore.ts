@@ -54,9 +54,8 @@ export const exporterStore = types
         params.fileName = packInfo.packName;
         params.directoryName = 'test';
         params.exportedLayers = [{exportType: 'raster', url: EXPORTER_CONFIG.EXPORT.RASTER_URL}];
-        const first = (snapshot.geojson as Polygon).coordinates[0][0];
-        const second = (snapshot.geojson as Polygon).coordinates[0][2];
-        params.bbox = `${first[0]},${first[1]},${second[0]},${second[1]}`;
+        const coordinates = (snapshot.geojson as Polygon).coordinates[0];
+        params.bbox = [coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1]];
 
         try {
           console.log('Fetch params--->',params);
