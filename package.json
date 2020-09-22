@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:8000",
   "name": "image-exporter-client",
   "version": "0.1.0",
   "bugs": {
