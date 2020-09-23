@@ -11,6 +11,7 @@ import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
+import EXPORTER_CONFIG from '../../common/config';
 
 export interface ExportResult {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,18 +50,16 @@ export const exporterStore = types
         const snapshot = getSnapshot(self.searchParams);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const params: Record<string, unknown> = {};
-        params.packName = packInfo.packName;
-        params.minZoom = packInfo.minZoom;
-        params.maxZoom = packInfo.maxZoom;
-        params.layers = [{layerType: 'raster', layerUrl: 'http://alex.rasterLayerUrl.com'}];
-        params.bbox = [
-          (snapshot.geojson as Polygon).coordinates[0], 
-          (snapshot.geojson as Polygon).coordinates[2]
-        ];
+        // Prepare body data for request
+        params.fileName = packInfo.packName;
+        params.directoryName = 'test';
+        params.exportedLayers = [{exportType: 'raster', url: EXPORTER_CONFIG.EXPORT.RASTER_URL}];
+        const coordinates = (snapshot.geojson as Polygon).coordinates[0];
+        params.bbox = [coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1]];
 
         try {
           console.log('Fetch params--->',params);
-          const result = yield self.root.fetch('/geoPackageExporter', params);
+          const result = yield self.root.fetch('/exportGeopackage', params);
           // const responseBody = result.data.data;
           self.state = ResponseState.DONE;
         } catch (error) {

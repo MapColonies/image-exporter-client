@@ -13,7 +13,7 @@ const store = rootStore.create(
   {},
   {
     fetch: async (url: string, params: Record<string, unknown>) =>
-      Axios.post(url, params).then((res) => res.data as ExporterResponse),
+      Axios.post(url, params, { baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` }).then((res) => res.data as ExporterResponse),
   }
 );
 
