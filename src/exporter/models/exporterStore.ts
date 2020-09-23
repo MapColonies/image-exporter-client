@@ -9,9 +9,9 @@ import {
 import { Polygon } from '@turf/helpers';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
+import EXPORTER_CONFIG from '../../common/config';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
-import EXPORTER_CONFIG from '../../common/config';
 
 export interface ExportResult {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

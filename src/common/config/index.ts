@@ -19,7 +19,7 @@ const EXPORTER_CONFIG = {
     AVG_TILE_SIZE_KB: 0.02,
     MIN_ZOOM: 1,
     MAX_ZOOM: 21,
-    RASTER_URL: 'http://alex.rasterLayerUrl.com',
+    RASTER_URL: MAP_SERVER,
   },
   ACTIVE_LAYER: 'OSM_DEFAULT', // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' |
   WMTS_LAYER: {
