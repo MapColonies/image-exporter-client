@@ -12,7 +12,9 @@ import { ResponseState } from '../../common/models/ResponseState';
 import EXPORTER_CONFIG from '../../common/config';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
+import { IGeoPackage } from './geoPackage';
 
+export type GeoPackageResponse = IGeoPackage[];
 export interface ExportResult {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
@@ -33,6 +35,7 @@ export const exporterStore = types
       Object.values(ResponseState)
     ),
     searchParams: types.optional(searchParams, {}),
+    exportedPackages: types.maybe(types.frozen<any>()),
   })
   .views((self) => ({
     get root(): IRootStore {
@@ -68,9 +71,45 @@ export const exporterStore = types
         }
       }
     );
+    const getGeoPackages: () => Promise<void> = flow(
+      function* getGeoPackages(): Generator<
+        Promise<GeoPackageResponse>,
+        void,
+        GeoPackageResponse
+      > {
+        try {
+          console.log('Fetch geoPackages--->');
+          // const result = yield self.root.fetch('/TODOGeopackages',{});
+          const result = yield Promise.resolve([
+            {
+              fileName:'kuku',
+              sizeEst: 23,
+              status: 'FINISHED',
+              link:'https://packages/kuku.gpkg',
+              date: new Date(),
+              progress: 100,
+            },
+            {
+              fileName:'muku',
+              sizeEst: 345,
+              status: 'INPROGRESS',
+              link:'https://packages/muku.gpkg',
+              date: new Date(),
+              progress: 80,
+            },
+          ])
+          self.exportedPackages = result;
+        } catch (error) {
+          console.error(error);
+          self.state = ResponseState.ERROR;
+        }
+      }
+    );
+
 
     return {
       startExportGeoPackage,
+      getGeoPackages,
     };
   });
 
