@@ -25,7 +25,6 @@ export interface PackageInfo {
 }
 
 const wmsOptions = EXPORTER_CONFIG.WMS_LAYER;
-
 const fullUrls : {[key : string] : string} = {
   'WMS_LAYER': `${wmsOptions.URL}?${getParamsString(wmsOptions.PARAMS)}`,
   'WMTS_LAYER': EXPORTER_CONFIG.WMTS_LAYER.URL,
