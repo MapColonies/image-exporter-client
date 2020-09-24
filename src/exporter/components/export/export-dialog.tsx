@@ -57,6 +57,10 @@ const isValidZoomValue = (zoom: number): boolean => {
   return zoom >=EXPORTER_CONFIG.EXPORT.MIN_ZOOM && zoom <= EXPORTER_CONFIG.EXPORT.MAX_ZOOM;
 }
 
+const calcPackSize = (tiles: number): number => {
+  return Math.ceil(tiles*EXPORTER_CONFIG.EXPORT.AVG_TILE_SIZE_MB);
+}
+
 interface ExportDialogProps {
   isOpen: boolean;
   selectedPolygon: Polygon;
@@ -85,6 +89,8 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
         packName: formik.values.packageName,
         minZoom: formik.values.minZoom,
         maxZoom: formik.values.maxZoom,
+        sizeEst: calcPackSize(numTiles),
+        tilesEst: numTiles,
       });
 
       handleClose(false);
@@ -214,7 +220,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               ~{numTiles} tiles,&nbsp;
             </Typography>
             <Typography use="body2" style={{marginLeft: '32px'}}>
-              ~{Math.ceil(numTiles*EXPORTER_CONFIG.EXPORT.AVG_TILE_SIZE_KB)}Mb
+              ~{calcPackSize(numTiles)}Mb
             </Typography>
           </Box>
           <Box style={{ display: 'flex' }}>

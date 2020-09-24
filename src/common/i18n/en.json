@@ -34,8 +34,10 @@
     "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
 
     "export-table.dialog.title": "Exported packages",
+    "export-table.link.text": "Download",
     "export-table.table-column-header.fileName.text": "File Name",
-    "export-table.table-column-header.sizeEst.text": "Est Size",
+    "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
+    "export-table.table-column-header.tilesEst.text": "Est Tiles",
     "export-table.table-column-header.status.text": "Status",
     "export-table.table-column-header.link.text": "Link",
     "export-table.table-column-header.date.text": "Date",

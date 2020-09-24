@@ -21,6 +21,8 @@ import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStore } from '../../models/rootStore';
 import './export-table-dialog.css';
+import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
+import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,8 +79,14 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
       },
       {
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.sizeEst.text' }),
-        width: 100,
+        width: 120,
         field: 'sizeEst',
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.tilesEst.text' }),
+        width: 100,
+        field: 'tilesEst',
         suppressMovable: true,
       },
       {
@@ -91,6 +99,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.link.text' }),
         width: 120,
         field: 'link',
+        cellRenderer: 'linkRenderer',
         suppressMovable: true,
       },
       {
@@ -103,6 +112,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.progress.text' }),
         width: 120,
         field: 'progress',
+        cellRenderer: 'progressRenderer',
         suppressMovable: true,
       },
 
@@ -124,20 +134,23 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     <Box id="exportTable">
       <Dialog open={isOpen}>
         <DialogTitle>
-          <FormattedMessage id="export.dialog.title" />
+          <FormattedMessage id="export-table.dialog.title" />
         </DialogTitle>
         <DialogContent>
-
           <Box
             className="ag-theme-alpine"
             style={{
               height: '450px',
-              width: '790px',
+              width: '910px',
             }}
           >
             <AgGridReact
               columnDefs={colDef}
               rowData={rowData}
+              frameworkComponents={{
+                progressRenderer: ProgressRenderer,
+                linkRenderer: LinkRenderer,
+              }}
               />
           </Box> 
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>

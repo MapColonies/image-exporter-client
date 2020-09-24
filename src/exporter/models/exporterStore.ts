@@ -22,6 +22,8 @@ export interface ExportResult {
 
 export interface PackageInfo {
   packName: string;
+  sizeEst: number;
+  tilesEst: number;
   minZoom?: number;
   maxZoom?: number;
 }
@@ -55,6 +57,8 @@ export const exporterStore = types
         const params: Record<string, unknown> = {};
         // Prepare body data for request
         params.fileName = packInfo.packName;
+        params.sizeEst = packInfo.sizeEst;
+        params.tilesEst = packInfo.tilesEst;
         params.directoryName = 'test';
         params.exportedLayers = [{exportType: 'raster', url: EXPORTER_CONFIG.EXPORT.RASTER_URL}];
         const coordinates = (snapshot.geojson as Polygon).coordinates[0];
@@ -84,6 +88,7 @@ export const exporterStore = types
             {
               fileName:'kuku',
               sizeEst: 23,
+              tilesEst: 120,
               status: 'FINISHED',
               link:'https://packages/kuku.gpkg',
               date: new Date(),
@@ -92,6 +97,7 @@ export const exporterStore = types
             {
               fileName:'muku',
               sizeEst: 345,
+              tilesEst: 2000,
               status: 'INPROGRESS',
               link:'https://packages/muku.gpkg',
               date: new Date(),
