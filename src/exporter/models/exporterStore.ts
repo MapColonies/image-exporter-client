@@ -24,6 +24,25 @@ export interface PackageInfo {
   maxZoom?: number;
 }
 
+const wmsOptions = EXPORTER_CONFIG.WMS_LAYER;
+
+const fullUrls : {[key : string] : string} = {
+  'WMS_LAYER': `${wmsOptions.URL}?${getParamsString(wmsOptions.PARAMS)}`,
+  'WMTS_LAYER': EXPORTER_CONFIG.WMTS_LAYER.URL,
+  'XYZ_LAYER': EXPORTER_CONFIG.XYZ_LAYER.URL,
+  'OSM_DEFAULT': 'NOT_VALID_URL'
+};
+
+function getParamsString(params: any) : string {
+  const paramArray = Object.keys(params).map((key) => `${key}=${params[key]}`);
+  return paramArray.join('&');
+}
+
+function getFullUrl() : string {
+  const activeLayer = EXPORTER_CONFIG.ACTIVE_LAYER;
+  return fullUrls[activeLayer];
+}
+
 export type ExporterResponse = ApiHttpResponse<ExportResult>;
 
 export const exporterStore = types
@@ -53,7 +72,7 @@ export const exporterStore = types
         // Prepare body data for request
         params.fileName = packInfo.packName;
         params.directoryName = 'test';
-        params.exportedLayers = [{exportType: 'raster', url: EXPORTER_CONFIG.EXPORT.RASTER_URL}];
+        params.exportedLayers = [{exportType: 'raster', url: getFullUrl()}];
         const coordinates = (snapshot.geojson as Polygon).coordinates[0];
         params.bbox = [coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1]];
 
