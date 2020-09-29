@@ -17,6 +17,7 @@ import { useStore } from '../../models/rootStore';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import './export-table-dialog.css';
+import { IGeoPackage } from '../../models/geoPackage';
 
 interface ExportSatusTableDialogProps {
   isOpen: boolean;
@@ -74,8 +75,8 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.date.text' }),
         width: 170,
         field: 'date',
-        cellRenderer: (data) => {
-          return moment(data.createdAt).format('DD/MM/YYYY HH:mm')
+        cellRenderer: (data: IGeoPackage): string => {
+          return moment(data.date).format('DD/MM/YYYY HH:mm');
         },
         suppressMovable: true,
       },
