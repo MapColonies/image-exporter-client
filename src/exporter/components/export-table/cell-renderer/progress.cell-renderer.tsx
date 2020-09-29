@@ -1,21 +1,24 @@
 import React from 'react';
+import { ICellRendererParams } from 'ag-grid-community';
 import { LinearProgress, Typography } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
+import { IGeoPackage } from '../../../models/geoPackage';
 
-export const ProgressRenderer: React.FC<any> = (
+const ONE_HUNDRED = 100;
+export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
 ) => {
-  const value = props.data.progress; 
+  const value: number = (props.data as IGeoPackage).progress; 
   if (!value) {
     return <></>;//''; // not null!
   }
   const getProgressValue = ():number => {
-    return value > 1 ? (value / 100) : value;
+    return value > 1 ? (value / ONE_HUNDRED) : value;
   }
 
   const getPercentageText = ():string => {
-    return value > 1 ? `${value}%` : `${value*100}%`;
+    return value > 1 ? `${value}%` : `${value * ONE_HUNDRED}%`;
   }
 
   // return (

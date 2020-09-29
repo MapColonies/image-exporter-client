@@ -1,14 +1,15 @@
 import React from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { ICellRendererParams } from 'ag-grid-community';
+import { FormattedMessage } from 'react-intl';
 import { useTheme } from '@map-colonies/react-core';
 import './link.cell-renderer.css';
+import { IGeoPackage } from '../../../models/geoPackage';
 
-export const LinkRenderer: React.FC<any> = (
+export const LinkRenderer: React.FC<ICellRendererParams> = (
   props
 ) => {
-  const value = props.data.link; 
+  const value: string = (props.data as IGeoPackage).link; 
   const theme = useTheme();
-  const intl = useIntl();
 
   if (!value) {
     return <></>;//''; // not null!

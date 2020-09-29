@@ -37,7 +37,7 @@ export const exporterStore = types
       Object.values(ResponseState)
     ),
     searchParams: types.optional(searchParams, {}),
-    exportedPackages: types.maybe(types.frozen<any>()),
+    exportedPackages: types.maybe(types.frozen<any>([])),
   })
   .views((self) => ({
     get root(): IRootStore {

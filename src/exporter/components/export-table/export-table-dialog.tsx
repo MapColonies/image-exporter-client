@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {
   Dialog,
   DialogTitle,
@@ -10,44 +9,13 @@ import { observer } from 'mobx-react-lite';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import {
-  ColDef,
-  CellClickedEvent,
-  ValueFormatterParams,
-  IsColumnFuncParams,
-  ValueParserParams,
-} from 'ag-grid-community';
+import { ColDef } from 'ag-grid-community';
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useStore } from '../../models/rootStore';
-import './export-table-dialog.css';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
-
-const useStyle = makeStyles((theme: Theme) =>
-  createStyles({
-    spacer: {
-      marginRight: '16px'
-    },
-    errorContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      marginRight: 'auto',
-      color: theme.palette.error.main,
-    },
-    noBorder: {
-      border: 'unset',
-    },
-    readOnly: {
-      backgroundColor: 'transparent !important',
-    },
-    infoLabel: {
-      width: '110px',
-    },
-  })
-);
-
-
+import './export-table-dialog.css';
 
 interface ExportSatusTableDialogProps {
   isOpen: boolean;
@@ -59,7 +27,6 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
 ) => {
   const { exporterStore } = useStore();
   const { isOpen, onSetOpen } = props;
-  const classes = useStyle();
   const intl = useIntl();
   const [colDef, setColDef] = useState<ColDef[]>([]);
   const [rowData, setRowData] = useState([]);
@@ -118,7 +85,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
 
     ]);
 
-  },[]);
+  },[intl]);
 
   useEffect(( )=>{
     setRowData(exporterStore.exportedPackages);
@@ -126,9 +93,9 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
 
   useEffect(() => {
     if(isOpen){
-      exporterStore.getGeoPackages();
+      void exporterStore.getGeoPackages();
     }
-  },[isOpen]);
+  },[isOpen, exporterStore]);
  
   return (
     <Box id="exportTable">

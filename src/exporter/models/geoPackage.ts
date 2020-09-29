@@ -1,6 +1,6 @@
 import { types, Instance } from 'mobx-state-tree';
 
-export const GeoPackage = types.model({
+export const geoPackage = types.model({
   fileName: types.string,
   sizeEst: types.number,
   tilesEst: types.number,
@@ -10,4 +10,4 @@ export const GeoPackage = types.model({
   progress: types.number,
 });
 
-export interface IGeoPackage extends Instance<typeof GeoPackage> {}
+export interface IGeoPackage extends Instance<typeof geoPackage> {}
