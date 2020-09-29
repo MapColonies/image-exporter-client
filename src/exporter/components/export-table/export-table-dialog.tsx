@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import moment from 'moment';
+import { observer } from 'mobx-react-lite';
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef } from 'ag-grid-community';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   Button,
 } from '@map-colonies/react-core';
-import { observer } from 'mobx-react-lite';
-import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-import { ColDef } from 'ag-grid-community';
 import { Box } from '@map-colonies/react-components';
-import { FormattedMessage, useIntl } from 'react-intl';
 import { useStore } from '../../models/rootStore';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
@@ -71,8 +72,11 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
       },
       {
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.date.text' }),
-        width: 120,
+        width: 170,
         field: 'date',
+        cellRenderer: (data) => {
+          return moment(data.createdAt).format('DD/MM/YYYY HH:mm')
+        },
         suppressMovable: true,
       },
       {
@@ -108,7 +112,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
             className="ag-theme-alpine"
             style={{
               height: '450px',
-              width: '910px',
+              width: '960px',
             }}
           >
             <AgGridReact
