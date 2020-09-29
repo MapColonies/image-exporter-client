@@ -14,10 +14,10 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Box } from '@map-colonies/react-components';
 import { useStore } from '../../models/rootStore';
+import { IGeoPackage } from '../../models/geoPackage';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import './export-table-dialog.css';
-import { IGeoPackage } from '../../models/geoPackage';
 
 interface ExportSatusTableDialogProps {
   isOpen: boolean;
@@ -104,7 +104,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
  
   return (
     <Box id="exportTable">
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} preventOutsideDismiss={true}>
         <DialogTitle>
           <FormattedMessage id="export-table.dialog.title" />
         </DialogTitle>

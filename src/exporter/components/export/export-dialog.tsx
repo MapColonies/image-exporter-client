@@ -123,7 +123,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
   };
 
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} preventOutsideDismiss={true}>
       <DialogTitle>
         <FormattedMessage id="export.dialog.title" />
       </DialogTitle>
