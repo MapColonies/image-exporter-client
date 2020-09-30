@@ -3,30 +3,47 @@ import { shallow } from 'enzyme';
 import { DrawType } from '@map-colonies/react-components';
 import { MenuItem, Menu, Button } from '@map-colonies/react-core';
 import { PolygonSelectionUi } from './polygon-selection-ui';
+import { DialogBBox } from './dialog-bbox';
+
+// Enzyme doesn’t work properly with hooks in general, especially for `shallow` so this is the way to mock `react-intl` module.
+// Enspired by https://github.com/formatjs/formatjs/issues/1477
+jest.mock('react-intl', () => {
+  const reactIntl = require.requireActual('react-intl');
+  const MESSAGES =  require.requireActual('../../../common/i18n');
+  const intl = reactIntl.createIntl({
+    locale: 'en',
+    messages: MESSAGES.default['en'],
+  })
+
+  return {
+    ...reactIntl,
+    useIntl: () => intl,
+  }
+});
 
 const startDraw = jest.fn();
 const cancelDraw = jest.fn();
 const resetDraw = jest.fn();
+
 afterEach(() => {
   startDraw.mockClear();
   cancelDraw.mockClear();
   resetDraw.mockClear();
 });
 
-// it('renders correctly', () => {
-//   // const store = rootStore.create({}, { fetch: conflictFetcher })
-//   const tree = renderer
-//     .create(
-//       <PolygonSelectionUi
-//         isSelectionEnabled={false}
-//         onCancelDraw={() => {}}
-//         onReset={() => {}}
-//         onStartDraw={() => {}}
-//       />
-//     )
-//     .toJSON();
-//   expect(tree).toMatchSnapshot();
-// });
+it('renders correctly', () => {
+  const wrapper = shallow(
+    <PolygonSelectionUi
+      isSelectionEnabled={false}
+      onCancelDraw={() => {}}
+      onReset={() => {}}
+      onStartDraw={() => {}}
+      onPolygonUpdate={(polygon) => {}}
+    />
+  );
+
+  expect(wrapper).toMatchSnapshot();
+});
 
 it('opens the menu with drawing options on open menu button click', () => {
   const wrapper = shallow(
@@ -35,23 +52,52 @@ it('opens the menu with drawing options on open menu button click', () => {
       onCancelDraw={cancelDraw}
       onReset={resetDraw}
       isSelectionEnabled={false}
+      onPolygonUpdate={(polygon) => {}}
     />
   );
 
-  expect(wrapper.find(Menu).prop('open')).toBe(false);
+  expect(wrapper.find(Menu).prop('open')).toBe(false); 
 
   wrapper.find(Button).simulate('click', { currentTarget: {} });
 
   expect(wrapper.find(Menu).prop('open')).toBe(true);
 });
 
-it('Polygon/box drawing menu items call start draw with correct params on click and closes the menu', () => {
+it('Box drawing menu items call start draw with correct params on click and closes the menu', () => {
   const wrapper = shallow(
     <PolygonSelectionUi
       onStartDraw={startDraw}
       onCancelDraw={cancelDraw}
       onReset={resetDraw}
       isSelectionEnabled={false}
+      onPolygonUpdate={(polygon) => {}}
+    />
+  );
+
+  const openMenuButton = wrapper.find(Button);
+ 
+  openMenuButton.simulate('click', { currentTarget: {} });
+
+  wrapper
+    .findWhere((n) => {
+      return n.type() === MenuItem && 
+            n.prop('children').props['id'] === 'polygon-selection.box-menu_option.text';
+    })
+    .simulate('click');
+
+  expect(wrapper.find(Menu).prop('open')).toBe(false);
+  expect(startDraw).toHaveBeenCalledWith(DrawType.BOX);
+  expect(startDraw).toHaveBeenCalledTimes(1);
+});
+
+it('Custom defined Bbox drawing menu items opens BBox definition dialog on click and closes the menu', () => {
+  const wrapper = shallow(
+    <PolygonSelectionUi
+      onStartDraw={startDraw}
+      onCancelDraw={cancelDraw}
+      onReset={resetDraw}
+      isSelectionEnabled={false}
+      onPolygonUpdate={(polygon) => {}}
     />
   );
 
@@ -59,24 +105,16 @@ it('Polygon/box drawing menu items call start draw with correct params on click 
   openMenuButton.simulate('click', { currentTarget: {} });
 
   wrapper
-    .findWhere((n) => n.type() === MenuItem && n.prop('children') === 'Polygon')
+    .findWhere((n) => {
+      return n.type() === MenuItem && 
+            n.prop('children').props['id'] === 'polygon-selection.box_coorinate-menu_option.text';
+    })
     .simulate('click');
 
-  expect(wrapper.find(Menu).prop('open')).toBe(false);
-  expect(startDraw).toHaveBeenCalledWith(DrawType.POLYGON);
-  expect(startDraw).toHaveBeenCalledTimes(1);
-
-  startDraw.mockClear();
-
-  openMenuButton.simulate('click', { currentTarget: {} });
-  wrapper
-    .findWhere((n) => n.type() === MenuItem && n.prop('children') === 'Box')
-    .simulate('click');
-
-  expect(wrapper.find(Menu).prop('open')).toBe(false);
-  expect(startDraw).toHaveBeenCalledWith(DrawType.BOX);
-  expect(startDraw).toHaveBeenCalledTimes(1);
+  // expect(wrapper.find(Menu).prop('open')).toBe(false);
+  expect(wrapper.find(DialogBBox).prop('isOpen')).toBe(true);
 });
+
 
 it('clicking the clear menu item calls onreset and closes the menu', () => {
   const wrapper = shallow(
@@ -85,6 +123,7 @@ it('clicking the clear menu item calls onreset and closes the menu', () => {
       onCancelDraw={cancelDraw}
       onReset={resetDraw}
       isSelectionEnabled={false}
+      onPolygonUpdate={(polygon) => {}}
     />
   );
 
@@ -92,7 +131,10 @@ it('clicking the clear menu item calls onreset and closes the menu', () => {
   openMenuButton.simulate('click', { currentTarget: {} });
 
   wrapper
-    .findWhere((n) => n.type() === MenuItem && n.prop('children') === 'Clear')
+    .findWhere((n) => {
+      return n.type() === MenuItem && 
+            n.prop('children').props['id'] === 'polygon-selection.clear-menu_option.text';
+    })
     .simulate('click');
 
   expect(wrapper.find(Menu).prop('open')).toBe(false);
@@ -106,12 +148,15 @@ it('Cancel draw is shown when IsSelectionEnabled is true, and clicking on the bu
       onCancelDraw={cancelDraw}
       onReset={resetDraw}
       isSelectionEnabled={true}
+      onPolygonUpdate={(polygon) => {}}
     />
   );
 
-  const button = wrapper.find(Button);
-
-  expect(button.prop('children')).toBe('Cancel Draw');
+  const button = wrapper
+  .findWhere((n) => {
+    return n.type() === Button && 
+          n.prop('children').props['id'] === 'polygon-selection.cancel-btn.text';
+  });
 
   button.simulate('click');
 

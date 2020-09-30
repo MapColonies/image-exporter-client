@@ -32,8 +32,14 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "/node_modules/(?!(ol)/).*/"
-    ]
+      "/node_modules/(?!(ol|ol-mapbox-style)/).*/"
+    ],
+    "moduleNameMapper": {
+      "ol/style": "<rootDir>/src/__mocks__/olStyleMock.js",
+      "@material+(.*)\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js",
+      "(map|collapsible-list|tooltip|icon).css": "<rootDir>/src/__mocks__/styleMock.js"
+    },
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +76,7 @@
     "ag-grid-react": "^24.0.0",
     "axios": "^0.19.2",
     "date-fns": "^2.14.0",
+    "enzyme-to-json": "^3.6.1",
     "formik": "^2.1.5",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.7",

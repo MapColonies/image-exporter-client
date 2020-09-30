@@ -30,11 +30,3 @@ it('useStore throws an error if store is undefined', () => {
 
   expect(action).toThrow();
 });
-
-it('root store should call fetchConflicts on init', () => {
-  const mockFetch = jest.fn().mockResolvedValue({ data: { data: [] } });
-
-  rootStore.create({}, { fetch: mockFetch });
-
-  expect(mockFetch).toHaveBeenCalledTimes(1);
-});
