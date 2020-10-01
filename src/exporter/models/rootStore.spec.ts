@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useStore, rootStore } from './rootStore';
+import { useStore } from './rootStore';
 jest.mock('react', () => {
   return {
     useContext: jest.fn(),

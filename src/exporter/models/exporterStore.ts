@@ -10,6 +10,7 @@ import { Polygon } from '@turf/helpers';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { getLayerUrl } from '../../common/helpers/layer-url';
+import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IGeoPackage } from './geoPackage';
@@ -84,26 +85,7 @@ export const exporterStore = types
         try {
           console.log('Fetch geoPackages--->');
           // const result = yield self.root.fetch('/TODOGeopackages',{});
-          const result = yield Promise.resolve([
-            {
-              fileName:'kuku',
-              sizeEst: 23,
-              tilesEst: 120,
-              status: 'FINISHED',
-              link:'https://packages/kuku.gpkg',
-              date: new Date(),
-              progress: 100,
-            },
-            {
-              fileName:'muku',
-              sizeEst: 345,
-              tilesEst: 2000,
-              status: 'INPROGRESS',
-              link:'https://packages/muku.gpkg',
-              date: new Date(),
-              progress: 80,
-            },
-          ])
+          const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
           self.exportedPackages = result;
         } catch (error) {
           console.error(error);
