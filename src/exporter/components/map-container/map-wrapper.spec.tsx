@@ -38,7 +38,7 @@ describe('MapWrapper component', () => {
       />
     );
 
-    expect(wrapper.find(VectorLayer)).toBeUndefined; 
+    expect(wrapper.find(VectorLayer)).toEqual({}); 
   });
 
   it('DrawInteraction not rendered when no DrawType defined', () => {
@@ -51,7 +51,7 @@ describe('MapWrapper component', () => {
       />
     );
 
-    expect(wrapper.find(DrawInteraction)).toBeUndefined; 
+    expect(wrapper.find(DrawInteraction)).toEqual({}); 
   });
 
   it('children SPAN rendered with proper content', () => {
@@ -66,7 +66,7 @@ describe('MapWrapper component', () => {
       />
     );
 
-    expect(wrapper.find('span')).toBeDefined;
+    expect(wrapper.find('span')).toBeDefined();
     expect(wrapper.find('span').prop('children')).toEqual(childrenContent); 
   });
 
