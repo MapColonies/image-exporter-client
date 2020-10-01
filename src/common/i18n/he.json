@@ -34,12 +34,12 @@
     "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
 
     "export-table.dialog.title": "חבילות",
-    "export-table.link.text": "הורד",
-    "export-table.table-column-header.fileName.text": "שם הקובץ",
-    "export-table.table-column-header.sizeEst.text": "(Mb)גודל משואר",
-    "export-table.table-column-header.tilesEst.text": "מס' טיילים משואר",
+    "export-table.link.text": "הורדה",
+    "export-table.table-column-header.fileName.text": "שם קובץ",
+    "export-table.table-column-header.sizeEst.text": "(Mb)גודל משוער",
+    "export-table.table-column-header.tilesEst.text": "מס' טיילים משוער",
     "export-table.table-column-header.status.text": "סטטוס",
-    "export-table.table-column-header.link.text": "קישןר",
+    "export-table.table-column-header.link.text": "קישור",
     "export-table.table-column-header.date.text": "תאריך",
     "export-table.table-column-header.progress.text": "התקדמות",
 
