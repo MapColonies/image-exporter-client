@@ -22,11 +22,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --verbose",
+    "test:coverage": "react-scripts test --verbose --coverage --watchAll", 
     "eject": "react-scripts eject",
     "release": "standard-version",
-    "eslint-fix": "npx eslint --fix",
-    "eslint-check": "npx eslint . --ext .ts,.tsx",
+    "eslint:fix": "npx eslint --fix",
+    "eslint:check": "npx eslint . --ext .ts,.tsx",
     "prettier:fix": "prettier --write .",
     "prettier:check": "prettier --check ."
   },
@@ -39,7 +40,13 @@
       "@material+(.*)\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js",
       "(map|collapsible-list|tooltip|icon).css": "<rootDir>/src/__mocks__/styleMock.js"
     },
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/src/__mocks__/",
+      "<rootDir>/src/coverage/",
+      "<rootDir>/src/common/models"
+    ]
   },
   "eslintConfig": {
     "extends": [
