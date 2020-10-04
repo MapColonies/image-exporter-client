@@ -1,7 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Polygon } from 'geojson';
-import { DrawInteraction, DrawType, VectorLayer } from '@map-colonies/react-components';
 import { MapContainer } from './map-container';
 import { MapWrapper } from './map-wrapper';
 
