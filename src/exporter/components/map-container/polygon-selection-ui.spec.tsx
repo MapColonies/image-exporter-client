@@ -29,13 +29,14 @@ const startDraw = jest.fn();
 const cancelDraw = jest.fn();
 const resetDraw = jest.fn();
 
-afterEach(() => {
-  startDraw.mockClear();
-  cancelDraw.mockClear();
-  resetDraw.mockClear();
-});
-
 describe('Polygon Selection component', () => {
+
+  afterEach(() => {
+    startDraw.mockClear();
+    cancelDraw.mockClear();
+    resetDraw.mockClear();
+  });
+
   it('renders correctly', () => {
     const wrapper = shallow(
       <PolygonSelectionUi
