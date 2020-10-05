@@ -22,8 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose",
-    "test:coverage": "react-scripts test --verbose --coverage --watchAll",
+    "test": "react-scripts test --env=jsdom-fourteen --verbose",
+    "test:coverage": "react-scripts test --env=jsdom-fourteen --verbose --coverage --watchAll",
     "eject": "react-scripts eject",
     "release": "standard-version",
     "eslint:fix": "npx eslint --fix",
@@ -38,7 +38,8 @@
     "moduleNameMapper": {
       "ol/style": "<rootDir>/src/__mocks__/olStyleMock.js",
       "@material+(.*)\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.js",
-      "(map|collapsible-list|tooltip|icon).css": "<rootDir>/src/__mocks__/styleMock.js"
+      "(map|collapsible-list|tooltip|icon).css": "<rootDir>/src/__mocks__/styleMock.js",
+      "(ag-grid|ag-theme-alpine).css": "<rootDir>/src/__mocks__/styleMock.js"
     },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -112,6 +113,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint-plugin-import": "^2.22.0",
     "husky": "^4.2.5",
+    "jest-environment-jsdom-fourteen": "^1.0.1",
     "jest-enzyme": "^7.1.2",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
