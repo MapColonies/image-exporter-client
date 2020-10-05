@@ -108,6 +108,10 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
 
         onPolygonUpdate(polygon.geometry);
         handleClose(false);
+        setFormErrors({
+          latDistance: '',
+          lonDistance: ''
+        });
       }
       else {
         setFormErrors(err);
@@ -173,7 +177,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
             {
               (!!formErrors.latDistance || !!formErrors.lonDistance) ?
-                <div className={classes.errorContainer}>
+                <div id="errorContainer" className={classes.errorContainer}>
                   {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.latDistance} ${formErrors.lonDistance}`}
                 </div> :
                 null
