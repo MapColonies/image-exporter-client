@@ -126,6 +126,28 @@ describe('DialogBBox component', () => {
     expect(setOpenFn).toHaveBeenCalledWith(false);
   });
 
+  it('Submiting the form triggers onPolygonUpdate', async () => {
+    const wrapper = shallow(
+      <DialogBBox
+        isOpen={false}
+        onSetOpen={setOpenFn}
+        onPolygonUpdate={polygonUpdate}
+      />
+    ); 
+
+    act(()=>{
+      wrapper
+        .find('form')
+        .simulate('submit');
+    });
+
+    wrapper.update();
+
+    await waitFor(() => {
+      expect(polygonUpdate).toHaveBeenCalled();
+    });
+  });
+
   //// TODO test to check error presentation logic.
   //// When component uses useFormik() hook internal formik state not updated when triggered onChange event.
   //// Probably formik should be used in component way rather than hook.
