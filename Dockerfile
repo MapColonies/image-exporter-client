@@ -8,6 +8,8 @@ RUN npm install --production
 
 COPY . .
 
+RUN yarn run confd:prod
+
 RUN yarn build
 
 FROM nginx:1.19.1-alpine

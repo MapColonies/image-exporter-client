@@ -8,6 +8,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn run confd:prod`
+
+Regenerates 
+```
+src/common/config/index.ts 
+```
+due to env variables or use defaults if not defined.<br />
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />

@@ -1,12 +1,12 @@
 /*eslint-disable */
-const MAP_SERVER = 'http://10.28.11.125';
-const PUBLISH_POINT = 'blue_m_flat2d-v001';
-const CHANNEL = 1002;
-const VERSION = 1;
-const REQUEST = 'ImageryMaps';
-const SERVICE_PROTOCOL = 'http://';
-const SERVICE_NAME = 'localhost:8000';
-const ACTIVE_LAYER = 'OSM_DEFAULT';
+const MAP_SERVER = '{{ getv "/configuration/mapServer/url" "http://10.28.11.125" }}';
+const PUBLISH_POINT = '{{ getv "/configuration/mapServer/publishPoint" "blue_m_flat2d-v001" }}';
+const CHANNEL = {{ getv "/configuration/mapServer/channel" "1002" }};
+const VERSION = {{ getv "/configuration/mapServer/version" "1" }};
+const REQUEST = '{{ getv "/configuration/mapServer/request" "ImageryMaps" }}';
+const SERVICE_PROTOCOL = '{{ getv "/configuration/service/protocol" "http://" }}';
+const SERVICE_NAME = '{{ getv "/configuration/service/url" "localhost:8000" }}';
+const ACTIVE_LAYER = '{{ getv "/configuration/activeLayer" "OSM_DEFAULT" }}';
 
 
 const EXPORTER_CONFIG = {
