@@ -8,6 +8,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn run confd:prod`
+
+Regenerates 
+```
+public/env-config.js 
+```
+due to env variables or use defaults if not defined.<br />
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />
@@ -41,3 +49,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `Update configuration inside the docker`
+
+In Docker run following in order to propregate ENV vars to clients
+```
+node ./confd/generate-config.js --environment production --indocker
+```
+Be sure that it runs from this location /usr/share/nginx/html
