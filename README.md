@@ -12,7 +12,7 @@ In the project directory, you can run:
 
 Regenerates 
 ```
-src/common/config/index.ts 
+public/env-config.js 
 ```
 due to env variables or use defaults if not defined.<br />
 

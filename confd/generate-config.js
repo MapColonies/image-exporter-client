@@ -100,7 +100,7 @@ const createDirIfNotExists = dir => {
   }
 };
 
-const createDevConfdConfigFile = env => {
+const createDevConfdConfigFile = (env, isInDocker) => {
   createDirIfNotExists(confdDevBasePath);
   createDirIfNotExists(path.join(confdDevBasePath, 'conf.d'));
   createDirIfNotExists(path.join(confdDevBasePath, 'templates'));
@@ -110,10 +110,11 @@ const createDevConfdConfigFile = env => {
   }
   console.log('Creating a development toml file.');
   const tmplCopy = copyFile(confdTmplPath, devTmplPath);
-  const tomlCopy = copyFile(confdConfigPath, devConfigPath, data =>
-    data
+  const tomlCopy = copyFile(confdConfigPath, devConfigPath, data => {
+
+    return !isInDocker ? data : data.replace('dest = "public/','dest = "');
     //data.replace(/dest = .*/g, `dest = "config/${env}.json"`)
-  );
+  });
 
   return Promise.all([tmplCopy, tomlCopy]);
 };
@@ -141,7 +142,10 @@ const help = () => {
   console.log('usage: "node <path to this script> [options]\n');
   console.log('options:');
   console.log(
-    '--environment <environment name>			generate config file for <environment name> environment instead of default.'
+    '--environment <environment name>			generate js config file instead of default.'
+  );
+  console.log(
+    '--indocker			generate js config file in different location.'
   );
   console.log('--help			shows this help page.');
   console.log();
@@ -152,9 +156,10 @@ const main = () => {
     help();
   }
   const envIdx = process.argv.indexOf('--environment');
+  const isInDocker = process.argv.indexOf('--indocker') !== -1;
   const env = envIdx !== -1 ? process.argv[envIdx + 1] : null;
   downloadIfNotExists(confdUrl, confdPath)
-    .then(() => createDevConfdConfigFile(env))
+    .then(() => createDevConfdConfigFile(env, isInDocker))
     // .then(createTargetDir())
     .then(() => runConfd())
     .catch(err => {
