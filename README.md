@@ -49,3 +49,10 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `Update configuration inside the docker`
+
+In Docker run following in order to propregate ENV vars to clients
+```
+node ./confd/generate-config.js --environment production --indocker
+```
+Be sure that it runs from this location /usr/share/nginx/html
