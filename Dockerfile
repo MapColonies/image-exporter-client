@@ -15,3 +15,5 @@ RUN yarn build
 FROM nginx:1.19.1-alpine
 
 COPY --from=build /opt/myapp/build /usr/share/nginx/html
+
+WORKDIR /usr/share/nginx/html
