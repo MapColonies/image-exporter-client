@@ -1,13 +1,8 @@
 import React from 'react';
-import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
-import { IntlProvider } from 'react-intl';
+import { shallow, ShallowWrapper } from 'enzyme';
 import { Polygon } from 'geojson';
 import { act, waitFor } from '@testing-library/react';
 import { TextField, Button } from '@map-colonies/react-core';
-import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
-import MESSAGES from '../../../common/i18n';
-import { rootStore, StoreProvider } from '../../models/rootStore';
-import { GeoPackageResponse } from '../../models/exporterStore';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
@@ -25,9 +20,6 @@ const fields = {
   topRightLat: polygon.coordinates[0][2][1],
   topRightLon: polygon.coordinates[0][2][0],
 }
-
-const exportedPackages: GeoPackageResponse = MOCK_EXPORTED_PACKAGES as GeoPackageResponse;
-const packagesFetcher = async (): Promise<GeoPackageResponse> => Promise.resolve<GeoPackageResponse>(exportedPackages);
 
 const getFieldValue = (wrapper: ShallowWrapper, fieldName: string) => {
   const field = wrapper.find(TextField).find({ name: fieldName });
