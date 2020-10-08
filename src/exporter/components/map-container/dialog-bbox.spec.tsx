@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { act } from 'react-dom/test-utils';
-import { waitFor } from '@testing-library/dom';
+import { act, waitFor } from '@testing-library/react';
 import 'mutationobserver-shim';
 import { Button, TextField } from '@map-colonies/react-core';
 import { DialogBBox } from './dialog-bbox';

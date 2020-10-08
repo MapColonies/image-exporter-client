@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExportDialog component renders correctly 1`] = `
+<Function
+  open={true}
+  preventOutsideDismiss={true}
+>
+  <Function>
+    <FormattedMessage
+      id="export.dialog.title"
+    />
+  </Function>
+  <Function>
+    <form
+      onSubmit={[Function]}
+    >
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <Function
+          fullwidth={true}
+          id="packageName"
+          name="packageName"
+          onChange={[Function]}
+          placeholder="Package Name"
+          type="text"
+          value=""
+        />
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <Function
+          className="makeStyles-spacer-1"
+          id="topRightLat"
+          label={
+            <NotchLabel
+              text="Top Right Lat"
+            />
+          }
+          name="topRightLat"
+          onChange={[Function]}
+          outlined={true}
+          readOnly={true}
+          type="number"
+          value={34}
+        />
+        <Function
+          className="makeStyles-spacer-1"
+          id="topRightLon"
+          label={
+            <NotchLabel
+              text="Top Right Lon"
+            />
+          }
+          name="topRightLon"
+          onChange={[Function]}
+          outlined={true}
+          readOnly={true}
+          type="number"
+          value={31}
+        />
+        <BBoxCorner
+          corner="TOP_RIGHT"
+        />
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <Function
+          className="makeStyles-spacer-1"
+          id="bottomLeftLat"
+          label={
+            <NotchLabel
+              text="Bottom Left Lat"
+            />
+          }
+          name="bottomLeftLat"
+          onChange={[Function]}
+          outlined={true}
+          readOnly={true}
+          type="number"
+          value={35}
+        />
+        <Function
+          className="makeStyles-spacer-1"
+          id="bottomLeftLon"
+          label={
+            <NotchLabel
+              text="Bottom Left Lon"
+            />
+          }
+          name="bottomLeftLon"
+          onChange={[Function]}
+          outlined={true}
+          readOnly={true}
+          type="number"
+          value={32}
+        />
+        <BBoxCorner
+          corner="BOTTOM_LEFT"
+        />
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <Function
+          className="makeStyles-spacer-1"
+          id="minZoom"
+          label="Min Zoom"
+          name="minZoom"
+          onChange={[Function]}
+          type="number"
+          value={2}
+        />
+        <Function
+          className="makeStyles-spacer-1"
+          id="maxZoom"
+          label="Max Zoom"
+          name="maxZoom"
+          onChange={[Function]}
+          type="number"
+          value={18}
+        />
+        <BBoxCorner
+          className="makeStyles-noBorder-3"
+          corner="UNKNOWN"
+        />
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <Function
+          className="makeStyles-infoLabel-5"
+          use="body1"
+        >
+          <FormattedMessage
+            id="export.dialog-info.label"
+          />
+        </Function>
+        <Function
+          use="body2"
+        >
+          ~
+          0
+           tiles, 
+        </Function>
+        <Function
+          style={
+            Object {
+              "marginLeft": "32px",
+            }
+          }
+          use="body2"
+        >
+          ~
+          0
+          Mb
+        </Function>
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+          }
+        }
+      >
+        <Function
+          className="makeStyles-infoLabel-5"
+          use="body1"
+        >
+          <FormattedMessage
+            id="export.dialog-info.link.label"
+          />
+        </Function>
+        <Function
+          id="exportDownloadLink"
+          use="body2"
+        >
+          https://packages/.gpkg
+        </Function>
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "gap": "16px",
+            "justifyContent": "flex-end",
+            "marginTop": "16px",
+          }
+        }
+      >
+        <withRipple(Function)
+          onClick={[Function]}
+          type="button"
+        >
+          <FormattedMessage
+            id="general.cancel-btn.text"
+          />
+        </withRipple(Function)>
+        <withRipple(Function)
+          disabled={true}
+          raised={true}
+          type="submit"
+        >
+          <FormattedMessage
+            id="general.ok-btn.text"
+          />
+        </withRipple(Function)>
+      </Component>
+    </form>
+  </Function>
+</Function>
+`;
