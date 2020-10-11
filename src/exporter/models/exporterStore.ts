@@ -85,26 +85,6 @@ export const exporterStore = types
           console.log('Fetch exported geoPackages--->');
           self.state = ResponseState.IDLE;
           const result = yield self.root.fetch('/exportStatus','GET',{});
-          // const result = yield Promise.resolve([
-          //   {
-          //     fileName:'kuku',
-          //     sizeEst: 23,
-          //     tilesEst: 120,
-          //     status: 'FINISHED',
-          //     link:'https://packages/kuku.gpkg',
-          //     date: new Date(),
-          //     progress: 100,
-          //   },
-          //   {
-          //     fileName:'muku',
-          //     sizeEst: 345,
-          //     tilesEst: 2000,
-          //     status: 'INPROGRESS',
-          //     link:'https://packages/muku.gpkg',
-          //     date: new Date(),
-          //     progress: 80,
-          //   },
-          // ]);
           self.exportedPackages = result;
         } catch (error) {
           console.error(error);
