@@ -66,7 +66,7 @@ export const exporterStore = types
 
         try {
           console.log('Fetch params--->',params);
-          const result = yield self.root.fetch('/exportGeopackage', params);
+          const result = yield self.root.fetch('/exportGeopackage', 'POST', params);
           // const responseBody = result.data.data;
           self.state = ResponseState.DONE;
         } catch (error) {
@@ -77,33 +77,34 @@ export const exporterStore = types
     );
     const getGeoPackages: () => Promise<void> = flow(
       function* getGeoPackages(): Generator<
-        Promise<GeoPackageResponse>,
+        Promise<ExporterResponse>,
         void,
         GeoPackageResponse
       > {
         try {
-          console.log('Fetch geoPackages--->');
-          // const result = yield self.root.fetch('/TODOGeopackages',{});
-          const result = yield Promise.resolve([
-            {
-              fileName:'kuku',
-              sizeEst: 23,
-              tilesEst: 120,
-              status: 'FINISHED',
-              link:'https://packages/kuku.gpkg',
-              date: new Date(),
-              progress: 100,
-            },
-            {
-              fileName:'muku',
-              sizeEst: 345,
-              tilesEst: 2000,
-              status: 'INPROGRESS',
-              link:'https://packages/muku.gpkg',
-              date: new Date(),
-              progress: 80,
-            },
-          ])
+          console.log('Fetch exported geoPackages--->');
+          self.state = ResponseState.IDLE;
+          const result = yield self.root.fetch('/exportStatus','GET',{});
+          // const result = yield Promise.resolve([
+          //   {
+          //     fileName:'kuku',
+          //     sizeEst: 23,
+          //     tilesEst: 120,
+          //     status: 'FINISHED',
+          //     link:'https://packages/kuku.gpkg',
+          //     date: new Date(),
+          //     progress: 100,
+          //   },
+          //   {
+          //     fileName:'muku',
+          //     sizeEst: 345,
+          //     tilesEst: 2000,
+          //     status: 'INPROGRESS',
+          //     link:'https://packages/muku.gpkg',
+          //     date: new Date(),
+          //     progress: 80,
+          //   },
+          // ]);
           self.exportedPackages = result;
         } catch (error) {
           console.error(error);

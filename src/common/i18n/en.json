@@ -35,6 +35,7 @@
 
     "export-table.dialog.title": "Exported packages",
     "export-table.link.text": "Download",
+    "export-table.nodata": "No Exported packages to show",
     "export-table.table-column-header.fileName.text": "File Name",
     "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
     "export-table.table-column-header.tilesEst.text": "Est Tiles",

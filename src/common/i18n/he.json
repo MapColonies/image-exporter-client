@@ -35,6 +35,7 @@
 
     "export-table.dialog.title": "חבילות",
     "export-table.link.text": "הורדה",
+    "export-table.nodata": "אין חבילות",
     "export-table.table-column-header.fileName.text": "שם קובץ",
     "export-table.table-column-header.sizeEst.text": "(Mb)גודל משוער",
     "export-table.table-column-header.tilesEst.text": "מס' טיילים משוער",

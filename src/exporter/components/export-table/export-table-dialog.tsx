@@ -119,6 +119,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
             <AgGridReact
               columnDefs={colDef}
               rowData={rowData}
+              overlayNoRowsTemplate={intl.formatMessage({ id: 'export-table.nodata' })}
               frameworkComponents={{
                 progressRenderer: ProgressRenderer,
                 linkRenderer: LinkRenderer,

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'mobx-react-lite/batchingForReactDom';
 import './index.css';
-import Axios from 'axios';
+import Axios, { Method } from 'axios';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider, rootStore } from './exporter/models/rootStore';
@@ -12,8 +12,15 @@ import EXPORTER_CONFIG from './common/config';
 const store = rootStore.create(
   {},
   {
-    fetch: async (url: string, params: Record<string, unknown>) =>
-      Axios.post(url, params, { baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` }).then((res) => res.data as ExporterResponse),
+    fetch: async (url: string, method: Method, params: Record<string, unknown>) =>
+      // Axios.post(url, params, { baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` }).then((res) => res.data as ExporterResponse),
+
+      Axios.request({
+        url, 
+        method, 
+        data: params,
+        baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` 
+      }).then((res) => res.data as ExporterResponse),
   }
 );
 
