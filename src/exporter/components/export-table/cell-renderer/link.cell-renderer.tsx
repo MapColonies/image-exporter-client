@@ -3,12 +3,12 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { FormattedMessage } from 'react-intl';
 import { useTheme } from '@map-colonies/react-core';
 import './link.cell-renderer.css';
-import { IGeoPackage } from '../../../models/geoPackage';
+import { IExportTaskStatus } from '../../../models/exportTaskStatus';
 
 export const LinkRenderer: React.FC<ICellRendererParams> = (
   props
 ) => {
-  const value: string = (props.data as IGeoPackage).link; 
+  const value: string = (props.data as IExportTaskStatus).link; 
   const theme = useTheme();
 
   if (!value) {

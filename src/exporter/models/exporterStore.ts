@@ -13,9 +13,9 @@ import { getLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
-import { IGeoPackage } from './geoPackage';
+import { IExportTaskStatus } from './exportTaskStatus';
 
-export type GeoPackageResponse = IGeoPackage[];
+export type ExportTaskStatusResponse = IExportTaskStatus[];
 export interface ExportResult {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
@@ -80,7 +80,7 @@ export const exporterStore = types
       function* getGeoPackages(): Generator<
         Promise<ExporterResponse>,
         void,
-        GeoPackageResponse
+        ExportTaskStatusResponse
       > {
         try {
           console.log('Fetch exported geoPackages--->');

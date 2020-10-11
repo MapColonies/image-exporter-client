@@ -8,14 +8,14 @@ import '../../../__mocks__/confEnvShim';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import MESSAGES from '../../../common/i18n';
 import { rootStore, StoreProvider } from '../../models/rootStore';
-import { GeoPackageResponse } from '../../models/exporterStore';
+import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { ExportSatusTableDialog } from './export-table-dialog';
 
 const setOpenFn = jest.fn();
 console.warn = jest.fn();
 
-const exportedPackages: GeoPackageResponse = MOCK_EXPORTED_PACKAGES as GeoPackageResponse;
-const packagesFetcher = async (): Promise<GeoPackageResponse> => Promise.resolve<GeoPackageResponse>(exportedPackages);
+const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES as ExportTaskStatusResponse;
+const packagesFetcher = async (): Promise<ExportTaskStatusResponse> => Promise.resolve<ExportTaskStatusResponse>(exportedPackages);
 
 describe('ExportStatusTable component', () => {
   it('renders correctly', async () => {

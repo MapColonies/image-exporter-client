@@ -3,22 +3,22 @@ import { ResponseState } from '../../common/models/ResponseState';
 // eslint-disable-next-line
 import '../../__mocks__/confEnvShim';
 import { rootStore } from './rootStore';
-import { GeoPackageResponse } from './exporterStore';
+import { ExportTaskStatusResponse } from './exporterStore';
 
 console.error = jest.fn();
 console.log = jest.fn();
 
-const exportedPackages: GeoPackageResponse = MOCK_EXPORTED_PACKAGES as GeoPackageResponse;
+const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES as ExportTaskStatusResponse;
 
 describe('Exporter Store', () => {
   it('return an array of exported packages in a result of FETCH', async () => {
-    const packagesFetcher = async (): Promise<GeoPackageResponse> =>
-      Promise.resolve<GeoPackageResponse>(exportedPackages);
+    const packagesFetcher = async (): Promise<ExportTaskStatusResponse> =>
+      Promise.resolve<ExportTaskStatusResponse>(exportedPackages);
     const { exporterStore } = rootStore.create({}, { fetch: packagesFetcher });
   
     await exporterStore.getGeoPackages();
 
-    const result:GeoPackageResponse = exporterStore.exportedPackages as GeoPackageResponse;
+    const result:ExportTaskStatusResponse = exporterStore.exportedPackages as ExportTaskStatusResponse;
   
     expect(result).toEqual(exportedPackages);
   });

@@ -14,7 +14,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Box } from '@map-colonies/react-components';
 import { useStore } from '../../models/rootStore';
-import { IGeoPackage } from '../../models/geoPackage';
+import { IExportTaskStatus } from '../../models/exportTaskStatus';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import './export-table-dialog.css';
@@ -75,7 +75,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.date.text' }),
         width: 170,
         field: 'date',
-        cellRenderer: (data: IGeoPackage): string => {
+        cellRenderer: (data: IExportTaskStatus): string => {
           return moment(data.date).format('DD/MM/YYYY HH:mm');
         },
         suppressMovable: true,
