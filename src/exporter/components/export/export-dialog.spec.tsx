@@ -3,6 +3,8 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { Polygon } from 'geojson';
 import { act, waitFor } from '@testing-library/react';
 import { TextField, Button } from '@map-colonies/react-core';
+// eslint-disable-next-line
+import '../../../__mocks__/confEnvShim';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();

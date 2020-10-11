@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { DrawType } from '@map-colonies/react-components';
 import { MenuItem, Menu, Button } from '@map-colonies/react-core';
+// eslint-disable-next-line
+import '../../../__mocks__/confEnvShim';
 import { PolygonSelectionUi } from './polygon-selection-ui';
 import { DialogBBox } from './dialog-bbox';
 

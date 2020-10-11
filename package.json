@@ -22,7 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && yarn run copyconf",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom-fourteen --verbose",
+    "test:coverage": "react-scripts test --env=jsdom-fourteen --verbose --coverage --watchAll",
     "eject": "react-scripts eject",
     "release": "standard-version",
     "eslint:fix": "npx eslint --fix",

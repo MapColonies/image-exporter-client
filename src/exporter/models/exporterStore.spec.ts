@@ -1,5 +1,7 @@
 import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { ResponseState } from '../../common/models/ResponseState';
+// eslint-disable-next-line
+import '../../__mocks__/confEnvShim';
 import { rootStore } from './rootStore';
 import { GeoPackageResponse } from './exporterStore';
 

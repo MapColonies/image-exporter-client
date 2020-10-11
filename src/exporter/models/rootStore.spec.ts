@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+// eslint-disable-next-line
+import '../../__mocks__/confEnvShim';
 import { useStore } from './rootStore';
 jest.mock('react', () => {
   return {

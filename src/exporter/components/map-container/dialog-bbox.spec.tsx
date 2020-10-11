@@ -3,6 +3,8 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import { act, waitFor } from '@testing-library/react';
 import 'mutationobserver-shim';
 import { Button, TextField } from '@map-colonies/react-core';
+// eslint-disable-next-line
+import '../../../__mocks__/confEnvShim';
 import { DialogBBox } from './dialog-bbox';
 
 

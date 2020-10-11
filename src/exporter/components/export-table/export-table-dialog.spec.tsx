@@ -3,6 +3,8 @@ import { mount } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 import { AgGridReact } from 'ag-grid-react';
 import { waitFor } from '@testing-library/react';
+// eslint-disable-next-line
+import '../../../__mocks__/confEnvShim';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import MESSAGES from '../../../common/i18n';
 import { rootStore, StoreProvider } from '../../models/rootStore';
