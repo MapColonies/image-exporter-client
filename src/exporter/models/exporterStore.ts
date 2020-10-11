@@ -10,7 +10,7 @@ import { Polygon } from '@turf/helpers';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { getLayerUrl } from '../../common/helpers/layer-url';
-import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
+// import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IGeoPackage } from './geoPackage';
@@ -67,7 +67,7 @@ export const exporterStore = types
 
         try {
           console.log('Fetch params--->',params);
-          const result = yield self.root.fetch('/exportGeopackage', params);
+          const result = yield self.root.fetch('/exportGeopackage', 'POST', params);
           // const responseBody = result.data.data;
           self.state = ResponseState.DONE;
         } catch (error) {
@@ -78,14 +78,15 @@ export const exporterStore = types
     );
     const getGeoPackages: () => Promise<void> = flow(
       function* getGeoPackages(): Generator<
-        Promise<GeoPackageResponse>,
+        Promise<ExporterResponse>,
         void,
         GeoPackageResponse
       > {
         try {
-          console.log('Fetch geoPackages--->');
-          // const result = yield self.root.fetch('/TODOGeopackages',{});
-          const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
+          console.log('Fetch exported geoPackages--->');
+          self.state = ResponseState.IDLE;
+          const result = yield self.root.fetch('/exportStatus','GET',{});
+          // const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
           self.exportedPackages = result;
         } catch (error) {
           console.error(error);

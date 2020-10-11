@@ -1,13 +1,17 @@
 /*eslint-disable */
-const MAP_SERVER = 'http://10.28.11.125';
-const PUBLISH_POINT = 'blue_m_flat2d-v001';
-const CHANNEL = 1002;
-const VERSION = 1;
-const REQUEST = 'ImageryMaps';
+const MAP_SERVER = (window as any)._env_.MAP_SERVER;
+const PUBLISH_POINT = (window as any)._env_.PUBLISH_POINT;
+const CHANNEL = (window as any)._env_.CHANNEL;
+const VERSION = (window as any)._env_.VERSION;
+const REQUEST = (window as any)._env_.REQUEST;
+const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
+const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
+const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
+
 
 const EXPORTER_CONFIG = {
-  SERVICE_PROTOCOL: 'http://',
-  SERVICE_NAME: 'localhost:8000',
+  SERVICE_PROTOCOL: SERVICE_PROTOCOL,
+  SERVICE_NAME: SERVICE_NAME,
   I18N:{
     DEFAULT_LANGUAGE: 'en'
   },
@@ -20,7 +24,7 @@ const EXPORTER_CONFIG = {
     MIN_ZOOM: 1,
     MAX_ZOOM: 21,
   },
-  ACTIVE_LAYER: 'OSM_DEFAULT', // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' |
+  ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
   WMTS_LAYER: {
     ATTRIBUTIONS:
       'Tiles © <a href="https://services.arcgisonline.com/arcgis/rest/' +

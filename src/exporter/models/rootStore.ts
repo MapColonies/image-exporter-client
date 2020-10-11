@@ -1,11 +1,12 @@
+import { Method } from 'axios';
 import { types, Instance, getEnv } from 'mobx-state-tree';
 import { useContext, createContext } from 'react';
 import { ResponseState } from '../../common/models/ResponseState';
-// import { conflictStore, ConflictResponse } from './conflictStore';
 import { exporterStore, ExporterResponse } from './exporterStore';
 
 type FetchAction = (
   url: string,
+  method: Method,
   params: Record<string, unknown>
 ) => Promise<ExporterResponse>;
 
@@ -15,7 +16,6 @@ export const baseRootStore = types
       state: ResponseState.IDLE,
       searchParams: {},
     }),
-    // mapStore: types.optional(ConflictMapState, {})
   })
   .views((self) => ({
     get fetch(): FetchAction {
