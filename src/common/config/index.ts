@@ -20,7 +20,7 @@ const EXPORTER_CONFIG = {
     MAX_Y_KM: 100,
   },
   EXPORT: {
-    AVG_TILE_SIZE_KB: 0.02,
+    AVG_TILE_SIZE_MB: 0.02,
     MIN_ZOOM: 1,
     MAX_ZOOM: 21,
   },

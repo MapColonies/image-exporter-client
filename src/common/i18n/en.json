@@ -20,6 +20,7 @@
     "custom-bbox.form-error.y-distance.text": "Y distance is exceeded the limit",
 
     "export.export-btn.text": "Export",
+    "export.export-status-btn.text": "Export Status",
     "export.dialog.title": "Export geopackage",
     "export.dialog-field.top_right_lat.label": "Top Right Lat",
     "export.dialog-field.top_right_lon.label": "Top Right Lon",
@@ -31,6 +32,17 @@
     "export.dialog-info.label": "Package info:",
     "export.dialog-info.link.label": "Link:",
     "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+
+    "export-table.dialog.title": "Exported packages",
+    "export-table.link.text": "Download",
+    "export-table.nodata": "No Exported packages to show",
+    "export-table.table-column-header.fileName.text": "File Name",
+    "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
+    "export-table.table-column-header.tilesEst.text": "Est Tiles",
+    "export-table.table-column-header.status.text": "Status",
+    "export-table.table-column-header.link.text": "Link",
+    "export-table.table-column-header.date.text": "Date",
+    "export-table.table-column-header.progress.text": "Progress",
 
     "snack.message.success": "Export SUCCEEDED",
     "snack.message.failed": "Export FAILED",

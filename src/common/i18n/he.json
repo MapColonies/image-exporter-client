@@ -20,6 +20,7 @@
     "custom-bbox.form-error.y-distance.text": "רוחב מעל המותר",
 
     "export.export-btn.text": "יצוא",
+    "export.export-status-btn.text": "סטטוס היצוא",
     "export.dialog.title": "יצוא גאופאקג'",
     "export.dialog-field.top_right_lat.label": "רוחב נק' ימין עליונה",
     "export.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
@@ -31,6 +32,17 @@
     "export.dialog-info.label": "מידע על חבילה:",
     "export.dialog-info.link.label": "קישור:",
     "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+
+    "export-table.dialog.title": "חבילות",
+    "export-table.link.text": "הורדה",
+    "export-table.nodata": "אין חבילות",
+    "export-table.table-column-header.fileName.text": "שם קובץ",
+    "export-table.table-column-header.sizeEst.text": "(Mb)גודל משוער",
+    "export-table.table-column-header.tilesEst.text": "מס' טיילים משוער",
+    "export-table.table-column-header.status.text": "סטטוס",
+    "export-table.table-column-header.link.text": "קישור",
+    "export-table.table-column-header.date.text": "תאריך",
+    "export-table.table-column-header.progress.text": "התקדמות",
 
     "snack.message.success": "יצוא התחיל בהצלחה",
     "snack.message.failed": "יצוא ניכשל",

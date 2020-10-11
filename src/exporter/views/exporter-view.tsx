@@ -18,6 +18,7 @@ import { MapContainer } from '../components/map-container';
 import EXPORTER_CONFIG from '../../common/config';
 import { ExportDialog } from '../components/export/export-dialog';
 import { ResponseState } from '../../common/models/ResponseState';
+import { ExportSatusTableDialog } from '../components/export-table/export-table-dialog';
 
 type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
 
@@ -54,9 +55,13 @@ const ExporterView: React.FC = observer(() => {
     setOpen(true);
   }
   const [open, setOpen] = useState(false);
+  const [openStatus, setOpenStatus] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [snackDetails, setSnackDetails] = useState<SnackDetails>({message:''});
   const intl = useIntl();
+  const onExportStatusClick= ():void => {
+    setOpenStatus(true);
+  }
   useEffect(()=>{
     switch(exporterStore.state){
       case ResponseState.ERROR:
@@ -112,6 +117,15 @@ const ExporterView: React.FC = observer(() => {
               }
             />
           }
+          <Button 
+            raised 
+            onClick={onExportStatusClick}>
+            <FormattedMessage id="export.export-status-btn.text"/>
+          </Button>
+          <ExportSatusTableDialog
+            isOpen={openStatus}
+            onSetOpen={setOpenStatus}>
+          </ExportSatusTableDialog>
         </>
       ]}
       mapContent={

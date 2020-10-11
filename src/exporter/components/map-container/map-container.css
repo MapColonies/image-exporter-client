@@ -26,4 +26,6 @@ body[dir="rtl"] .filtersPosition {
 
 .filtersMargin {
   margin-left: 8px;
+  display: flex;
+  gap: 8px;
 }

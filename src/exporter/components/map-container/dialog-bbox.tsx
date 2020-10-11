@@ -122,7 +122,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     onSetOpen(isOpened);
   }
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} preventOutsideDismiss={true}>
       <DialogTitle>
         <FormattedMessage id="custom-bbox.dialog.title" />
       </DialogTitle>
