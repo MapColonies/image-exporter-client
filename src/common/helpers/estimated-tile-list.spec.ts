@@ -29,4 +29,4 @@ describe('Polygon estimated tiles', () => {
 
     expect(tilesArr).toEqual(RESULT);
   });
-});  
+});
