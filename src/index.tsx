@@ -19,7 +19,7 @@ const store = rootStore.create(
         url, 
         method, 
         data: params,
-        baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` 
+        baseURL: `${(EXPORTER_CONFIG.SERVICE_PROTOCOL as string)}${(EXPORTER_CONFIG.SERVICE_NAME as string)}` 
       }).then((res) => res.data as ExporterResponse),
   }
 );

@@ -3,13 +3,13 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { LinearProgress, Typography } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
-import { IGeoPackage } from '../../../models/geoPackage';
+import { IExportTaskStatus } from '../../../models/exportTaskStatus';
 
 const ONE_HUNDRED = 100;
 export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
 ) => {
-  const value: number = (props.data as IGeoPackage).progress; 
+  const value: number = (props.data as IExportTaskStatus).progress; 
   if (!value) {
     return <></>;//''; // not null!
   }

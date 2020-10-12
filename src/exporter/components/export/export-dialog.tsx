@@ -227,7 +227,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
             <Typography use="body1" className={classes.infoLabel}>
               <FormattedMessage id="export.dialog-info.link.label" /> 
             </Typography>
-            <Typography use="body2">
+            <Typography use="body2" id="exportDownloadLink">
               {intl.formatMessage({ id: 'export.dialog-info.link.pattern' }, {packageName: formik.values.packageName})}
             </Typography>
           </Box>

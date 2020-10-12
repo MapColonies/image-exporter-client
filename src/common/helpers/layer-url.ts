@@ -18,7 +18,6 @@ const fullUrls : {[key : string] : string} = {
 };
 
 export const getLayerUrl = () : string => {
-  const activeLayer = EXPORTER_CONFIG.ACTIVE_LAYER;
+  const activeLayer = EXPORTER_CONFIG.ACTIVE_LAYER as string;
   return fullUrls[activeLayer];
 }
-
