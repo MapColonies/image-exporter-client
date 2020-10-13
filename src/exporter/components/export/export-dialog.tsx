@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -99,7 +99,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
   // eslint-disable-next-line
   const [numTiles, setNumTiles] = useState<number>(0);
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     if( isValidZoomValue(formik.values.minZoom) &&
         isValidZoomValue(formik.values.maxZoom) && 
         formik.values.maxZoom >= formik.values.minZoom ){
