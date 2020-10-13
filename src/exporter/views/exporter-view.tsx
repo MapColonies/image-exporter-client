@@ -96,7 +96,7 @@ const ExporterView: React.FC = observer(() => {
             <FormattedMessage id="export.export-btn.text"/>
           </Button>
           {
-            exporterStore.searchParams.geojson && <ExportDialog 
+            exporterStore.searchParams.geojson && open && <ExportDialog 
               isOpen={open}
               onSetOpen={setOpen}
               selectedPolygon={exporterStore.searchParams.geojson as Polygon}
