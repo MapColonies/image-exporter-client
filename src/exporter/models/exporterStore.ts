@@ -1,11 +1,5 @@
 /* eslint-disable camelcase */
-import {
-  types,
-  Instance,
-  flow,
-  getParent,
-  getSnapshot,
-} from 'mobx-state-tree';
+import { types, Instance, flow, getParent, getSnapshot } from 'mobx-state-tree';
 import { Polygon } from '@turf/helpers';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
@@ -46,36 +40,43 @@ export const exporterStore = types
     },
   }))
   .actions((self) => {
-    const startExportGeoPackage: (packInfo: PackageInfo) => Promise<void> = flow(
-      function* startExportGeoPackage(packInfo: PackageInfo): Generator<
-        Promise<ExporterResponse>,
-        void,
-        ExporterResponse
-      > {
-        self.state = ResponseState.PENDING;
-        const snapshot = getSnapshot(self.searchParams);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const params: Record<string, unknown> = {};
-        // Prepare body data for request
-        params.fileName = packInfo.packName;
-        params.sizeEst = packInfo.sizeEst;
-        params.tilesEst = packInfo.tilesEst;
-        params.directoryName = 'test';
-        params.exportedLayers = [{exportType: 'raster', url: getLayerUrl()}];
-        const coordinates = (snapshot.geojson as Polygon).coordinates[0];
-        params.bbox = [coordinates[0][0], coordinates[0][1], coordinates[2][0], coordinates[2][1]];
+    const startExportGeoPackage: (
+      packInfo: PackageInfo
+    ) => Promise<void> = flow(function* startExportGeoPackage(
+      packInfo: PackageInfo
+    ): Generator<Promise<ExporterResponse>, void, ExporterResponse> {
+      self.state = ResponseState.PENDING;
+      const snapshot = getSnapshot(self.searchParams);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const params: Record<string, unknown> = {};
+      // Prepare body data for request
+      params.fileName = packInfo.packName;
+      params.sizeEst = packInfo.sizeEst;
+      params.tilesEst = packInfo.tilesEst;
+      params.directoryName = 'test';
+      params.exportedLayers = [{ exportType: 'raster', url: getLayerUrl() }];
+      const coordinates = (snapshot.geojson as Polygon).coordinates[0];
+      params.bbox = [
+        coordinates[0][0],
+        coordinates[0][1],
+        coordinates[2][0],
+        coordinates[2][1],
+      ];
 
-        try {
-          console.log('Fetch params--->',params);
-          const result = yield self.root.fetch('/exportGeopackage', 'POST', params);
-          // const responseBody = result.data.data;
-          self.state = ResponseState.DONE;
-        } catch (error) {
-          console.error(error);
-          self.state = ResponseState.ERROR;
-        }
+      try {
+        console.log('Fetch params--->', params);
+        const result = yield self.root.fetch(
+          '/exportGeopackage',
+          'POST',
+          params
+        );
+        // const responseBody = result.data.data;
+        self.state = ResponseState.DONE;
+      } catch (error) {
+        console.error(error);
+        self.state = ResponseState.ERROR;
       }
-    );
+    });
     const getGeoPackages: () => Promise<void> = flow(
       function* getGeoPackages(): Generator<
         Promise<ExporterResponse>,
@@ -85,7 +86,7 @@ export const exporterStore = types
         try {
           console.log('Fetch exported geoPackages--->');
           self.state = ResponseState.IDLE;
-          const result = yield self.root.fetch('/exportStatus','GET',{});
+          const result = yield self.root.fetch('/exportStatus', 'GET', {});
           // const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
           self.exportedPackages = result;
         } catch (error) {
@@ -94,7 +95,6 @@ export const exporterStore = types
         }
       }
     );
-
 
     return {
       startExportGeoPackage,

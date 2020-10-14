@@ -37,6 +37,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     onSetOpen(false);
   };
 
+  const renderDate = (date : string): string => {
+    return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
+  }
+
   useEffect(()=>{
     // File name | Est Size | Status | (URI) Link to download | Date | Progress
     setColDef([
@@ -72,12 +76,17 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         suppressMovable: true,
       },
       {
-        headerName: intl.formatMessage({ id: 'export-table.table-column-header.date.text' }),
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.creationDate.text' }),
         width: 170,
-        field: 'date',
-        cellRenderer: (data: IExportTaskStatus): string => {
-          return moment(data.date).format('DD/MM/YYYY HH:mm');
-        },
+        field: 'creationDate',
+        cellRenderer: (props) => renderDate(props.data.creationDate),
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.lastUpdateTime.text' }),
+        width: 170,
+        field: 'lastUpdateTime',
+        cellRenderer: (props) => renderDate(props.data.lastUpdateTime),
         suppressMovable: true,
       },
       {
