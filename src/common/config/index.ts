@@ -8,12 +8,11 @@ const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
 
-
 const EXPORTER_CONFIG = {
   SERVICE_PROTOCOL: SERVICE_PROTOCOL,
   SERVICE_NAME: SERVICE_NAME,
-  I18N:{
-    DEFAULT_LANGUAGE: 'en'
+  I18N: {
+    DEFAULT_LANGUAGE: 'en',
   },
   BOUNDARIES: {
     MAX_X_KM: 100,
@@ -37,21 +36,20 @@ const EXPORTER_CONFIG = {
     FORMAT: 'image/png',
   },
   WMS_LAYER: {
-    ATTRIBUTIONS:
-      `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
-    URL:
-     `${MAP_SERVER}/${PUBLISH_POINT}/wms`,
-     // eslint-disable-next-line @typescript-eslint/naming-convention
-    PARAMS: {'LAYERS': `[${PUBLISH_POINT}]:${CHANNEL}`, 'TILED': true},
+    ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
+    URL: `${MAP_SERVER}/${PUBLISH_POINT}/wms`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    PARAMS: {
+      SERVICE: 'WMS',
+      LAYERS: `[${PUBLISH_POINT}]:${CHANNEL}`,
+      TILED: true,
+    },
     SERVERTYPE: 'geoserver',
     TRANSITION: 0.5,
   },
   XYZ_LAYER: {
-    ATTRIBUTIONS:
-      `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
-    URL:
-     `${MAP_SERVER}/${PUBLISH_POINT}/query?request=${REQUEST}&channel=${CHANNEL}&version=${VERSION}&x={x}&y={y}&z={z}`,
-    
+    ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
+    URL: `${MAP_SERVER}/${PUBLISH_POINT}/query?request=${REQUEST}&channel=${CHANNEL}&version=${VERSION}&x={x}&y={y}&z={z}`,
   },
 };
 
