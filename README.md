@@ -1,5 +1,5 @@
-
 # image-exporter-client
+
 React app written in typescript to define export map area.<br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -8,12 +8,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `yarn install`
+
+Installs missing node modules.
+
 ### `yarn run confd:prod`
 
-Regenerates 
+Regenerates
+
 ```
-public/env-config.js 
+public/env-config.js
 ```
+
 due to env variables or use defaults if not defined.<br />
 
 ### `yarn start`
@@ -25,6 +31,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Any relative request is proxied to the backend.<br/>
 you can control the host by editing the package.json file.
+
 ```json
 {
   "proxy": "http://localhost:8000"
@@ -52,7 +59,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `Update configuration inside the docker`
 
 In Docker run following in order to propregate ENV vars to clients
+
 ```
 node ./confd/generate-config.js --environment production --indocker
 ```
+
 Be sure that it runs from this location /usr/share/nginx/html
