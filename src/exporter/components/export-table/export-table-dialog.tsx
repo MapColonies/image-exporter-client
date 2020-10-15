@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import {
   Dialog,
   DialogTitle,
@@ -36,6 +36,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
   const handleClose = (): void => {
     onSetOpen(false);
   };
+
+  const renderDate = (date : Date | undefined): string => {
+    return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
+  }
 
   useEffect(()=>{
     // File name | Est Size | Status | (URI) Link to download | Date | Progress
@@ -72,11 +76,22 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         suppressMovable: true,
       },
       {
-        headerName: intl.formatMessage({ id: 'export-table.table-column-header.date.text' }),
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.creationDate.text' }),
         width: 170,
-        field: 'date',
-        cellRenderer: (data: IExportTaskStatus): string => {
-          return moment(data.date).format('DD/MM/YYYY HH:mm');
+        field: 'creationDate',
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          return renderDate(data.creationDate);
+        },
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.lastUpdateTime.text' }),
+        width: 170,
+        field: 'lastUpdateTime',
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          return renderDate(data.lastUpdateTime);
         },
         suppressMovable: true,
       },

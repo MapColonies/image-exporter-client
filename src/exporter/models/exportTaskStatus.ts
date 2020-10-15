@@ -6,7 +6,8 @@ export const exportTaskStatus = types.model({
   tilesEst: types.number,
   status: types.string,
   link: types.string,
-  date: types.Date,
+  creationDate: types.Date,
+  lastUpdateTime: types.Date,
   progress: types.number,
 });
 
