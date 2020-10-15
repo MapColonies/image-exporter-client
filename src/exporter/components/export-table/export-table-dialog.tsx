@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import {
   Dialog,
   DialogTitle,
@@ -37,7 +37,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     onSetOpen(false);
   };
 
-  const renderDate = (date : string): string => {
+  const renderDate = (date : Date | undefined): string => {
     return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
   }
 
@@ -79,14 +79,20 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.creationDate.text' }),
         width: 170,
         field: 'creationDate',
-        cellRenderer: (props) => renderDate(props.data.creationDate),
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          return renderDate(data.creationDate);
+        },
         suppressMovable: true,
       },
       {
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.lastUpdateTime.text' }),
         width: 170,
         field: 'lastUpdateTime',
-        cellRenderer: (props) => renderDate(props.data.lastUpdateTime),
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          return renderDate(data.lastUpdateTime);
+        },
         suppressMovable: true,
       },
       {
