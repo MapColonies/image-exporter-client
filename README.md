@@ -14,7 +14,7 @@ Installs missing node modules.
 
 ### `yarn run confd:prod`
 
-Regenerates
+Generates(MUST)
 
 ```
 public/env-config.js
