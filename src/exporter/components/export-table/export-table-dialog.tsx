@@ -14,7 +14,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Box } from '@map-colonies/react-components';
 import { useStore } from '../../models/rootStore';
-import { IExportTaskStatus } from '../../models/exportTaskStatus';
+import { IExportTaskStatus, IBbox } from '../../models/exportTaskStatus';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import './export-table-dialog.css';
@@ -39,6 +39,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
 
   const renderDate = (date : Date | undefined): string => {
     return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
+  }
+
+  const renderBbox = (bbox : IBbox | undefined) : string => {
+    return bbox ? `Top right: ${bbox.topRight.lat}, ${bbox.topRight.lon}, Bottom left: ${bbox.bottomLeft.lat}, ${bbox.bottomLeft.lon}` : '';
   }
 
   useEffect(()=>{
@@ -69,7 +73,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         cellRenderer: (props : ICellRendererParams) : string => {
           const data = props.data as IExportTaskStatus;
           const bbox = data.bbox;
-          return bbox ? `Top right: ${bbox.topRight.lat}, ${bbox.topRight.lon}, Bottom left: ${bbox.bottomLeft.lat}, ${bbox.bottomLeft.lon}` : '';
+          return renderBbox(bbox);
         },
         suppressMovable: true,
       },
