@@ -5,6 +5,16 @@ export const exportTaskStatus = types.model({
   sizeEst: types.number,
   tilesEst: types.number,
   status: types.string,
+  bbox: types.model({
+    topRight: types.model({
+      lat: types.number,
+      lon: types.number,
+    }),
+    bottomLeft: types.model({
+      lat: types.number,
+      lon: types.number,
+    }),
+  }),
   link: types.string,
   creationDate: types.Date,
   lastUpdateTime: types.Date,

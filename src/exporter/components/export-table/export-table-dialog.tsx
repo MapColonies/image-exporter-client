@@ -63,6 +63,17 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         suppressMovable: true,
       },
       {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.bbox.text' }),
+        width: 800,
+        field: 'bbox',
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          const bbox = data.bbox;
+          return bbox ? `Top right: ${bbox.topRight.lat}, ${bbox.topRight.lon}, Bottom left: ${bbox.bottomLeft.lat}, ${bbox.bottomLeft.lon}` : '';
+        },
+        suppressMovable: true,
+      },
+      {
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.status.text' }),
         width: 120,
         field: 'status',
