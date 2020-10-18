@@ -14,7 +14,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Box } from '@map-colonies/react-components';
 import { useStore } from '../../models/rootStore';
-import { IExportTaskStatus } from '../../models/exportTaskStatus';
+import { IExportTaskStatus, IBbox } from '../../models/exportTaskStatus';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import './export-table-dialog.css';
@@ -41,6 +41,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
   }
 
+  const renderBbox = (bbox : IBbox | undefined) : string => {
+    return bbox ? `Top right: ${bbox.topRight.lat}, ${bbox.topRight.lon}, Bottom left: ${bbox.bottomLeft.lat}, ${bbox.bottomLeft.lon}` : '';
+  }
+
   useEffect(()=>{
     // File name | Est Size | Status | (URI) Link to download | Date | Progress
     setColDef([
@@ -60,6 +64,17 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.tilesEst.text' }),
         width: 100,
         field: 'tilesEst',
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.bbox.text' }),
+        width: 800,
+        field: 'bbox',
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          const bbox = data.bbox;
+          return renderBbox(bbox);
+        },
         suppressMovable: true,
       },
       {
