@@ -54,7 +54,11 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
   const onlyCorners = false;
   const zooms = Array.apply(null, Array(maxZoom - minZoom + 1)).map( (x, i) => (minZoom + i) );
 
-  zooms.forEach(function (z) {
+  const oneMoment = () => new Promise(resolve => setTimeout(resolve));
+  const iterationsPerChunk = 10000;
+
+
+  zooms.forEach(async function (z) {
     //   polygons.forEach(function(poly) {
     const line = turf.lineString(polygon.coordinates[0]);
     const boundingBox = limitBounds(bbox(line));
@@ -87,11 +91,72 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
             res.push([z, x, y].join('/') + '.png');
           }
         }
+
+        if (res.length % iterationsPerChunk === 0) {
+          await oneMoment();
+        }
       }
     }
     //   })
   });
   return res;
-}
+};
 
-export default getTiles;
+const getTilesCount = (polygon: Polygon, minZoom: number, maxZoom: number): number => {
+  const onlyCorners = false;
+  const zooms = Array.apply(null, Array(maxZoom - minZoom + 1)).map( (x, i) => (minZoom + i) );
+
+  const oneMoment = () => new Promise(resolve => setTimeout(resolve));
+  const iterationsPerChunk = 10000;
+
+  let tileCount = 0;
+
+  zooms.forEach(async function (z) {
+    //   polygons.forEach(function(poly) {
+    const line = turf.lineString(polygon.coordinates[0]);
+    const boundingBox = limitBounds(bbox(line));
+    const top = lat2tile(boundingBox[3], z);
+    const left = long2tile(boundingBox[0], z);
+    const bottom = lat2tile(boundingBox[1], z);
+    const right = long2tile(boundingBox[2], z);
+    for (let x = left; x <= right; x++) {
+      for (let y = top; y <= bottom; y++) {
+        //get tile corners and center
+        const cornersWithCenter = tileCornersWithCenter(z, x, y);
+        const anyPointIn = cornersWithCenter.some((pt) => booleanPointInPolygon(pt, polygon));
+        if (anyPointIn) {
+          tileCount++;
+        }
+        if (!anyPointIn && !onlyCorners) {
+          // if tile covers polygon (like river) points would not be inside
+          // but intersects with polygon
+          const int = intersect(
+            {
+              type: 'Polygon',
+              coordinates: polygon.coordinates,
+            },
+            {
+              type: 'Polygon',
+              coordinates: [cornersWithCenter],
+            });
+            
+          if (int) {
+            tileCount++;
+          }
+        }
+
+        if (tileCount % iterationsPerChunk === 0) {
+          await oneMoment();
+        }
+        // console.log('****getTiles iteraction', minZoom,'---', maxZoom);
+      }
+    }
+    //   })
+  });
+  return tileCount;
+};
+
+export  {
+  getTiles,
+  getTilesCount
+};
