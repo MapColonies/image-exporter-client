@@ -49,14 +49,13 @@ const tile2lat = (y: number, z: number) => {
   return (180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n))));
 }
 
+const oneMoment = () => new Promise(resolve => setTimeout(resolve));
+const iterationsPerChunk = 10000;
+
 const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<string> => {
   const res = new Array<string>();
   const onlyCorners = false;
   const zooms = Array.apply(null, Array(maxZoom - minZoom + 1)).map( (x, i) => (minZoom + i) );
-
-  const oneMoment = () => new Promise(resolve => setTimeout(resolve));
-  const iterationsPerChunk = 10000;
-
 
   zooms.forEach(async function (z) {
     //   polygons.forEach(function(poly) {
@@ -105,9 +104,6 @@ const getTiles = (polygon: Polygon, minZoom: number, maxZoom: number): Array<str
 const getTilesCount = (polygon: Polygon, minZoom: number, maxZoom: number): number => {
   const onlyCorners = false;
   const zooms = Array.apply(null, Array(maxZoom - minZoom + 1)).map( (x, i) => (minZoom + i) );
-
-  const oneMoment = () => new Promise(resolve => setTimeout(resolve));
-  const iterationsPerChunk = 10000;
 
   let tileCount = 0;
 
