@@ -1,5 +1,5 @@
 import { Polygon } from '@turf/helpers';
-import getTiles from './estimated-tile-list';
+import { getTiles, getTilesCount } from './estimated-tile-list';
 
 const minZoom = 1;
 const maxZoom = 2;
@@ -28,5 +28,11 @@ describe('Polygon estimated tiles', () => {
     const tilesArr = getTiles(polygonGeometry,minZoom, maxZoom);
 
     expect(tilesArr).toEqual(RESULT);
+  });
+
+  it('return an count of estimated tiles',  () => {
+    const count = getTilesCount(polygonGeometry,minZoom, maxZoom);
+
+    expect(count).toEqual(RESULT.length);
   });
 });

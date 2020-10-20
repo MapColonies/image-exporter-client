@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -8,17 +8,19 @@ import {
   DialogContent,
   TextField,
   Button,
-  Typography
+  Typography,
 } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
-import getTiles from '../../../common/helpers/estimated-tile-list';
+import { getTilesCount } from '../../../common/helpers/estimated-tile-list';
+import { useDebouncedLayoutEffect } from '../../../common/hooks/debounced.hooks';
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
 import { NotchLabel } from './notch-label';
 
 const FIRST_CHAR_IDX = 0;
+const DEBOUNCE_TIME = 300;
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
     spacer: {
@@ -99,17 +101,17 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
   // eslint-disable-next-line
   const [numTiles, setNumTiles] = useState<number>(0);
 
-  useLayoutEffect(()=>{
+  useDebouncedLayoutEffect(()=>{
     if( isValidZoomValue(formik.values.minZoom) &&
-        isValidZoomValue(formik.values.maxZoom) && 
-        formik.values.maxZoom >= formik.values.minZoom ){
-      const tiles = getTiles(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
-      setNumTiles(tiles.length);
+      isValidZoomValue(formik.values.maxZoom) && 
+      formik.values.maxZoom >= formik.values.minZoom ){
+      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
+      setNumTiles(tilesCount);
       setFormErrors({ minMaxZooms: '' });
     }else{
       setFormErrors({ minMaxZooms: 'Enter valid zoom values' });
     }
-  },[formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
+  },DEBOUNCE_TIME, [formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
 
   const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
 

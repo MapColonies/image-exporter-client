@@ -26,7 +26,7 @@ import EXPORTER_CONFIG from './common/config';
 const App: React.FC = () => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [lang, setLang] = useState(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE);
-  const theme = prefersDarkMode ? Themes.darkTheme : Themes.lightTheme;
+  const theme = Themes.lightTheme;//TODO: when dark theme will be tuned use this --> prefersDarkMode ? Themes.darkTheme : Themes.lightTheme;
   
   useLayoutEffect(()=>{
     setLang(document.documentElement.lang);

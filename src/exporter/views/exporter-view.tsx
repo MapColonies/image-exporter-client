@@ -122,10 +122,12 @@ const ExporterView: React.FC = observer(() => {
             onClick={onExportStatusClick}>
             <FormattedMessage id="export.export-status-btn.text"/>
           </Button>
-          <ExportSatusTableDialog
-            isOpen={openStatus}
-            onSetOpen={setOpenStatus}>
-          </ExportSatusTableDialog>
+          {
+            openStatus && <ExportSatusTableDialog
+              isOpen={openStatus}
+              onSetOpen={setOpenStatus}>
+            </ExportSatusTableDialog>
+          }
         </>
       ]}
       mapContent={
