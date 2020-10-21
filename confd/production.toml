@@ -9,5 +9,8 @@ keys = [
   "/configuration/mapServer/request",
   "/configuration/service/protocol",
   "/configuration/service/url",
-  "/configuration/activeLayer"
+  "/configuration/activeLayer",
+  "/configuration/logger/http/host",
+  "/configuration/logger/http/port",
+  "/configuration/logger/http/path"
 ]

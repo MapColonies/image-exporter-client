@@ -17,6 +17,7 @@ import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import EXPORTER_CONFIG from '../../../common/config';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
+import logger from '../../../logger/logger';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,7 +105,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           [values.topRightLon, values.topRightLat],
         ]);
         const polygon = bboxPolygon(bbox(line));
-        console.log('polygon', polygon.geometry);
+        logger.debug(`polygon ${polygon.geometry}`);
 
         onPolygonUpdate(polygon.geometry);
         handleClose(false);

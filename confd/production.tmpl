@@ -6,5 +6,13 @@ window._env_ = {
   REQUEST: '{{ getv "/configuration/mapServer/request" "ImageryMaps" }}',
   SERVICE_PROTOCOL: '{{ getv "/configuration/service/protocol" "http://" }}',
   SERVICE_NAME: '{{ getv "/configuration/service/url" "localhost:8000" }}',
-  ACTIVE_LAYER: '{{ getv "/configuration/activeLayer" "OSM_DEFAULT" }}'
+  ACTIVE_LAYER: '{{ getv "/configuration/activeLayer" "OSM_DEFAULT" }}',
+  LOGGER: {
+    level: "{{ getv "/configuration/logger/level" "error" }}",
+    log2httpServer: {
+      host: "{{ getv "/configuration/logger/http/host" "" }}",
+      port: "{{ getv "/configuration/logger/http/port" "" }}",
+      path: "{{ getv "/configuration/logger/http/path" "" }}"
+    }
+  }
 };
