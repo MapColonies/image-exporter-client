@@ -113,7 +113,6 @@ const ExporterView: React.FC = observer(() => {
               action={
                 <SnackbarAction
                   label={intl.formatMessage({ id: 'snack.dismiss-btn.text' })}
-                  onClick={() => logger.info('dismiss clicked')}
                 />
               }
             />
