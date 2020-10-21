@@ -5,10 +5,10 @@ import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { getLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
+import logger from '../../logger/logger';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IExportTaskStatus } from './exportTaskStatus';
-import logger from '../../logger/logger';
 
 export type ExportTaskStatusResponse = IExportTaskStatus[];
 export interface ExportResult {
@@ -65,7 +65,7 @@ export const exporterStore = types
       ];
 
       try {
-        logger.debug(`Fetch params---> ${params}`);
+        logger.debug('Fetch params---> ', params);
         const result = yield self.root.fetch(
           '/exportGeopackage',
           'POST',

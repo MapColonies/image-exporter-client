@@ -105,7 +105,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           [values.topRightLon, values.topRightLat],
         ]);
         const polygon = bboxPolygon(bbox(line));
-        logger.debug(`polygon ${polygon.geometry}`);
+        logger.debug('polygon: ',  polygon.geometry);
 
         onPolygonUpdate(polygon.geometry);
         handleClose(false);
