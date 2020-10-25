@@ -3,7 +3,10 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import moment from 'moment';
 import { observer } from 'mobx-react-lite';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { 
+  ColDef, 
+  ICellRendererParams,
+} from 'ag-grid-community';
 import {
   Dialog,
   DialogTitle,
@@ -32,6 +35,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
   const intl = useIntl();
   const [colDef, setColDef] = useState<ColDef[]>([]);
   const [rowData, setRowData] = useState([]);
+  const pageSize = 10;
 
   const handleClose = (): void => {
     onSetOpen(false);
@@ -52,29 +56,6 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         headerName: intl.formatMessage({ id: 'export-table.table-column-header.fileName.text' }),
         width: 200,
         field: 'fileName',
-        suppressMovable: true,
-      },
-      {
-        headerName: intl.formatMessage({ id: 'export-table.table-column-header.sizeEst.text' }),
-        width: 120,
-        field: 'sizeEst',
-        suppressMovable: true,
-      },
-      {
-        headerName: intl.formatMessage({ id: 'export-table.table-column-header.tilesEst.text' }),
-        width: 100,
-        field: 'tilesEst',
-        suppressMovable: true,
-      },
-      {
-        headerName: intl.formatMessage({ id: 'export-table.table-column-header.bbox.text' }),
-        width: 800,
-        field: 'bbox',
-        cellRenderer: (props : ICellRendererParams) : string => {
-          const data = props.data as IExportTaskStatus;
-          const bbox = data.bbox;
-          return renderBbox(bbox);
-        },
         suppressMovable: true,
       },
       {
@@ -117,7 +98,29 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         cellRenderer: 'progressRenderer',
         suppressMovable: true,
       },
-
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.sizeEst.text' }),
+        width: 120,
+        field: 'sizeEst',
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.tilesEst.text' }),
+        width: 100,
+        field: 'tilesEst',
+        suppressMovable: true,
+      },
+      {
+        headerName: intl.formatMessage({ id: 'export-table.table-column-header.bbox.text' }),
+        width: 800,
+        field: 'bbox',
+        cellRenderer: (props : ICellRendererParams) : string => {
+          const data = props.data as IExportTaskStatus;
+          const bbox = data.bbox;
+          return renderBbox(bbox);
+        },
+        suppressMovable: true,
+      },
     ]);
 
   },[intl]);
@@ -147,6 +150,8 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
             }}
           >
             <AgGridReact
+              pagination={true}
+              paginationPageSize={pageSize}
               columnDefs={colDef}
               rowData={rowData}
               overlayNoRowsTemplate={intl.formatMessage({ id: 'export-table.nodata' })}
