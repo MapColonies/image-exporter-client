@@ -5,9 +5,6 @@ import '../../__mocks__/confEnvShim';
 import { rootStore } from './rootStore';
 import { ExportTaskStatusResponse } from './exporterStore';
 
-console.error = jest.fn();
-console.log = jest.fn();
-
 const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES as ExportTaskStatusResponse;
 
 describe('Exporter Store', () => {
@@ -15,24 +12,27 @@ describe('Exporter Store', () => {
     const packagesFetcher = async (): Promise<ExportTaskStatusResponse> =>
       Promise.resolve<ExportTaskStatusResponse>(exportedPackages);
     const { exporterStore } = rootStore.create({}, { fetch: packagesFetcher });
-  
+
     await exporterStore.getGeoPackages();
 
-    const result:ExportTaskStatusResponse = exporterStore.exportedPackages as ExportTaskStatusResponse;
-  
+    const result: ExportTaskStatusResponse = exporterStore.exportedPackages as ExportTaskStatusResponse;
+
     expect(result).toEqual(exportedPackages);
   });
 
   it('status is DONE when export package trigered succesfully', async () => {
-    const { exporterStore } = rootStore.create({}, { 
-      fetch: async () =>  Promise.resolve({}),
-    });
+    const { exporterStore } = rootStore.create(
+      {},
+      {
+        fetch: async () => Promise.resolve({}),
+      }
+    );
 
     exporterStore.searchParams.setLocation({
-      type: "MultiPolygon",
-      coordinates: [[[[32,35]], [[32,35]],[[31.5,34.5]],[[32,35]]]]
+      type: 'MultiPolygon',
+      coordinates: [[[[32, 35]], [[32, 35]], [[31.5, 34.5]], [[32, 35]]]],
     });
-    
+
     await exporterStore.startExportGeoPackage({
       packName: 'kuku',
       sizeEst: 20000,
@@ -43,15 +43,18 @@ describe('Exporter Store', () => {
   });
 
   it('status is ERROR when export package trigered failed', async () => {
-    const { exporterStore } = rootStore.create({}, { 
-      fetch: async () =>  Promise.reject(),
-    });
+    const { exporterStore } = rootStore.create(
+      {},
+      {
+        fetch: async () => Promise.reject(),
+      }
+    );
 
     exporterStore.searchParams.setLocation({
-      type: "MultiPolygon",
-      coordinates: [[[[32,35]], [[32,35]],[[31.5,34.5]],[[32,35]]]]
+      type: 'MultiPolygon',
+      coordinates: [[[[32, 35]], [[32, 35]], [[31.5, 34.5]], [[32, 35]]]],
     });
-    
+
     await exporterStore.startExportGeoPackage({
       packName: 'kuku',
       sizeEst: 20000,
@@ -60,5 +63,4 @@ describe('Exporter Store', () => {
 
     expect(exporterStore.state).toBe(ResponseState.ERROR);
   });
-
 });

@@ -19,7 +19,6 @@ import EXPORTER_CONFIG from '../../common/config';
 import { ExportDialog } from '../components/export/export-dialog';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportSatusTableDialog } from '../components/export-table/export-table-dialog';
-import logger from '../../logger/logger';
 
 type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
 

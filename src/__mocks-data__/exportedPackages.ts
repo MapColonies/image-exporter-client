@@ -5,7 +5,8 @@ const MOCK_EXPORTED_PACKAGES = [
     tilesEst: 120,
     status: 'FINISHED',
     link: 'https://packages/kuku.gpkg',
-    date: new Date('2020-10-01T03:24:00'),
+    creationDate: new Date('2020-10-01T03:24:00'),
+    lastUpdateTime: new Date('2020-10-01T03:24:00'),
     progress: 100,
   },
   {
@@ -14,7 +15,8 @@ const MOCK_EXPORTED_PACKAGES = [
     tilesEst: 2000,
     status: 'INPROGRESS',
     link: 'https://packages/muku.gpkg',
-    date: new Date('2020-09-30T02:24:00'),
+    creationDate: new Date('2020-09-30T02:24:00'),
+    lastUpdateTime: new Date('2020-10-01T03:24:00'),
     progress: 80,
   },
 ];

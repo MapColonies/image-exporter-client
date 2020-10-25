@@ -17,7 +17,6 @@ import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import EXPORTER_CONFIG from '../../../common/config';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
-import logger from '../../../logger/logger';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
