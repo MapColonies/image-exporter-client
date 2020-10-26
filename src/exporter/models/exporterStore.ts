@@ -5,7 +5,6 @@ import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { getLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
-import logger from '../../logger/logger';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IExportTaskStatus } from './exportTaskStatus';
@@ -65,7 +64,6 @@ export const exporterStore = types
       ];
 
       try {
-        logger.debug('Fetch params---> ', params);
         const result = yield self.root.fetch(
           '/exportGeopackage',
           'POST',
@@ -74,7 +72,6 @@ export const exporterStore = types
         // const responseBody = result.data.data;
         self.state = ResponseState.DONE;
       } catch (error) {
-        logger.error(error);
         self.state = ResponseState.ERROR;
       }
     });
@@ -85,13 +82,11 @@ export const exporterStore = types
         ExportTaskStatusResponse
       > {
         try {
-          logger.debug('Fetch exported geoPackages--->');
           self.state = ResponseState.IDLE;
           const result = yield self.root.fetch('/exportStatus', 'GET', {});
           // const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
           self.exportedPackages = result;
         } catch (error) {
-        logger.error(error);
           self.state = ResponseState.ERROR;
         }
       }

@@ -1,26 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'mobx-react-lite/batchingForReactDom';
-import './index.css';
 import Axios, { Method } from 'axios';
+import moment from 'moment';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider, rootStore } from './exporter/models/rootStore';
 import { ExporterResponse } from './exporter/models/exporterStore';
 import EXPORTER_CONFIG from './common/config';
+import logger from './logger/logger';
+import './index.css';
 
 const store = rootStore.create(
   {},
   {
-    fetch: async (url: string, method: Method, params: Record<string, unknown>) =>
-      // Axios.post(url, params, { baseURL: `${EXPORTER_CONFIG.SERVICE_PROTOCOL}${EXPORTER_CONFIG.SERVICE_NAME}` }).then((res) => res.data as ExporterResponse),
-
-      Axios.request({
+    fetch: async (url: string, method: Method, params: Record<string, unknown>) => {
+      const { userAgent } = navigator as NavigatorID;
+      const errorMsg = 'CLIENT HTTP ERROR BY AXIOS';
+      return Axios.request({
         url, 
         method, 
         data: params,
         baseURL: `${(EXPORTER_CONFIG.SERVICE_PROTOCOL as string)}${(EXPORTER_CONFIG.SERVICE_NAME as string)}` 
-      }).then((res) => res.data as ExporterResponse),
+      })
+      .then((res) => res.data as ExporterResponse)
+      .catch ((error) => {
+        // eslint-disable-next-line
+        logger.error(errorMsg, {response:error, userAgent, dateTime: moment(new Date()).format('DD/MM/YYYY HH:mm')});
+        throw(error);
+      })
+    },
   }
 );
 
