@@ -14,7 +14,7 @@ const store = rootStore.create(
   {},
   {
     fetch: async (url: string, method: Method, params: Record<string, unknown>) => {
-      const { userAgent } = navigator;
+      const { userAgent } = navigator as NavigatorID;
       const errorMsg = 'CLIENT HTTP ERROR BY AXIOS';
       return Axios.request({
         url, 
