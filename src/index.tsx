@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'mobx-react-lite/batchingForReactDom';
-import './index.css';
 import Axios, { Method } from 'axios';
+import moment from 'moment';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { StoreProvider, rootStore } from './exporter/models/rootStore';
 import { ExporterResponse } from './exporter/models/exporterStore';
 import EXPORTER_CONFIG from './common/config';
 import logger from './logger/logger';
+import './index.css';
 
 const store = rootStore.create(
   {},
@@ -25,7 +26,7 @@ const store = rootStore.create(
       .then((res) => res.data as ExporterResponse)
       .catch ((error) => {
         // eslint-disable-next-line
-        logger.error(errorMsg, {response:error, userAgent});
+        logger.error(errorMsg, {response:error, userAgent, dateTime: moment(new Date()).format('DD/MM/YYYY HH:mm')});
         throw(error);
       })
     },
