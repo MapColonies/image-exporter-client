@@ -24,7 +24,7 @@ const store = rootStore.create(
       })
       .then((res) => res.data as ExporterResponse)
       .catch ((error) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line
         logger.error(errorMsg, {response:error, userAgent});
         throw(error);
       })
