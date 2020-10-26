@@ -14,7 +14,6 @@ const store = rootStore.create(
   {},
   {
     fetch: async (url: string, method: Method, params: Record<string, unknown>) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { userAgent } = navigator as NavigatorID;
       const errorMsg = 'CLIENT HTTP ERROR BY AXIOS';
       return Axios.request({
@@ -25,6 +24,7 @@ const store = rootStore.create(
       })
       .then((res) => res.data as ExporterResponse)
       .catch ((error) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         logger.error(errorMsg, {response:error, userAgent});
         throw(error);
       })
