@@ -42,7 +42,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
   };
 
   const renderDate = (date : Date | undefined): string => {
-    return date ? moment(date).format('DD/MM/YYYY HH:mm') : "-";
+    return date ? moment(new Date(date.toLocaleString())).format('DD/MM/YYYY HH:mm') : "-";
   }
 
   const renderBbox = (bbox : IBbox | undefined) : string => {
