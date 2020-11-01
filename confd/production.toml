@@ -2,14 +2,14 @@
 src = "production.tmpl"
 dest = "public/env-config.js"
 keys = [
-  "/configuration/mapServer/url",
-  "/configuration/mapServer/publishPoint",
-  "/configuration/mapServer/channel",
-  "/configuration/mapServer/version",
-  "/configuration/mapServer/request",
+  "/configuration/mapserver/url",
+  "/configuration/mapserver/publish/point",
+  "/configuration/mapserver/channel",
+  "/configuration/mapserver/version",
+  "/configuration/mapserver/request",
   "/configuration/service/protocol",
   "/configuration/service/url",
-  "/configuration/activeLayer",
+  "/configuration/active/layer",
   "/configuration/logger/http/host",
   "/configuration/logger/http/port",
   "/configuration/logger/http/path",
