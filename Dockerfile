@@ -14,6 +14,17 @@ RUN yarn build
 
 FROM nginx:1.19.1-alpine
 
-COPY --from=build /opt/myapp/build /usr/share/nginx/html
+# Install Node for running confd
+RUN set -eux & apk add --no-cache nodejs
+
+COPY entrypoint.sh /entrypoint.sh
 
 WORKDIR /usr/share/nginx/html
+
+COPY --from=build /opt/myapp/build ./
+COPY --from=build /opt/myapp/package*.json /usr/share/nginx/html/
+
+# Move env-config.js to location in which confd script expects it to be located
+RUN mkdir public && cp env-config.js public/env-config.js
+
+CMD ["/entrypoint.sh"]
