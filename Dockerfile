@@ -22,7 +22,6 @@ COPY entrypoint.sh /entrypoint.sh
 WORKDIR /usr/share/nginx/html
 
 COPY --from=build /opt/myapp/build ./
-COPY --from=build /opt/myapp/package*.json /usr/share/nginx/html/
 
 # Move env-config.js to location in which confd script expects it to be located
 RUN mkdir public && cp env-config.js public/env-config.js
