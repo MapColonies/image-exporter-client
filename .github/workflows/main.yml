@@ -20,10 +20,18 @@ jobs:
           
       - name: Install dependecies
         run: yarn
-		
       - name: Lint
         run: yarn run eslint:check
-
       - name: Test
         run: yarn test
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: false
+          tags: exporter-worker:latest
+      #- name: Image digest
+      #  run: echo ${{ steps.docker_build.outputs.digest }}
         
