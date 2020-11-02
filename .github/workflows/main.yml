@@ -26,6 +26,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install --no-install-recommends yarn
           
+      - name: Install dependecies
+        run: yarn
+
       - name: Lint
         run: yarn run eslint:check
 
