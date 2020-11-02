@@ -82,8 +82,8 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       bottomLeftLon: selectedPolygon.coordinates[0][0][0],
       topRightLat: selectedPolygon.coordinates[0][2][1],
       topRightLon: selectedPolygon.coordinates[0][2][0],
-      minZoom: 2,
-      maxZoom: 18,
+      minZoom: EXPORTER_CONFIG.EXPORT.MIN_ZOOM,
+      maxZoom: EXPORTER_CONFIG.EXPORT.MAX_ZOOM,
       packageName: ''
     },
     onSubmit: values => {
@@ -105,7 +105,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
     if( isValidZoomValue(formik.values.minZoom) &&
       isValidZoomValue(formik.values.maxZoom) && 
       formik.values.maxZoom >= formik.values.minZoom ){
-      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom );
+      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom ) * EXPORTER_CONFIG.EXPORT.METRIX_SET_FACTOR;
       setNumTiles(tilesCount);
       setFormErrors({ minMaxZooms: '' });
     }else{
@@ -192,7 +192,8 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
             />
             <BBoxCorner corner={Corner.BOTTOM_LEFT} />
           </Box>
-          <Box style={{ display: 'flex', marginBottom: '16px' }}>
+          {/* <Box style={{ display: 'flex', marginBottom: '16px' }}> */}
+          <Box style={{ display: 'none', marginBottom: '16px' }}>
             <TextField
               label={intl.formatMessage({ id: 'export.dialog-field.min_zoom.label' })}
               id="minZoom"
@@ -225,14 +226,14 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               ~{calcPackSize(numTiles)}Mb
             </Typography>
           </Box>
-          <Box style={{ display: 'flex' }}>
+          {/* <Box style={{ display: 'flex' }}>
             <Typography use="body1" className={classes.infoLabel}>
               <FormattedMessage id="export.dialog-info.link.label" /> 
             </Typography>
             <Typography use="body2" id="exportDownloadLink">
               {intl.formatMessage({ id: 'export.dialog-info.link.pattern' }, {packageName: formik.values.packageName})}
             </Typography>
-          </Box>
+          </Box> */}
 
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
             {
