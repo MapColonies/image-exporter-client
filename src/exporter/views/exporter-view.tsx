@@ -127,11 +127,17 @@ const ExporterView: React.FC = observer(() => {
           {
             !!snackOpen && <Snackbar
               open={snackOpen}
-              onOpen={(): void => setDrawDisabled(true)}
+              onOpen={(): void => {
+                if(exporterStore.error) {
+                  setDrawDisabled(true)
+                }
+              }}
               onClose={(evt): void => {
-                exporterStore.searchParams.resetLocation();
+                if(exporterStore.error) {
+                  exporterStore.searchParams.resetLocation();
+                  setDrawDisabled(false);
+                }
                 setSnackOpen(false);
-                setDrawDisabled(false);
               }}
               message={intl.formatMessage({ id: snackDetails.message })}
               dismissesOnAction
