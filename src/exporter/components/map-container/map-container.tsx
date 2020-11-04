@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Polygon } from 'geojson';
-import { DrawType } from  '@map-colonies/react-components'; 
+import { DrawType } from  '@map-colonies/react-components';
+import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 import { PolygonSelectionUi } from './polygon-selection-ui';
 import { MapWrapper } from './map-wrapper';
 import './map-container.css';
-import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 
 export interface MapContainerProps {
   selectionPolygon: Polygon;
