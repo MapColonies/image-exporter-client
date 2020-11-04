@@ -87,7 +87,6 @@ const ExporterView: React.FC = observer(() => {
       setSnackDetails({
         message: 'snack.message.failed.draw.bbox',
       });
-      exporterStore.setError(null);
     }
   }, [exporterStore.error]);
 
@@ -129,13 +128,14 @@ const ExporterView: React.FC = observer(() => {
               open={snackOpen}
               onOpen={(): void => {
                 if(exporterStore.error) {
-                  setDrawDisabled(true)
+                  setDrawDisabled(true);
                 }
               }}
               onClose={(evt): void => {
                 if(exporterStore.error) {
                   exporterStore.searchParams.resetLocation();
                   setDrawDisabled(false);
+                  exporterStore.setError(null);
                 }
                 setSnackOpen(false);
               }}
