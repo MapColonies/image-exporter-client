@@ -14,5 +14,8 @@ window._env_ = {
       port: "{{ getv "/configuration/logger/http/port" "" }}",
       path: "{{ getv "/configuration/logger/http/path" "" }}"
     }
+  },
+  BBOX: {
+    "limit": {{ getv "/configuration/bbox/area/square/km/limit" "100000" }}
   }
 };
