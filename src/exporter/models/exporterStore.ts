@@ -3,6 +3,10 @@ import { types, Instance, flow, getParent, getSnapshot } from 'mobx-state-tree';
 import { Polygon } from '@turf/helpers';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
+import {
+  ExportStoreError,
+  ExporterError,
+} from '../../common/models/exportStoreError';
 import { getLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
@@ -33,6 +37,15 @@ export const exporterStore = types
     ),
     searchParams: types.optional(searchParams, {}),
     exportedPackages: types.maybe(types.frozen<any>([])),
+    error: types.maybeNull(
+      types.model({
+        name: types.enumeration<ExportStoreError>(
+          'Error',
+          Object.values(ExportStoreError)
+        ),
+        message: types.string,
+      })
+    ),
   })
   .views((self) => ({
     get root(): IRootStore {
@@ -91,10 +104,14 @@ export const exporterStore = types
         }
       }
     );
+    const setError = (error: ExporterError): void => {
+      self.error = error;
+    };
 
     return {
       startExportGeoPackage,
       getGeoPackages,
+      setError,
     };
   });
 

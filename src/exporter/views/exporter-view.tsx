@@ -19,6 +19,7 @@ import EXPORTER_CONFIG from '../../common/config';
 import { ExportDialog } from '../components/export/export-dialog';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportSatusTableDialog } from '../components/export-table/export-table-dialog';
+import { ExportStoreError } from '../../common/models/exportStoreError';
 
 type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
 
@@ -43,8 +44,6 @@ const xyzOptions =  getXYZOptions({
   url: EXPORTER_CONFIG.XYZ_LAYER.URL,
 });
 
-const tileOtions = {opacity:0.5};
-
 interface SnackDetails {
   message: string;
 }
@@ -57,6 +56,7 @@ const ExporterView: React.FC = observer(() => {
   const [open, setOpen] = useState(false);
   const [openStatus, setOpenStatus] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
+  const [isDrawDisabled, setDrawDisabled] = useState(false);
   const [snackDetails, setSnackDetails] = useState<SnackDetails>({message:''});
   const intl = useIntl();
   const onExportStatusClick= ():void => {
@@ -81,17 +81,38 @@ const ExporterView: React.FC = observer(() => {
     }
   },[exporterStore.state]);
 
+  useEffect(()=>{
+    if(exporterStore.error) {
+      setSnackOpen(true);
+      setSnackDetails({
+        message: 'snack.message.failed.draw.bbox',
+      });
+      exporterStore.setError(null);
+    }
+  }, [exporterStore.error]);
+
+  const handleError = (): void => {
+    const bboxLimit = EXPORTER_CONFIG.BOUNDARIES.AREA as number;
+    exporterStore.setError({
+      name: ExportStoreError.BBOX_AREA_TOO_LARGE,
+      message: `Wanted BBox is too large, limit is ${bboxLimit} square kilometers`
+    });
+  }
+
   return (
     <MapContainer
+      selectionPolygon={exporterStore.searchParams.geojson as Polygon}
       handlePolygonSelected={exporterStore.searchParams.setLocation}
       handlePolygonReset={exporterStore.searchParams.resetLocation.bind(
         exporterStore.searchParams
       )}
+      handleError={handleError}
+      isDrawDisabled={isDrawDisabled}
       filters={[
         <>
           <Button 
             raised 
-            disabled={exporterStore.searchParams.geojson ? false : true} 
+            disabled={exporterStore.searchParams.geojson && !isDrawDisabled ? false : true} 
             onClick={onExportClick}>
             <FormattedMessage id="export.export-btn.text"/>
           </Button>
@@ -104,9 +125,14 @@ const ExporterView: React.FC = observer(() => {
             </ExportDialog>
           }
           {
-            !!snackDetails.message && <Snackbar
+            !!snackOpen && <Snackbar
               open={snackOpen}
-              onClose={(evt): void => setSnackOpen(false)}
+              onOpen={(): void => setDrawDisabled(true)}
+              onClose={(evt): void => {
+                exporterStore.searchParams.resetLocation();
+                setSnackOpen(false);
+                setDrawDisabled(false);
+              }}
               message={intl.formatMessage({ id: snackDetails.message })}
               dismissesOnAction
               action={
@@ -142,13 +168,13 @@ const ExporterView: React.FC = observer(() => {
             </TileLayer> 
           }
           {
-            EXPORTER_CONFIG.ACTIVE_LAYER === 'WMS_LAYER' && <TileLayer options={tileOtions}>
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'WMS_LAYER' && <TileLayer>
               <TileWMS options={wmsOptions}/>
             </TileLayer>
           }
 
           {
-            EXPORTER_CONFIG.ACTIVE_LAYER === 'XYZ_LAYER' &&<TileLayer options={tileOtions}>
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'XYZ_LAYER' &&<TileLayer>
               <TileXYZ options={xyzOptions}/>
             </TileLayer> 
           }

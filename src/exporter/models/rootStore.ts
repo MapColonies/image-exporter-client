@@ -15,6 +15,7 @@ export const baseRootStore = types
     exporterStore: types.optional(exporterStore, {
       state: ResponseState.IDLE,
       searchParams: {},
+      error: null,
     }),
   })
   .views((self) => ({
