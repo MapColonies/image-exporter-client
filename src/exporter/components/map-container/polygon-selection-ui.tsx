@@ -29,6 +29,7 @@ const useStyle = makeStyles((theme: Theme) =>
 
 export interface PolygonSelectionUiProps {
   isSelectionEnabled: boolean;
+  isDrawDisabled: boolean;
   onStartDraw: (type: DrawType) => void;
   onCancelDraw: () => void;
   onReset: () => void;
@@ -74,6 +75,7 @@ export const PolygonSelectionUi: React.FC<PolygonSelectionUiProps> = (
           <Button
             className={classes.drawingButton}
             raised
+            disabled={props.isDrawDisabled}
             onClick={handleClick}
           >
             <FormattedMessage id="polygon-selection.draw-btn.text"/>
