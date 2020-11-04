@@ -119,7 +119,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       <Component
         style={
           Object {
-            "display": "flex",
+            "display": "none",
             "marginBottom": "16px",
           }
         }
@@ -131,7 +131,7 @@ exports[`ExportDialog component renders correctly 1`] = `
           name="minZoom"
           onChange={[Function]}
           type="number"
-          value={2}
+          value={1}
         />
         <Function
           className="makeStyles-spacer-1"
@@ -140,7 +140,7 @@ exports[`ExportDialog component renders correctly 1`] = `
           name="maxZoom"
           onChange={[Function]}
           type="number"
-          value={18}
+          value={21}
         />
         <BBoxCorner
           className="makeStyles-noBorder-3"
@@ -180,28 +180,6 @@ exports[`ExportDialog component renders correctly 1`] = `
           ~
           0
           Mb
-        </Function>
-      </Component>
-      <Component
-        style={
-          Object {
-            "display": "flex",
-          }
-        }
-      >
-        <Function
-          className="makeStyles-infoLabel-5"
-          use="body1"
-        >
-          <FormattedMessage
-            id="export.dialog-info.link.label"
-          />
-        </Function>
-        <Function
-          id="exportDownloadLink"
-          use="body2"
-        >
-          https://packages/.gpkg
         </Function>
       </Component>
       <Component

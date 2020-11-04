@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Polygon } from 'geojson';
-import { DrawType } from  '@map-colonies/react-components'; 
+import { DrawType } from  '@map-colonies/react-components';
+import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 import { PolygonSelectionUi } from './polygon-selection-ui';
 import { MapWrapper } from './map-wrapper';
 import './map-container.css';
 
 export interface MapContainerProps {
+  selectionPolygon: Polygon;
   handlePolygonSelected: (polygon: Polygon) => void;
   handlePolygonReset: () => void;
+  handleError: () => void;
+  isDrawDisabled: boolean;
   mapContent?: React.ReactNode;
   filters?: React.ReactNode[];
 }
@@ -16,16 +20,17 @@ export const MapContainer: React.FC<MapContainerProps> = (
   props
 ) => {
   const [drawType, setDrawType] = useState<DrawType>();
-  const [selectionPolygon, setSelectionPolygon] = useState<Polygon>();
 
   const onPolygonSelection = (polygon: Polygon): void => {
-    setSelectionPolygon(polygon);
+    if(!isBBoxWithinLimit(polygon)) {
+      props.handleError();
+    }
+
     setDrawType(undefined);
     props.handlePolygonSelected(polygon);
   };
 
   const onReset = (): void => {
-    setSelectionPolygon(undefined);
     props.handlePolygonReset();
   };
 
@@ -38,6 +43,7 @@ export const MapContainer: React.FC<MapContainerProps> = (
             onReset={onReset}
             onStartDraw={setDrawType}
             isSelectionEnabled={drawType !== undefined}
+            isDrawDisabled={props.isDrawDisabled}
             onPolygonUpdate={onPolygonSelection}
           />
           {props.filters?.map((filter, index) => (
@@ -51,7 +57,7 @@ export const MapContainer: React.FC<MapContainerProps> = (
         children={props.mapContent}
         onPolygonSelection={onPolygonSelection}
         drawType={drawType}
-        selectionPolygon={selectionPolygon}
+        selectionPolygon={props.selectionPolygon}
       />
     </div>
   );
