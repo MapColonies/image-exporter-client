@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as  turf from '@turf/helpers';
 import bbox from '@turf/bbox';
 import bboxPolygon from '@turf/bbox-polygon';
-import distance from '@turf/distance/dist/js'; //TODO: make a consumption "REGULAR"
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -15,8 +14,8 @@ import {
 } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
-import EXPORTER_CONFIG from '../../../common/config';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
+import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,37 +39,25 @@ interface BBoxCorners {
   topRightLon: number;
 }
 
-interface BBoxCornersError {
-  latDistance: string;
-  lonDistance: string;
+interface BBoxError {
+  bboxArea: string;
 }
 
-const validate = (values: BBoxCorners, intl: IntlShape): BBoxCornersError => {
-  const errors: BBoxCornersError = { latDistance: '', lonDistance: '' };
+const validate = (values: BBoxCorners, intl: IntlShape): BBoxError => {
+  const errors: BBoxError = { bboxArea: '' };
 
   try {
-    turf.lineString([
+    const line = turf.lineString([
       [values.bottomLeftLon, values.bottomLeftLat],
       [values.topRightLon, values.topRightLat],
     ]);
-
-    const yDistance = distance(
-      [values.bottomLeftLon, values.bottomLeftLat],
-      [values.bottomLeftLon, values.topRightLat]);
-
-    const xDistance = distance(
-      [values.bottomLeftLon, values.bottomLeftLat],
-      [values.topRightLon, values.bottomLeftLat]);
-
-    if (yDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_Y_KM) {
-      errors.latDistance = intl.formatMessage({ id: 'custom-bbox.form-error.y-distance.text' });
-    }
-    if (xDistance > EXPORTER_CONFIG.BOUNDARIES.MAX_X_KM) {
-      errors.lonDistance = intl.formatMessage({ id: 'custom-bbox.form-error.x-distance.text' });
+    const polygon = bboxPolygon(bbox(line));
+    if(!isBBoxWithinLimit(polygon.geometry)) {
+      errors.bboxArea = intl.formatMessage({ id: 'custom-bbox.form-error.area.text' });
     }
   }
   catch (err) {
-    errors.latDistance = 'Not valid coordinates';
+    errors.bboxArea = 'Not valid bbox area';
   }
 
   return errors;
@@ -98,7 +85,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     },
     onSubmit: values => {
       const err = validate(values, intl);
-      if (!err.latDistance && !err.lonDistance) {
+      if (!err.bboxArea) {
         const line = turf.lineString([
           [values.bottomLeftLon, values.bottomLeftLat],
           [values.topRightLon, values.topRightLat],
@@ -108,8 +95,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
         onPolygonUpdate(polygon.geometry);
         handleClose(false);
         setFormErrors({
-          latDistance: '',
-          lonDistance: ''
+          bboxArea: ''
         });
       }
       else {
@@ -119,7 +105,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     },
   });
 
-  const [formErrors, setFormErrors] = useState({ latDistance: '', lonDistance: '' });
+  const [formErrors, setFormErrors] = useState({ bboxArea: '' });
 
   const handleClose = (isOpened: boolean): void => {
     onSetOpen(isOpened);
@@ -175,9 +161,9 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           </Box>
           <Box style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', gap: '16px' }}>
             {
-              (!!formErrors.latDistance || !!formErrors.lonDistance) ?
+              formErrors.bboxArea ?
                 <div id="errorContainer" className={classes.errorContainer}>
-                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.latDistance} ${formErrors.lonDistance}`}
+                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${formErrors.bboxArea}`}
                 </div> :
                 null
             }

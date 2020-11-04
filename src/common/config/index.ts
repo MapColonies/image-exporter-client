@@ -7,6 +7,7 @@ const REQUEST = (window as any)._env_.REQUEST;
 const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
+const BBOX = (window as any)._env_.BBOX;
 
 const EXPORTER_CONFIG = {
   SERVICE_PROTOCOL: SERVICE_PROTOCOL,
@@ -15,8 +16,7 @@ const EXPORTER_CONFIG = {
     DEFAULT_LANGUAGE: 'en',
   },
   BOUNDARIES: {
-    MAX_X_KM: 100,
-    MAX_Y_KM: 100,
+    AREA: BBOX.limit,
   },
   EXPORT: {
     AVG_TILE_SIZE_MB: 0.02,
