@@ -84,10 +84,12 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       topRightLon: selectedPolygon.coordinates[0][2][0],
       minZoom: EXPORTER_CONFIG.EXPORT.MIN_ZOOM,
       maxZoom: EXPORTER_CONFIG.EXPORT.MAX_ZOOM,
+      directoryName: '',
       packageName: ''
     },
     onSubmit: values => {
       void handleExport({
+        directoryName: formik.values.directoryName,
         packName: formik.values.packageName,
         minZoom: formik.values.minZoom,
         maxZoom: formik.values.maxZoom,
@@ -120,7 +122,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
   };
 
   // eslint-disable-next-line
-  const checkPackName = (e: React.ChangeEvent<any>) => {
+  const checkName = (e: React.ChangeEvent<any>) => {
     return isValidPackName(e) ? formik.handleChange(e) : false;
   };
 
@@ -131,13 +133,24 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       </DialogTitle>
       <DialogContent>
         <form onSubmit={formik.handleSubmit}>
+        <Box style={{ display: 'flex', marginBottom: '16px' }}>
+            <TextField
+              placeholder={intl.formatMessage({ id: 'export.dialog-field.directory_name.placeholder' })}
+              id="directoryName"
+              name="directoryName"
+              type="text"
+              onChange={checkName}
+              value={formik.values.directoryName}
+              fullwidth
+            />
+          </Box>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
               placeholder={intl.formatMessage({ id: 'export.dialog-field.package_name.placeholder' })}
               id="packageName"
               name="packageName"
               type="text"
-              onChange={checkPackName}
+              onChange={checkName}
               value={formik.values.packageName}
               fullwidth
             />
