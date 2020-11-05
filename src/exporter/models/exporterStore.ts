@@ -20,6 +20,7 @@ export interface ExportResult {
 }
 
 export interface PackageInfo {
+  directoryName: string;
   packName: string;
   sizeEst: number;
   tilesEst: number;
@@ -63,10 +64,10 @@ export const exporterStore = types
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const params: Record<string, unknown> = {};
       // Prepare body data for request
+      params.directoryName = packInfo.directoryName;
       params.fileName = packInfo.packName;
       params.sizeEst = packInfo.sizeEst;
       params.tilesEst = packInfo.tilesEst;
-      params.directoryName = 'test';
       params.exportedLayers = [{ exportType: 'raster', url: getLayerUrl() }];
       const coordinates = (snapshot.geojson as Polygon).coordinates[0];
       params.bbox = [

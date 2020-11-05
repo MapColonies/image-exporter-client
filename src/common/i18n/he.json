@@ -25,6 +25,7 @@
   "export.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
   "export.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
   "export.dialog-field.bottom_left_lon.label": "ארך נק' שמאל תחתונה",
+  "export.dialog-field.directory_name.placeholder": "שם תיקייה",
   "export.dialog-field.package_name.placeholder": "שם גאופאקג'",
   "export.dialog-field.min_zoom.label": "זום מינימלי",
   "export.dialog-field.max_zoom.label": "זום מקסימלי",

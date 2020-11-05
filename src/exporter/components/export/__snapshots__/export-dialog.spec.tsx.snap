@@ -24,6 +24,24 @@ exports[`ExportDialog component renders correctly 1`] = `
       >
         <Function
           fullwidth={true}
+          id="directoryName"
+          name="directoryName"
+          onChange={[Function]}
+          placeholder="Directory Name"
+          type="text"
+          value=""
+        />
+      </Component>
+      <Component
+        style={
+          Object {
+            "display": "flex",
+            "marginBottom": "16px",
+          }
+        }
+      >
+        <Function
+          fullwidth={true}
           id="packageName"
           name="packageName"
           onChange={[Function]}
