@@ -10,12 +10,12 @@ export const LinkRenderer: React.FC<ICellRendererParams> = (
 ) => {
   const value: string = (props.data as IExportTaskStatus).link; 
   const theme = useTheme();
-
+  
   if (!value) {
     return <></>;//''; // not null!
   }
   return (
-    <a href={value} className="buttonLink" style={{backgroundColor:theme.primary}}>
+    <a href={value} target="_blank" rel="noopener noreferrer" className="buttonLink" style={{backgroundColor:theme.primary}}>
       <FormattedMessage id="export-table.link.text" />
     </a>
   );
