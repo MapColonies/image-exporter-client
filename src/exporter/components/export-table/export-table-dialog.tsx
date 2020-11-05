@@ -8,6 +8,7 @@ import {
   ICellRendererParams,
   GridReadyEvent,
   GridApi,
+  ValueGetterParams,
 } from 'ag-grid-community';
 import {
   Dialog,
@@ -23,6 +24,7 @@ import { useStore } from '../../models/rootStore';
 import { IExportTaskStatus, IBbox } from '../../models/exportTaskStatus';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
+import { CopyToClipboardRenderer } from './cell-renderer/copy-to-clipboard.cell-renderer';
 import './export-table-dialog.css';
 
 interface ExportSatusTableDialogProps {
@@ -62,8 +64,20 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
       setGridApi(params.api);
     };
 
+    const linkValueGetter =(params: ValueGetterParams): string => {
+      const START_IDX = 0;
+      const FILE_PROTOCOL = 'file://';
+      let value = (params.data as IExportTaskStatus).link; 
+
+      value = value.substring(START_IDX, value.lastIndexOf("/"));
+      if(!value.startsWith(FILE_PROTOCOL)) {
+        value = FILE_PROTOCOL + value;
+      }
+
+      return value;
+    }
+
     useEffect(() => {
-      // File name | Est Size | Status | (URI) Link to download | Date | Progress
       setColDef([
         {
           headerName: intl.formatMessage({
@@ -85,9 +99,9 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           headerName: intl.formatMessage({
             id: 'export-table.table-column-header.link.text',
           }),
-          width: 120,
-          field: 'link',
-          cellRenderer: 'linkRenderer',
+          width: 180,
+          cellRenderer: 'copyToClipboardRenderer',
+          valueGetter: linkValueGetter,
           suppressMovable: true,
         },
         {
@@ -251,6 +265,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
                 frameworkComponents={{
                   progressRenderer: ProgressRenderer,
                   linkRenderer: LinkRenderer,
+                  copyToClipboardRenderer: CopyToClipboardRenderer
                 }}
               />
             </Box>

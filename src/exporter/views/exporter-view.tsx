@@ -89,7 +89,7 @@ const ExporterView: React.FC = observer(() => {
       });
       exporterStore.setError(null);
     }
-  }, [exporterStore.error]);
+  }, [exporterStore]);
 
   const handleError = (): void => {
     const bboxLimit = EXPORTER_CONFIG.BOUNDARIES.AREA as number;
