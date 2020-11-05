@@ -49,7 +49,7 @@
   "export-table.table-column-header.progress.text": "התקדמות",
 
   "snack.message.success": "יצוא התחיל בהצלחה",
-  "snack.message.failed": "יצוא ניכשל",
+  "snack.message.failed": "אירעה שגיאת רשת",
   "snack.message.failed.draw.bbox": "אזור רצוי גדול מדי",
   "snack.dismiss-btn.text": "אישור"
 }

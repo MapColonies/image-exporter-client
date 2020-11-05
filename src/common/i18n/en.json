@@ -49,7 +49,7 @@
   "export-table.table-column-header.progress.text": "Progress",
 
   "snack.message.success": "Export SUCCEEDED",
-  "snack.message.failed": "Export FAILED",
+  "snack.message.failed": "Network error occurred",
   "snack.message.failed.draw.bbox": "Requested area too large",
   "snack.dismiss-btn.text": "Dismiss"
 }
