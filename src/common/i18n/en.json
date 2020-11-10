@@ -41,7 +41,7 @@
   "export-table.table-column-header.fileName.text": "File Name",
   "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
   "export-table.table-column-header.realSize.text": "Real Size(Mb)",
-  "export-table.table-column-header.expirationTime.text": "Epiration date",
+  "export-table.table-column-header.expirationTime.text": "Expiration date",
   "export-table.table-column-header.bbox.text": "Bounding box",
   "export-table.table-column-header.status.text": "Status",
   "export-table.table-column-header.link.text": "File location",

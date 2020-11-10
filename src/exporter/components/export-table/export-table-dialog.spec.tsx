@@ -13,7 +13,7 @@ import { ExportSatusTableDialog } from './export-table-dialog';
 
 const setOpenFn = jest.fn();
 
-const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES as ExportTaskStatusResponse;
+const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES;
 const packagesFetcher = async (): Promise<ExportTaskStatusResponse> => Promise.resolve<ExportTaskStatusResponse>(exportedPackages);
 
 describe('ExportStatusTable component', () => {

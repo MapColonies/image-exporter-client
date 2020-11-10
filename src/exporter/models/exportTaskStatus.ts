@@ -21,6 +21,7 @@ const bbox = types.model({
 
 export const exportTaskStatus = types.model({
   fileName: types.string,
+  sizeEst: types.number,
   realSize: types.number,
   status: types.enumeration<ExportStatus>(
     'status',
