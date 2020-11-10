@@ -5,7 +5,7 @@ import '../../__mocks__/confEnvShim';
 import { rootStore } from './rootStore';
 import { ExportTaskStatusResponse } from './exporterStore';
 
-const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES as ExportTaskStatusResponse;
+const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES;
 
 describe('Exporter Store', () => {
   it('return an array of exported packages in a result of FETCH', async () => {
@@ -34,8 +34,9 @@ describe('Exporter Store', () => {
     });
 
     await exporterStore.startExportGeoPackage({
+      directoryName: 'kuku',
       packName: 'kuku',
-      realSize: 20000,
+      sizeEst: 20000,
     });
 
     expect(exporterStore.state).toBe(ResponseState.DONE);
@@ -55,8 +56,9 @@ describe('Exporter Store', () => {
     });
 
     await exporterStore.startExportGeoPackage({
+      directoryName: 'kuku',
       packName: 'kuku',
-      realSize: 20000,
+      sizeEst: 20000,
     });
 
     expect(exporterStore.state).toBe(ResponseState.ERROR);

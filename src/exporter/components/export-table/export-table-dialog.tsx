@@ -54,6 +54,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         : '-';
     };
 
+    const renderSize = (size: number): string => {
+      return size !== 0 ? `${size}` : '-';
+    };
+
     const renderBbox = (bbox: IBbox | undefined): string => {
       return bbox
         ? `Top right: ${bbox.topRight.lat}, ${bbox.topRight.lon}, Bottom left: ${bbox.bottomLeft.lat}, ${bbox.bottomLeft.lon}`
@@ -143,6 +147,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           }),
           width: 120,
           field: 'sizeEst',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderSize(data.sizeEst);
+          },
           suppressMovable: true,
         },
         {
@@ -151,6 +159,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           }),
           width: 120,
           field: 'realSize',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderSize(data.realSize);
+          },
           suppressMovable: true,
         },
         {
