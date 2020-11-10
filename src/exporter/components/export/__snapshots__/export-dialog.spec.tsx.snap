@@ -27,7 +27,7 @@ exports[`ExportDialog component renders correctly 1`] = `
           id="directoryName"
           name="directoryName"
           onChange={[Function]}
-          placeholder="Directory Name"
+          placeholder="Directory Name (English Only)"
           type="text"
           value=""
         />
@@ -45,7 +45,7 @@ exports[`ExportDialog component renders correctly 1`] = `
           id="packageName"
           name="packageName"
           onChange={[Function]}
-          placeholder="Package Name"
+          placeholder="Package Name (English Only)"
           type="text"
           value=""
         />
