@@ -85,6 +85,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     },
     onSubmit: values => {
       const err = validate(values, intl);
+
       if (!err.bboxArea) {
         const line = turf.lineString([
           [values.bottomLeftLon, values.bottomLeftLat],

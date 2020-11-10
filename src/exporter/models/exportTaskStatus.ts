@@ -1,4 +1,5 @@
 import { types, Instance } from 'mobx-state-tree';
+import { Polygon } from '@turf/helpers';
 
 export enum ExportStatus {
   PENDING = 'pending',
@@ -21,15 +22,16 @@ const bbox = types.model({
 export const exportTaskStatus = types.model({
   fileName: types.string,
   sizeEst: types.number,
-  tilesEst: types.number,
+  realSize: types.number,
   status: types.enumeration<ExportStatus>(
     'status',
     Object.values(ExportStatus)
   ),
-  bbox: bbox,
+  polygon: types.frozen<Polygon>(),
   link: types.string,
   creationDate: types.Date,
   lastUpdateTime: types.Date,
+  expirationTime: types.Date,
   progress: types.number,
   taskId: types.string,
 });

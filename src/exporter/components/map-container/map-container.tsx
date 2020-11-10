@@ -22,6 +22,7 @@ export const MapContainer: React.FC<MapContainerProps> = (
   const [drawType, setDrawType] = useState<DrawType>();
 
   const onPolygonSelection = (polygon: Polygon): void => {
+
     if(!isBBoxWithinLimit(polygon)) {
       props.handleError();
     }

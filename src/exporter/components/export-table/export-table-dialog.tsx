@@ -27,6 +27,8 @@ import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import { CopyToClipboardRenderer } from './cell-renderer/copy-to-clipboard.cell-renderer';
 import './export-table-dialog.css';
 
+const unsetSize = 0;
+
 interface ExportSatusTableDialogProps {
   isOpen: boolean;
   onSetOpen: (open: boolean) => void;
@@ -52,6 +54,10 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
       return date
         ? moment(new Date(date.toLocaleString())).format('DD/MM/YYYY HH:mm')
         : '-';
+    };
+
+    const renderSize = (size: number): string => {
+      return size !== unsetSize ? `${size}` : '-';
     };
 
     const renderBbox = (bbox: IBbox | undefined): string => {
@@ -143,14 +149,34 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           }),
           width: 120,
           field: 'sizeEst',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderSize(data.sizeEst);
+          },
           suppressMovable: true,
         },
         {
           headerName: intl.formatMessage({
-            id: 'export-table.table-column-header.tilesEst.text',
+            id: 'export-table.table-column-header.realSize.text',
           }),
-          width: 100,
-          field: 'tilesEst',
+          width: 120,
+          field: 'realSize',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderSize(data.realSize);
+          },
+          suppressMovable: true,
+        },
+        {
+          headerName: intl.formatMessage({
+            id: 'export-table.table-column-header.expirationTime.text',
+          }),
+          width: 170,
+          field: 'expirationTime',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderDate(data.expirationTime);
+          },
           suppressMovable: true,
         },
         {
@@ -161,8 +187,20 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           field: 'bbox',
           cellRenderer: (props: ICellRendererParams): string => {
             const data = props.data as IExportTaskStatus;
-            const bbox = data.bbox;
-            return renderBbox(bbox);
+            const polygon = data.polygon;
+
+            const bboxFromPolygon :IBbox = {
+              topRight: {
+                lat: polygon.coordinates[0][2][1],
+                lon: polygon.coordinates[0][2][0]
+              },
+              bottomLeft: {
+                lat: polygon.coordinates[0][0][1],
+                lon: polygon.coordinates[0][0][0]
+              }
+            }
+
+            return renderBbox(bboxFromPolygon);
           },
           suppressMovable: true,
         },
