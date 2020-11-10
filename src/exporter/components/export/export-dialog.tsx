@@ -94,7 +94,6 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
         minZoom: formik.values.minZoom,
         maxZoom: formik.values.maxZoom,
         sizeEst: calcPackSize(numTiles),
-        tilesEst: numTiles,
       });
 
       handleClose(false);

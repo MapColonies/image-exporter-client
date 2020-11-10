@@ -35,8 +35,7 @@ describe('Exporter Store', () => {
 
     await exporterStore.startExportGeoPackage({
       packName: 'kuku',
-      sizeEst: 20000,
-      tilesEst: 200,
+      realSize: 20000,
     });
 
     expect(exporterStore.state).toBe(ResponseState.DONE);
@@ -57,8 +56,7 @@ describe('Exporter Store', () => {
 
     await exporterStore.startExportGeoPackage({
       packName: 'kuku',
-      sizeEst: 20000,
-      tilesEst: 200,
+      realSize: 20000,
     });
 
     expect(exporterStore.state).toBe(ResponseState.ERROR);
