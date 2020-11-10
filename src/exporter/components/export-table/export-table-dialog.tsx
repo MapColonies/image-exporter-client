@@ -27,6 +27,8 @@ import { LinkRenderer } from './cell-renderer/link.cell-renderer';
 import { CopyToClipboardRenderer } from './cell-renderer/copy-to-clipboard.cell-renderer';
 import './export-table-dialog.css';
 
+const unsetSize = 0;
+
 interface ExportSatusTableDialogProps {
   isOpen: boolean;
   onSetOpen: (open: boolean) => void;
@@ -55,7 +57,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     };
 
     const renderSize = (size: number): string => {
-      return size !== 0 ? `${size}` : '-';
+      return size !== unsetSize ? `${size}` : '-';
     };
 
     const renderBbox = (bbox: IBbox | undefined): string => {
