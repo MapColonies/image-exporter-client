@@ -23,7 +23,6 @@ export interface PackageInfo {
   directoryName: string;
   packName: string;
   sizeEst: number;
-  tilesEst: number;
   minZoom?: number;
   maxZoom?: number;
 }
@@ -67,7 +66,6 @@ export const exporterStore = types
       params.directoryName = packInfo.directoryName;
       params.fileName = packInfo.packName;
       params.sizeEst = packInfo.sizeEst;
-      params.tilesEst = packInfo.tilesEst;
       params.exportedLayers = [{ exportType: 'raster', url: getLayerUrl() }];
       const coordinates = (snapshot.geojson as Polygon).coordinates[0];
       params.bbox = [

@@ -88,7 +88,7 @@ const ExporterView: React.FC = observer(() => {
         message: 'snack.message.failed.draw.bbox',
       });
     }
-  }, [exporterStore]);
+  }, [exporterStore.error]);
 
   const handleError = (): void => {
     const bboxLimit = EXPORTER_CONFIG.BOUNDARIES.AREA as number;

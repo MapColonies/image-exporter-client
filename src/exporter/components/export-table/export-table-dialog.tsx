@@ -147,10 +147,22 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         },
         {
           headerName: intl.formatMessage({
-            id: 'export-table.table-column-header.tilesEst.text',
+            id: 'export-table.table-column-header.realSize.text',
           }),
-          width: 100,
-          field: 'tilesEst',
+          width: 120,
+          field: 'realSize',
+          suppressMovable: true,
+        },
+        {
+          headerName: intl.formatMessage({
+            id: 'export-table.table-column-header.expirationTime.text',
+          }),
+          width: 170,
+          field: 'expirationTime',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderDate(data.expirationTime);
+          },
           suppressMovable: true,
         },
         {
@@ -161,8 +173,20 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           field: 'bbox',
           cellRenderer: (props: ICellRendererParams): string => {
             const data = props.data as IExportTaskStatus;
-            const bbox = data.bbox;
-            return renderBbox(bbox);
+            const polygon = data.polygon;
+
+            const bboxFromPolygon :IBbox = {
+              topRight: {
+                lat: polygon.coordinates[0][2][1],
+                lon: polygon.coordinates[0][2][0]
+              },
+              bottomLeft: {
+                lat: polygon.coordinates[0][0][1],
+                lon: polygon.coordinates[0][0][0]
+              }
+            }
+
+            return renderBbox(bboxFromPolygon);
           },
           suppressMovable: true,
         },
