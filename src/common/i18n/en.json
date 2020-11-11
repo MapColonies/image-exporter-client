@@ -11,7 +11,7 @@
   "polygon-selection.box_coorinate-menu_option.text": "Box by coordinates",
   "polygon-selection.clear-menu_option.text": "Clear",
 
-  "custom-bbox.dialog.title": "Define bbox coordinates",
+  "custom-bbox.dialog.title": "Define BBOX Coordinates (WGS84 Coordinate System Only)",
   "custom-bbox.dialog-field.top_right_lat.label": "Top Right Lat",
   "custom-bbox.dialog-field.top_right_lon.label": "Top Right Lon",
   "custom-bbox.dialog-field.bottom_left_lat.label": "Bottom Left Lat",
