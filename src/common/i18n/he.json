@@ -11,7 +11,7 @@
   "polygon-selection.box_coorinate-menu_option.text": "מלבן לפי נק'",
   "polygon-selection.clear-menu_option.text": "נקה",
 
-  "custom-bbox.dialog.title": "הגדר קואורדינטות אזור היצוא",
+  "custom-bbox.dialog.title": "הגדר קואורדינטות אזור היצוא (מערכת קואורדינטות WGS84 בלבד)",
   "custom-bbox.dialog-field.top_right_lat.label": "רוחב נק' ימין עליונה",
   "custom-bbox.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
   "custom-bbox.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
