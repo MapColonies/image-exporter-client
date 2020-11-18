@@ -24,7 +24,6 @@ import { useStore } from '../../models/rootStore';
 import { IExportTaskStatus, IBbox } from '../../models/exportTaskStatus';
 import { ProgressRenderer } from './cell-renderer/progress.cell-renderer';
 import { LinkRenderer } from './cell-renderer/link.cell-renderer';
-import { CopyToClipboardRenderer } from './cell-renderer/copy-to-clipboard.cell-renderer';
 import './export-table-dialog.css';
 
 const unsetSize = 0;
@@ -105,9 +104,9 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           headerName: intl.formatMessage({
             id: 'export-table.table-column-header.link.text',
           }),
-          width: 180,
-          cellRenderer: 'copyToClipboardRenderer',
-          valueGetter: linkValueGetter,
+          width: 120,
+          field: 'link',
+          cellRenderer: 'linkRenderer',
           suppressMovable: true,
         },
         {
@@ -303,7 +302,6 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
                 frameworkComponents={{
                   progressRenderer: ProgressRenderer,
                   linkRenderer: LinkRenderer,
-                  copyToClipboardRenderer: CopyToClipboardRenderer
                 }}
               />
             </Box>
