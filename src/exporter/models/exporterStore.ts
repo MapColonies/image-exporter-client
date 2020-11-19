@@ -130,7 +130,8 @@ export const exporterStore = types
     };
 
     const hasErrors = (): boolean => {
-      return self.errors.length > 0;
+      const minimalLength = 0;
+      return self.errors.length > minimalLength;
     };
 
     const cleanError = (key: ExportStoreError): boolean => {
