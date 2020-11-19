@@ -1,16 +1,16 @@
 import React from 'react';
-import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import { Polygon } from 'geojson';
 import { act, waitFor } from '@testing-library/react';
 import { TextField, Button } from '@map-colonies/react-core';
 // eslint-disable-next-line
 import '../../../__mocks__/confEnvShim';
-import { ExportDialog } from './export-dialog';
 import { IntlProvider } from 'react-intl';
 import MESSAGES from '../../../common/i18n';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
+import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
 const handleExport = jest.fn();

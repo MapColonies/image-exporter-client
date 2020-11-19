@@ -57,7 +57,8 @@ exports[`ExportDialog component renders correctly 1`] = `
       "polygon-selection.draw-btn.tooltip": "Draw an Area to export",
       "snack.dismiss-btn.text": "Dismiss",
       "snack.message.failed": "Network error occurred",
-      "snack.message.failed.draw.bbox": "Requested area too large",
+      "snack.message.failed.draw.bbox.large": "Requested area too large",
+      "snack.message.failed.draw.bbox.small": "Requested area too small",
       "snack.message.success": "Export SUCCEEDED",
     }
   }

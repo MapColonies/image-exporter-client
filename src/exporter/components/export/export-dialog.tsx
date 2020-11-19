@@ -12,15 +12,15 @@ import {
 } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { observer } from 'mobx-react-lite';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { getTilesCount } from '../../../common/helpers/estimated-tile-list';
 import { useDebouncedLayoutEffect } from '../../../common/hooks/debounced.hooks';
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
-import { NotchLabel } from './notch-label';
-import { observer } from 'mobx-react-lite';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
 import { useStore } from '../../models/rootStore';
+import { NotchLabel } from './notch-label';
 
 const FIRST_CHAR_IDX = 0;
 const DEBOUNCE_TIME = 300;

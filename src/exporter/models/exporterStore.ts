@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { types, Instance, flow, getParent, getSnapshot } from 'mobx-state-tree';
 import { Polygon } from '@turf/helpers';
-import { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig, AxiosError } from 'axios';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportStoreError } from '../../common/models/exportStoreError';
@@ -79,11 +79,19 @@ export const exporterStore = types
         );
         // const responseBody = result.data.data;
         self.state = ResponseState.DONE;
-      } catch (error) {
+      } catch (e) {
+        const error = e as AxiosError;
+        // eslint-disable-next-line
         if (error) {
-          if (error.response && error.response.data && error.response.data.name) {
+          if (
+            error.response &&
+            error.response.data &&
+            // eslint-disable-next-line
+            error.response.data.name
+          ) {
             addError({
-              request: error.config as AxiosRequestConfig,
+              request: error.config,
+              // eslint-disable-next-line
               key: error.response.data.name as ExportStoreError,
             });
           } else {
