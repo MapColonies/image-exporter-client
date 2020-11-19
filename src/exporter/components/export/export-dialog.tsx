@@ -123,6 +123,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
 
   // eslint-disable-next-line
   const checkName = (e: React.ChangeEvent<any>) => {
+
     if (serverErrors.duplicate) {
       setServerErrors({ duplicate: '' });
     }

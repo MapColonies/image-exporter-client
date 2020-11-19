@@ -4,9 +4,7 @@ import { Polygon } from '@turf/helpers';
 import { AxiosRequestConfig } from 'axios';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
-import {
-  ExportStoreError,
-} from '../../common/models/exportStoreError';
+import { ExportStoreError } from '../../common/models/exportStoreError';
 import { getLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
@@ -82,16 +80,18 @@ export const exporterStore = types
         // const responseBody = result.data.data;
         self.state = ResponseState.DONE;
       } catch (error) {
-        if (error.response) {
-          addError({
-            request: error.config as AxiosRequestConfig,
-            key: error.response.data as ExportStoreError,
-          });
-        } else {
-          addError({
-            request: error.config,
-            key: ExportStoreError.GENERAL_ERROR
-          });
+        if (error) {
+          if (error.response) {
+            addError({
+              request: error.config as AxiosRequestConfig,
+              key: error.response.data as ExportStoreError,
+            });
+          } else {
+            addError({
+              request: error.config,
+              key: ExportStoreError.GENERAL_ERROR,
+            });
+          }
         }
         self.state = ResponseState.ERROR;
       }
@@ -118,24 +118,24 @@ export const exporterStore = types
     };
 
     const hasError = (key: ExportStoreError): boolean => {
-      return Boolean(self.errors.find(err => err.key === key));
-    }
+      return Boolean(self.errors.find((err) => err.key === key));
+    };
 
     const hasErrors = (): boolean => {
       return self.errors.length > 0;
-    }
+    };
 
     const cleanError = (key: ExportStoreError): boolean => {
       if (hasError(key)) {
-        self.errors = self.errors.filter(err => err.key !== key);
+        self.errors = self.errors.filter((err) => err.key !== key);
         return true;
       }
       return false;
-    }
+    };
 
     const cleanErrors = (): void => {
       self.errors = [];
-    }
+    };
 
     return {
       startExportGeoPackage,
@@ -144,7 +144,7 @@ export const exporterStore = types
       hasError,
       hasErrors,
       cleanError,
-      cleanErrors
+      cleanErrors,
     };
   });
 
