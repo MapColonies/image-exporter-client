@@ -24,12 +24,12 @@ import { ExportStoreError } from '../../common/models/exportStoreError';
 type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
 
 const wmtsOptions = getWMTSOptions({
-    attributions: EXPORTER_CONFIG.WMTS_LAYER.ATTRIBUTIONS,
-    url: EXPORTER_CONFIG.WMTS_LAYER.URL,
-    layer: EXPORTER_CONFIG.WMTS_LAYER.LAYER,
-    projection: EXPORTER_CONFIG.WMTS_LAYER.PROJECTION,
-    format: EXPORTER_CONFIG.WMTS_LAYER.FORMAT,
-  });
+  attributions: EXPORTER_CONFIG.WMTS_LAYER.ATTRIBUTIONS,
+  url: EXPORTER_CONFIG.WMTS_LAYER.URL,
+  layer: EXPORTER_CONFIG.WMTS_LAYER.LAYER,
+  projection: EXPORTER_CONFIG.WMTS_LAYER.PROJECTION,
+  format: EXPORTER_CONFIG.WMTS_LAYER.FORMAT,
+});
 
 const wmsOptions = getWMSOptions({
   attributions: EXPORTER_CONFIG.WMS_LAYER.ATTRIBUTIONS,
@@ -39,7 +39,7 @@ const wmsOptions = getWMSOptions({
   transition: EXPORTER_CONFIG.WMS_LAYER.TRANSITION,
 });
 
-const xyzOptions =  getXYZOptions({
+const xyzOptions = getXYZOptions({
   attributions: EXPORTER_CONFIG.XYZ_LAYER.ATTRIBUTIONS,
   url: EXPORTER_CONFIG.XYZ_LAYER.URL,
 });
@@ -50,26 +50,20 @@ interface SnackDetails {
 
 const ExporterView: React.FC = observer(() => {
   const { exporterStore } = useStore();
-  const onExportClick = ():void => {
+  const onExportClick = (): void => {
     setOpen(true);
   }
   const [open, setOpen] = useState(false);
   const [openStatus, setOpenStatus] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [isDrawDisabled, setDrawDisabled] = useState(false);
-  const [snackDetails, setSnackDetails] = useState<SnackDetails>({message:''});
+  const [snackDetails, setSnackDetails] = useState<SnackDetails>({ message: '' });
   const intl = useIntl();
-  const onExportStatusClick= ():void => {
+  const onExportStatusClick = (): void => {
     setOpenStatus(true);
   }
-  useEffect(()=>{
-    switch(exporterStore.state){
-      case ResponseState.ERROR:
-        setSnackOpen(true);
-        setSnackDetails({
-          message: 'snack.message.failed',
-        });
-        break;
+  useEffect(() => {
+    switch (exporterStore.state) {
       case ResponseState.DONE:
         setSnackOpen(true);
         setSnackDetails({
@@ -79,22 +73,30 @@ const ExporterView: React.FC = observer(() => {
       default:
         break;
     }
-  },[exporterStore.state]);
+  }, [exporterStore.state]);
 
-  useEffect(()=>{
-    if(exporterStore.error) {
+  useEffect(() => {
+    if (exporterStore.hasError(ExportStoreError.GENERAL_ERROR)) {
       setSnackOpen(true);
       setSnackDetails({
-        message: 'snack.message.failed.draw.bbox',
+        message: 'snack.message.failed',
       });
     }
-  }, [exporterStore.error]);
+  }, [exporterStore.errors]);
+
+  useEffect(() => {
+    if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE)) {
+      setSnackOpen(true);
+      setSnackDetails({
+        message: 'snack.message.failed.draw.bbox.large',
+      });
+    }
+  }, [exporterStore.errors]);
 
   const handleError = (): void => {
-    const bboxLimit = EXPORTER_CONFIG.BOUNDARIES.AREA as number;
-    exporterStore.setError({
-      name: ExportStoreError.BBOX_AREA_TOO_LARGE,
-      message: `Wanted BBox is too large, limit is ${bboxLimit} square kilometers`
+    exporterStore.addError({
+      key: ExportStoreError.BBOX_AREA_TOO_LARGE,
+      request: undefined
     });
   }
 
@@ -109,14 +111,14 @@ const ExporterView: React.FC = observer(() => {
       isDrawDisabled={isDrawDisabled}
       filters={[
         <>
-          <Button 
-            raised 
-            disabled={exporterStore.searchParams.geojson && !isDrawDisabled ? false : true} 
+          <Button
+            raised
+            disabled={exporterStore.searchParams.geojson && !isDrawDisabled ? false : true}
             onClick={onExportClick}>
-            <FormattedMessage id="export.export-btn.text"/>
+            <FormattedMessage id="export.export-btn.text" />
           </Button>
           {
-            exporterStore.searchParams.geojson && open && <ExportDialog 
+            exporterStore.searchParams.geojson && open && <ExportDialog
               isOpen={open}
               onSetOpen={setOpen}
               selectedPolygon={exporterStore.searchParams.geojson as Polygon}
@@ -127,15 +129,21 @@ const ExporterView: React.FC = observer(() => {
             !!snackOpen && <Snackbar
               open={snackOpen}
               onOpen={(): void => {
-                if(exporterStore.error) {
+                if (exporterStore.hasErrors()) {
                   setDrawDisabled(true);
+                } else {
+                  // on success (no errors)
+                  exporterStore.searchParams.resetLocation();
+                  setOpen(false);
                 }
               }}
               onClose={(evt): void => {
-                if(exporterStore.error) {
-                  exporterStore.searchParams.resetLocation();
+                if (exporterStore.hasErrors()) {
+                  if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE)) {
+                    exporterStore.searchParams.resetLocation();
+                  }
                   setDrawDisabled(false);
-                  exporterStore.setError(null);
+                  exporterStore.cleanErrors();
                 }
                 setSnackOpen(false);
               }}
@@ -148,10 +156,10 @@ const ExporterView: React.FC = observer(() => {
               }
             />
           }
-          <Button 
-            raised 
+          <Button
+            raised
             onClick={onExportStatusClick}>
-            <FormattedMessage id="export.export-status-btn.text"/>
+            <FormattedMessage id="export.export-status-btn.text" />
           </Button>
           {
             openStatus && <ExportSatusTableDialog
@@ -170,22 +178,22 @@ const ExporterView: React.FC = observer(() => {
           }
           {
             EXPORTER_CONFIG.ACTIVE_LAYER === 'WMTS_LAYER' && <TileLayer>
-              <TileWMTS options={wmtsOptions}/>
-            </TileLayer> 
+              <TileWMTS options={wmtsOptions} />
+            </TileLayer>
           }
           {
             EXPORTER_CONFIG.ACTIVE_LAYER === 'WMS_LAYER' && <TileLayer>
-              <TileWMS options={wmsOptions}/>
+              <TileWMS options={wmsOptions} />
             </TileLayer>
           }
 
           {
-            EXPORTER_CONFIG.ACTIVE_LAYER === 'XYZ_LAYER' &&<TileLayer>
-              <TileXYZ options={xyzOptions}/>
-            </TileLayer> 
+            EXPORTER_CONFIG.ACTIVE_LAYER === 'XYZ_LAYER' && <TileLayer>
+              <TileXYZ options={xyzOptions} />
+            </TileLayer>
           }
         </>
-      
+
       }
     />
   );

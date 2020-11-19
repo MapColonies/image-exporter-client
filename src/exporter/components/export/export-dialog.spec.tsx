@@ -1,15 +1,23 @@
 import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
 import { Polygon } from 'geojson';
 import { act, waitFor } from '@testing-library/react';
 import { TextField, Button } from '@map-colonies/react-core';
 // eslint-disable-next-line
 import '../../../__mocks__/confEnvShim';
+import { IntlProvider } from 'react-intl';
+import MESSAGES from '../../../common/i18n';
+import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
+import { ExportTaskStatusResponse } from '../../models/exporterStore';
+import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
 const handleExport = jest.fn();
 console.warn = jest.fn();
+
+const exportedPackages: ExportTaskStatusResponse = MOCK_EXPORTED_PACKAGES;
+const packagesFetcher = async (): Promise<ExportTaskStatusResponse> => Promise.resolve<ExportTaskStatusResponse>(exportedPackages);
 
 const polygon: Polygon = {
   type: 'Polygon',
@@ -23,27 +31,27 @@ const fields = {
   topRightLon: polygon.coordinates[0][2][0],
 }
 
-const getFieldValue = (wrapper: ShallowWrapper, fieldName: string) => {
-  const field = wrapper.find(TextField).find({ name: fieldName });
+const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
+  const field = wrapper.find(TextField).find({ name: fieldName }).find(TextField);
   // eslint-disable-next-line
   return field.props().value;
 };
 
 /* eslint-disable */
-const getButtonById = (wrapper: ShallowWrapper,id: string):ShallowWrapper => {
+const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper => {
   return wrapper
     .findWhere((n) => {
-      return n.type() === Button && 
-            n.prop('children').props['id'] === id;
+      return n.type() === Button &&
+        n.prop('children').props['id'] === id;
     });
 };
 /* eslint-enable */
 
-const updateField = (wrapper: ShallowWrapper, fieldName: string, value: number | string) => {
-  const fieldWrapper = wrapper.find(TextField).find({ name: fieldName });
-  
+const updateField = (wrapper: ReactWrapper, fieldName: string, value: number | string) => {
+  const fieldWrapper = wrapper.find(TextField).find({ name: fieldName }).find('input');
+
   act(() => {
-    fieldWrapper.at(0).simulate('change', {
+    fieldWrapper.simulate('change', {
       nativeEvent: {
         data: value
       },
@@ -78,64 +86,97 @@ jest.mock('react-intl', () => {
   /* eslint-enable */
 });
 
+jest.mock('../../../common/helpers/estimated-tile-list');
+
+
 describe('ExportDialog component', () => {
   it('renders correctly', () => {
-    const wrapper = shallow(
-      <ExportDialog
-        isOpen={true}
-        onSetOpen={setOpenFn}
-        selectedPolygon={polygon}
-        handleExport={handleExport}
-      />
+
+    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExport}
+          />
+        </IntlProvider>
+      </StoreProvider>
     );
 
     expect(wrapper).toMatchSnapshot();
   });
 
   it('Initial state of Ok button is disabled', () => {
-    const wrapper = shallow(
-      <ExportDialog
-        isOpen={true}
-        onSetOpen={setOpenFn}
-        selectedPolygon={polygon}
-        handleExport={handleExport}
-      />
+    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExport}
+          />
+        </IntlProvider>
+      </StoreProvider>
     );
+
 
     const okButton = getButtonById(wrapper, 'general.ok-btn.text');
     expect(okButton.prop('disabled')).toBe(true);
-
   });
 
   it('Passed polygon presented as bottom-left and top-right corners coordinates', () => {
-    const wrapper = shallow(
-      <ExportDialog
-        isOpen={true}
-        onSetOpen={setOpenFn}
-        selectedPolygon={polygon}
-        handleExport={handleExport}
-      />
+    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExport}
+          />
+        </IntlProvider>
+      </StoreProvider>
     );
+
 
     for (const field in fields) {
       // eslint-disable-next-line
-      expect(getFieldValue(wrapper,field)).toEqual((fields as any)[field]);
+      expect(getFieldValue(wrapper, field)).toEqual((fields as any)[field]);
     }
 
   });
 
-  it('When package name defined Ok button is anabled and download link properly generated', async () => {
+  it('When package name and directory name are defined Ok button is enabled and download link properly generated', async () => {
     const exportPackName = 'test';
-    const wrapper = shallow(
-      <ExportDialog
-        isOpen={true}
-        onSetOpen={setOpenFn}
-        selectedPolygon={polygon}
-        handleExport={handleExport}
-      />
+    const exportDirName = 'test';
+    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExport}
+          />
+        </IntlProvider>
+      </StoreProvider>
     );
 
     updateField(wrapper, 'packageName', exportPackName);
+    updateField(wrapper, 'directoryName', exportDirName);
+
+    wrapper.update();
 
     await waitFor(() => {
       const okButton = getButtonById(wrapper, 'general.ok-btn.text');
@@ -148,18 +189,26 @@ describe('ExportDialog component', () => {
 
   it('When all data filled and FORM submitted, handleExport triggered', async () => {
     const exportPackName = 'test';
-    const wrapper = shallow(
-      <ExportDialog
-        isOpen={true}
-        onSetOpen={setOpenFn}
-        selectedPolygon={polygon}
-        handleExport={handleExport}
-      />
+    const exportDirName = 'test';
+    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExport}
+          />
+        </IntlProvider>
+      </StoreProvider>
     );
 
     updateField(wrapper, 'packageName', exportPackName);
+    updateField(wrapper, 'directoryName', exportDirName);
 
-    act(()=>{
+    act(() => {
       wrapper
         .find('form')
         .simulate('submit');
@@ -171,8 +220,6 @@ describe('ExportDialog component', () => {
       expect(getButtonById(wrapper, 'general.ok-btn.text').prop('disabled')).toBe(false);
       expect(handleExport).toHaveBeenCalled();
     });
-
-
   });
 
   //// TODO test to check error presentation logic.
