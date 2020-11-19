@@ -81,10 +81,10 @@ export const exporterStore = types
         self.state = ResponseState.DONE;
       } catch (error) {
         if (error) {
-          if (error.response) {
+          if (error.response && error.response.data && error.response.data.name) {
             addError({
               request: error.config as AxiosRequestConfig,
-              key: error.response.data as ExportStoreError,
+              key: error.response.data.name as ExportStoreError,
             });
           } else {
             addError({

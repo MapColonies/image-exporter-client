@@ -53,6 +53,7 @@
 
   "snack.message.success": "Export SUCCEEDED",
   "snack.message.failed": "Network error occurred",
-  "snack.message.failed.draw.bbox": "Requested area too large",
+  "snack.message.failed.draw.bbox.large": "Requested area too large",
+  "snack.message.failed.draw.bbox.small": "Requested area too small",
   "snack.dismiss-btn.text": "Dismiss"
 }

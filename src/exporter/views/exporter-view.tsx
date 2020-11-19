@@ -88,7 +88,7 @@ const ExporterView: React.FC = observer(() => {
     if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE)) {
       setSnackOpen(true);
       setSnackDetails({
-        message: 'snack.message.failed.draw.bbox',
+        message: 'snack.message.failed.draw.bbox.large',
       });
     }
   }, [exporterStore.errors]);
