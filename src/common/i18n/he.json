@@ -1,7 +1,7 @@
 {
   "general.ok-btn.text": "אישור",
   "general.cancel-btn.text": "בטל",
-  "general.error.label": "שגיא",
+  "general.error.label": "שגיאה",
 
   "polygon-selection.draw-btn.tooltip": "צייר אזור ליצוא",
   "polygon-selection.cancel-btn.tooltip": "בטל ציור",
@@ -32,6 +32,8 @@
   "export.dialog-info.label": "מידע על חבילה:",
   "export.dialog-info.link.label": "קישור:",
   "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+  "export.dialog.duplicate-path.text": "קובץ בשם זה כבר קיים בתיקייה זו",
+  "export.dialog.tiles.text": "אריחים",
 
   "export-table.dialog.title": "חבילות",
   "export-table.link.text": "הורדה",

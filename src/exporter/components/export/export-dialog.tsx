@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Polygon } from 'geojson';
 import { useFormik } from 'formik';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -18,6 +18,9 @@ import { useDebouncedLayoutEffect } from '../../../common/hooks/debounced.hooks'
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
 import { NotchLabel } from './notch-label';
+import { observer } from 'mobx-react-lite';
+import { ExportStoreError } from '../../../common/models/exportStoreError';
+import { useStore } from '../../models/rootStore';
 
 const FIRST_CHAR_IDX = 0;
 const DEBOUNCE_TIME = 300;
@@ -47,8 +50,8 @@ const useStyle = makeStyles((theme: Theme) =>
 // eslint-disable-next-line
 const isValidPackName = (e: React.ChangeEvent<any>): boolean => {
   // eslint-disable-next-line
-  const data:string = (e.nativeEvent as any).data;
-  if(!data)
+  const data: string = (e.nativeEvent as any).data;
+  if (!data)
     return true;
 
   const charIdx = data.search(/[a-zA-Z0-9]+/i);
@@ -56,11 +59,11 @@ const isValidPackName = (e: React.ChangeEvent<any>): boolean => {
 };
 
 const isValidZoomValue = (zoom: number): boolean => {
-  return zoom >=EXPORTER_CONFIG.EXPORT.MIN_ZOOM && zoom <= EXPORTER_CONFIG.EXPORT.MAX_ZOOM;
+  return zoom >= EXPORTER_CONFIG.EXPORT.MIN_ZOOM && zoom <= EXPORTER_CONFIG.EXPORT.MAX_ZOOM;
 }
 
 const calcPackSize = (tiles: number): number => {
-  return Math.ceil(tiles*EXPORTER_CONFIG.EXPORT.AVG_TILE_SIZE_MB);
+  return Math.ceil(tiles * EXPORTER_CONFIG.EXPORT.AVG_TILE_SIZE_MB);
 }
 
 interface ExportDialogProps {
@@ -70,9 +73,8 @@ interface ExportDialogProps {
   handleExport: (packInfo: PackageInfo) => void;
 }
 
-export const ExportDialog: React.FC<ExportDialogProps> = (
-  props
-) => {
+export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
+  const { exporterStore } = useStore();
   const { isOpen, onSetOpen, selectedPolygon, handleExport } = props;
   const classes = useStyle();
   const intl = useIntl();
@@ -95,26 +97,25 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
         maxZoom: formik.values.maxZoom,
         sizeEst: calcPackSize(numTiles),
       });
-
-      handleClose(false);
     },
   });
   // eslint-disable-next-line
   const [numTiles, setNumTiles] = useState<number>(0);
 
-  useDebouncedLayoutEffect(()=>{
-    if( isValidZoomValue(formik.values.minZoom) &&
-      isValidZoomValue(formik.values.maxZoom) && 
-      formik.values.maxZoom >= formik.values.minZoom ){
-      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom ) * EXPORTER_CONFIG.EXPORT.METRIX_SET_FACTOR;
+  useDebouncedLayoutEffect(() => {
+    if (isValidZoomValue(formik.values.minZoom) &&
+      isValidZoomValue(formik.values.maxZoom) &&
+      formik.values.maxZoom >= formik.values.minZoom) {
+      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom) * EXPORTER_CONFIG.EXPORT.METRIX_SET_FACTOR;
       setNumTiles(tilesCount);
       setFormErrors({ minMaxZooms: '' });
-    }else{
+    } else {
       setFormErrors({ minMaxZooms: 'Enter valid zoom values' });
     }
-  },DEBOUNCE_TIME, [formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
+  }, DEBOUNCE_TIME, [formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
 
   const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
+  const [serverErrors, setServerErrors] = useState({ duplicate: '' });
 
   const handleClose = (isOpened: boolean): void => {
     onSetOpen(isOpened);
@@ -122,8 +123,18 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
 
   // eslint-disable-next-line
   const checkName = (e: React.ChangeEvent<any>) => {
+    if (serverErrors.duplicate) {
+      setServerErrors({ duplicate: '' });
+    }
     return isValidPackName(e) ? formik.handleChange(e) : false;
   };
+
+  useEffect(() => {
+    if (exporterStore.hasError(ExportStoreError.DUPLICATE_PATH)) {
+      setServerErrors({ duplicate: 'export.dialog.duplicate-path.text' });
+      exporterStore.cleanError(ExportStoreError.DUPLICATE_PATH);
+    }
+  }, [exporterStore.errors]);
 
   return (
     <Dialog open={isOpen} preventOutsideDismiss={true}>
@@ -132,7 +143,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
       </DialogTitle>
       <DialogContent>
         <form onSubmit={formik.handleSubmit}>
-        <Box style={{ display: 'flex', marginBottom: '16px' }}>
+          <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
               placeholder={intl.formatMessage({ id: 'export.dialog-field.directory_name.placeholder' })}
               id="directoryName"
@@ -156,7 +167,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
           </Box>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
-              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.top_right_lat.label' })}/>}
+              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.top_right_lat.label' })} />}
               id="topRightLat"
               name="topRightLat"
               type="number"
@@ -167,7 +178,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               outlined
             />
             <TextField
-              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.top_right_lon.label' })}/>}
+              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.top_right_lon.label' })} />}
               id="topRightLon"
               name="topRightLon"
               type="number"
@@ -181,7 +192,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
           </Box>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
             <TextField
-              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.bottom_left_lat.label' })}/>}
+              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.bottom_left_lat.label' })} />}
               id="bottomLeftLat"
               name="bottomLeftLat"
               type="number"
@@ -192,7 +203,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               outlined
             />
             <TextField
-              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.bottom_left_lon.label' })}/>}
+              label={<NotchLabel text={intl.formatMessage({ id: 'export.dialog-field.bottom_left_lon.label' })} />}
               id="bottomLeftLon"
               name="bottomLeftLon"
               type="number"
@@ -232,9 +243,9 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
               <FormattedMessage id="export.dialog-info.label" />
             </Typography>
             <Typography use="body2">
-              ~{numTiles} tiles,&nbsp;
+              ~{numTiles} {intl.formatMessage({ id: 'export.dialog.tiles.text' })},&nbsp;
             </Typography>
-            <Typography use="body2" style={{marginLeft: '32px'}}>
+            <Typography use="body2" style={{ marginLeft: '32px' }}>
               ~{calcPackSize(numTiles)}Mb
             </Typography>
           </Box>
@@ -255,10 +266,18 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
                 </div> :
                 null
             }
+            {
+              (serverErrors.duplicate) ?
+                <div className={classes.errorContainer}>
+                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${intl.formatMessage({ id: serverErrors.duplicate })}`}
+                </div> :
+                null
+            }
             <Button type="button" onClick={(): void => { handleClose(false); }}>
               <FormattedMessage id="general.cancel-btn.text" />
             </Button>
-            <Button raised type="submit" disabled={!!formErrors.minMaxZooms || !formik.values.packageName}>
+            <Button raised type="submit" disabled={!!formErrors.minMaxZooms || !formik.values.packageName || 
+              !!serverErrors.duplicate || !formik.values.directoryName}>
               <FormattedMessage id="general.ok-btn.text" />
             </Button>
           </Box>
@@ -267,4 +286,4 @@ export const ExportDialog: React.FC<ExportDialogProps> = (
     </Dialog>
 
   );
-}
+});
