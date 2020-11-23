@@ -15,7 +15,7 @@ import {
 import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
-import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
+import { BBoxAreaLimit, isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,8 +52,10 @@ const validate = (values: BBoxCorners, intl: IntlShape): BBoxError => {
       [values.topRightLon, values.topRightLat],
     ]);
     const polygon = bboxPolygon(bbox(line));
-    if(!isBBoxWithinLimit(polygon.geometry)) {
-      errors.bboxArea = intl.formatMessage({ id: 'custom-bbox.form-error.area.text' });
+    const isWithinLimit = isBBoxWithinLimit(polygon.geometry);
+    if(isWithinLimit !== BBoxAreaLimit.OK) {
+      const messageFormat = isWithinLimit === BBoxAreaLimit.TOO_BIG ? 'custom-bbox.form-error.area.large.text' : 'custom-bbox.form-error.area.small.text';
+      errors.bboxArea = intl.formatMessage({ id: messageFormat });
     }
   }
   catch (err) {
@@ -80,8 +82,8 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     initialValues: {
       bottomLeftLat: 0,
       bottomLeftLon: 0,
-      topRightLat: 0,
-      topRightLon: 0,
+      topRightLat: 0.1,
+      topRightLon: 0.1,
     },
     onSubmit: values => {
       const err = validate(values, intl);
@@ -100,6 +102,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
         });
       }
       else {
+        console.log(err);
         setFormErrors(err);
       }
 

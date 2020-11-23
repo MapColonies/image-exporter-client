@@ -29,7 +29,7 @@ exports[`DialogBBox component renders correctly 1`] = `
           name="topRightLat"
           onChange={[Function]}
           type="number"
-          value={0}
+          value={0.1}
         />
         <Function
           className="makeStyles-spacer-1"
@@ -38,7 +38,7 @@ exports[`DialogBBox component renders correctly 1`] = `
           name="topRightLon"
           onChange={[Function]}
           type="number"
-          value={0}
+          value={0.1}
         />
         <BBoxCorner
           corner="TOP_RIGHT"

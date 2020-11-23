@@ -1521,10 +1521,10 @@
     opentracing "^0.14.1"
     winston "^2.4.5"
 
-"@map-colonies/react-components@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@map-colonies/react-components/-/react-components-3.1.1.tgz#07242ec288e322e3a55e31ee2f59b9127c242ee9"
-  integrity sha512-Ijmvbr9uFz/xefUJF6FlJ+8ICgnaiuMQz6lacgdggDP2PQD/+X6xyxNkVzTuaGtedy2QmVoMUVO/qlheH4DzeQ==
+"@map-colonies/react-components@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@map-colonies/react-components/-/react-components-3.2.0.tgz#c38e4677b49f41914418df8d72c336389cedb1a5"
+  integrity sha512-/4ZvlPOqEmlnPi2Yqr0A3S7HkUkrhf8jMuVV1Ut4/TNwFC13LkS2Gm1h7uFuzbQsb3gkWTeD83vSc5meAJdiDQ==
   dependencies:
     "@date-io/date-fns" "^1.3.13"
     "@map-colonies/react-core" "^3.1.0"

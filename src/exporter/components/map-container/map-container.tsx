@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Polygon } from 'geojson';
 import { DrawType } from  '@map-colonies/react-components';
-import { isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
+import { BBoxAreaLimit, isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
 import { PolygonSelectionUi } from './polygon-selection-ui';
 import { MapWrapper } from './map-wrapper';
 import './map-container.css';
@@ -10,7 +10,7 @@ export interface MapContainerProps {
   selectionPolygon: Polygon;
   handlePolygonSelected: (polygon: Polygon) => void;
   handlePolygonReset: () => void;
-  handleError: () => void;
+  handleError: (isWithinLimit: BBoxAreaLimit) => void;
   isDrawDisabled: boolean;
   mapContent?: React.ReactNode;
   filters?: React.ReactNode[];
@@ -22,9 +22,9 @@ export const MapContainer: React.FC<MapContainerProps> = (
   const [drawType, setDrawType] = useState<DrawType>();
 
   const onPolygonSelection = (polygon: Polygon): void => {
-
-    if(!isBBoxWithinLimit(polygon)) {
-      props.handleError();
+    const isWithinLimit = isBBoxWithinLimit(polygon);
+    if(isWithinLimit !== BBoxAreaLimit.OK) {
+      props.handleError(isWithinLimit);
     }
 
     setDrawType(undefined);
