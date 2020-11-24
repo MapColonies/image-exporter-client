@@ -65,3 +65,35 @@ node ./confd/generate-config.js --environment production --indocker
 ```
 
 Be sure that it runs from this location /usr/share/nginx/html
+
+### `Environment variables used in confd:`
+
+UI settings:
+
+- UI display language: CONFIGURATION_UI_LANGUAGE - Current available values: en, he
+
+Map server settings:
+
+- Source map server: CONFIGURATION_MAPSERVER_URL
+- Map server publish point: CONFIGURATION_MAPSERVER_PUBLISH_POINT
+- Publish point channel: CONFIGURATION_MAPSERVER_CHANNEL
+- Publish point version: CONFIGURATION_MAPSERVER_VERSION
+- Publish point request: CONFIGURATION_MAPSERVER_REQUEST
+- Active layer: CONFIGURATION_ACTIVE_LAYER - Available values: OSM_DEFAULT, WMS_LAYER, WMTS_LAYER, XYZ_LAYER
+
+Exporter trigger configuration:
+
+- Protocol : CONFIGURATION_SERVICE_PROTOCOL
+- Url: CONFIGURATION_SERVICE_URL
+
+Logger settings:
+
+- Log level: CONFIGURATION_LOGGER_LEVEL
+- Log to server:
+  - Host: CONFIGURATION_LOGGER_HTTP_HOST
+  - Port: CONFIGURATION_LOGGER_HTTP_PORT
+  - Log path: CONFIGURATION_LOGGER_HTTP_PATH
+
+Bounding box configuration:
+
+- Area limit: CONFIGURATION_BBOX_AREA_SQUARE_KM_LIMIT
