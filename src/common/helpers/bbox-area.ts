@@ -9,7 +9,6 @@ export enum BBoxAreaLimit {
 }
 
 export function isBBoxWithinLimit(bbox: Polygon): BBoxAreaLimit {
-  console.log(bbox);
   const kmSqToMSq = 1000000; // 1000 * 1000
   const limit = EXPORTER_CONFIG.BOUNDARIES.AREA * kmSqToMSq;
   const polygonArea = area(bbox);
