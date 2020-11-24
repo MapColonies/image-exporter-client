@@ -59,7 +59,7 @@ const validate = (values: BBoxCorners, intl: IntlShape): BBoxError => {
     }
   }
   catch (err) {
-    errors.bboxArea = 'Not valid bbox area';
+    errors.bboxArea = intl.formatMessage({ id: 'custom-bbox.form-error.area.invalid.text' });
   }
 
   return errors;

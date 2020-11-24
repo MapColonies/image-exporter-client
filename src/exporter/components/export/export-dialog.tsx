@@ -110,7 +110,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       setNumTiles(tilesCount);
       setFormErrors({ minMaxZooms: '' });
     } else {
-      setFormErrors({ minMaxZooms: 'Enter valid zoom values' });
+      setFormErrors({ minMaxZooms: intl.formatMessage({ id: 'custom-bbox.form-error.zoom.invalid.text' })});
     }
   }, DEBOUNCE_TIME, [formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
 
