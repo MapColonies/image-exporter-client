@@ -35,7 +35,7 @@ const store = rootStore.create(
 
 // REMARK IIFE to discard language presentation logic
 ((): void=>{
-  const lang = EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE;//navigator.language.split(/[-_]/)[0];  // language without region code
+  const lang = EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE as string;//navigator.language.split(/[-_]/)[0];  // language without region code
 
   document.documentElement.lang = lang;
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
