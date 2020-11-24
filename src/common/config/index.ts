@@ -1,4 +1,5 @@
 /*eslint-disable */
+const LANGUAGE = (window as any)._env_.LANGUAGE;
 const MAP_SERVER = (window as any)._env_.MAP_SERVER;
 const PUBLISH_POINT = (window as any)._env_.PUBLISH_POINT;
 const CHANNEL = (window as any)._env_.CHANNEL;
@@ -13,7 +14,7 @@ const EXPORTER_CONFIG = {
   SERVICE_PROTOCOL: SERVICE_PROTOCOL,
   SERVICE_NAME: SERVICE_NAME,
   I18N: {
-    DEFAULT_LANGUAGE: 'en',
+    DEFAULT_LANGUAGE: LANGUAGE,
   },
   BOUNDARIES: {
     AREA: BBOX.limit,

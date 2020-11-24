@@ -2,6 +2,7 @@
 src = "production.tmpl"
 dest = "public/env-config.js"
 keys = [
+  "/configuration/ui/language",
   "/configuration/mapserver/url",
   "/configuration/mapserver/publish/point",
   "/configuration/mapserver/channel",
