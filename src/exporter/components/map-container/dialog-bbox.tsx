@@ -102,7 +102,6 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
         });
       }
       else {
-        console.log(err);
         setFormErrors(err);
       }
 
