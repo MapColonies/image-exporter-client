@@ -16,7 +16,10 @@
   "custom-bbox.dialog-field.top_right_lon.label": "ארך נק' ימין עליונה",
   "custom-bbox.dialog-field.bottom_left_lat.label": "רוחב נק' שמאל תחתונה",
   "custom-bbox.dialog-field.bottom_left_lon.label": "ארך נק' שמאל תחתונה",
-  "custom-bbox.form-error.area.text": "שטח תיחום גדול מן המותר לייצוא",
+  "custom-bbox.form-error.area.large.text": "שטח תיחום גדול מן המותר לייצוא",
+  "custom-bbox.form-error.area.small.text": "שטח תיחום קטן מן המותר לייצוא",
+  "custom-bbox.form-error.area.invalid.text": "שטח תיחום לא תקין",
+  "custom-bbox.form-error.zoom.invalid.text": "רמת זום לא תקנית",
 
   "export.export-btn.text": "יצוא",
   "export.export-status-btn.text": "סטטוס היצוא",

@@ -16,7 +16,10 @@
   "custom-bbox.dialog-field.top_right_lon.label": "Top Right Lon",
   "custom-bbox.dialog-field.bottom_left_lat.label": "Bottom Left Lat",
   "custom-bbox.dialog-field.bottom_left_lon.label": "Bottom Left Lon",
-  "custom-bbox.form-error.area.text": "BBox area exceededs export limit",
+  "custom-bbox.form-error.area.large.text": "BBox area exceededs export limit",
+  "custom-bbox.form-error.area.small.text": "BBox area too small",
+  "custom-bbox.form-error.area.invalid.text": "BBox area is invalid",
+  "custom-bbox.form-error.zoom.invalid.text": "Invalid zoom values",
 
   "export.export-btn.text": "Export",
   "export.export-status-btn.text": "Export Status",

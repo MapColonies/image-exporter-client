@@ -20,6 +20,7 @@ import { ExportDialog } from '../components/export/export-dialog';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportSatusTableDialog } from '../components/export-table/export-table-dialog';
 import { ExportStoreError } from '../../common/models/exportStoreError';
+import { BBoxAreaLimit } from '../../common/helpers/bbox-area';
 
 type ServerType = 'geoserver' | 'carmentaserver' | 'mapserver' | 'qgis';
 
@@ -91,11 +92,18 @@ const ExporterView: React.FC = observer(() => {
         message: 'snack.message.failed.draw.bbox.large',
       });
     }
+    else if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_SMALL)) {
+      setSnackOpen(true);
+      setSnackDetails({
+        message: 'snack.message.failed.draw.bbox.small',
+      });
+    }
   }, [exporterStore.errors]);
 
-  const handleError = (): void => {
+  const handleError = (isWithinLimit : BBoxAreaLimit): void => {
+    const key = isWithinLimit === BBoxAreaLimit.TOO_BIG ? ExportStoreError.BBOX_AREA_TOO_LARGE : ExportStoreError.BBOX_AREA_TOO_SMALL;
     exporterStore.addError({
-      key: ExportStoreError.BBOX_AREA_TOO_LARGE,
+      key: key,
       request: undefined
     });
   }
@@ -139,7 +147,8 @@ const ExporterView: React.FC = observer(() => {
               }}
               onClose={(evt): void => {
                 if (exporterStore.hasErrors()) {
-                  if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE)) {
+                  if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE) || 
+                      exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_SMALL)) {
                     exporterStore.searchParams.resetLocation();
                   }
                   setDrawDisabled(false);
