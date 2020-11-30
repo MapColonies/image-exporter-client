@@ -9,7 +9,8 @@ window._env_ = {
   SERVICE_NAME: '{{ getv "/configuration/service/url" "localhost:8000" }}',
   ACTIVE_LAYER: '{{ getv "/configuration/active/layer" "OSM_DEFAULT" }}',
   LOGGER: {
-    level: "{{ getv "/configuration/logger/level" "error" }}",
+    level: "{{ getv "/configuration/logger/level" "warn" }}",
+    log2console: {{ getv "/configuration/logger/log2console" "false" }},
     log2httpServer: {
       host: "{{ getv "/configuration/logger/http/host" "" }}",
       port: "{{ getv "/configuration/logger/http/port" "" }}",
