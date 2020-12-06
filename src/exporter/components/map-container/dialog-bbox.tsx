@@ -82,8 +82,8 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     initialValues: {
       bottomLeftLat: 0,
       bottomLeftLon: 0,
-      topRightLat: 0.1,
-      topRightLon: 0.1,
+      topRightLat: 0.00001,
+      topRightLon: 0.00001,
     },
     onSubmit: values => {
       const err = validate(values, intl);

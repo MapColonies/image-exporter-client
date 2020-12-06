@@ -69,19 +69,6 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
       setGridApi(params.api);
     };
 
-    const linkValueGetter =(params: ValueGetterParams): string => {
-      const START_IDX = 0;
-      const FILE_PROTOCOL = 'file://';
-      let value = (params.data as IExportTaskStatus).link; 
-
-      value = value.substring(START_IDX, value.lastIndexOf("/"));
-      if(!value.startsWith(FILE_PROTOCOL)) {
-        value = FILE_PROTOCOL + value;
-      }
-
-      return value;
-    }
-
     useEffect(() => {
       setColDef([
         {
@@ -140,6 +127,18 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
           width: 120,
           field: 'progress',
           cellRenderer: 'progressRenderer',
+          suppressMovable: true,
+        },
+        {
+          headerName: intl.formatMessage({
+            id: 'export-table.table-column-header.maxZoom.text',
+          }),
+          width: 120,
+          field: 'maxZoom',
+          cellRenderer: (props: ICellRendererParams): string => {
+            const data = props.data as IExportTaskStatus;
+            return renderSize(data.maxZoom);
+          },
           suppressMovable: true,
         },
         {

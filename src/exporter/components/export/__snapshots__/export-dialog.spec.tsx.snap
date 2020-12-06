@@ -28,6 +28,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       "export-table.table-column-header.fileName.text": "File Name",
       "export-table.table-column-header.lastUpdateTime.text": "Last update",
       "export-table.table-column-header.link.text": "File location",
+      "export-table.table-column-header.maxZoom.text": "Max zoom level",
       "export-table.table-column-header.progress.text": "Progress",
       "export-table.table-column-header.realSize.text": "Real Size(Mb)",
       "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
@@ -366,33 +367,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                         </div>
                         <div
                           class="MuiBox-root MuiBox-root-15"
-                          style="display: none; margin-bottom: 16px;"
+                          style="display: flex; margin-bottom: 16px;"
                         >
-                          <label
-                            aria-labelledby="minZoom-label"
-                            class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                          >
-                            <span
-                              class="mdc-text-field__ripple"
-                            />
-                            <input
-                              class="mdc-text-field__input"
-                              id="minZoom"
-                              name="minZoom"
-                              type="number"
-                              value="1"
-                            />
-                            <span
-                              class="mdc-floating-label mdc-floating-label--float-above"
-                              id="minZoom-label"
-                            >
-                              Min Zoom
-                            </span>
-                            <span
-                              class="mdc-line-ripple mdc-line-ripple--deactivating"
-                              style="transform-origin: 0px center;"
-                            />
-                          </label>
                           <label
                             aria-labelledby="maxZoom-label"
                             class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
@@ -405,10 +381,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                               id="maxZoom"
                               name="maxZoom"
                               type="number"
-                              value="21"
+                              value=""
                             />
                             <span
-                              class="mdc-floating-label mdc-floating-label--float-above"
+                              class="mdc-floating-label"
                               id="maxZoom-label"
                             >
                               Max Zoom
@@ -4006,7 +3982,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                         <Component
                           style={
                             Object {
-                              "display": "none",
+                              "display": "flex",
                               "marginBottom": "16px",
                             }
                           }
@@ -4014,7 +3990,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                           <Styled(MuiBox)
                             style={
                               Object {
-                                "display": "none",
+                                "display": "flex",
                                 "marginBottom": "16px",
                               }
                             }
@@ -4023,477 +3999,11 @@ exports[`ExportDialog component renders correctly 1`] = `
                               className="MuiBox-root MuiBox-root-15"
                               style={
                                 Object {
-                                  "display": "none",
+                                  "display": "flex",
                                   "marginBottom": "16px",
                                 }
                               }
                             >
-                              <Function
-                                className="makeStyles-spacer-1"
-                                id="minZoom"
-                                label="Min Zoom"
-                                name="minZoom"
-                                onChange={[Function]}
-                                type="number"
-                                value={1}
-                              >
-                                <withRipple(Object)
-                                  aria-labelledby="minZoom-label"
-                                  className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                  element={
-                                    FoundationElement {
-                                      "_classes": Set {},
-                                      "_events": Object {
-                                        "onClick": [Function],
-                                        "onKeyDown": [Function],
-                                      },
-                                      "_onChange": [Function],
-                                      "_props": Object {},
-                                      "_ref": <label
-                                        aria-labelledby="minZoom-label"
-                                        class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                      >
-                                        <span
-                                          class="mdc-text-field__ripple"
-                                        />
-                                        <input
-                                          class="mdc-text-field__input"
-                                          id="minZoom"
-                                          name="minZoom"
-                                          type="number"
-                                          value="1"
-                                        />
-                                        <span
-                                          class="mdc-floating-label mdc-floating-label--float-above"
-                                          id="minZoom-label"
-                                        >
-                                          Min Zoom
-                                        </span>
-                                        <span
-                                          class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                          style="transform-origin: 0px center;"
-                                        />
-                                      </label>,
-                                      "_style": Object {},
-                                      "addClass": [Function],
-                                      "addEventListener": [Function],
-                                      "getProp": [Function],
-                                      "hasClass": [Function],
-                                      "onChange": [Function],
-                                      "removeClass": [Function],
-                                      "removeEventListener": [Function],
-                                      "removeProp": [Function],
-                                      "setProp": [Function],
-                                      "setRef": [Function],
-                                      "setStyle": [Function],
-                                    }
-                                  }
-                                >
-                                  <class_1
-                                    aria-labelledby="minZoom-label"
-                                    className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                    element={
-                                      FoundationElement {
-                                        "_classes": Set {},
-                                        "_events": Object {
-                                          "onClick": [Function],
-                                          "onKeyDown": [Function],
-                                        },
-                                        "_onChange": [Function],
-                                        "_props": Object {},
-                                        "_ref": <label
-                                          aria-labelledby="minZoom-label"
-                                          class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                        >
-                                          <span
-                                            class="mdc-text-field__ripple"
-                                          />
-                                          <input
-                                            class="mdc-text-field__input"
-                                            id="minZoom"
-                                            name="minZoom"
-                                            type="number"
-                                            value="1"
-                                          />
-                                          <span
-                                            class="mdc-floating-label mdc-floating-label--float-above"
-                                            id="minZoom-label"
-                                          >
-                                            Min Zoom
-                                          </span>
-                                          <span
-                                            class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                            style="transform-origin: 0px center;"
-                                          />
-                                        </label>,
-                                        "_style": Object {},
-                                        "addClass": [Function],
-                                        "addEventListener": [Function],
-                                        "getProp": [Function],
-                                        "hasClass": [Function],
-                                        "onChange": [Function],
-                                        "removeClass": [Function],
-                                        "removeEventListener": [Function],
-                                        "removeProp": [Function],
-                                        "setProp": [Function],
-                                        "setRef": [Function],
-                                        "setStyle": [Function],
-                                      }
-                                    }
-                                    surface={false}
-                                  >
-                                    <Ripple
-                                      aria-labelledby="minZoom-label"
-                                      className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                      domNode={
-                                        <label
-                                          aria-labelledby="minZoom-label"
-                                          class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                        >
-                                          <span
-                                            class="mdc-text-field__ripple"
-                                          />
-                                          <input
-                                            class="mdc-text-field__input"
-                                            id="minZoom"
-                                            name="minZoom"
-                                            type="number"
-                                            value="1"
-                                          />
-                                          <span
-                                            class="mdc-floating-label mdc-floating-label--float-above"
-                                            id="minZoom-label"
-                                          >
-                                            Min Zoom
-                                          </span>
-                                          <span
-                                            class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                            style="transform-origin: 0px center;"
-                                          />
-                                        </label>
-                                      }
-                                      element={
-                                        FoundationElement {
-                                          "_classes": Set {},
-                                          "_events": Object {
-                                            "onClick": [Function],
-                                            "onKeyDown": [Function],
-                                          },
-                                          "_onChange": [Function],
-                                          "_props": Object {},
-                                          "_ref": <label
-                                            aria-labelledby="minZoom-label"
-                                            class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                          >
-                                            <span
-                                              class="mdc-text-field__ripple"
-                                            />
-                                            <input
-                                              class="mdc-text-field__input"
-                                              id="minZoom"
-                                              name="minZoom"
-                                              type="number"
-                                              value="1"
-                                            />
-                                            <span
-                                              class="mdc-floating-label mdc-floating-label--float-above"
-                                              id="minZoom-label"
-                                            >
-                                              Min Zoom
-                                            </span>
-                                            <span
-                                              class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                              style="transform-origin: 0px center;"
-                                            />
-                                          </label>,
-                                          "_style": Object {},
-                                          "addClass": [Function],
-                                          "addEventListener": [Function],
-                                          "getProp": [Function],
-                                          "hasClass": [Function],
-                                          "onChange": [Function],
-                                          "removeClass": [Function],
-                                          "removeEventListener": [Function],
-                                          "removeProp": [Function],
-                                          "setProp": [Function],
-                                          "setRef": [Function],
-                                          "setStyle": [Function],
-                                        }
-                                      }
-                                      surface={false}
-                                    >
-                                      <ForwardRef(TextFieldRoot)
-                                        aria-labelledby="minZoom-label"
-                                        className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                        element={
-                                          FoundationElement {
-                                            "_classes": Set {},
-                                            "_events": Object {
-                                              "onClick": [Function],
-                                              "onKeyDown": [Function],
-                                            },
-                                            "_onChange": [Function],
-                                            "_props": Object {},
-                                            "_ref": <label
-                                              aria-labelledby="minZoom-label"
-                                              class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                            >
-                                              <span
-                                                class="mdc-text-field__ripple"
-                                              />
-                                              <input
-                                                class="mdc-text-field__input"
-                                                id="minZoom"
-                                                name="minZoom"
-                                                type="number"
-                                                value="1"
-                                              />
-                                              <span
-                                                class="mdc-floating-label mdc-floating-label--float-above"
-                                                id="minZoom-label"
-                                              >
-                                                Min Zoom
-                                              </span>
-                                              <span
-                                                class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                                style="transform-origin: 0px center;"
-                                              />
-                                            </label>,
-                                            "_style": Object {},
-                                            "addClass": [Function],
-                                            "addEventListener": [Function],
-                                            "getProp": [Function],
-                                            "hasClass": [Function],
-                                            "onChange": [Function],
-                                            "removeClass": [Function],
-                                            "removeEventListener": [Function],
-                                            "removeProp": [Function],
-                                            "setProp": [Function],
-                                            "setRef": [Function],
-                                            "setStyle": [Function],
-                                          }
-                                        }
-                                        onBlur={[Function]}
-                                        onFocus={[Function]}
-                                        onKeyDown={[Function]}
-                                        onKeyUp={[Function]}
-                                        onMouseDown={[Function]}
-                                        onMouseUp={[Function]}
-                                        onTouchEnd={[Function]}
-                                        onTouchStart={[Function]}
-                                        style={Object {}}
-                                      >
-                                        <ForwardRef(Tag)
-                                          aria-labelledby="minZoom-label"
-                                          className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                          element={
-                                            FoundationElement {
-                                              "_classes": Set {},
-                                              "_events": Object {
-                                                "onClick": [Function],
-                                                "onKeyDown": [Function],
-                                              },
-                                              "_onChange": [Function],
-                                              "_props": Object {},
-                                              "_ref": <label
-                                                aria-labelledby="minZoom-label"
-                                                class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                              >
-                                                <span
-                                                  class="mdc-text-field__ripple"
-                                                />
-                                                <input
-                                                  class="mdc-text-field__input"
-                                                  id="minZoom"
-                                                  name="minZoom"
-                                                  type="number"
-                                                  value="1"
-                                                />
-                                                <span
-                                                  class="mdc-floating-label mdc-floating-label--float-above"
-                                                  id="minZoom-label"
-                                                >
-                                                  Min Zoom
-                                                </span>
-                                                <span
-                                                  class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                                  style="transform-origin: 0px center;"
-                                                />
-                                              </label>,
-                                              "_style": Object {},
-                                              "addClass": [Function],
-                                              "addEventListener": [Function],
-                                              "getProp": [Function],
-                                              "hasClass": [Function],
-                                              "onChange": [Function],
-                                              "removeClass": [Function],
-                                              "removeEventListener": [Function],
-                                              "removeProp": [Function],
-                                              "setProp": [Function],
-                                              "setRef": [Function],
-                                              "setStyle": [Function],
-                                            }
-                                          }
-                                          onBlur={[Function]}
-                                          onFocus={[Function]}
-                                          onKeyDown={[Function]}
-                                          onKeyUp={[Function]}
-                                          onMouseDown={[Function]}
-                                          onMouseUp={[Function]}
-                                          onTouchEnd={[Function]}
-                                          onTouchStart={[Function]}
-                                          style={Object {}}
-                                          tag="label"
-                                        >
-                                          <label
-                                            aria-labelledby="minZoom-label"
-                                            className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
-                                            onBlur={[Function]}
-                                            onClick={[Function]}
-                                            onFocus={[Function]}
-                                            onKeyDown={[Function]}
-                                            onKeyUp={[Function]}
-                                            onMouseDown={[Function]}
-                                            onMouseUp={[Function]}
-                                            onTouchEnd={[Function]}
-                                            onTouchStart={[Function]}
-                                            style={Object {}}
-                                          >
-                                            <Memo(TextFieldRipple)>
-                                              <span
-                                                className="mdc-text-field__ripple"
-                                              />
-                                            </Memo(TextFieldRipple)>
-                                            <ForwardRef(Tag)
-                                              className="mdc-text-field__input"
-                                              element={
-                                                FoundationElement {
-                                                  "_classes": Set {},
-                                                  "_events": Object {
-                                                    "onBlur": [Function],
-                                                    "onFocus": [Function],
-                                                    "onInput": [Function],
-                                                    "onMouseDown": [Function],
-                                                    "onTouchStart": [Function],
-                                                  },
-                                                  "_onChange": [Function],
-                                                  "_props": Object {},
-                                                  "_ref": <input
-                                                    class="mdc-text-field__input"
-                                                    id="minZoom"
-                                                    name="minZoom"
-                                                    type="number"
-                                                    value="1"
-                                                  />,
-                                                  "_style": Object {},
-                                                  "addClass": [Function],
-                                                  "addEventListener": [Function],
-                                                  "getProp": [Function],
-                                                  "hasClass": [Function],
-                                                  "onChange": [Function],
-                                                  "removeClass": [Function],
-                                                  "removeEventListener": [Function],
-                                                  "removeProp": [Function],
-                                                  "setProp": [Function],
-                                                  "setRef": [Function],
-                                                  "setStyle": [Function],
-                                                }
-                                              }
-                                              id="minZoom"
-                                              name="minZoom"
-                                              onChange={[Function]}
-                                              tag="input"
-                                              type="number"
-                                              value={1}
-                                            >
-                                              <input
-                                                className="mdc-text-field__input"
-                                                id="minZoom"
-                                                name="minZoom"
-                                                onBlur={[Function]}
-                                                onChange={[Function]}
-                                                onFocus={[Function]}
-                                                onInput={[Function]}
-                                                onMouseDown={[Function]}
-                                                onTouchStart={[Function]}
-                                                style={Object {}}
-                                                type="number"
-                                                value={1}
-                                              />
-                                            </ForwardRef(Tag)>
-                                            <Function
-                                              apiRef={[Function]}
-                                              float={true}
-                                              id="minZoom-label"
-                                              shake={false}
-                                            >
-                                              <span
-                                                className="mdc-floating-label mdc-floating-label--float-above"
-                                                id="minZoom-label"
-                                                onAnimationEnd={[Function]}
-                                                style={Object {}}
-                                              >
-                                                Min Zoom
-                                              </span>
-                                            </Function>
-                                            <Function
-                                              active={false}
-                                              center={0}
-                                            >
-                                              <ForwardRef(Tag)
-                                                className="mdc-line-ripple"
-                                                element={
-                                                  FoundationElement {
-                                                    "_classes": Set {
-                                                      "mdc-line-ripple--deactivating",
-                                                    },
-                                                    "_events": Object {
-                                                      "onTransitionEnd": [Function],
-                                                    },
-                                                    "_onChange": [Function],
-                                                    "_props": Object {
-                                                      "onTransitionEnd": [Function],
-                                                    },
-                                                    "_ref": <span
-                                                      class="mdc-line-ripple mdc-line-ripple--deactivating"
-                                                      style="transform-origin: 0px center;"
-                                                    />,
-                                                    "_style": Object {
-                                                      "transformOrigin": "0px center",
-                                                    },
-                                                    "addClass": [Function],
-                                                    "addEventListener": [Function],
-                                                    "getProp": [Function],
-                                                    "hasClass": [Function],
-                                                    "onChange": [Function],
-                                                    "removeClass": [Function],
-                                                    "removeEventListener": [Function],
-                                                    "removeProp": [Function],
-                                                    "setProp": [Function],
-                                                    "setRef": [Function],
-                                                    "setStyle": [Function],
-                                                  }
-                                                }
-                                                tag="span"
-                                              >
-                                                <span
-                                                  className="mdc-line-ripple mdc-line-ripple--deactivating"
-                                                  onTransitionEnd={[Function]}
-                                                  style={
-                                                    Object {
-                                                      "transformOrigin": "0px center",
-                                                    }
-                                                  }
-                                                />
-                                              </ForwardRef(Tag)>
-                                            </Function>
-                                          </label>
-                                        </ForwardRef(Tag)>
-                                      </ForwardRef(TextFieldRoot)>
-                                    </Ripple>
-                                  </class_1>
-                                </withRipple(Object)>
-                              </Function>
                               <Function
                                 className="makeStyles-spacer-1"
                                 id="maxZoom"
@@ -4501,7 +4011,6 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 name="maxZoom"
                                 onChange={[Function]}
                                 type="number"
-                                value={21}
                               >
                                 <withRipple(Object)
                                   aria-labelledby="maxZoom-label"
@@ -4527,10 +4036,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           id="maxZoom"
                                           name="maxZoom"
                                           type="number"
-                                          value="21"
+                                          value=""
                                         />
                                         <span
-                                          class="mdc-floating-label mdc-floating-label--float-above"
+                                          class="mdc-floating-label"
                                           id="maxZoom-label"
                                         >
                                           Max Zoom
@@ -4579,10 +4088,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             id="maxZoom"
                                             name="maxZoom"
                                             type="number"
-                                            value="21"
+                                            value=""
                                           />
                                           <span
-                                            class="mdc-floating-label mdc-floating-label--float-above"
+                                            class="mdc-floating-label"
                                             id="maxZoom-label"
                                           >
                                             Max Zoom
@@ -4624,10 +4133,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             id="maxZoom"
                                             name="maxZoom"
                                             type="number"
-                                            value="21"
+                                            value=""
                                           />
                                           <span
-                                            class="mdc-floating-label mdc-floating-label--float-above"
+                                            class="mdc-floating-label"
                                             id="maxZoom-label"
                                           >
                                             Max Zoom
@@ -4659,10 +4168,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               id="maxZoom"
                                               name="maxZoom"
                                               type="number"
-                                              value="21"
+                                              value=""
                                             />
                                             <span
-                                              class="mdc-floating-label mdc-floating-label--float-above"
+                                              class="mdc-floating-label"
                                               id="maxZoom-label"
                                             >
                                               Max Zoom
@@ -4712,10 +4221,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 id="maxZoom"
                                                 name="maxZoom"
                                                 type="number"
-                                                value="21"
+                                                value=""
                                               />
                                               <span
-                                                class="mdc-floating-label mdc-floating-label--float-above"
+                                                class="mdc-floating-label"
                                                 id="maxZoom-label"
                                               >
                                                 Max Zoom
@@ -4773,10 +4282,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   id="maxZoom"
                                                   name="maxZoom"
                                                   type="number"
-                                                  value="21"
+                                                  value=""
                                                 />
                                                 <span
-                                                  class="mdc-floating-label mdc-floating-label--float-above"
+                                                  class="mdc-floating-label"
                                                   id="maxZoom-label"
                                                 >
                                                   Max Zoom
@@ -4849,7 +4358,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     id="maxZoom"
                                                     name="maxZoom"
                                                     type="number"
-                                                    value="21"
+                                                    value=""
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -4870,7 +4379,6 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               onChange={[Function]}
                                               tag="input"
                                               type="number"
-                                              value={21}
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -4884,17 +4392,16 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 onTouchStart={[Function]}
                                                 style={Object {}}
                                                 type="number"
-                                                value={21}
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
                                               apiRef={[Function]}
-                                              float={true}
+                                              float={false}
                                               id="maxZoom-label"
                                               shake={false}
                                             >
                                               <span
-                                                className="mdc-floating-label mdc-floating-label--float-above"
+                                                className="mdc-floating-label"
                                                 id="maxZoom-label"
                                                 onAnimationEnd={[Function]}
                                                 style={Object {}}

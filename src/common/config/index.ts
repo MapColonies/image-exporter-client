@@ -8,6 +8,7 @@ const REQUEST = (window as any)._env_.REQUEST;
 const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
+const DEFAULT_ZOOM_LEVEL: number = (window as any)._env_.DEFAULT_ZOOM_LEVEL;
 const BBOX = (window as any)._env_.BBOX;
 
 const EXPORTER_CONFIG = {
@@ -21,8 +22,9 @@ const EXPORTER_CONFIG = {
   },
   EXPORT: {
     AVG_TILE_SIZE_MB: 0.02,
+    DEFAULT_ZOOM: DEFAULT_ZOOM_LEVEL,
     MIN_ZOOM: 1,
-    MAX_ZOOM: 21,
+    MAX_ZOOM: 22,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
   },

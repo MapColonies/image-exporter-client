@@ -84,8 +84,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       bottomLeftLon: selectedPolygon.coordinates[0][0][0],
       topRightLat: selectedPolygon.coordinates[0][2][1],
       topRightLon: selectedPolygon.coordinates[0][2][0],
-      minZoom: EXPORTER_CONFIG.EXPORT.MIN_ZOOM,
-      maxZoom: EXPORTER_CONFIG.EXPORT.MAX_ZOOM,
+      maxZoom: EXPORTER_CONFIG.EXPORT.DEFAULT_ZOOM,
       directoryName: '',
       packageName: ''
     },
@@ -93,7 +92,6 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       void handleExport({
         directoryName: formik.values.directoryName,
         packName: formik.values.packageName,
-        minZoom: formik.values.minZoom,
         maxZoom: formik.values.maxZoom,
         sizeEst: calcPackSize(numTiles),
       });
@@ -103,16 +101,14 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   const [numTiles, setNumTiles] = useState<number>(0);
 
   useDebouncedLayoutEffect(() => {
-    if (isValidZoomValue(formik.values.minZoom) &&
-      isValidZoomValue(formik.values.maxZoom) &&
-      formik.values.maxZoom >= formik.values.minZoom) {
-      const tilesCount = getTilesCount(selectedPolygon, formik.values.minZoom, formik.values.maxZoom) * EXPORTER_CONFIG.EXPORT.METRIX_SET_FACTOR;
+    if (isValidZoomValue(formik.values.maxZoom)) {
+      const tilesCount = getTilesCount(selectedPolygon, EXPORTER_CONFIG.EXPORT.MIN_ZOOM, formik.values.maxZoom) * EXPORTER_CONFIG.EXPORT.METRIX_SET_FACTOR;
       setNumTiles(tilesCount);
       setFormErrors({ minMaxZooms: '' });
     } else {
       setFormErrors({ minMaxZooms: intl.formatMessage({ id: 'custom-bbox.form-error.zoom.invalid.text' })});
     }
-  }, DEBOUNCE_TIME, [formik.values.minZoom, formik.values.maxZoom, selectedPolygon]);
+  }, DEBOUNCE_TIME, [formik.values.maxZoom, selectedPolygon]);
 
   const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
   const [serverErrors, setServerErrors] = useState({ duplicate: '' });
@@ -135,7 +131,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       setServerErrors({ duplicate: 'export.dialog.duplicate-path.text' });
       exporterStore.cleanError(ExportStoreError.DUPLICATE_PATH);
     }
-  }, [exporterStore.errors]);
+  }, [exporterStore, exporterStore.errors]);
 
   return (
     <Dialog open={isOpen} preventOutsideDismiss={true}>
@@ -216,17 +212,8 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
             />
             <BBoxCorner corner={Corner.BOTTOM_LEFT} />
           </Box>
-          {/* <Box style={{ display: 'flex', marginBottom: '16px' }}> */}
-          <Box style={{ display: 'none', marginBottom: '16px' }}>
-            <TextField
-              label={intl.formatMessage({ id: 'export.dialog-field.min_zoom.label' })}
-              id="minZoom"
-              name="minZoom"
-              type="number"
-              onChange={formik.handleChange}
-              value={formik.values.minZoom}
-              className={classes.spacer}
-            />
+          <Box style={{ display: 'flex', marginBottom: '16px' }}>
+          {/* <Box style={{ display: 'none', marginBottom: '16px' }}> */}
             <TextField
               label={intl.formatMessage({ id: 'export.dialog-field.max_zoom.label' })}
               id="maxZoom"

@@ -80,6 +80,7 @@ Map server settings:
 - Publish point version: CONFIGURATION_MAPSERVER_VERSION
 - Publish point request: CONFIGURATION_MAPSERVER_REQUEST
 - Active layer: CONFIGURATION_ACTIVE_LAYER - Available values: OSM_DEFAULT, WMS_LAYER, WMTS_LAYER, XYZ_LAYER
+- Default zoom level: CONFIGURATION_DEFAULT_ZOOM_LEVEL
 
 Exporter trigger configuration:
 

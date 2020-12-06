@@ -21,7 +21,6 @@ export interface PackageInfo {
   directoryName: string;
   packName: string;
   sizeEst: number;
-  minZoom?: number;
   maxZoom?: number;
 }
 
@@ -70,6 +69,7 @@ export const exporterStore = types
         coordinates[2][0],
         coordinates[2][1],
       ];
+      params.maxZoom = packInfo.maxZoom;
 
       try {
         const result = yield self.root.fetch(

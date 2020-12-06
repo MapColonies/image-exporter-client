@@ -2,12 +2,13 @@ window._env_ = {
   LANGUAGE: '{{ getv "/configuration/ui/language" "en" }}',
   MAP_SERVER: '{{ getv "/configuration/mapserver/url" "http://localhost" }}',
   PUBLISH_POINT: '{{ getv "/configuration/mapserver/publish/point" "blue_m_flat2d-v001" }}',
-  CHANNEL: {{ getv "/configuration/mapserver/channel" "1002" }},
-  VERSION: {{ getv "/configuration/mapserver/version" "1" }},
+  CHANNEL: '{{ getv "/configuration/mapserver/channel" "1002" }}',
+  VERSION: '{{ getv "/configuration/mapserver/version" "1" }}',
   REQUEST: '{{ getv "/configuration/mapserver/request" "ImageryMaps" }}',
   SERVICE_PROTOCOL: '{{ getv "/configuration/service/protocol" "http://" }}',
   SERVICE_NAME: '{{ getv "/configuration/service/url" "localhost:8000" }}',
   ACTIVE_LAYER: '{{ getv "/configuration/active/layer" "OSM_DEFAULT" }}',
+  DEFAULT_ZOOM_LEVEL: {{ getv "/configuration/default/zoom/level" "18" }},
   LOGGER: {
     level: "{{ getv "/configuration/logger/level" "error" }}",
     log2httpServer: {
