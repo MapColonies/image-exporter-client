@@ -11,6 +11,7 @@ keys = [
   "/configuration/service/protocol",
   "/configuration/service/url",
   "/configuration/active/layer",
+  "/configuration/default/zoom/level",
   "/configuration/logger/http/host",
   "/configuration/logger/http/port",
   "/configuration/logger/http/path",

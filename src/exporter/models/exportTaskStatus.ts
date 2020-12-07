@@ -27,6 +27,7 @@ export const exportTaskStatus = types.model({
     'status',
     Object.values(ExportStatus)
   ),
+  maxZoom: types.number,
   polygon: types.frozen<Polygon>(),
   link: types.string,
   creationDate: types.Date,

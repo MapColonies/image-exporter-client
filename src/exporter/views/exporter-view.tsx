@@ -83,7 +83,7 @@ const ExporterView: React.FC = observer(() => {
         message: 'snack.message.failed',
       });
     }
-  }, [exporterStore.errors]);
+  }, [exporterStore, exporterStore.errors]);
 
   useEffect(() => {
     if (exporterStore.hasError(ExportStoreError.BBOX_AREA_TOO_LARGE)) {
@@ -98,7 +98,7 @@ const ExporterView: React.FC = observer(() => {
         message: 'snack.message.failed.draw.bbox.small',
       });
     }
-  }, [exporterStore.errors]);
+  }, [exporterStore, exporterStore.errors]);
 
   const handleError = (isWithinLimit : BBoxAreaLimit): void => {
     const key = isWithinLimit === BBoxAreaLimit.TOO_BIG ? ExportStoreError.BBOX_AREA_TOO_LARGE : ExportStoreError.BBOX_AREA_TOO_SMALL;
