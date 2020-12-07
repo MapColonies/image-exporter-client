@@ -126,6 +126,16 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
     return isValidPackName(e) ? formik.handleChange(e) : false;
   };
 
+  // eslint-disable-next-line
+  const checkZoomLevel = (e: React.ChangeEvent<any>) => {
+    // eslint-disable-next-line
+    const zoomLevel: number = (e.nativeEvent as any).data;
+    if (!zoomLevel) {
+      return true;
+    }
+    return isValidZoomValue(zoomLevel) ? formik.handleChange(e) : false;
+  };
+
   useEffect(() => {
     if (exporterStore.hasError(ExportStoreError.DUPLICATE_PATH)) {
       setServerErrors({ duplicate: 'export.dialog.duplicate-path.text' });
@@ -219,7 +229,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
               id="maxZoom"
               name="maxZoom"
               type="number"
-              onChange={formik.handleChange}
+              onChange={checkZoomLevel}
               value={formik.values.maxZoom}
               className={classes.spacer}
             />
