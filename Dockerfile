@@ -26,15 +26,15 @@ RUN sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.c
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+WORKDIR /usr/share/nginx/html
+RUN mkdir public && mkdir ./confd
+COPY --from=prepare /confd/confd ./confd/confd
+COPY --from=prepare /opt/myapp/build ./
+
 #give app user required permissions
 RUN chown -R app /etc/nginx && chmod -R g+w /etc/nginx && \
   chown -R app /usr/share/nginx && \
   chown -R app /var/cache/nginx && chmod -R g+w /var/cache/nginx
 USER app:app
-
-WORKDIR /usr/share/nginx/html
-RUN mkdir public && mkdir ./confd
-COPY --from=prepare /confd/confd ./confd/confd
-COPY --from=prepare /opt/myapp/build ./
 
 CMD ["/entrypoint.sh"]
