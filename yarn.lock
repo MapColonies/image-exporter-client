@@ -1522,10 +1522,10 @@
     eslint-plugin-import "^2.22.0"
     eslint-plugin-jest "^23.20.0"
 
-"@map-colonies/mc-logger@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@map-colonies/mc-logger/-/mc-logger-2.0.0.tgz#d845b181725e953bd193f7232c23e6191d42db0d"
-  integrity sha512-98sVkXIi5X5TErAGnVFg6mQi2AtIgdkQKjcvu6s3VpHw7DmcpmvtFEMVuZZaqy4zpeRnGJN+zm1WGrWwm7Pxzg==
+"@map-colonies/mc-logger@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@map-colonies/mc-logger/-/mc-logger-2.0.1.tgz#9587af2d1c8cd7df76370189e3537b00941a8218"
+  integrity sha512-/ZCLKBq0yvqFrjE9ecCG5lWNNj4MUM2jgdHxGT77tC/AM9+atOX4QTISBsYYRJhJOaM5Za++Z7sjvBVlaL6QTg==
   dependencies:
     opentracing "^0.14.1"
     winston "^3.3.3"
