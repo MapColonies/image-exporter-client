@@ -10,7 +10,8 @@ window._env_ = {
   ACTIVE_LAYER: '{{ getv "/configuration/active/layer" "OSM_DEFAULT" }}',
   DEFAULT_ZOOM_LEVEL: {{ getv "/configuration/default/zoom/level" "18" }},
   LOGGER: {
-    level: "{{ getv "/configuration/logger/level" "error" }}",
+    level: "{{ getv "/configuration/logger/level" "warn" }}",
+    log2console: {{ getv "/configuration/logger/log2console" "false" }},
     log2httpServer: {
       host: "{{ getv "/configuration/logger/http/host" "" }}",
       port: "{{ getv "/configuration/logger/http/port" "" }}",
