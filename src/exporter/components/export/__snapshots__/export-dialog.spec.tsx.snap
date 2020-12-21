@@ -44,6 +44,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       "export.dialog-info.label": "Package info:",
       "export.dialog-info.link.label": "Link:",
       "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
+      "export.dialog.bbox.resolution.validation.error.text": "BBox too small for wanted zoom level",
       "export.dialog.duplicate-path.text": "A file with this name already exists in this folder",
       "export.dialog.tiles.text": "tiles",
       "export.dialog.title": "Export geopackage",
@@ -63,6 +64,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       "snack.message.failed": "Network error occurred",
       "snack.message.failed.draw.bbox.large": "Requested area too large",
       "snack.message.failed.draw.bbox.small": "Requested area too small",
+      "snack.message.server.failed": "Server error",
       "snack.message.success": "Export SUCCEEDED",
     }
   }
