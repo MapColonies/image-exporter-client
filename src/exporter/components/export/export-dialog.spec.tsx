@@ -10,8 +10,8 @@ import MESSAGES from '../../../common/i18n';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
-import { ExportDialog } from './export-dialog';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
+import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
 const handleExport = jest.fn();
@@ -265,7 +265,8 @@ describe('ExportDialog component', () => {
     wrapper.update();
 
     await waitFor(() => {
-      const errorMessage = MESSAGES['en']['export.dialog.bbox.resolution.validation.error.text'] as string;
+      const errorMessage: string = MESSAGES['en']['export.dialog.bbox.resolution.validation.error.text'] as string;
+      // eslint-disable-next-line
       expect(wrapper.text().includes(errorMessage)).toBe(true);
       expect(handleExportError).toHaveBeenCalled();
     });
