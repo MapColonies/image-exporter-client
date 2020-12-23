@@ -2,7 +2,7 @@ import EXPORTER_CONFIG from '../config';
 
 const getParamsString = (params: {[key: string]: string | boolean | number}) : string  => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const paramArray = Object.keys(params).map((key: string) => `${key}=${String(params[key])}`);
+  const paramArray = Object.keys(params).map((key: string) => `${key}=${String(encodeURIComponent(params[key]))}`);
   return paramArray.join('&');
 }
 
