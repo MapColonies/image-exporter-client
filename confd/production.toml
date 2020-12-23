@@ -16,5 +16,6 @@ keys = [
   "/configuration/logger/http/port",
   "/configuration/logger/http/path",
   "/configuration/logger/level",
+  "/configuration/logger/log2console",
   "/configuration/bbox/area/square/km/limit"
 ]
