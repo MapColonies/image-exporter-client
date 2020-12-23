@@ -265,7 +265,8 @@ describe('ExportDialog component', () => {
     wrapper.update();
 
     await waitFor(() => {
-      const errorMessage = MESSAGES['en']['export.dialog.bbox.resolution.validation.error.text'] as string;
+      const errorMessage: string = MESSAGES['en']['export.dialog.bbox.resolution.validation.error.text'] as string;
+      // eslint-disable-next-line
       expect(wrapper.text().includes(errorMessage)).toBe(true);
       expect(handleExportError).toHaveBeenCalled();
     });
