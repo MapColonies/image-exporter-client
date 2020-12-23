@@ -36,8 +36,8 @@ exports[`ExportDialog component renders correctly 1`] = `
       "export.dialog-field.bottom_left_lat.label": "Bottom Left Lat",
       "export.dialog-field.bottom_left_lon.label": "Bottom Left Lon",
       "export.dialog-field.directory_name.placeholder": "Directory Name (English Only)",
-      "export.dialog-field.max_zoom.label": "Max Zoom",
-      "export.dialog-field.min_zoom.label": "Min Zoom",
+      "export.dialog-field.max_zoom.label": "Max Zoom Level",
+      "export.dialog-field.min_zoom.label": "Min Zoom Level",
       "export.dialog-field.package_name.placeholder": "Package Name (English Only)",
       "export.dialog-field.top_right_lat.label": "Top Right Lat",
       "export.dialog-field.top_right_lon.label": "Top Right Lon",
@@ -389,7 +389,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               class="mdc-floating-label"
                               id="maxZoom-label"
                             >
-                              Max Zoom
+                              Max Zoom Level
                             </span>
                             <span
                               class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4009,7 +4009,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               <Function
                                 className="makeStyles-spacer-1"
                                 id="maxZoom"
-                                label="Max Zoom"
+                                label="Max Zoom Level"
                                 name="maxZoom"
                                 onChange={[Function]}
                                 type="number"
@@ -4044,7 +4044,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           class="mdc-floating-label"
                                           id="maxZoom-label"
                                         >
-                                          Max Zoom
+                                          Max Zoom Level
                                         </span>
                                         <span
                                           class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4096,7 +4096,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             class="mdc-floating-label"
                                             id="maxZoom-label"
                                           >
-                                            Max Zoom
+                                            Max Zoom Level
                                           </span>
                                           <span
                                             class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4141,7 +4141,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             class="mdc-floating-label"
                                             id="maxZoom-label"
                                           >
-                                            Max Zoom
+                                            Max Zoom Level
                                           </span>
                                           <span
                                             class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4176,7 +4176,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               class="mdc-floating-label"
                                               id="maxZoom-label"
                                             >
-                                              Max Zoom
+                                              Max Zoom Level
                                             </span>
                                             <span
                                               class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4229,7 +4229,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 class="mdc-floating-label"
                                                 id="maxZoom-label"
                                               >
-                                                Max Zoom
+                                                Max Zoom Level
                                               </span>
                                               <span
                                                 class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4290,7 +4290,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   class="mdc-floating-label"
                                                   id="maxZoom-label"
                                                 >
-                                                  Max Zoom
+                                                  Max Zoom Level
                                                 </span>
                                                 <span
                                                   class="mdc-line-ripple mdc-line-ripple--deactivating"
@@ -4408,7 +4408,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 onAnimationEnd={[Function]}
                                                 style={Object {}}
                                               >
-                                                Max Zoom
+                                                Max Zoom Level
                                               </span>
                                             </Function>
                                             <Function

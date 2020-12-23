@@ -273,10 +273,10 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
                 null
             }
             {
-              Object.entries(serverErrors).map(([error, value]) => {
-                console.log(`Error: ${error}, Value: ${value}`);
+              // Display any server error the occurred
+              Object.entries(serverErrors).map(([error, value], index) => {
                 return value ?
-                <div className={classes.errorContainer}>
+                <div key={index} className={classes.errorContainer}>
                   {`${intl.formatMessage({ id: 'general.error.label' })}: ${intl.formatMessage({ id: value })}`}
                 </div> :
                 null
