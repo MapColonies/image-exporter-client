@@ -31,8 +31,8 @@ const EXPORTER_CONFIG = {
     POLLING_CYCLE_INTERVAL: 3000,
   },
   MAP: {
-    CENTER: MAP.center as number,
-    ZOOM: MAP.zoom as [number, number],
+    CENTER: MAP.center as [number, number],
+    ZOOM: MAP.zoom as number,
   },
   ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
   WMTS_LAYER: {
