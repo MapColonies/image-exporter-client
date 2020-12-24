@@ -30,12 +30,13 @@
   "export.dialog-field.bottom_left_lon.label": "Bottom Left Lon",
   "export.dialog-field.directory_name.placeholder": "Directory Name (English Only)",
   "export.dialog-field.package_name.placeholder": "Package Name (English Only)",
-  "export.dialog-field.min_zoom.label": "Min Zoom",
-  "export.dialog-field.max_zoom.label": "Max Zoom",
+  "export.dialog-field.min_zoom.label": "Min Zoom Level",
+  "export.dialog-field.max_zoom.label": "Max Zoom Level",
   "export.dialog-info.label": "Package info:",
   "export.dialog-info.link.label": "Link:",
   "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
   "export.dialog.duplicate-path.text": "A file with this name already exists in this folder",
+  "export.dialog.bbox.resolution.validation.error.text": "BBox too small for wanted zoom level",
   "export.dialog.tiles.text": "tiles",
 
   "export-table.dialog.title": "Exported packages",
@@ -57,6 +58,7 @@
 
   "snack.message.success": "Export SUCCEEDED",
   "snack.message.failed": "Network error occurred",
+  "snack.message.server.failed": "Server error",
   "snack.message.failed.draw.bbox.large": "Requested area too large",
   "snack.message.failed.draw.bbox.small": "Requested area too small",
   "snack.dismiss-btn.text": "Dismiss"

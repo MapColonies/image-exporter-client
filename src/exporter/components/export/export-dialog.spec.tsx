@@ -10,6 +10,7 @@ import MESSAGES from '../../../common/i18n';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
+import { ExportStoreError } from '../../../common/models/exportStoreError';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
@@ -219,6 +220,55 @@ describe('ExportDialog component', () => {
     await waitFor(() => {
       expect(getButtonById(wrapper, 'general.ok-btn.text').prop('disabled')).toBe(false);
       expect(handleExport).toHaveBeenCalled();
+    });
+  });
+
+  it('When all data filled and FORM submitted, export fails', async () => {
+    const exportPackName = 'uniqueName';
+    const exportDirName = 'uniqueName';
+    const polygon: Polygon = {
+      type: 'Polygon',
+      coordinates: [[[35.4274677973303, 32.83433188112207], [], [35.427479676963486, 32.83434257279194], []]],
+    }
+    const maxZoom = 3;
+
+    const packagesFetcherFailure = async (): Promise<ExportTaskStatusResponse> => Promise.reject<ExportTaskStatusResponse>();
+    const mockStore = rootStore.create({}, { fetch: packagesFetcherFailure });
+
+    const handleExportError = jest.fn(x => {
+      mockStore.exporterStore.addError({ request: {}, key: ExportStoreError.BBOX_TOO_SMALL_FOR_RESOLUTION });
+    });
+
+    const wrapper = mount(
+      <StoreProvider value={mockStore}>
+        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
+          <ExportDialog
+            isOpen={true}
+            onSetOpen={setOpenFn}
+            selectedPolygon={polygon}
+            handleExport={handleExportError}
+          />
+        </IntlProvider>
+      </StoreProvider>
+    );
+
+    updateField(wrapper, 'packageName', exportPackName);
+    updateField(wrapper, 'directoryName', exportDirName);
+    updateField(wrapper, 'maxZoom', maxZoom);
+
+    act(() => {
+      wrapper
+        .find('form')
+        .simulate('submit');
+    });
+
+    wrapper.update();
+
+    await waitFor(() => {
+      const errorMessage: string = MESSAGES['en']['export.dialog.bbox.resolution.validation.error.text'] as string;
+      // eslint-disable-next-line
+      expect(wrapper.text().includes(errorMessage)).toBe(true);
+      expect(handleExportError).toHaveBeenCalled();
     });
   });
 

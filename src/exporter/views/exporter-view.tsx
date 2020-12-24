@@ -100,6 +100,16 @@ const ExporterView: React.FC = observer(() => {
     }
   }, [exporterStore, exporterStore.errors]);
 
+  useEffect(() => {
+    if (exporterStore.hasError(ExportStoreError.ERROR_SAVING_EXPORT)) {
+      setSnackOpen(true);
+      setSnackDetails({
+        message: 'snack.message.server.failed',
+      });
+      setOpen(false);
+    }
+  }, [exporterStore, exporterStore.errors]);
+
   const handleError = (isWithinLimit : BBoxAreaLimit): void => {
     const key = isWithinLimit === BBoxAreaLimit.TOO_BIG ? ExportStoreError.BBOX_AREA_TOO_LARGE : ExportStoreError.BBOX_AREA_TOO_SMALL;
     exporterStore.addError({
