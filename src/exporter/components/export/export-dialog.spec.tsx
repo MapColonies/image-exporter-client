@@ -24,11 +24,12 @@ const polygon: Polygon = {
   coordinates: [[[32, 35], [], [31, 34], []]],
 }
 
+const maxFractionDigits = 5;
 const fields = {
-  bottomLeftLat: polygon.coordinates[0][0][1],
-  bottomLeftLon: polygon.coordinates[0][0][0],
-  topRightLat: polygon.coordinates[0][2][1],
-  topRightLon: polygon.coordinates[0][2][0],
+  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(maxFractionDigits),
+  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(maxFractionDigits),
+  topRightLat: polygon.coordinates[0][2][1].toFixed(maxFractionDigits),
+  topRightLon: polygon.coordinates[0][2][0].toFixed(maxFractionDigits),
 }
 
 const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
