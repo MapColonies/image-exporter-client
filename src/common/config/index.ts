@@ -34,11 +34,13 @@ const EXPORTER_CONFIG = {
       'Tiles © <a href="https://services.arcgisonline.com/arcgis/rest/' +
       'services/Demographics/USA_Population_Density/MapServer/">ArcGIS</a>',
     URL:
-      'https://services.arcgisonline.com/arcgis/rest/' +
-      'services/Demographics/USA_Population_Density/MapServer/WMTS/',
-    LAYER: '0',
-    PROJECTION: 'EPSG:3857',
+      'http://10.28.11.95:8080/wmts/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png',
+    LAYER: 'combined_layers',
+    MATRIX_SET:'gridname',
+    STYLE: 'default',
+    PROJECTION: 'EPSG:4326',
     FORMAT: 'image/png',
+    
   },
   WMS_LAYER: {
     ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
