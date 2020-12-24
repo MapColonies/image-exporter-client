@@ -78,12 +78,13 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   const { isOpen, onSetOpen, selectedPolygon, handleExport } = props;
   const classes = useStyle();
   const intl = useIntl();
+  const maxFractionDigits = 5;
   const formik = useFormik({
     initialValues: {
-      bottomLeftLat: selectedPolygon.coordinates[0][0][1],
-      bottomLeftLon: selectedPolygon.coordinates[0][0][0],
-      topRightLat: selectedPolygon.coordinates[0][2][1],
-      topRightLon: selectedPolygon.coordinates[0][2][0],
+      bottomLeftLat: selectedPolygon.coordinates[0][0][1].toFixed(maxFractionDigits),
+      bottomLeftLon: selectedPolygon.coordinates[0][0][0].toFixed(maxFractionDigits),
+      topRightLat: selectedPolygon.coordinates[0][2][1].toFixed(maxFractionDigits),
+      topRightLon: selectedPolygon.coordinates[0][2][0].toFixed(maxFractionDigits),
       maxZoom: EXPORTER_CONFIG.EXPORT.DEFAULT_ZOOM,
       directoryName: '',
       packageName: ''
