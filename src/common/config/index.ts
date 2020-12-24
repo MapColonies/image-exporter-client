@@ -8,6 +8,7 @@ const REQUEST = (window as any)._env_.REQUEST;
 const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
+const ACTIVE_LAYER_PARAMS = (window as any)._env_.ACTIVE_LAYER_PARAMS;
 const DEFAULT_ZOOM_LEVEL: number = (window as any)._env_.DEFAULT_ZOOM_LEVEL;
 const BBOX = (window as any)._env_.BBOX;
 
@@ -31,15 +32,14 @@ const EXPORTER_CONFIG = {
   ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
   WMTS_LAYER: {
     ATTRIBUTIONS:
-      'Tiles © <a href="https://services.arcgisonline.com/arcgis/rest/' +
-      'services/Demographics/USA_Population_Density/MapServer/">ArcGIS</a>',
+      `Tiles © <a href="${MAP_SERVER}/service?REQUEST=GetCapabilities">MapProxy</a>`,
     URL:
-      'http://10.28.11.95:8080/wmts/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png',
-    LAYER: 'combined_layers',
-    MATRIX_SET:'gridname',
-    STYLE: 'default',
-    PROJECTION: 'EPSG:4326',
-    FORMAT: 'image/png',
+      `${MAP_SERVER}/${ACTIVE_LAYER_PARAMS.urlPattern}`,
+    LAYER: `${PUBLISH_POINT}`,
+    MATRIX_SET: `${ACTIVE_LAYER_PARAMS.matrixSet}`,
+    STYLE: `${ACTIVE_LAYER_PARAMS.style}`,
+    PROJECTION: `${ACTIVE_LAYER_PARAMS.projection}`,
+    FORMAT: `${ACTIVE_LAYER_PARAMS.format}`,
     
   },
   WMS_LAYER: {
