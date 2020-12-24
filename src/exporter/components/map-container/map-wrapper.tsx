@@ -9,6 +9,7 @@ import { Map,
   DrawInteraction,
   DrawType
  } from '@map-colonies/react-components';
+import EXPORTER_CONFIG from '../../../common/config';
 import './map-wrapper.css';
 
 interface MapWrapperProps {
@@ -24,7 +25,12 @@ export const MapWrapper: React.FC<MapWrapperProps> = (props) => {
   };
 
   return (
-    <Map allowFullScreen={true} showMousePosition={true}>
+    <Map 
+      allowFullScreen={true}
+      showMousePosition={true}
+      zoom={EXPORTER_CONFIG.MAP.ZOOM}
+      center={EXPORTER_CONFIG.MAP.CENTER}
+    >
       {props.selectionPolygon && (
         <VectorLayer>
           <VectorSource>

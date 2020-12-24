@@ -87,7 +87,13 @@ Map server settings:
   - projection: CONFIGURATION_ACTIVE_LAYER_PARAM_PROJECTION
   - format: CONFIGURATION_ACTIVE_LAYER_PARAM_FORMAT
 
-- Default zoom level: CONFIGURATION_DEFAULT_ZOOM_LEVEL
+- Export: 
+  - Default zoom level: CONFIGURATION_EXPORT_DEFAULT_ZOOM_LEVEL
+  - Max zoom level: CONFIGURATION_EXPORT_MAX_ZOOM_LEVEL
+
+- Map:
+  - Center: CONFIGURATION_MAP_CENTER
+  - Zoom: CONFIGURATION_MAP_ZOOM
 
 Exporter trigger configuration:
 

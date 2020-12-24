@@ -15,7 +15,14 @@ window._env_ = {
     projection: '{{ getv "/configuration/active/layer/params/projection" "EPSG:4326" }}',
     format: '{{ getv "/configuration/active/layer/params/format" "image/png" }}'
   },
-  DEFAULT_ZOOM_LEVEL: {{ getv "/configuration/default/zoom/level" "18" }},
+  EXPORT: {
+    defaultZoomLevel: {{ getv "/configuration/export/default/zoom/level" "18" }},
+    maxZoomLevel: {{ getv "/configuration/export/max/zoom/level" "22" }}
+  },
+  MAP: {
+    center: {{ getv "/configuration/map/center" "[35.14, 31.39]" }},
+    zoom: {{ getv "/configuration/map/zoom" "8" }},
+  },
   LOGGER: {
     level: '{{ getv "/configuration/logger/level" "warn" }}',
     log2console: {{ getv "/configuration/logger/log2console" "false" }},

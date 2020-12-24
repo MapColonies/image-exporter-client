@@ -9,7 +9,8 @@ const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
 const ACTIVE_LAYER_PARAMS = (window as any)._env_.ACTIVE_LAYER_PARAMS;
-const DEFAULT_ZOOM_LEVEL: number = (window as any)._env_.DEFAULT_ZOOM_LEVEL;
+const EXPORT = (window as any)._env_.EXPORT;
+const MAP = (window as any)._env_.MAP;
 const BBOX = (window as any)._env_.BBOX;
 
 const EXPORTER_CONFIG = {
@@ -23,11 +24,15 @@ const EXPORTER_CONFIG = {
   },
   EXPORT: {
     AVG_TILE_SIZE_MB: 0.02,
-    DEFAULT_ZOOM: DEFAULT_ZOOM_LEVEL,
+    DEFAULT_ZOOM: EXPORT.defaultZoomLevel,
     MIN_ZOOM: 0,
-    MAX_ZOOM: 22,
+    MAX_ZOOM: EXPORT.maxZoomLevel,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
+  },
+  MAP: {
+    CENTER: MAP.center,
+    ZOOM: MAP.zoom,
   },
   ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
   WMTS_LAYER: {
