@@ -381,10 +381,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                               id="maxZoom"
                               name="maxZoom"
                               type="number"
-                              value=""
+                              value="18"
                             />
                             <span
-                              class="mdc-floating-label"
+                              class="mdc-floating-label mdc-floating-label--float-above"
                               id="maxZoom-label"
                             >
                               Max Zoom
@@ -4011,6 +4011,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 name="maxZoom"
                                 onChange={[Function]}
                                 type="number"
+                                value={18}
                               >
                                 <withRipple(Object)
                                   aria-labelledby="maxZoom-label"
@@ -4036,10 +4037,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           id="maxZoom"
                                           name="maxZoom"
                                           type="number"
-                                          value=""
+                                          value="18"
                                         />
                                         <span
-                                          class="mdc-floating-label"
+                                          class="mdc-floating-label mdc-floating-label--float-above"
                                           id="maxZoom-label"
                                         >
                                           Max Zoom
@@ -4088,10 +4089,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             id="maxZoom"
                                             name="maxZoom"
                                             type="number"
-                                            value=""
+                                            value="18"
                                           />
                                           <span
-                                            class="mdc-floating-label"
+                                            class="mdc-floating-label mdc-floating-label--float-above"
                                             id="maxZoom-label"
                                           >
                                             Max Zoom
@@ -4133,10 +4134,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             id="maxZoom"
                                             name="maxZoom"
                                             type="number"
-                                            value=""
+                                            value="18"
                                           />
                                           <span
-                                            class="mdc-floating-label"
+                                            class="mdc-floating-label mdc-floating-label--float-above"
                                             id="maxZoom-label"
                                           >
                                             Max Zoom
@@ -4168,10 +4169,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               id="maxZoom"
                                               name="maxZoom"
                                               type="number"
-                                              value=""
+                                              value="18"
                                             />
                                             <span
-                                              class="mdc-floating-label"
+                                              class="mdc-floating-label mdc-floating-label--float-above"
                                               id="maxZoom-label"
                                             >
                                               Max Zoom
@@ -4221,10 +4222,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 id="maxZoom"
                                                 name="maxZoom"
                                                 type="number"
-                                                value=""
+                                                value="18"
                                               />
                                               <span
-                                                class="mdc-floating-label"
+                                                class="mdc-floating-label mdc-floating-label--float-above"
                                                 id="maxZoom-label"
                                               >
                                                 Max Zoom
@@ -4282,10 +4283,10 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   id="maxZoom"
                                                   name="maxZoom"
                                                   type="number"
-                                                  value=""
+                                                  value="18"
                                                 />
                                                 <span
-                                                  class="mdc-floating-label"
+                                                  class="mdc-floating-label mdc-floating-label--float-above"
                                                   id="maxZoom-label"
                                                 >
                                                   Max Zoom
@@ -4358,7 +4359,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     id="maxZoom"
                                                     name="maxZoom"
                                                     type="number"
-                                                    value=""
+                                                    value="18"
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -4379,6 +4380,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               onChange={[Function]}
                                               tag="input"
                                               type="number"
+                                              value={18}
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -4392,16 +4394,17 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 onTouchStart={[Function]}
                                                 style={Object {}}
                                                 type="number"
+                                                value={18}
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
                                               apiRef={[Function]}
-                                              float={false}
+                                              float={true}
                                               id="maxZoom-label"
                                               shake={false}
                                             >
                                               <span
-                                                className="mdc-floating-label"
+                                                className="mdc-floating-label mdc-floating-label--float-above"
                                                 id="maxZoom-label"
                                                 onAnimationEnd={[Function]}
                                                 style={Object {}}

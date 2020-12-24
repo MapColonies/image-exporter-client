@@ -3,7 +3,14 @@
 exports[`MapWrapper component renders correctly 1`] = `
 <Component
   allowFullScreen={true}
+  center={
+    Array [
+      35.14,
+      31.39,
+    ]
+  }
   showMousePosition={true}
+  zoom={8}
 >
   <Component>
     <Component>
