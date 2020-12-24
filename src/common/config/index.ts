@@ -24,9 +24,9 @@ const EXPORTER_CONFIG = {
   },
   EXPORT: {
     AVG_TILE_SIZE_MB: 0.02,
-    DEFAULT_ZOOM: EXPORT.defaultZoomLevel,
+    DEFAULT_ZOOM: EXPORT.defaultZoomLevel as number,
     MIN_ZOOM: 0,
-    MAX_ZOOM: EXPORT.maxZoomLevel,
+    MAX_ZOOM: EXPORT.maxZoomLevel as number,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
   },
