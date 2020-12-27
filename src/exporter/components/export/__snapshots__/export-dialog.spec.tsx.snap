@@ -41,6 +41,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       "export.dialog-field.package_name.placeholder": "Package Name (English Only)",
       "export.dialog-field.top_right_lat.label": "Top Right Lat",
       "export.dialog-field.top_right_lon.label": "Top Right Lon",
+      "export.dialog-field.zoom_resolution.units.meter": "m/px",
       "export.dialog-info.label": "Package info:",
       "export.dialog-info.link.label": "Link:",
       "export.dialog-info.link.pattern": "https://packages/{packageName}.gpkg",
@@ -397,11 +398,23 @@ exports[`ExportDialog component renders correctly 1`] = `
                             />
                           </label>
                           <div
+                            class="MuiBox-root MuiBox-root-16"
+                            style="display: flex; align-items: center;"
+                          >
+                            <span
+                              class="mdc-typography--body2"
+                            >
+                              0
+                               
+                              m/px
+                            </span>
+                          </div>
+                          <div
                             class="makeStyles-bbox-9  makeStyles-noBorder-3"
                           />
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-16"
+                          class="MuiBox-root MuiBox-root-17"
                           style="display: flex;"
                         >
                           <span
@@ -428,7 +441,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                           </span>
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-17"
+                          class="MuiBox-root MuiBox-root-18"
                           style="display: flex; justify-content: flex-end; margin-top: 16px; gap: 16px;"
                         >
                           <button
@@ -4472,6 +4485,50 @@ exports[`ExportDialog component renders correctly 1`] = `
                                   </class_1>
                                 </withRipple(Object)>
                               </Function>
+                              <Component
+                                style={
+                                  Object {
+                                    "alignItems": "center",
+                                    "display": "flex",
+                                  }
+                                }
+                              >
+                                <Styled(MuiBox)
+                                  style={
+                                    Object {
+                                      "alignItems": "center",
+                                      "display": "flex",
+                                    }
+                                  }
+                                >
+                                  <div
+                                    className="MuiBox-root MuiBox-root-16"
+                                    style={
+                                      Object {
+                                        "alignItems": "center",
+                                        "display": "flex",
+                                      }
+                                    }
+                                  >
+                                    <Function
+                                      use="body2"
+                                    >
+                                      <ForwardRef(Tag)
+                                        className="mdc-typography--body2"
+                                        tag="span"
+                                      >
+                                        <span
+                                          className="mdc-typography--body2"
+                                        >
+                                          0
+                                           
+                                          m/px
+                                        </span>
+                                      </ForwardRef(Tag)>
+                                    </Function>
+                                  </div>
+                                </Styled(MuiBox)>
+                              </Component>
                               <BBoxCorner
                                 className="makeStyles-noBorder-3"
                                 corner="UNKNOWN"
@@ -4498,7 +4555,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-16"
+                              className="MuiBox-root MuiBox-root-17"
                               style={
                                 Object {
                                   "display": "flex",
@@ -4597,7 +4654,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-17"
+                              className="MuiBox-root MuiBox-root-18"
                               style={
                                 Object {
                                   "display": "flex",

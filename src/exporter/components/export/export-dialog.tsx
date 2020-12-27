@@ -242,7 +242,6 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
             <BBoxCorner corner={Corner.BOTTOM_LEFT} />
           </Box>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
-          {/* <Box style={{ display: 'none', marginBottom: '16px' }}> */}
             <TextField
               label={intl.formatMessage({ id: 'export.dialog-field.max_zoom.label' })}
               id="maxZoom"
@@ -254,7 +253,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
             />
             <Box style={{display: 'flex', alignItems: 'center'}}>
               <Typography use="body2">
-                {pixelSize} m/pixel
+                {pixelSize} {intl.formatMessage({ id: 'export.dialog-field.zoom_resolution.units.meter' })}
               </Typography>
             </Box>
             <BBoxCorner corner={Corner.UNKNOWN} className={classes.noBorder} />
