@@ -112,7 +112,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   }, DEBOUNCE_TIME, [formik.values.maxZoom, selectedPolygon]);
 
   const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
-  const [serverErrors, setServerErrors] = useState({ duplicate: '' });
+  const [serverErrors, setServerErrors] = useState({ duplicate: '', bboxAreaForResolution: '' });
 
   const handleClose = (isOpened: boolean): void => {
     onSetOpen(isOpened);
@@ -122,13 +122,17 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   const checkName = (e: React.ChangeEvent<any>) => {
 
     if (serverErrors.duplicate) {
-      setServerErrors({ duplicate: '' });
+      setServerErrors({ ...serverErrors, duplicate: '' });
     }
     return isValidPackName(e) ? formik.handleChange(e) : false;
   };
 
   // eslint-disable-next-line
   const checkZoomLevel = (e: React.ChangeEvent<any>) => {
+    if (serverErrors.bboxAreaForResolution) {
+      setServerErrors({ ...serverErrors, bboxAreaForResolution: '' });
+    }
+    
     // eslint-disable-next-line
     const zoomLevel: number = (e.nativeEvent as any).data;
     if (!zoomLevel) {
@@ -139,10 +143,14 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
 
   useEffect(() => {
     if (exporterStore.hasError(ExportStoreError.DUPLICATE_PATH)) {
-      setServerErrors({ duplicate: 'export.dialog.duplicate-path.text' });
+      setServerErrors({ ...serverErrors, duplicate: 'export.dialog.duplicate-path.text' });
       exporterStore.cleanError(ExportStoreError.DUPLICATE_PATH);
     }
-  }, [exporterStore, exporterStore.errors]);
+    else if(exporterStore.hasError(ExportStoreError.BBOX_TOO_SMALL_FOR_RESOLUTION)) {
+      setServerErrors({ ...serverErrors, bboxAreaForResolution: 'export.dialog.bbox.resolution.validation.error.text' });
+      exporterStore.cleanError(ExportStoreError.BBOX_TOO_SMALL_FOR_RESOLUTION);
+    }
+  }, [exporterStore, exporterStore.errors, serverErrors]);
 
   return (
     <Dialog open={isOpen} preventOutsideDismiss={true}>
@@ -266,11 +274,15 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
                 null
             }
             {
-              (serverErrors.duplicate) ?
-                <div className={classes.errorContainer}>
-                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${intl.formatMessage({ id: serverErrors.duplicate })}`}
+              // Display any server error the occurred
+              Object.entries(serverErrors).map(([error, value], index) => {
+                return value ?
+                <div key={index} className={classes.errorContainer}>
+                  {`${intl.formatMessage({ id: 'general.error.label' })}: ${intl.formatMessage({ id: value })}`}
                 </div> :
                 null
+              }
+              )
             }
             <Button type="button" onClick={(): void => { handleClose(false); }}>
               <FormattedMessage id="general.cancel-btn.text" />

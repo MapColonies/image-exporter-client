@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Polygon } from 'geojson';
 import { DrawInteraction, DrawType, VectorLayer } from '@map-colonies/react-components';
+// eslint-disable-next-line
+import '../../../__mocks__/confEnvShim';
 import { MapWrapper } from './map-wrapper';
 
 

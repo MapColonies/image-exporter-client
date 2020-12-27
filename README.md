@@ -70,7 +70,7 @@ Be sure that it runs from this location /usr/share/nginx/html
 
 UI settings:
 
-- UI display language: CONFIGURATION_UI_LANGUAGE - Current available values: en, he
+- UI display language: CONFIGURATION_UI_LANGUAGE - Available values: ***en, he***
 
 Map server settings:
 
@@ -79,8 +79,21 @@ Map server settings:
 - Publish point channel: CONFIGURATION_MAPSERVER_CHANNEL
 - Publish point version: CONFIGURATION_MAPSERVER_VERSION
 - Publish point request: CONFIGURATION_MAPSERVER_REQUEST
-- Active layer: CONFIGURATION_ACTIVE_LAYER - Available values: OSM_DEFAULT, WMS_LAYER, WMTS_LAYER, XYZ_LAYER
-- Default zoom level: CONFIGURATION_DEFAULT_ZOOM_LEVEL
+- Active layer: CONFIGURATION_ACTIVE_LAYER - Available values: ***OSM_DEFAULT, WMS_LAYER, WMTS_LAYER, XYZ_LAYER***
+- Active layer params:
+  - urlPattern : CONFIGURATION_ACTIVE_LAYER_PARAM_URLPATTERN
+  - matrixSet: CONFIGURATION_ACTIVE_LAYER_PARAM_MATRIXSET
+  - style: CONFIGURATION_ACTIVE_LAYER_PARAM_STYLE
+  - projection: CONFIGURATION_ACTIVE_LAYER_PARAM_PROJECTION
+  - format: CONFIGURATION_ACTIVE_LAYER_PARAM_FORMAT
+
+- Export: 
+  - Default zoom level: CONFIGURATION_EXPORT_DEFAULT_ZOOM_LEVEL
+  - Max zoom level: CONFIGURATION_EXPORT_MAX_ZOOM_LEVEL
+
+- Map:
+  - Center: CONFIGURATION_MAP_CENTER
+  - Zoom: CONFIGURATION_MAP_ZOOM
 
 Exporter trigger configuration:
 
@@ -98,3 +111,50 @@ Logger settings:
 Bounding box configuration:
 
 - Area limit: CONFIGURATION_BBOX_AREA_SQUARE_KM_LIMIT
+
+## Layer configuratioin examples:
+**WMTS**
+```
+{
+  ...
+  MAP_SERVER: 'http://10.28.11.95:8080',
+  PUBLISH_POINT: 'combined_layers',
+  ACTIVE_LAYER: 'WMTS_LAYER',
+  ACTIVE_LAYER_PARAMS: {
+    urlPattern : 'wmts/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png',
+    matrixSet: 'gridname',
+    style: 'default',
+    projection: 'EPSG:4326',
+    format: 'image/png'
+  },
+  ...
+}
+```
+
+**WMS**
+```
+{
+  ...
+  MAP_SERVER: 'http://10.28.11.95:8080',
+  PUBLISH_POINT: 'blue_m_flat2d-v001',
+  CHANNEL: '1002',
+  ACTIVE_LAYER: 'WMS_LAYER',
+  ...
+}
+```
+
+**XYZ**
+```
+{
+  ...
+  MAP_SERVER: 'http://10.28.11.95:8080',
+  PUBLISH_POINT: 'blue_m_flat2d-v001',
+  CHANNEL: '1002',
+  REQUEST: 'ImageryMaps',
+  VERSION: '1',
+  ACTIVE_LAYER: 'XYZ_LAYER',
+  ...
+}
+```
+
+

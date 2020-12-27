@@ -30,6 +30,8 @@ const wmtsOptions = getWMTSOptions({
   layer: EXPORTER_CONFIG.WMTS_LAYER.LAYER,
   projection: EXPORTER_CONFIG.WMTS_LAYER.PROJECTION,
   format: EXPORTER_CONFIG.WMTS_LAYER.FORMAT,
+  matrixSet: EXPORTER_CONFIG.WMTS_LAYER.MATRIX_SET,
+  style: EXPORTER_CONFIG.WMTS_LAYER.STYLE,
 });
 
 const wmsOptions = getWMSOptions({
@@ -97,6 +99,16 @@ const ExporterView: React.FC = observer(() => {
       setSnackDetails({
         message: 'snack.message.failed.draw.bbox.small',
       });
+    }
+  }, [exporterStore, exporterStore.errors]);
+
+  useEffect(() => {
+    if (exporterStore.hasError(ExportStoreError.ERROR_SAVING_EXPORT)) {
+      setSnackOpen(true);
+      setSnackDetails({
+        message: 'snack.message.server.failed',
+      });
+      setOpen(false);
     }
   }, [exporterStore, exporterStore.errors]);
 
