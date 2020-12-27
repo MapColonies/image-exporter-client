@@ -200,7 +200,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               name="topRightLat"
                               readonly=""
                               type="number"
-                              value="34.00000"
+                              value="34"
                             />
                             <div
                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -242,7 +242,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               name="topRightLon"
                               readonly=""
                               type="number"
-                              value="31.00000"
+                              value="31"
                             />
                             <div
                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -292,7 +292,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               name="bottomLeftLat"
                               readonly=""
                               type="number"
-                              value="35.00000"
+                              value="35"
                             />
                             <div
                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -334,7 +334,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               name="bottomLeftLon"
                               readonly=""
                               type="number"
-                              value="32.00000"
+                              value="32"
                             />
                             <div
                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1465,7 +1465,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 outlined={true}
                                 readOnly={true}
                                 type="number"
-                                value="34.00000"
+                                value="34"
                               >
                                 <withRipple(Object)
                                   aria-labelledby="topRightLat-label"
@@ -1492,7 +1492,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           name="topRightLat"
                                           readonly=""
                                           type="number"
-                                          value="34.00000"
+                                          value="34"
                                         />
                                         <div
                                           class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1561,7 +1561,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="topRightLat"
                                             readonly=""
                                             type="number"
-                                            value="34.00000"
+                                            value="34"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1623,7 +1623,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="topRightLat"
                                             readonly=""
                                             type="number"
-                                            value="34.00000"
+                                            value="34"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1675,7 +1675,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               name="topRightLat"
                                               readonly=""
                                               type="number"
-                                              value="34.00000"
+                                              value="34"
                                             />
                                             <div
                                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1745,7 +1745,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 name="topRightLat"
                                                 readonly=""
                                                 type="number"
-                                                value="34.00000"
+                                                value="34"
                                               />
                                               <div
                                                 class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1823,7 +1823,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   name="topRightLat"
                                                   readonly=""
                                                   type="number"
-                                                  value="34.00000"
+                                                  value="34"
                                                 />
                                                 <div
                                                   class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -1916,7 +1916,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     name="topRightLat"
                                                     readonly=""
                                                     type="number"
-                                                    value="34.00000"
+                                                    value="34"
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -1938,7 +1938,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               readOnly={true}
                                               tag="input"
                                               type="number"
-                                              value="34.00000"
+                                              value="34"
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -1953,7 +1953,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 readOnly={true}
                                                 style={Object {}}
                                                 type="number"
-                                                value="34.00000"
+                                                value="34"
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
@@ -2086,7 +2086,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 outlined={true}
                                 readOnly={true}
                                 type="number"
-                                value="31.00000"
+                                value="31"
                               >
                                 <withRipple(Object)
                                   aria-labelledby="topRightLon-label"
@@ -2113,7 +2113,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           name="topRightLon"
                                           readonly=""
                                           type="number"
-                                          value="31.00000"
+                                          value="31"
                                         />
                                         <div
                                           class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2182,7 +2182,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="topRightLon"
                                             readonly=""
                                             type="number"
-                                            value="31.00000"
+                                            value="31"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2244,7 +2244,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="topRightLon"
                                             readonly=""
                                             type="number"
-                                            value="31.00000"
+                                            value="31"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2296,7 +2296,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               name="topRightLon"
                                               readonly=""
                                               type="number"
-                                              value="31.00000"
+                                              value="31"
                                             />
                                             <div
                                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2366,7 +2366,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 name="topRightLon"
                                                 readonly=""
                                                 type="number"
-                                                value="31.00000"
+                                                value="31"
                                               />
                                               <div
                                                 class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2444,7 +2444,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   name="topRightLon"
                                                   readonly=""
                                                   type="number"
-                                                  value="31.00000"
+                                                  value="31"
                                                 />
                                                 <div
                                                   class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2537,7 +2537,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     name="topRightLon"
                                                     readonly=""
                                                     type="number"
-                                                    value="31.00000"
+                                                    value="31"
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -2559,7 +2559,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               readOnly={true}
                                               tag="input"
                                               type="number"
-                                              value="31.00000"
+                                              value="31"
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -2574,7 +2574,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 readOnly={true}
                                                 style={Object {}}
                                                 type="number"
-                                                value="31.00000"
+                                                value="31"
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
@@ -2742,7 +2742,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 outlined={true}
                                 readOnly={true}
                                 type="number"
-                                value="35.00000"
+                                value="35"
                               >
                                 <withRipple(Object)
                                   aria-labelledby="bottomLeftLat-label"
@@ -2769,7 +2769,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           name="bottomLeftLat"
                                           readonly=""
                                           type="number"
-                                          value="35.00000"
+                                          value="35"
                                         />
                                         <div
                                           class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2838,7 +2838,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="bottomLeftLat"
                                             readonly=""
                                             type="number"
-                                            value="35.00000"
+                                            value="35"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2900,7 +2900,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="bottomLeftLat"
                                             readonly=""
                                             type="number"
-                                            value="35.00000"
+                                            value="35"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -2952,7 +2952,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               name="bottomLeftLat"
                                               readonly=""
                                               type="number"
-                                              value="35.00000"
+                                              value="35"
                                             />
                                             <div
                                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3022,7 +3022,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 name="bottomLeftLat"
                                                 readonly=""
                                                 type="number"
-                                                value="35.00000"
+                                                value="35"
                                               />
                                               <div
                                                 class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3100,7 +3100,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   name="bottomLeftLat"
                                                   readonly=""
                                                   type="number"
-                                                  value="35.00000"
+                                                  value="35"
                                                 />
                                                 <div
                                                   class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3193,7 +3193,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     name="bottomLeftLat"
                                                     readonly=""
                                                     type="number"
-                                                    value="35.00000"
+                                                    value="35"
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -3215,7 +3215,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               readOnly={true}
                                               tag="input"
                                               type="number"
-                                              value="35.00000"
+                                              value="35"
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -3230,7 +3230,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 readOnly={true}
                                                 style={Object {}}
                                                 type="number"
-                                                value="35.00000"
+                                                value="35"
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
@@ -3363,7 +3363,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 outlined={true}
                                 readOnly={true}
                                 type="number"
-                                value="32.00000"
+                                value="32"
                               >
                                 <withRipple(Object)
                                   aria-labelledby="bottomLeftLon-label"
@@ -3390,7 +3390,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           name="bottomLeftLon"
                                           readonly=""
                                           type="number"
-                                          value="32.00000"
+                                          value="32"
                                         />
                                         <div
                                           class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3459,7 +3459,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="bottomLeftLon"
                                             readonly=""
                                             type="number"
-                                            value="32.00000"
+                                            value="32"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3521,7 +3521,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             name="bottomLeftLon"
                                             readonly=""
                                             type="number"
-                                            value="32.00000"
+                                            value="32"
                                           />
                                           <div
                                             class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3573,7 +3573,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               name="bottomLeftLon"
                                               readonly=""
                                               type="number"
-                                              value="32.00000"
+                                              value="32"
                                             />
                                             <div
                                               class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3643,7 +3643,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 name="bottomLeftLon"
                                                 readonly=""
                                                 type="number"
-                                                value="32.00000"
+                                                value="32"
                                               />
                                               <div
                                                 class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3721,7 +3721,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   name="bottomLeftLon"
                                                   readonly=""
                                                   type="number"
-                                                  value="32.00000"
+                                                  value="32"
                                                 />
                                                 <div
                                                   class="mdc-notched-outline mdc-notched-outline--upgraded"
@@ -3814,7 +3814,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                     name="bottomLeftLon"
                                                     readonly=""
                                                     type="number"
-                                                    value="32.00000"
+                                                    value="32"
                                                   />,
                                                   "_style": Object {},
                                                   "addClass": [Function],
@@ -3836,7 +3836,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               readOnly={true}
                                               tag="input"
                                               type="number"
-                                              value="32.00000"
+                                              value="32"
                                             >
                                               <input
                                                 className="mdc-text-field__input"
@@ -3851,7 +3851,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 readOnly={true}
                                                 style={Object {}}
                                                 type="number"
-                                                value="32.00000"
+                                                value="32"
                                               />
                                             </ForwardRef(Tag)>
                                             <Function
