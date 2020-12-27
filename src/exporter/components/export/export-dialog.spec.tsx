@@ -12,6 +12,7 @@ import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
 import { ExportDialog } from './export-dialog';
+import EXPORTER_CONFIG from '../../../common/config';
 
 const setOpenFn = jest.fn();
 const handleExport = jest.fn();
@@ -25,12 +26,11 @@ const polygon: Polygon = {
   coordinates: [[[32, 35], [], [31, 34], []]],
 }
 
-const maxFractionDigits = 5;
 const fields = {
-  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(maxFractionDigits),
-  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(maxFractionDigits),
-  topRightLat: polygon.coordinates[0][2][1].toFixed(maxFractionDigits),
-  topRightLon: polygon.coordinates[0][2][0].toFixed(maxFractionDigits),
+  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+  topRightLat: polygon.coordinates[0][2][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+  topRightLon: polygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS)
 }
 
 const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {

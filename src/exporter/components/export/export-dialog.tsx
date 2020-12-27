@@ -78,13 +78,13 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   const { isOpen, onSetOpen, selectedPolygon, handleExport } = props;
   const classes = useStyle();
   const intl = useIntl();
-  const maxFractionDigits = 5;
   const formik = useFormik({
     initialValues: {
-      bottomLeftLat: selectedPolygon.coordinates[0][0][1].toFixed(maxFractionDigits),
-      bottomLeftLon: selectedPolygon.coordinates[0][0][0].toFixed(maxFractionDigits),
-      topRightLat: selectedPolygon.coordinates[0][2][1].toFixed(maxFractionDigits),
-      topRightLon: selectedPolygon.coordinates[0][2][0].toFixed(maxFractionDigits),
+      // TODO: Need to be fixed in Shared components - this override changes the value from number to string
+      bottomLeftLat: selectedPolygon.coordinates[0][0][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+      bottomLeftLon: selectedPolygon.coordinates[0][0][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+      topRightLat: selectedPolygon.coordinates[0][2][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
+      topRightLon: selectedPolygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
       maxZoom: EXPORTER_CONFIG.EXPORT.DEFAULT_ZOOM,
       directoryName: '',
       packageName: ''
