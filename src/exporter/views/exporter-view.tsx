@@ -30,6 +30,8 @@ const wmtsOptions = getWMTSOptions({
   layer: EXPORTER_CONFIG.WMTS_LAYER.LAYER,
   projection: EXPORTER_CONFIG.WMTS_LAYER.PROJECTION,
   format: EXPORTER_CONFIG.WMTS_LAYER.FORMAT,
+  matrixSet: EXPORTER_CONFIG.WMTS_LAYER.MATRIX_SET,
+  style: EXPORTER_CONFIG.WMTS_LAYER.STYLE,
 });
 
 const wmsOptions = getWMSOptions({
