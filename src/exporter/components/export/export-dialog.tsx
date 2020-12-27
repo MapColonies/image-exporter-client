@@ -15,6 +15,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { observer } from 'mobx-react-lite';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { getTilesCount } from '../../../common/helpers/estimated-tile-list';
+import { getResolutionInMeteres } from '../../../common/helpers/zoom-resolution';
 import { useDebouncedLayoutEffect } from '../../../common/hooks/debounced.hooks';
 import EXPORTER_CONFIG from '../../../common/config';
 import { PackageInfo } from '../../models/exporterStore';
@@ -100,6 +101,8 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
   });
   // eslint-disable-next-line
   const [numTiles, setNumTiles] = useState<number>(0);
+  // eslint-disable-next-line
+  const [pixelSize, setPixelSize] = useState<number | string>(0);
 
   useDebouncedLayoutEffect(() => {
     if (isValidZoomValue(formik.values.maxZoom)) {
@@ -110,6 +113,13 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       setFormErrors({ minMaxZooms: intl.formatMessage({ id: 'custom-bbox.form-error.zoom.invalid.text' })});
     }
   }, DEBOUNCE_TIME, [formik.values.maxZoom, selectedPolygon]);
+
+  useDebouncedLayoutEffect(() => {
+    if (isValidZoomValue(formik.values.maxZoom)) {
+      const resolution = getResolutionInMeteres(formik.values.maxZoom);
+      setPixelSize(resolution);
+    }
+  }, DEBOUNCE_TIME, [formik.values.maxZoom]);
 
   const [formErrors, setFormErrors] = useState({ minMaxZooms: '' });
   const [serverErrors, setServerErrors] = useState({ duplicate: '', bboxAreaForResolution: '' });
@@ -232,7 +242,6 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
             <BBoxCorner corner={Corner.BOTTOM_LEFT} />
           </Box>
           <Box style={{ display: 'flex', marginBottom: '16px' }}>
-          {/* <Box style={{ display: 'none', marginBottom: '16px' }}> */}
             <TextField
               label={intl.formatMessage({ id: 'export.dialog-field.max_zoom.label' })}
               id="maxZoom"
@@ -242,6 +251,11 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
               value={formik.values.maxZoom}
               className={classes.spacer}
             />
+            <Box style={{display: 'flex', alignItems: 'center'}}>
+              <Typography use="body2">
+                {pixelSize} {intl.formatMessage({ id: 'export.dialog-field.zoom_resolution.units.meter' })}
+              </Typography>
+            </Box>
             <BBoxCorner corner={Corner.UNKNOWN} className={classes.noBorder} />
           </Box>
 

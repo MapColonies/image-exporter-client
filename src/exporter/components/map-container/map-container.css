@@ -29,3 +29,7 @@ body[dir="rtl"] .filtersPosition {
   display: flex;
   gap: 8px;
 }
+
+body[dir="rtl"] .filtersMargin {
+  margin-right: 8px;
+}
