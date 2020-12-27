@@ -9,8 +9,7 @@ window._env_ = {
   SERVICE_NAME: '{{ getv "/configuration/service/url" "localhost:8000" }}',
   ACTIVE_LAYER: '{{ getv "/configuration/active/layer" "OSM_DEFAULT" }}',
   ACTIVE_LAYER_PROPERTIES: {
-    exportUrlPattern: '{{ getv "/configuration/active/layer/properties/export/url/pattern" "http://10.28.11.95:8080/service" }}',
-    urlPattern : '{{ getv "/configuration/active/layer/properties/url/pattern" "http://10.28.11.95:8080/service?REQUEST=GetMap&SERVICE=WMS&LAYERS=combined_layers" }}',
+    urlPattern : '{{ getv "/configuration/active/layer/properties/url/pattern" "http://10.28.11.95:8080/service" }}',
     urlPatternParams: {
       service: '{{ getv "/configuration/active/layer/properties/url/pattern/params/service" "WMS" }}',
       layers: '{{ getv "/configuration/active/layer/properties/url/pattern/params/layers" "combined_layers" }}',
@@ -22,7 +21,8 @@ window._env_ = {
   },
   EXPORT: {
     defaultZoomLevel: {{ getv "/configuration/export/default/zoom/level" "18" }},
-    maxZoomLevel: {{ getv "/configuration/export/max/zoom/level" "22" }}
+    maxZoomLevel: {{ getv "/configuration/export/max/zoom/level" "22" }},
+    urlPattern: '{{ getv "/configuration/export/url/pattern" "http://10.28.11.95:8080/service?REQUEST=GetMap&SERVICE=WMS&LAYERS=combined_layers" }}',
   },
   MAP: {
     center: {{ getv "/configuration/map/center" "[35.14, 31.39]" }},

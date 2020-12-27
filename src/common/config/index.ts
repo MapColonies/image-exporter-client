@@ -8,7 +8,6 @@ const REQUEST = (window as any)._env_.REQUEST;
 const SERVICE_PROTOCOL = (window as any)._env_.SERVICE_PROTOCOL;
 const SERVICE_NAME = (window as any)._env_.SERVICE_NAME;
 const ACTIVE_LAYER = (window as any)._env_.ACTIVE_LAYER;
-// const ACTIVE_LAYER_PARAMS = (window as any)._env_.ACTIVE_LAYER_PARAMS;
 const ACTIVE_LAYER_PROPERTIES = (window as any)._env_.ACTIVE_LAYER_PROPERTIES;
 const EXPORT = (window as any)._env_.EXPORT;
 const MAP = (window as any)._env_.MAP;
@@ -30,7 +29,8 @@ const EXPORTER_CONFIG = {
     MAX_ZOOM: EXPORT.maxZoomLevel as number,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
-    MAX_FRACTION_DIGITS: 5
+    MAX_FRACTION_DIGITS: 5,
+    EXPORT_URL: EXPORT.exportUrl,
   },
   MAP: {
     CENTER: MAP.center as [number, number],
@@ -77,7 +77,6 @@ const EXPORTER_CONFIG = {
   WMS_LAYER: {
     ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
     URL: ACTIVE_LAYER_PROPERTIES.urlPattern,
-    EXPORT_URL: ACTIVE_LAYER_PROPERTIES.exportUrlPattern,
     // eslint-disable-next-line @typescript-eslint/naming-convention
     PARAMS: ACTIVE_LAYER_PROPERTIES.urlPatternParams,
     SERVERTYPE: 'geoserver',
