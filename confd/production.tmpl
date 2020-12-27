@@ -8,12 +8,17 @@ window._env_ = {
   SERVICE_PROTOCOL: '{{ getv "/configuration/service/protocol" "http://" }}',
   SERVICE_NAME: '{{ getv "/configuration/service/url" "localhost:8000" }}',
   ACTIVE_LAYER: '{{ getv "/configuration/active/layer" "OSM_DEFAULT" }}',
-  ACTIVE_LAYER_PARAMS: {
-    urlPattern : '{{ getv "/configuration/active/layer/params/urlpattern" "wmts/{Layer}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png" }}',
-    matrixSet: '{{ getv "/configuration/active/layer/params/matrixset" "gridname" }}',
-    style: '{{ getv "/configuration/active/layer/params/style" "default" }}',
-    projection: '{{ getv "/configuration/active/layer/params/projection" "EPSG:4326" }}',
-    format: '{{ getv "/configuration/active/layer/params/format" "image/png" }}'
+  ACTIVE_LAYER_PROPERTIES: {
+    exportUrlPattern: '{{ getv "/configuration/active/layer/properties/export/url/pattern" "http://10.28.11.95:8080/service" }}',
+    urlPattern : '{{ getv "/configuration/active/layer/properties/url/pattern" "http://10.28.11.95:8080/service?REQUEST=GetMap&SERVICE=WMS&LAYERS=combined_layers" }}',
+    urlPatternParams: {
+      service: '{{ getv "/configuration/active/layer/properties/url/pattern/params/service" "WMS" }}',
+      layers: '{{ getv "/configuration/active/layer/properties/url/pattern/params/layers" "combined_layers" }}',
+      tiled: '{{ getv "/configuration/active/layer/properties/url/pattern/params/tiled" "true" }}',
+      matrixSet: '{{ getv "/configuration/active/layer/properties/url/pattern/params/matrixset" "gridname" }}',
+      style: '{{ getv "/configuration/active/layer/properties/url/pattern/params/style" "default" }}',
+      projection: '{{ getv "/configuration/active/layer/properties/url/pattern/params/projection" "EPSG:4326" }}'
+    }
   },
   EXPORT: {
     defaultZoomLevel: {{ getv "/configuration/export/default/zoom/level" "18" }},

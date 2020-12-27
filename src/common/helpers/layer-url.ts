@@ -8,7 +8,8 @@ const getParamsString = (params: {[key: string]: string | boolean | number}) : s
 
 const fullUrls : {[key : string] : string} = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  'WMS_LAYER': `${EXPORTER_CONFIG.WMS_LAYER.URL}?${getParamsString(EXPORTER_CONFIG.WMS_LAYER.PARAMS)}`,
+  // TODO: 'WMS_LAYER': `${EXPORTER_CONFIG.WMS_LAYER.URL}?${getParamsString(EXPORTER_CONFIG.WMS_LAYER.PARAMS)}`,
+  'WMS_LAYER': `${EXPORTER_CONFIG.WMS_LAYER.EXPORT_URL}`,
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'WMTS_LAYER': EXPORTER_CONFIG.WMTS_LAYER.URL,
   // eslint-disable-next-line @typescript-eslint/naming-convention
