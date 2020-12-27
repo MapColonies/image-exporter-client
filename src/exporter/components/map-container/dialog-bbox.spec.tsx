@@ -86,10 +86,10 @@ describe('DialogBBox component', () => {
 
   it('Bbox fields filled succesfully', async () => {
     const fields = {
-      bottomLeftLat: 10.1,
-      bottomLeftLon: 10.1,
-      topRightLat: 10.2,
-      topRightLon: 10.2,
+      bottomLeftLat: '10.1',
+      bottomLeftLon: '10.1',
+      topRightLat: '10.2',
+      topRightLon: '10.2',
     };
 
     const wrapper = shallow(
