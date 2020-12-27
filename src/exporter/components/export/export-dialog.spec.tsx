@@ -27,10 +27,10 @@ const polygon: Polygon = {
 }
 
 const fields = {
-  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
-  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
-  topRightLat: polygon.coordinates[0][2][1].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS),
-  topRightLon: polygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.MAX_FRACTION_DIGITS)
+  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  topRightLat: polygon.coordinates[0][2][1].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  topRightLon: polygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS)
 }
 
 const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
