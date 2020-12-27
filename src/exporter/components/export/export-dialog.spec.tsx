@@ -11,8 +11,8 @@ import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
-import { ExportDialog } from './export-dialog';
 import EXPORTER_CONFIG from '../../../common/config';
+import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
 const handleExport = jest.fn();
