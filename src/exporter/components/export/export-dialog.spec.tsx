@@ -11,6 +11,7 @@ import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
 import { ExportTaskStatusResponse } from '../../models/exporterStore';
 import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
+import EXPORTER_CONFIG from '../../../common/config';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
@@ -26,10 +27,10 @@ const polygon: Polygon = {
 }
 
 const fields = {
-  bottomLeftLat: polygon.coordinates[0][0][1],
-  bottomLeftLon: polygon.coordinates[0][0][0],
-  topRightLat: polygon.coordinates[0][2][1],
-  topRightLon: polygon.coordinates[0][2][0],
+  bottomLeftLat: polygon.coordinates[0][0][1].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  bottomLeftLon: polygon.coordinates[0][0][0].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  topRightLat: polygon.coordinates[0][2][1].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS),
+  topRightLon: polygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS)
 }
 
 const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
