@@ -30,7 +30,7 @@ const EXPORTER_CONFIG = {
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
     MAX_FRACTION_DIGITS: 5,
-    EXPORT_URL: EXPORT.exportUrl,
+    EXPORT_URL: EXPORT.urlPattern,
   },
   MAP: {
     CENTER: MAP.center as [number, number],
