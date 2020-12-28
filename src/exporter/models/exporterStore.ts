@@ -115,8 +115,13 @@ export const exporterStore = types
           const result = yield self.root.fetch('/exportStatus', 'GET', {});
           // const result = yield Promise.resolve(MOCK_EXPORTED_PACKAGES);
           self.exportedPackages = result;
-        } catch (error) {
+        } catch (e) {
+          const error = e as AxiosError;
           self.state = ResponseState.ERROR;
+          addError({
+            request: error.config,
+            key: ExportStoreError.GENERAL_ERROR,
+          });
         }
       }
     );
