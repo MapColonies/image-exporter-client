@@ -63,6 +63,7 @@ const EXPORTER_CONFIG = {
     },
   },
   ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
+  ACTIVE_LAYER_PROPERTIES: ACTIVE_LAYER_PROPERTIES,
   WMTS_LAYER: {
     ATTRIBUTIONS:
       `Tiles © <a href="${MAP_SERVER}/service?REQUEST=GetCapabilities">MapProxy</a>`,
@@ -76,9 +77,8 @@ const EXPORTER_CONFIG = {
   },
   WMS_LAYER: {
     ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
-    URL: ACTIVE_LAYER_PROPERTIES.urlPattern,
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    PARAMS: ACTIVE_LAYER_PROPERTIES.urlPatternParams,
+    URL: `${ACTIVE_LAYER_PROPERTIES.urlPattern}`,
+    PARAMS: {...ACTIVE_LAYER_PROPERTIES.urlPatternParams},
     SERVERTYPE: 'geoserver',
     TRANSITION: 0.5,
   },
