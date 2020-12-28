@@ -117,6 +117,10 @@ export const exporterStore = types
           self.exportedPackages = result;
         } catch (error) {
           self.state = ResponseState.ERROR;
+          addError({
+            request: error.config,
+            key: ExportStoreError.GENERAL_ERROR,
+          });
         }
       }
     );
