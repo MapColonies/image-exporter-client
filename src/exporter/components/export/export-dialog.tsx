@@ -55,7 +55,7 @@ const isValidPackName = (e: React.ChangeEvent<any>): boolean => {
   if (!data)
     return true;
 
-  const charIdx = data.search(/[a-zA-Z0-9]+/i);
+  const charIdx = data.search(/[a-zA-Z0-9-_)]+/i);
   return (charIdx === FIRST_CHAR_IDX);
 };
 

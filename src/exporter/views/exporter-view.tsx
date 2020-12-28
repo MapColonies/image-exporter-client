@@ -37,7 +37,7 @@ const wmtsOptions = getWMTSOptions({
 const wmsOptions = getWMSOptions({
   attributions: EXPORTER_CONFIG.WMS_LAYER.ATTRIBUTIONS,
   url: EXPORTER_CONFIG.WMS_LAYER.URL,
-  params: EXPORTER_CONFIG.WMS_LAYER.PARAMS,
+  params: EXPORTER_CONFIG.WMS_LAYER.PARAMS as {[key: string]: string},
   serverType: EXPORTER_CONFIG.WMS_LAYER.SERVERTYPE as ServerType,
   transition: EXPORTER_CONFIG.WMS_LAYER.TRANSITION,
 });

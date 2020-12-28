@@ -21,12 +21,17 @@ if (!window._env_) {
         center: [35.14, 31.39],
         zoom: 8,
       },
-      ACTIVE_LAYER_PARAMS: {
-        urlPattern : 'URL_PATTERN',
-        matrixSet: 'MATRIX_SET',
-        style: 'STYLE',
-        projection: 'PROJECTTION',
-        format: 'FORMAT'
+      ACTIVE_LAYER_PROPERTIES: {
+        urlPattern : 'MAP_SERVER/service',
+        exportUrlPattern: 'MAP_SERVER/service?REQUEST=REQUEST&SERVICE=SERVICE&LAYERS=LAYER',
+        urlPatternParams: {
+          service: 'SERVICE',
+          layers: 'LAYER',
+          tiled: 'TILED',
+          matrixSet: 'MATRIXSET',
+          style: 'STYLE',
+          projection: 'PROJECTION'
+        }
       },
     };
   })(void 0);

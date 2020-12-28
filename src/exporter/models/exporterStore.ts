@@ -5,7 +5,7 @@ import { AxiosRequestConfig, AxiosError } from 'axios';
 import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportStoreError } from '../../common/models/exportStoreError';
-import { getLayerUrl } from '../../common/helpers/layer-url';
+import { getExportLayerUrl } from '../../common/helpers/layer-url';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
@@ -61,7 +61,7 @@ export const exporterStore = types
       params.directoryName = packInfo.directoryName;
       params.fileName = packInfo.packName;
       params.sizeEst = packInfo.sizeEst;
-      params.exportedLayers = [{ exportType: 'raster', url: getLayerUrl() }];
+      params.exportedLayers = [{ exportType: 'raster', url: getExportLayerUrl() }];
       const coordinates = (snapshot.geojson as Polygon).coordinates[0];
       params.bbox = [
         coordinates[0][0],
