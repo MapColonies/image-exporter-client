@@ -56,7 +56,7 @@ describe('AgGrid ProgressRenderer component', () => {
     expect(percContainer.text()).toBe('80%');
   });
 
-  it('value of progress 0.8 shown as 80%', () => {
+  it('value of progress 0.8 shown as 0.8%', () => {
     const value = 0.8;
     const mockData = {
       ...mockDataBase,
@@ -69,6 +69,6 @@ describe('AgGrid ProgressRenderer component', () => {
     );
     
     const percContainer = wrapper.find(Typography);
-    expect(percContainer.text()).toBe('80%');
+    expect(percContainer.text()).toBe('0.8%');
   });
 });
