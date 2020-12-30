@@ -5,7 +5,7 @@ import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
 import { IExportTaskStatus } from '../../../models/exportTaskStatus';
 
-const PEDING_PROGRESS = 0
+const PEDING_PROGRESS = 0;
 const ONE_HUNDRED = 100;
 export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
