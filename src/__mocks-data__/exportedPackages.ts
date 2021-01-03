@@ -15,6 +15,7 @@ const MOCK_EXPORTED_PACKAGES: ExportTaskStatusResponse = [
     expirationTime: new Date('2020-11-01T03:24:00'),
     progress: 100,
     taskId: '11111111',
+    sourceLayer: 'kuku_layer_name'
   },
   {
     fileName: 'muku',
@@ -29,6 +30,7 @@ const MOCK_EXPORTED_PACKAGES: ExportTaskStatusResponse = [
     expirationTime: new Date('2020-11-01T03:24:00'),
     progress: 80,
     taskId: '2222222',
+    sourceLayer: 'muku_layer_name'
   },
 ];
 

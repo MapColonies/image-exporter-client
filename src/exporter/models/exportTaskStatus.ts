@@ -35,6 +35,7 @@ export const exportTaskStatus = types.model({
   expirationTime: types.Date,
   progress: types.number,
   taskId: types.string,
+  sourceLayer: types.string
 });
 
 export interface IExportTaskStatus extends Instance<typeof exportTaskStatus> {}

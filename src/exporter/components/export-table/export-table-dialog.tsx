@@ -143,6 +143,14 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
         },
         {
           headerName: intl.formatMessage({
+            id: 'export-table.table-column-header.sourceLayer.text',
+          }),
+          width: 170,
+          field: 'sourceLayer',
+          suppressMovable: true,
+        },
+        {
+          headerName: intl.formatMessage({
             id: 'export-table.table-column-header.sizeEst.text',
           }),
           width: 120,
