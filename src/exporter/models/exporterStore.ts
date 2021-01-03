@@ -6,11 +6,11 @@ import { ApiHttpResponse } from '../../common/models/api-response';
 import { ResponseState } from '../../common/models/ResponseState';
 import { ExportStoreError } from '../../common/models/exportStoreError';
 import { getExportLayerUrl } from '../../common/helpers/layer-url';
+import EXPORTER_CONFIG from '../../common/config';
 // import MOCK_EXPORTED_PACKAGES from '../../__mocks-data__/exportedPackages';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IExportTaskStatus } from './exportTaskStatus';
-import EXPORTER_CONFIG from '../../common/config';
 
 export type ExportTaskStatusResponse = IExportTaskStatus[];
 export interface ExportResult {
@@ -59,7 +59,8 @@ export const exporterStore = types
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const params: Record<string, unknown> = {};
       // Get the source layer name
-      const sourceLayer = EXPORTER_CONFIG.ACTIVE_LAYER_PROPERTIES.urlPatternParams.layers
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      const sourceLayer: string = EXPORTER_CONFIG.ACTIVE_LAYER_PROPERTIES.urlPatternParams.layers as string;
       // Prepare body data for request
       params.directoryName = packInfo.directoryName;
       params.fileName = packInfo.packName;
