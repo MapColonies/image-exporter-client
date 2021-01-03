@@ -10,6 +10,7 @@ import { getExportLayerUrl } from '../../common/helpers/layer-url';
 import { searchParams } from './search-params';
 import { IRootStore } from './rootStore';
 import { IExportTaskStatus } from './exportTaskStatus';
+import EXPORTER_CONFIG from '../../common/config';
 
 export type ExportTaskStatusResponse = IExportTaskStatus[];
 export interface ExportResult {
@@ -57,11 +58,13 @@ export const exporterStore = types
       const snapshot = getSnapshot(self.searchParams);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const params: Record<string, unknown> = {};
+      // Get the source layer name
+      const sourceLayer = EXPORTER_CONFIG.ACTIVE_LAYER_PROPERTIES.urlPatternParams.layers
       // Prepare body data for request
       params.directoryName = packInfo.directoryName;
       params.fileName = packInfo.packName;
       params.sizeEst = packInfo.sizeEst;
-      params.exportedLayers = [{ exportType: 'raster', url: getExportLayerUrl() }];
+      params.exportedLayers = [{ exportType: 'raster', url: getExportLayerUrl(), sourceLayer: sourceLayer }];
       const coordinates = (snapshot.geojson as Polygon).coordinates[0];
       params.bbox = [
         coordinates[0][0],
