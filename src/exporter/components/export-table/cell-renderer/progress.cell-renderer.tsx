@@ -3,9 +3,9 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { LinearProgress, Typography } from '@map-colonies/react-core';
 import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
+import { useState } from 'react';
 import EXPORTER_CONFIG from '../../../../common/config';
 import { IExportTaskStatus } from '../../../models/exportTaskStatus';
-import { useState } from 'react';
 
 const PEDING_PROGRESS = 0;
 const ONE_HUNDRED = 100;
