@@ -42,6 +42,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
     const [gridApi, setGridApi] = useState<GridApi>();
     const [colDef, setColDef] = useState<ColDef[]>([]);
     const [rowData, setRowData] = useState([]);
+    const [isRtl] = useState<boolean>( EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE === 'he' ? true : false);
     const [pollingCycle, setPollingCycle] = useState(START_CYCLE_ITTERACTION);
     const pageSize = 10;
 
@@ -139,6 +140,14 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
             const data = props.data as IExportTaskStatus;
             return renderSize(data.maxZoom);
           },
+          suppressMovable: true,
+        },
+        {
+          headerName: intl.formatMessage({
+            id: 'export-table.table-column-header.sourceLayer.text',
+          }),
+          width: 170,
+          field: 'sourceLayer',
           suppressMovable: true,
         },
         {
@@ -294,6 +303,7 @@ export const ExportSatusTableDialog: React.FC<ExportSatusTableDialogProps> = obs
                 pagination={true}
                 paginationPageSize={pageSize}
                 columnDefs={colDef}
+                enableRtl={isRtl}
                 rowData={rowData}
                 overlayNoRowsTemplate={intl.formatMessage({
                   id: 'export-table.nodata',
