@@ -7,7 +7,7 @@ import EXPORTER_CONFIG from '../../../../common/config';
 import { IExportTaskStatus } from '../../../models/exportTaskStatus';
 import { useState } from 'react';
 
-
+const PEDING_PROGRESS = 0;
 const ONE_HUNDRED = 100;
 export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
@@ -18,11 +18,11 @@ export const ProgressRenderer: React.FC<ICellRendererParams> = (
     return <></>;//''; // not null!
   }
   const getProgressValue = ():number => {
-    return value > 0 ? (value / ONE_HUNDRED) : value;
+    return value > PEDING_PROGRESS ? (value / ONE_HUNDRED) : value;
   }
 
   const getPercentageText = ():string => {
-    return value > 0 ? `${value}%` : `${value * ONE_HUNDRED}%`;
+    return value > PEDING_PROGRESS ? `${value}%` : `${value * ONE_HUNDRED}%`;
   }
 
   return (
