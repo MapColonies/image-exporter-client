@@ -18,11 +18,11 @@ export const ProgressRenderer: React.FC<ICellRendererParams> = (
     return <></>;//''; // not null!
   }
   const getProgressValue = ():number => {
-    return value > 1 ? (value / ONE_HUNDRED) : value;
+    return value > 0 ? (value / ONE_HUNDRED) : value;
   }
 
   const getPercentageText = ():string => {
-    return value > 1 ? `${value}%` : `${value * ONE_HUNDRED}%`;
+    return value > 0 ? `${value}%` : `${value * ONE_HUNDRED}%`;
   }
 
   return (
