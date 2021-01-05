@@ -1,3 +1,2 @@
-node ./confd/generate-config.js --environment production
-cp public/env-config.js env-config.js
+node ../confd/generate-config.js --indocker
 nginx -g "daemon off;"
