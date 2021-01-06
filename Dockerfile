@@ -6,10 +6,9 @@ RUN wget -O '/confd/confd' 'https://github.com/kelseyhightower/confd/releases/do
 RUN chmod +x /confd/confd
 #build app
 WORKDIR /opt/myapp
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 RUN yarn install --production
 COPY . .
-RUN yarn run confd:prod
 RUN yarn build
 
 
@@ -17,7 +16,6 @@ FROM nginx:1.19.1-alpine AS production
 # Install Node for running confd
 RUN set -eux & apk add --no-cache nodejs
 #change nginx config to work without root
-RUN addgroup -S app && adduser -S app -G app
 RUN sed -i 's/listen       80;/listen       8080;/g' /etc/nginx/conf.d/default.conf  && \
   sed -i '/user  nginx;/d' /etc/nginx/nginx.conf && \
   sed -i 's,/var/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf && \ 
@@ -27,14 +25,13 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /usr/share/nginx/html
-RUN mkdir public && mkdir ./confd
-COPY --from=prepare /confd/confd ./confd/confd
+RUN mkdir public && mkdir ../confd
+COPY --from=prepare /confd/confd ../confd
+COPY ./confd ../confd/
 COPY --from=prepare /opt/myapp/build ./
 
-#give app user required permissions
-RUN chown -R app /etc/nginx && chmod -R g+w /etc/nginx && \
-  chown -R app /usr/share/nginx && \
-  chown -R app /var/cache/nginx && chmod -R g+w /var/cache/nginx
-USER app:app
+#give every user required permissions
+RUN chmod -R +w /var/cache/nginx && chmod 777 . && \
+    chmod -R 777 ../confd
 
 CMD ["/entrypoint.sh"]

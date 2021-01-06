@@ -21,8 +21,8 @@ if (process.platform === 'darwin') {
   confdExeExtension = '';
 }
 
-const confdBasePath = 'confd';
-const confdDevBasePath = 'confd/dev';
+const confdBasePath = __dirname;
+const confdDevBasePath = path.join(confdBasePath,'dev');
 const confdTmplRelPath = 'production.tmpl';
 const confdConfigPath = path.join(confdBasePath, 'production.toml');
 const confdTmplPath = path.join(confdBasePath, confdTmplRelPath);
@@ -111,8 +111,8 @@ const createDevConfdConfigFile = (env, isInDocker) => {
   console.log('Creating a development toml file.');
   const tmplCopy = copyFile(confdTmplPath, devTmplPath);
   const tomlCopy = copyFile(confdConfigPath, devConfigPath, data => {
-
-    return !isInDocker ? data : data.replace('dest = "public/','dest = "');
+    const target = 'dest = "' + path.join(confdBasePath,'..','html') +'/'; 
+    return !isInDocker ? data : data.replace('dest = "public/',target);
     //data.replace(/dest = .*/g, `dest = "config/${env}.json"`)
   });
 
