@@ -5,6 +5,7 @@ import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
 import { IExportTaskStatus } from '../../../models/exportTaskStatus';
 
+const PEDING_PROGRESS = 0;
 const ONE_HUNDRED = 100;
 export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
@@ -14,11 +15,11 @@ export const ProgressRenderer: React.FC<ICellRendererParams> = (
     return <></>;//''; // not null!
   }
   const getProgressValue = ():number => {
-    return value > 1 ? (value / ONE_HUNDRED) : value;
+    return value > PEDING_PROGRESS ? (value / ONE_HUNDRED) : value;
   }
 
   const getPercentageText = ():string => {
-    return value > 1 ? `${value}%` : `${value * ONE_HUNDRED}%`;
+    return value > PEDING_PROGRESS ? `${value}%` : `${value * ONE_HUNDRED}%`;
   }
 
   return (

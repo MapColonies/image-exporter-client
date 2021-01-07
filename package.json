@@ -1,6 +1,6 @@
 {
   "name": "image-exporter-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "bugs": {
     "url": "https://github.com/MapColonies/image-exporter-client/issues"
   },
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts --max_old_space_size=4096 build && yarn run copyconf",
+    "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts test --env=jsdom-fourteen --verbose",
     "test:coverage": "react-scripts test --env=jsdom-fourteen --verbose --coverage --watchAll",
     "eject": "react-scripts eject",
@@ -32,8 +32,7 @@
     "prettier:check": "prettier --check .",
     "confd": "node ./confd/generate-config.js",
     "confd:prod": "node ./confd/generate-config.js --environment production",
-    "confd:prod:indocker": "node ./confd/generate-config.js --environment production --indocker",
-    "copyconf": "copyfiles ./confd/* ./build"
+    "confd:prod:indocker": "node ./confd/generate-config.js --environment production --indocker"
   },
   "jest": {
     "transformIgnorePatterns": [
