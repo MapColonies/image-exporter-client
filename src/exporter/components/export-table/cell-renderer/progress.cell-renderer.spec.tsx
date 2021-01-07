@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Typography } from '@map-colonies/react-core';
 import { ICellRendererParams, Column, RowNode, GridApi, ColumnApi } from 'ag-grid-community';
+// eslint-disable-next-line
+import '../../../../__mocks__/confEnvShim';
 import { ProgressRenderer } from './progress.cell-renderer';
 
 /* eslint-disable */
