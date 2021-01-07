@@ -56,6 +56,7 @@
   "export-table.table-column-header.creationDate.text": "Creation",
   "export-table.table-column-header.lastUpdateTime.text": "Last update",
   "export-table.table-column-header.progress.text": "Progress",
+  "export-table.table-column-header.sourceLayer.text": "Layer Name",
 
   "snack.message.success": "Export SUCCEEDED",
   "snack.message.failed": "Network error occurred",
