@@ -32,6 +32,7 @@ exports[`ExportDialog component renders correctly 1`] = `
       "export-table.table-column-header.progress.text": "Progress",
       "export-table.table-column-header.realSize.text": "Real Size(Mb)",
       "export-table.table-column-header.sizeEst.text": "Est Size(Mb)",
+      "export-table.table-column-header.sourceLayer.text": "Layer Name",
       "export-table.table-column-header.status.text": "Status",
       "export.dialog-field.bottom_left_lat.label": "Bottom Left Lat",
       "export.dialog-field.bottom_left_lon.label": "Bottom Left Lon",

@@ -56,6 +56,7 @@
   "export-table.table-column-header.creationDate.text": "תאריך יצירה",
   "export-table.table-column-header.lastUpdateTime.text": "תאריך עדכון אחרון",
   "export-table.table-column-header.progress.text": "התקדמות",
+  "export-table.table-column-header.sourceLayer.text": "שם שכבה",
 
   "snack.message.success": "ייצוא התחיל בהצלחה",
   "snack.message.failed": "אירעה שגיאת רשת",
