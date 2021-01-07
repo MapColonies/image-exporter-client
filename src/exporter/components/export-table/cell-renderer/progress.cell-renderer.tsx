@@ -12,7 +12,7 @@ const ONE_HUNDRED = 100;
 export const ProgressRenderer: React.FC<ICellRendererParams> = (
   props
 ) => {
-  const [isReversed] = useState<boolean>(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE === 'he' ? true : false);
+  const [isRtl] = useState<boolean>(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE === 'he' ? true : false);
   const value: number = (props.data as IExportTaskStatus).progress; 
   if (!value) {
     return <></>;//''; // not null!
@@ -28,7 +28,7 @@ export const ProgressRenderer: React.FC<ICellRendererParams> = (
   return (
     <Box style={{display: 'flex', height: '40px', alignItems: 'center', direction: 'ltr'}}>
       <Typography use="body1" className={'rendererLabel'}>{getPercentageText()}</Typography>
-      <LinearProgress progress={getProgressValue()} reversed={isReversed} />
+      <LinearProgress progress={getProgressValue()} reversed={isRtl} />
     </Box>
   );
 
