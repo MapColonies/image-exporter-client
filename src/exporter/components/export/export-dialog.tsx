@@ -45,6 +45,9 @@ const useStyle = makeStyles((theme: Theme) =>
     infoLabel: {
       width: '110px',
     },
+    maxZoomField: {
+      width: '40%',
+    },
   })
 );
 
@@ -143,12 +146,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
       setServerErrors({ ...serverErrors, bboxAreaForResolution: '' });
     }
     
-    // eslint-disable-next-line
-    const zoomLevel: number = (e.nativeEvent as any).data;
-    if (!zoomLevel) {
-      return true;
-    }
-    return isValidZoomValue(zoomLevel) ? formik.handleChange(e) : false;
+    return formik.handleChange(e);
   };
 
   useEffect(() => {
@@ -249,12 +247,18 @@ export const ExportDialog: React.FC<ExportDialogProps> = observer((props) => {
               type="number"
               onChange={checkZoomLevel}
               value={formik.values.maxZoom}
-              className={classes.spacer}
+              max={EXPORTER_CONFIG.EXPORT.MAX_ZOOM}
+              min={EXPORTER_CONFIG.EXPORT.MIN_ZOOM}
+              className={`${classes.spacer} ${classes.maxZoomField}`}
             />
             <Box style={{display: 'flex', alignItems: 'center'}}>
-              <Typography use="body2">
-                {pixelSize} {intl.formatMessage({ id: 'export.dialog-field.zoom_resolution.units.meter' })}
-              </Typography>
+              {
+                (!formErrors.minMaxZooms) ?
+                  <Typography use="body2">
+                    {pixelSize} {intl.formatMessage({ id: 'export.dialog-field.zoom_resolution.units.meter' })}
+                  </Typography> :
+                  null
+              }
             </Box>
             <BBoxCorner corner={Corner.UNKNOWN} className={classes.noBorder} />
           </Box>

@@ -136,7 +136,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                     >
                       <form>
                         <div
-                          class="MuiBox-root MuiBox-root-6"
+                          class="MuiBox-root MuiBox-root-7"
                           style="display: flex; margin-bottom: 16px;"
                         >
                           <label
@@ -161,7 +161,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                           </label>
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-7"
+                          class="MuiBox-root MuiBox-root-8"
                           style="display: flex; margin-bottom: 16px;"
                         >
                           <label
@@ -186,7 +186,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                           </label>
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-8"
+                          class="MuiBox-root MuiBox-root-9"
                           style="display: flex; margin-bottom: 16px;"
                         >
                           <label
@@ -274,11 +274,11 @@ exports[`ExportDialog component renders correctly 1`] = `
                             </div>
                           </label>
                           <div
-                            class="makeStyles-bbox-9 makeStyles-bboxRightTopCorner-12 "
+                            class="makeStyles-bbox-10 makeStyles-bboxRightTopCorner-13 "
                           />
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-14"
+                          class="MuiBox-root MuiBox-root-15"
                           style="display: flex; margin-bottom: 16px;"
                         >
                           <label
@@ -366,16 +366,16 @@ exports[`ExportDialog component renders correctly 1`] = `
                             </div>
                           </label>
                           <div
-                            class="makeStyles-bbox-9 makeStyles-bboxLeftBottomCorner-10 "
+                            class="makeStyles-bbox-10 makeStyles-bboxLeftBottomCorner-11 "
                           />
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-15"
+                          class="MuiBox-root MuiBox-root-16"
                           style="display: flex; margin-bottom: 16px;"
                         >
                           <label
                             aria-labelledby="maxZoom-label"
-                            class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                            class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                           >
                             <span
                               class="mdc-text-field__ripple"
@@ -383,6 +383,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                             <input
                               class="mdc-text-field__input"
                               id="maxZoom"
+                              max="22"
+                              min="0"
                               name="maxZoom"
                               type="number"
                               value="18"
@@ -399,7 +401,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             />
                           </label>
                           <div
-                            class="MuiBox-root MuiBox-root-16"
+                            class="MuiBox-root MuiBox-root-17"
                             style="display: flex; align-items: center;"
                           >
                             <span
@@ -411,11 +413,11 @@ exports[`ExportDialog component renders correctly 1`] = `
                             </span>
                           </div>
                           <div
-                            class="makeStyles-bbox-9  makeStyles-noBorder-3"
+                            class="makeStyles-bbox-10  makeStyles-noBorder-3"
                           />
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-17"
+                          class="MuiBox-root MuiBox-root-18"
                           style="display: flex;"
                         >
                           <span
@@ -442,7 +444,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                           </span>
                         </div>
                         <div
-                          class="MuiBox-root MuiBox-root-18"
+                          class="MuiBox-root MuiBox-root-19"
                           style="display: flex; justify-content: flex-end; margin-top: 16px; gap: 16px;"
                         >
                           <button
@@ -554,7 +556,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-6"
+                              className="MuiBox-root MuiBox-root-7"
                               style={
                                 Object {
                                   "display": "flex",
@@ -1006,7 +1008,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-7"
+                              className="MuiBox-root MuiBox-root-8"
                               style={
                                 Object {
                                   "display": "flex",
@@ -1458,7 +1460,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-8"
+                              className="MuiBox-root MuiBox-root-9"
                               style={
                                 Object {
                                   "display": "flex",
@@ -2712,7 +2714,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 corner="TOP_RIGHT"
                               >
                                 <div
-                                  className="makeStyles-bbox-9 makeStyles-bboxRightTopCorner-12 "
+                                  className="makeStyles-bbox-10 makeStyles-bboxRightTopCorner-13 "
                                 />
                               </BBoxCorner>
                             </div>
@@ -2735,7 +2737,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-14"
+                              className="MuiBox-root MuiBox-root-15"
                               style={
                                 Object {
                                   "display": "flex",
@@ -3989,7 +3991,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 corner="BOTTOM_LEFT"
                               >
                                 <div
-                                  className="makeStyles-bbox-9 makeStyles-bboxLeftBottomCorner-10 "
+                                  className="makeStyles-bbox-10 makeStyles-bboxLeftBottomCorner-11 "
                                 />
                               </BBoxCorner>
                             </div>
@@ -4012,7 +4014,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-15"
+                              className="MuiBox-root MuiBox-root-16"
                               style={
                                 Object {
                                   "display": "flex",
@@ -4021,9 +4023,11 @@ exports[`ExportDialog component renders correctly 1`] = `
                               }
                             >
                               <Function
-                                className="makeStyles-spacer-1"
+                                className="makeStyles-spacer-1 makeStyles-maxZoomField-6"
                                 id="maxZoom"
                                 label="Max Zoom Level"
+                                max={22}
+                                min={0}
                                 name="maxZoom"
                                 onChange={[Function]}
                                 type="number"
@@ -4031,7 +4035,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                               >
                                 <withRipple(Object)
                                   aria-labelledby="maxZoom-label"
-                                  className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                  className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                   element={
                                     FoundationElement {
                                       "_classes": Set {},
@@ -4043,7 +4047,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                       "_props": Object {},
                                       "_ref": <label
                                         aria-labelledby="maxZoom-label"
-                                        class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                        class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                       >
                                         <span
                                           class="mdc-text-field__ripple"
@@ -4051,6 +4055,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                         <input
                                           class="mdc-text-field__input"
                                           id="maxZoom"
+                                          max="22"
+                                          min="0"
                                           name="maxZoom"
                                           type="number"
                                           value="18"
@@ -4083,7 +4089,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 >
                                   <class_1
                                     aria-labelledby="maxZoom-label"
-                                    className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                    className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                     element={
                                       FoundationElement {
                                         "_classes": Set {},
@@ -4095,7 +4101,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                         "_props": Object {},
                                         "_ref": <label
                                           aria-labelledby="maxZoom-label"
-                                          class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                          class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                         >
                                           <span
                                             class="mdc-text-field__ripple"
@@ -4103,6 +4109,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           <input
                                             class="mdc-text-field__input"
                                             id="maxZoom"
+                                            max="22"
+                                            min="0"
                                             name="maxZoom"
                                             type="number"
                                             value="18"
@@ -4136,11 +4144,11 @@ exports[`ExportDialog component renders correctly 1`] = `
                                   >
                                     <Ripple
                                       aria-labelledby="maxZoom-label"
-                                      className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                      className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                       domNode={
                                         <label
                                           aria-labelledby="maxZoom-label"
-                                          class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                          class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                         >
                                           <span
                                             class="mdc-text-field__ripple"
@@ -4148,6 +4156,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           <input
                                             class="mdc-text-field__input"
                                             id="maxZoom"
+                                            max="22"
+                                            min="0"
                                             name="maxZoom"
                                             type="number"
                                             value="18"
@@ -4175,7 +4185,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                           "_props": Object {},
                                           "_ref": <label
                                             aria-labelledby="maxZoom-label"
-                                            class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                            class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                           >
                                             <span
                                               class="mdc-text-field__ripple"
@@ -4183,6 +4193,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             <input
                                               class="mdc-text-field__input"
                                               id="maxZoom"
+                                              max="22"
+                                              min="0"
                                               name="maxZoom"
                                               type="number"
                                               value="18"
@@ -4216,7 +4228,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                     >
                                       <ForwardRef(TextFieldRoot)
                                         aria-labelledby="maxZoom-label"
-                                        className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                        className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                         element={
                                           FoundationElement {
                                             "_classes": Set {},
@@ -4228,7 +4240,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                             "_props": Object {},
                                             "_ref": <label
                                               aria-labelledby="maxZoom-label"
-                                              class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                              class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                             >
                                               <span
                                                 class="mdc-text-field__ripple"
@@ -4236,6 +4248,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               <input
                                                 class="mdc-text-field__input"
                                                 id="maxZoom"
+                                                max="22"
+                                                min="0"
                                                 name="maxZoom"
                                                 type="number"
                                                 value="18"
@@ -4277,7 +4291,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                       >
                                         <ForwardRef(Tag)
                                           aria-labelledby="maxZoom-label"
-                                          className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                          className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                           element={
                                             FoundationElement {
                                               "_classes": Set {},
@@ -4289,7 +4303,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               "_props": Object {},
                                               "_ref": <label
                                                 aria-labelledby="maxZoom-label"
-                                                class="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                                class="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                               >
                                                 <span
                                                   class="mdc-text-field__ripple"
@@ -4297,6 +4311,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 <input
                                                   class="mdc-text-field__input"
                                                   id="maxZoom"
+                                                  max="22"
+                                                  min="0"
                                                   name="maxZoom"
                                                   type="number"
                                                   value="18"
@@ -4339,7 +4355,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                         >
                                           <label
                                             aria-labelledby="maxZoom-label"
-                                            className="makeStyles-spacer-1 mdc-text-field mdc-text-field--upgraded"
+                                            className="makeStyles-spacer-1 makeStyles-maxZoomField-6 mdc-text-field mdc-text-field--upgraded"
                                             onBlur={[Function]}
                                             onClick={[Function]}
                                             onFocus={[Function]}
@@ -4373,6 +4389,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                   "_ref": <input
                                                     class="mdc-text-field__input"
                                                     id="maxZoom"
+                                                    max="22"
+                                                    min="0"
                                                     name="maxZoom"
                                                     type="number"
                                                     value="18"
@@ -4392,6 +4410,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                                 }
                                               }
                                               id="maxZoom"
+                                              max={22}
+                                              min={0}
                                               name="maxZoom"
                                               onChange={[Function]}
                                               tag="input"
@@ -4401,6 +4421,8 @@ exports[`ExportDialog component renders correctly 1`] = `
                                               <input
                                                 className="mdc-text-field__input"
                                                 id="maxZoom"
+                                                max={22}
+                                                min={0}
                                                 name="maxZoom"
                                                 onBlur={[Function]}
                                                 onChange={[Function]}
@@ -4503,7 +4525,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                   }
                                 >
                                   <div
-                                    className="MuiBox-root MuiBox-root-16"
+                                    className="MuiBox-root MuiBox-root-17"
                                     style={
                                       Object {
                                         "alignItems": "center",
@@ -4535,7 +4557,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                                 corner="UNKNOWN"
                               >
                                 <div
-                                  className="makeStyles-bbox-9  makeStyles-noBorder-3"
+                                  className="makeStyles-bbox-10  makeStyles-noBorder-3"
                                 />
                               </BBoxCorner>
                             </div>
@@ -4556,7 +4578,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-17"
+                              className="MuiBox-root MuiBox-root-18"
                               style={
                                 Object {
                                   "display": "flex",
@@ -4655,7 +4677,7 @@ exports[`ExportDialog component renders correctly 1`] = `
                             }
                           >
                             <div
-                              className="MuiBox-root MuiBox-root-18"
+                              className="MuiBox-root MuiBox-root-19"
                               style={
                                 Object {
                                   "display": "flex",
