@@ -73,14 +73,8 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    // waitForComponentToPaint(wrapper);
-    // await act(async () => {
-    //   wrapper.update();
-    // });
-
     await waitFor(() => {
       expect(wrapper.exists(ExportDialog)).toBeTruthy();
-      // expect(wrapper).toMatchSnapshot();
     });
   });
 
@@ -100,10 +94,8 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    // waitForComponentToPaint(wrapper);
-
-    const okButton = getButtonById(wrapper, 'general.ok-btn.text');
     await waitFor(() => {
+      const okButton = getButtonById(wrapper, 'general.ok-btn.text');
       expect(okButton.prop('disabled')).toBe(true);
     });
   });
@@ -124,15 +116,13 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    // waitForComponentToPaint(wrapper);
-
-    await waitFor(() => {
-      for (const field in fields) {
+    for (const field in fields) {
+      await waitFor(() => {
         const fieldVal = getField(wrapper, field);
         // eslint-disable-next-line
         expect(fieldVal.prop('value')).toBe((fields as any)[field]);
-      }
-    });
+      });
+    }
 
   });
   
@@ -154,8 +144,13 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    await updateFieldAsync(wrapper, 'packageName', exportPackName);
-    await updateFieldAsync(wrapper, 'directoryName', exportDirName);
+    await waitFor(() => {
+      updateField(wrapper, 'packageName', exportPackName);
+      updateField(wrapper, 'directoryName', exportDirName);
+    })
+
+    // await updateFieldAsync(wrapper, 'packageName', exportPackName);
+    // await updateFieldAsync(wrapper, 'directoryName', exportDirName);
 
     wrapper.update();
 
@@ -224,9 +219,6 @@ describe('ExportDialog component', () => {
       updateField(wrapper, 'packageName', exportPackName);
       updateField(wrapper, 'directoryName', exportDirName);
     })
-
-    // await updateFieldAsync(wrapper, 'packageName', exportPackName);
-    // await updateFieldAsync(wrapper, 'directoryName', exportDirName);
 
     // eslint-disable-next-line
     await act(async () => {
