@@ -68,7 +68,7 @@ export const updateField = (wrapper: ReactWrapper, fieldName: string, value: num
 };
 /* eslint-enable */
 
-xdescribe('TextField helpers dummy suite', () => {
+describe.skip('TextField helpers dummy suite', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });

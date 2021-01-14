@@ -47,7 +47,7 @@ export const asyncRender: asyncRenderModel = async (renderMethod, component) => 
 
 /* eslint-enable */
 
-xdescribe('General helpers dummy suits', () => {
+describe.skip('General helpers dummy suits', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });
