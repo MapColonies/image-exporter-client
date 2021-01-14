@@ -1,4 +1,4 @@
-import { ReactWrapper } from 'enzyme';
+import { ReactWrapper, ShallowWrapper } from 'enzyme';
 import { act } from '@testing-library/react';
 import { TextField } from '@map-colonies/react-core';
 
@@ -11,7 +11,7 @@ export const getField = (wrapper: ReactWrapper, fieldName: string) => {
     });
 };
 
-export const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
+export const getFieldValue = (wrapper: ReactWrapper | ShallowWrapper, fieldName: string) => {
   const field = wrapper.find(TextField).find({ name: fieldName }).find(TextField);
   // eslint-disable-next-line
   return field.props().value;
