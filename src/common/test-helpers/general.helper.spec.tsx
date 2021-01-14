@@ -46,3 +46,7 @@ export const asyncRender: asyncRenderModel = async (renderMethod, component) => 
 // });
 
 /* eslint-enable */
+
+describe('General dummy suit', () => {
+  it('dummy test', () => {});
+});

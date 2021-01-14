@@ -67,3 +67,7 @@ export const updateField = (wrapper: ReactWrapper, fieldName: string, value: num
   fieldWrapper.simulate('blur');
 };
 /* eslint-enable */
+
+describe('TextField dummy suit', () => {
+  it('dummy test', () => {});
+});

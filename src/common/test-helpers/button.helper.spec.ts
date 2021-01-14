@@ -10,3 +10,7 @@ export const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper =
     });
 };
 /* eslint-enable */
+
+describe('Button dummy suit', () => {
+  it('dummy test', () => {});
+});
