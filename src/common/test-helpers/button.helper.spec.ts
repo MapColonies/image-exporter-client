@@ -11,7 +11,7 @@ export const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper =
 };
 /* eslint-enable */
 
-describe('Button dummy suit', () => {
+xdescribe('Button helpers dummy suite', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });
