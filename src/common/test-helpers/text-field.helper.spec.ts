@@ -66,10 +66,10 @@ export const updateField = (wrapper: ReactWrapper, fieldName: string, value: num
 
   fieldWrapper.simulate('blur');
 };
-/* eslint-enable */
 
 describe.skip('TextField helpers dummy suite', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });
 });
+/* eslint-enable */

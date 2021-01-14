@@ -45,10 +45,9 @@ export const asyncRender: asyncRenderModel = async (renderMethod, component) => 
 //   expect(true).toBe(true);
 // });
 
-/* eslint-enable */
-
 describe.skip('General helpers dummy suits', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });
 });
+/* eslint-enable */

@@ -10,10 +10,10 @@ export const getButtonById = (wrapper: ReactWrapper | ShallowWrapper, id: string
         n.prop('children').props['id'] === id;
     });
 };
-/* eslint-enable */
 
 describe.skip('Button helpers dummy suite', () => {
   it('dummy test', () => {
     expect(true).toBe(true);
   });
 });
+/* eslint-enable */
