@@ -148,51 +148,11 @@ describe('ExportDialog component', () => {
       updateField(wrapper, 'directoryName', exportDirName);
     })
 
-    // await updateFieldAsync(wrapper, 'packageName', exportPackName);
-    // await updateFieldAsync(wrapper, 'directoryName', exportDirName);
-
     wrapper.update();
 
     await waitFor(() => {
       const okButton = getButtonById(wrapper, 'general.ok-btn.text');
-      // const downloadLink = wrapper.find('#exportDownloadLink').text();
-
       expect(okButton.prop('disabled')).toBe(false);
-      // expect(downloadLink).toContain(exportPackName);
-    });
-  });
-
-  it('When package name and directory name are defined Ok button is enabled and download link properly generated [ with updateField() ]', async () => {
-    const exportPackName = 'test';
-    const exportDirName = 'test';
-    const mockStore = rootStore.create({}, { fetch: packagesFetcher });
-
-    const wrapper = mount(
-      <StoreProvider value={mockStore}>
-        <IntlProvider locale={'en'} messages={MESSAGES['en']}>
-          <ExportDialog
-            isOpen={true}
-            onSetOpen={setOpenFn}
-            selectedPolygon={polygon}
-            handleExport={handleExport}
-          />
-        </IntlProvider>
-      </StoreProvider>
-    );
-
-    await waitFor(() => {
-      updateField(wrapper, 'packageName', exportPackName);
-      updateField(wrapper, 'directoryName', exportDirName);
-    })
-
-    wrapper.update();
-
-    await waitFor(() => {
-      const okButton = getButtonById(wrapper, 'general.ok-btn.text');
-      // const downloadLink = wrapper.find('#exportDownloadLink').text();
-
-      expect(okButton.prop('disabled')).toBe(false);
-      // expect(downloadLink).toContain(exportPackName);
     });
   });
 
