@@ -36,7 +36,9 @@ describe('ExportStatusTable component', () => {
       return mockStore.exporterStore.exportedPackages !== [];
     });
 
-    expect(wrapper.exists(ExportSatusTableDialog)).toBeTruthy();
+    await waitFor(() => {
+      expect(wrapper.exists(ExportSatusTableDialog)).toBeTruthy();
+    });
   });
 
   it('exported packages fetched during component lifecycle', async () => {
@@ -60,8 +62,10 @@ describe('ExportStatusTable component', () => {
       return mockStore.exporterStore.exportedPackages !== [];
     });
   
-    expect(getGeoPackagesMock).toHaveBeenCalled();
-    getGeoPackagesMock.mockRestore();
+    await waitFor(() => {
+      expect(getGeoPackagesMock).toHaveBeenCalled();
+      getGeoPackagesMock.mockRestore();
+    });
   });
 
   
@@ -85,7 +89,9 @@ describe('ExportStatusTable component', () => {
 
     wrapper.update();
 
-    const aggrid = wrapper.find(AgGridReact);
-    expect(aggrid.props().rowData).toBe(exportedPackages);
+    await waitFor(() => {
+      const aggrid = wrapper.find(AgGridReact);
+      expect(aggrid.props().rowData).toBe(exportedPackages);
+    });
   });
 });

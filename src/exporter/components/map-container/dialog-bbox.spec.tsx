@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { act, waitFor } from '@testing-library/react';
 import 'mutationobserver-shim';
-import { Button, TextField } from '@map-colonies/react-core';
+import { TextField } from '@map-colonies/react-core';
+import { getFieldValue } from '../../../common/test-helpers/text-field.helper.spec';
+import { getButtonById } from '../../../common/test-helpers/button.helper.spec';
 // eslint-disable-next-line
 import '../../../__mocks__/confEnvShim';
 import { DialogBBox } from './dialog-bbox';
@@ -48,22 +50,6 @@ const updateField = (wrapper: ShallowWrapper, fieldName: string, value: number) 
     fieldWrapper.simulate('blur');
   });
 };
-
-const getFieldValue = (wrapper: ShallowWrapper, fieldName: string) => {
-  const field = wrapper.find(TextField).find({ name: fieldName });
-  // eslint-disable-next-line
-  return field.props().value;
-};
-
-/* eslint-disable */
-const getButtonById = (wrapper: ShallowWrapper,id: string):ShallowWrapper => {
-  return wrapper
-    .findWhere((n) => {
-      return n.type() === Button && 
-            n.prop('children').props['id'] === id;
-    });
-};
-/* eslint-enable */
 
 describe('DialogBBox component', () => {
 

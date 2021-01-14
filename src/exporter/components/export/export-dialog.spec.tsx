@@ -1,17 +1,18 @@
 import React from 'react';
-import { mount, ReactWrapper } from 'enzyme';
+import { mount } from 'enzyme';
 import { Polygon } from 'geojson';
 import { act, waitFor } from '@testing-library/react';
-import { TextField, Button } from '@map-colonies/react-core';
+import { IntlProvider } from 'react-intl';
 // eslint-disable-next-line
 import '../../../__mocks__/confEnvShim';
-import { IntlProvider } from 'react-intl';
 import MESSAGES from '../../../common/i18n';
 import MOCK_EXPORTED_PACKAGES from '../../../__mocks-data__/exportedPackages';
-import { ExportTaskStatusResponse } from '../../models/exporterStore';
-import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportStoreError } from '../../../common/models/exportStoreError';
 import EXPORTER_CONFIG from '../../../common/config';
+import { getField, updateField, updateFieldAsync } from '../../../common/test-helpers/text-field.helper.spec';
+import { getButtonById } from '../../../common/test-helpers/button.helper.spec';
+import { ExportTaskStatusResponse } from '../../models/exporterStore';
+import { rootStore, StoreProvider } from '../../models/rootStore';
 import { ExportDialog } from './export-dialog';
 
 const setOpenFn = jest.fn();
@@ -33,43 +34,6 @@ const fields = {
   topRightLon: polygon.coordinates[0][2][0].toFixed(EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS)
 }
 
-const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
-  const field = wrapper.find(TextField).find({ name: fieldName }).find(TextField);
-  // eslint-disable-next-line
-  return field.props().value;
-};
-
-/* eslint-disable */
-const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper => {
-  return wrapper
-    .findWhere((n) => {
-      return n.type() === Button &&
-        n.prop('children').props['id'] === id;
-    });
-};
-/* eslint-enable */
-
-const updateField = (wrapper: ReactWrapper, fieldName: string, value: number | string) => {
-  const fieldWrapper = wrapper.find(TextField).find({ name: fieldName }).find('input');
-
-  act(() => {
-    fieldWrapper.simulate('change', {
-      nativeEvent: {
-        data: value
-      },
-      // simulate changing e.target.name and e.target.value
-      target: {
-        name: fieldName,
-        value
-      },
-    });
-  });
-
-  act(() => {
-    fieldWrapper.simulate('blur');
-  });
-};
-
 // Enzyme doesn’t work properly with hooks in general, especially for `shallow` so this is the way to mock `react-intl` module.
 // Enspired by https://github.com/formatjs/formatjs/issues/1477
 jest.mock('react-intl', () => {
@@ -90,9 +54,8 @@ jest.mock('react-intl', () => {
 
 jest.mock('../../../common/helpers/estimated-tile-list');
 
-
 describe('ExportDialog component', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
 
     const mockStore = rootStore.create({}, { fetch: packagesFetcher });
 
@@ -109,10 +72,12 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    expect(wrapper).toMatchSnapshot();
+    await waitFor(() => {
+      expect(wrapper.exists(ExportDialog)).toBeTruthy();
+    });
   });
 
-  it('Initial state of Ok button is disabled', () => {
+  it('Initial state of Ok button is disabled',  async () => {
     const mockStore = rootStore.create({}, { fetch: packagesFetcher });
 
     const wrapper = mount(
@@ -128,12 +93,13 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-
-    const okButton = getButtonById(wrapper, 'general.ok-btn.text');
-    expect(okButton.prop('disabled')).toBe(true);
+    await waitFor(() => {
+      const okButton = getButtonById(wrapper, 'general.ok-btn.text');
+      expect(okButton.prop('disabled')).toBe(true);
+    });
   });
 
-  it('Passed polygon presented as bottom-left and top-right corners coordinates', () => {
+  it('Passed polygon presented as bottom-left and top-right corners coordinates', async () => {
     const mockStore = rootStore.create({}, { fetch: packagesFetcher });
 
     const wrapper = mount(
@@ -148,15 +114,17 @@ describe('ExportDialog component', () => {
         </IntlProvider>
       </StoreProvider>
     );
-
 
     for (const field in fields) {
-      // eslint-disable-next-line
-      expect(getFieldValue(wrapper, field)).toEqual((fields as any)[field]);
+      await waitFor(() => {
+        const fieldVal = getField(wrapper, field);
+        // eslint-disable-next-line
+        expect(fieldVal.prop('value')).toBe((fields as any)[field]);
+      });
     }
 
   });
-
+  
   it('When package name and directory name are defined Ok button is enabled and download link properly generated', async () => {
     const exportPackName = 'test';
     const exportDirName = 'test';
@@ -175,17 +143,16 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    updateField(wrapper, 'packageName', exportPackName);
-    updateField(wrapper, 'directoryName', exportDirName);
+    await waitFor(() => {
+      updateField(wrapper, 'packageName', exportPackName);
+      updateField(wrapper, 'directoryName', exportDirName);
+    })
 
     wrapper.update();
 
     await waitFor(() => {
       const okButton = getButtonById(wrapper, 'general.ok-btn.text');
-      // const downloadLink = wrapper.find('#exportDownloadLink').text();
-
       expect(okButton.prop('disabled')).toBe(false);
-      // expect(downloadLink).toContain(exportPackName);
     });
   });
 
@@ -207,10 +174,13 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    updateField(wrapper, 'packageName', exportPackName);
-    updateField(wrapper, 'directoryName', exportDirName);
+    await waitFor(() => {
+      updateField(wrapper, 'packageName', exportPackName);
+      updateField(wrapper, 'directoryName', exportDirName);
+    })
 
-    act(() => {
+    // eslint-disable-next-line
+    await act(async () => {
       wrapper
         .find('form')
         .simulate('submit');
@@ -253,11 +223,12 @@ describe('ExportDialog component', () => {
       </StoreProvider>
     );
 
-    updateField(wrapper, 'packageName', exportPackName);
-    updateField(wrapper, 'directoryName', exportDirName);
-    updateField(wrapper, 'maxZoom', maxZoom);
+    await updateFieldAsync(wrapper, 'packageName', exportPackName);
+    await updateFieldAsync(wrapper, 'directoryName', exportDirName);
+    await updateFieldAsync(wrapper, 'maxZoom', maxZoom);
 
-    act(() => {
+    // eslint-disable-next-line
+    await act(async () => {
       wrapper
         .find('form')
         .simulate('submit');
@@ -288,8 +259,8 @@ describe('ExportDialog component', () => {
   //     />
   //   );
 
-  //   updateField(wrapper, 'packageName', exportPackName);
-  //   updateField(wrapper, 'minZoom', 0);
+  //   await updateFieldAsync(wrapper, 'packageName', exportPackName);
+  //   await updateFieldAsync(wrapper, 'minZoom', 0);
 
   //   wrapper.update();
 
