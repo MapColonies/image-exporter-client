@@ -12,5 +12,7 @@ export const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper =
 /* eslint-enable */
 
 describe('Button dummy suit', () => {
-  it('dummy test', () => {});
+  it('dummy test', () => {
+    expect(true).toBe(true);
+  });
 });

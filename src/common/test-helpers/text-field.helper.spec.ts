@@ -69,5 +69,7 @@ export const updateField = (wrapper: ReactWrapper, fieldName: string, value: num
 /* eslint-enable */
 
 describe('TextField dummy suit', () => {
-  it('dummy test', () => {});
+  it('dummy test', () => {
+    expect(true).toBe(true);
+  });
 });

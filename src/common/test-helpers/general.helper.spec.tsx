@@ -48,5 +48,7 @@ export const asyncRender: asyncRenderModel = async (renderMethod, component) => 
 /* eslint-enable */
 
 describe('General dummy suit', () => {
-  it('dummy test', () => {});
+  it('dummy test', () => {
+    expect(true).toBe(true);
+  });
 });
