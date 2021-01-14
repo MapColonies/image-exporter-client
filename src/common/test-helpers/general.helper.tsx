@@ -2,6 +2,7 @@ import { ReactWrapper } from 'enzyme';
 import React, { ReactElement } from 'react';
 import { act, waitFor } from '@testing-library/react';
 
+/* eslint-disable */
 interface asyncRenderModel {
   (renderMethod: (node: ReactElement) =>
     ReactWrapper<any>, component: ReactElement): Promise<ReactWrapper<any>>
@@ -43,3 +44,5 @@ export const asyncRender: asyncRenderModel = async (renderMethod, component) => 
 //   );
 //   expect(true).toBe(true);
 // });
+
+/* eslint-enable */

@@ -2,6 +2,7 @@ import { ReactWrapper } from 'enzyme';
 import { act } from '@testing-library/react';
 import { TextField } from '@map-colonies/react-core';
 
+/* eslint-disable */
 export const getField = (wrapper: ReactWrapper, fieldName: string) => {
   return wrapper
     .findWhere((n) => {
@@ -19,7 +20,9 @@ export const getFieldValue = (wrapper: ReactWrapper, fieldName: string) => {
 export const updateFieldAsync = async (wrapper: ReactWrapper, fieldName: string, value: number | string) => {
   const fieldWrapper = wrapper.find(TextField).find({ name: fieldName }).find('input');
 
+  // eslint-disable-next-line
   await act(async () => {
+    // await new Promise(resolve => setTimeout(resolve, 0));
     fieldWrapper.simulate('change', {
       nativeEvent: {
         data: value
@@ -63,3 +66,4 @@ export const updateField = (wrapper: ReactWrapper, fieldName: string, value: num
 
   fieldWrapper.simulate('blur');
 };
+/* eslint-enable */

@@ -129,6 +129,7 @@ describe('ExportDialog component', () => {
     await waitFor(() => {
       for (const field in fields) {
         const fieldVal = getField(wrapper, field);
+        // eslint-disable-next-line
         expect(fieldVal.prop('value')).toBe((fields as any)[field]);
       }
     });
@@ -227,6 +228,7 @@ describe('ExportDialog component', () => {
     // await updateFieldAsync(wrapper, 'packageName', exportPackName);
     // await updateFieldAsync(wrapper, 'directoryName', exportDirName);
 
+    // eslint-disable-next-line
     await act(async () => {
       wrapper
         .find('form')
@@ -274,6 +276,7 @@ describe('ExportDialog component', () => {
     await updateFieldAsync(wrapper, 'directoryName', exportDirName);
     await updateFieldAsync(wrapper, 'maxZoom', maxZoom);
 
+    // eslint-disable-next-line
     await act(async () => {
       wrapper
         .find('form')

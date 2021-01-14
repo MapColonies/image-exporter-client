@@ -9,4 +9,4 @@ export const getButtonById = (wrapper: ReactWrapper, id: string): ReactWrapper =
         n.prop('children').props['id'] === id;
     });
 };
-  /* eslint-enable */
+/* eslint-enable */
