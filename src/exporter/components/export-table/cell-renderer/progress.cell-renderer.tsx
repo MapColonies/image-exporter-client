@@ -5,7 +5,7 @@ import { Box } from '@map-colonies/react-components';
 import './progress.cell-renderer.css';
 import { useState } from 'react';
 import EXPORTER_CONFIG from '../../../../common/config';
-import { IExportTaskStatus } from '../../../models/exportTaskStatus';
+import { IExportTaskStatus, ExportStatus } from '../../../models/exportTaskStatus';
 
 const PEDING_PROGRESS = 0;
 const ONE_HUNDRED = 100;
@@ -14,7 +14,8 @@ export const ProgressRenderer: React.FC<ICellRendererParams> = (
 ) => {
   const [isRtl] = useState<boolean>(EXPORTER_CONFIG.I18N.DEFAULT_LANGUAGE === 'he' ? true : false);
   const value: number = (props.data as IExportTaskStatus).progress; 
-  if (!value) {
+  const status: string = (props.data as IExportTaskStatus).status;
+  if (!value || status === ExportStatus.FAILED) {
     return <></>;//''; // not null!
   }
   const getProgressValue = ():number => {
