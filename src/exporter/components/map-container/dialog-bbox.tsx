@@ -128,10 +128,11 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
   };
 
   const isValidRegexPattern = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
+    // eslint-disable-next-line
     const valueString: string = e.target.value as string;
     const splitChar = EXPORTER_CONFIG.EXPORT.SPLIT_CHARACTER;
     const maxFractionDigits = EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS;
-    const regexStr: string = `^([0-9])+\\${splitChar}?(\\b[0-9]{0,${maxFractionDigits}})*$`;
+    const regexStr = `^([0-9])+\\${splitChar}?(\\b[0-9]{0,${maxFractionDigits}})*$`;
     const regex = new RegExp(regexStr);
     const value = Number(valueString);
     if (!valueString) {
