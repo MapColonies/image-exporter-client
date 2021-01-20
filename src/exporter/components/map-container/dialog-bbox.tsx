@@ -148,17 +148,17 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     return true;
   }
 
+  // eslint-disable-next-line
+  const isValidRegexPattern = (e: React.ChangeEvent<any>): boolean => {
     // eslint-disable-next-line
-    const isValidRegexPattern = (e: React.ChangeEvent<any>): boolean => {
-      // eslint-disable-next-line
-      const FIRST_CHAR_IDX = 0;
-      const data: string = (e.nativeEvent as any).data;
-      if (!data)
-        return true;
+    const FIRST_CHAR_IDX = 0;
+    const data: string = (e.nativeEvent as any).data;
+    if (!data)
+      return true;
   
-      const charIdx = data.search(/[0-9.)]+/i);
-      return (charIdx === FIRST_CHAR_IDX);
-    };
+    const charIdx = data.search(/[0-9.)]+/i);
+    return (charIdx === FIRST_CHAR_IDX);
+  };
 
   return (
     <Dialog open={ isOpen } preventOutsideDismiss={ true }>
