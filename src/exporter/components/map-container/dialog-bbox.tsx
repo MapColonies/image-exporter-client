@@ -115,50 +115,32 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
 
   // eslint-disable-next-line
   const checkValidLat = (e: React.ChangeEvent<any>) => {
-    const maxMinLatValue = 90;
-    const isValidBBOXValue: boolean = innerCheckValidBBOXValue(e, maxMinLatValue);
-    const isValidValuePattern: boolean = isValidRegexPattern(e);
-    return isValidBBOXValue && isValidValuePattern? formik.handleChange(e) : false;
+    const maxMinLatValue = EXPORTER_CONFIG.MAP.MAX_MIN_LAT_VALUE;
+    const isValid: boolean = isValidRegexPattern(e, maxMinLatValue);
+    return isValid? formik.handleChange(e) : false;
   };
 
   // eslint-disable-next-line
   const checkValidLong = (e: React.ChangeEvent<any>) => {
-    const maxMinLongValue = 180;
-    const isValidBBOXValue: boolean = innerCheckValidBBOXValue(e, maxMinLongValue);
-    const isValidValuePattern: boolean = isValidRegexPattern(e);
-    return isValidBBOXValue && isValidValuePattern ? formik.handleChange(e) : false;
+    const maxMinLongValue = EXPORTER_CONFIG.MAP.MAX_MIN_LONG_VALUE;
+    const isValid: boolean = isValidRegexPattern(e, maxMinLongValue);
+    return isValid? formik.handleChange(e) : false;
   };
 
-  const innerCheckValidBBOXValue = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const isValidRegexPattern = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
     const valueString: string = e.target.value as string;
+    const splitChar = EXPORTER_CONFIG.EXPORT.SPLIT_CHARACTER;
+    const maxFractionDigits = EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS;
+    const regexStr: string = `^([0-9])+\\${splitChar}?(\\b[0-9]{0,${maxFractionDigits}})*$`;
+    const regex = new RegExp(regexStr);
+    const value = Number(valueString);
     if (!valueString) {
       return false;
     }
-    const splited = valueString.split('.');
-    const maxFractionDigits = EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS;
-    const numberOfSplitedNumber = EXPORTER_CONFIG.EXPORT.NUMBER_OF_SPLITED_NUMBER;
-    if (splited.length === numberOfSplitedNumber && splited[1].length > maxFractionDigits) {
-      return false;
-    }
-    const value = Number(valueString);
     if (value < -maxMinValue || value > maxMinValue) {
       return false;
     }
-
-    return true;
-  }
-
-  // eslint-disable-next-line
-  const isValidRegexPattern = (e: React.ChangeEvent<any>): boolean => {
-    // eslint-disable-next-line
-    const FIRST_CHAR_IDX = 0;
-    const data: string = (e.nativeEvent as any).data;
-    if (!data)
-      return true;
-  
-    const charIdx = data.search(/[0-9.)]+/i);
-    return (charIdx === FIRST_CHAR_IDX);
+    return regex.test(valueString);
   };
 
   return (
@@ -194,7 +176,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lat.label' }) }
               id="bottomLeftLat"
               name="bottomLeftLat"
-              type="number"
+              type="text"
               onChange={ checkValidLat }
               value={ formik.values.bottomLeftLat }
               className={ classes.spacer }
@@ -203,7 +185,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lon.label' }) }
               id="bottomLeftLon"
               name="bottomLeftLon"
-              type="number"
+              type="text"
               onChange={ checkValidLong }
               value={ formik.values.bottomLeftLon }
               className={ classes.spacer }

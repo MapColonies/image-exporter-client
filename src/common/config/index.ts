@@ -29,14 +29,16 @@ const EXPORTER_CONFIG = {
     MAX_ZOOM: EXPORT.maxZoomLevel as number,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
-    MAX_FRACTION_DIGITS: EXPORT.maxFractionDigits,
-    NUMBER_OF_SPLITED_NUMBER: EXPORT.numberOfSplitedNumber,
+    MAX_FRACTION_DIGITS: 5,
+    SPLIT_CHARACTER: '.',
     EXPORT_URL: EXPORT.urlPattern,
   },
   MAP: {
     CENTER: MAP.center as [number, number],
     ZOOM: MAP.zoom as number,
     ZERO_ZOOM_LEVEL_RESOLUTION: 78271.52, // pixel_size_meters
+    MAX_MIN_LONG_VALUE: 180,
+    MAX_MIN_LAT_VALUE: 90,
   },
   ACTIVE_LAYER: ACTIVE_LAYER, // | 'WMTS_LAYER' | 'WMS_LAYER' | 'XYZ_LAYER' | 'OSM_DEFAULT'
   ACTIVE_LAYER_PROPERTIES: ACTIVE_LAYER_PROPERTIES,
@@ -61,7 +63,7 @@ const EXPORTER_CONFIG = {
   XYZ_LAYER: {
     ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
     URL: `${MAP_SERVER}/${PUBLISH_POINT}/query?request=${REQUEST}&channel=${CHANNEL}&version=${VERSION}&x={x}&y={y}&z={z}`,
-  },
+  }
 };
 
 export default EXPORTER_CONFIG;
