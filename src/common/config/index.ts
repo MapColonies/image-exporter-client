@@ -63,7 +63,7 @@ const EXPORTER_CONFIG = {
   XYZ_LAYER: {
     ATTRIBUTIONS: `Tiles © <a href="${MAP_SERVER}">GEE</a>`,
     URL: `${MAP_SERVER}/${PUBLISH_POINT}/query?request=${REQUEST}&channel=${CHANNEL}&version=${VERSION}&x={x}&y={y}&z={z}`,
-  }
+  },
 };
 
 export default EXPORTER_CONFIG;
