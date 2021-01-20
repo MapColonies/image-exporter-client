@@ -115,15 +115,17 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
   // eslint-disable-next-line
   const checkValidLat = (e: React.ChangeEvent<any>) => {
     const maxMinLatValue = 90;
-    const isValid = innerCheckValidBBOXValue(e, maxMinLatValue);
-    return isValid ? formik.handleChange(e) : false;
+    const isValidBBOXValue: boolean = innerCheckValidBBOXValue(e, maxMinLatValue);
+    const isValidValuePattern: boolean = isValidRegexPattern(e);
+    return isValidBBOXValue && isValidValuePattern? formik.handleChange(e) : false;
   };
 
   // eslint-disable-next-line
   const checkValidLong = (e: React.ChangeEvent<any>) => {
     const maxMinLongValue = 180;
-    const isValid = innerCheckValidBBOXValue(e, maxMinLongValue);
-    return isValid ? formik.handleChange(e) : false;
+    const isValidBBOXValue: boolean = innerCheckValidBBOXValue(e, maxMinLongValue);
+    const isValidValuePattern: boolean = isValidRegexPattern(e);
+    return isValidBBOXValue && isValidValuePattern ? formik.handleChange(e) : false;
   };
 
   const innerCheckValidBBOXValue = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
@@ -132,7 +134,6 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     if (!valueString) {
       return false;
     }
-
     const splited = valueString.split('.');
     const maxFractionDigits = 5;
     const numberOfSplitedNumber = 2;
@@ -147,6 +148,18 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
     return true;
   }
 
+    // eslint-disable-next-line
+    const isValidRegexPattern = (e: React.ChangeEvent<any>): boolean => {
+      // eslint-disable-next-line
+      const FIRST_CHAR_IDX = 0;
+      const data: string = (e.nativeEvent as any).data;
+      if (!data)
+        return true;
+  
+      const charIdx = data.search(/[0-9.)]+/i);
+      return (charIdx === FIRST_CHAR_IDX);
+    };
+
   return (
     <Dialog open={ isOpen } preventOutsideDismiss={ true }>
       <DialogTitle>
@@ -157,9 +170,9 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           <Box style={ { display: 'flex', marginBottom: '16px' } }>
             <TextField
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lat.label' }) }
-              id="topRightLat"
+              id="topRightLat" 
               name="topRightLat"
-              type="number"
+              type="text"
               onChange={ checkValidLat }
               value={ formik.values.topRightLat }
               className={ classes.spacer }
@@ -168,7 +181,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lon.label' }) }
               id="topRightLon"
               name="topRightLon"
-              type="number"
+              type="text"
               onChange={ checkValidLong }
               value={ formik.values.topRightLon }
               className={ classes.spacer }
