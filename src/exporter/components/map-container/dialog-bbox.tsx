@@ -16,6 +16,7 @@ import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { BBoxAreaLimit, isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
+import EXPORTER_CONFIG from '../../../common/config';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -114,38 +115,34 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
 
   // eslint-disable-next-line
   const checkValidLat = (e: React.ChangeEvent<any>) => {
-    const maxMinLatValue = 90;
-    const isValid = innerCheckValidBBOXValue(e, maxMinLatValue);
-    return isValid ? formik.handleChange(e) : false;
+    const maxMinLatValue = EXPORTER_CONFIG.MAP.MAX_MIN_LAT_VALUE;
+    const isValid: boolean = isValidRegexPattern(e, maxMinLatValue);
+    return isValid? formik.handleChange(e) : false;
   };
 
   // eslint-disable-next-line
   const checkValidLong = (e: React.ChangeEvent<any>) => {
-    const maxMinLongValue = 180;
-    const isValid = innerCheckValidBBOXValue(e, maxMinLongValue);
-    return isValid ? formik.handleChange(e) : false;
+    const maxMinLongValue = EXPORTER_CONFIG.MAP.MAX_MIN_LONG_VALUE;
+    const isValid: boolean = isValidRegexPattern(e, maxMinLongValue);
+    return isValid? formik.handleChange(e) : false;
   };
 
-  const innerCheckValidBBOXValue = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const isValidRegexPattern = (e: React.ChangeEvent<any>, maxMinValue: number): boolean => {
+    // eslint-disable-next-line
     const valueString: string = e.target.value as string;
+    const splitChar = EXPORTER_CONFIG.EXPORT.SPLIT_CHARACTER;
+    const maxFractionDigits = EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS;
+    const regexStr = `^([0-9])+\\${splitChar}?(\\b[0-9]{0,${maxFractionDigits}})*$`;
+    const regex = new RegExp(regexStr);
+    const value = Number(valueString);
     if (!valueString) {
       return false;
     }
-
-    const splited = valueString.split('.');
-    const maxFractionDigits = 5;
-    const numberOfSplitedNumber = 2;
-    if (splited.length === numberOfSplitedNumber && splited[1].length > maxFractionDigits) {
-      return false;
-    }
-    const value = Number(valueString);
     if (value < -maxMinValue || value > maxMinValue) {
       return false;
     }
-
-    return true;
-  }
+    return regex.test(valueString);
+  };
 
   return (
     <Dialog open={ isOpen } preventOutsideDismiss={ true }>
@@ -157,9 +154,9 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
           <Box style={ { display: 'flex', marginBottom: '16px' } }>
             <TextField
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lat.label' }) }
-              id="topRightLat"
+              id="topRightLat" 
               name="topRightLat"
-              type="number"
+              type="text"
               onChange={ checkValidLat }
               value={ formik.values.topRightLat }
               className={ classes.spacer }
@@ -168,7 +165,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.top_right_lon.label' }) }
               id="topRightLon"
               name="topRightLon"
-              type="number"
+              type="text"
               onChange={ checkValidLong }
               value={ formik.values.topRightLon }
               className={ classes.spacer }
@@ -180,7 +177,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lat.label' }) }
               id="bottomLeftLat"
               name="bottomLeftLat"
-              type="number"
+              type="text"
               onChange={ checkValidLat }
               value={ formik.values.bottomLeftLat }
               className={ classes.spacer }
@@ -189,7 +186,7 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
               label={ intl.formatMessage({ id: 'custom-bbox.dialog-field.bottom_left_lon.label' }) }
               id="bottomLeftLon"
               name="bottomLeftLon"
-              type="number"
+              type="text"
               onChange={ checkValidLong }
               value={ formik.values.bottomLeftLon }
               className={ classes.spacer }
