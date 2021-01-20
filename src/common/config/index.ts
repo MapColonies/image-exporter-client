@@ -29,7 +29,8 @@ const EXPORTER_CONFIG = {
     MAX_ZOOM: EXPORT.maxZoomLevel as number,
     METRIX_SET_FACTOR: 2,
     POLLING_CYCLE_INTERVAL: 3000,
-    MAX_FRACTION_DIGITS: 5,
+    MAX_FRACTION_DIGITS: EXPORT.maxFractionDigits,
+    NUMBER_OF_SPLITED_NUMBER: EXPORT.numberOfSplitedNumber,
     EXPORT_URL: EXPORT.urlPattern,
   },
   MAP: {

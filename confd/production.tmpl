@@ -24,6 +24,8 @@ window._env_ = {
   EXPORT: {
     defaultZoomLevel: {{ getv "/configuration/export/default/zoom/level" "18" }},
     maxZoomLevel: {{ getv "/configuration/export/max/zoom/level" "22" }},
+    maxFractionDigits: {{ getv "/configuration/export/max/fraction/digits" "5" }},
+    numberOfSplitedNumber: {{ getv "/configuration/export/number/of/splited/number" "2" }}
   },
   MAP: {
     center: {{ getv "/configuration/map/center" "[35.14, 31.39]" }},

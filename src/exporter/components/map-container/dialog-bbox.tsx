@@ -16,6 +16,7 @@ import { Box } from '@map-colonies/react-components';
 import { FormattedMessage, useIntl, IntlShape } from 'react-intl';
 import { BBoxCorner, Corner } from '../bbox/bbox-corner-indicator';
 import { BBoxAreaLimit, isBBoxWithinLimit } from '../../../common/helpers/bbox-area';
+import EXPORTER_CONFIG from '../../../common/config';
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -135,8 +136,8 @@ export const DialogBBox: React.FC<DialogBBoxProps> = (
       return false;
     }
     const splited = valueString.split('.');
-    const maxFractionDigits = 5;
-    const numberOfSplitedNumber = 2;
+    const maxFractionDigits = EXPORTER_CONFIG.EXPORT.MAX_FRACTION_DIGITS;
+    const numberOfSplitedNumber = EXPORTER_CONFIG.EXPORT.NUMBER_OF_SPLITED_NUMBER;
     if (splited.length === numberOfSplitedNumber && splited[1].length > maxFractionDigits) {
       return false;
     }
