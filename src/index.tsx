@@ -17,7 +17,7 @@ const store = rootStore.create(
   {
     fetch: async (url: string, method: Method, params: Record<string, unknown>) => {
       const { userAgent } = navigator as NavigatorID;
-      // eslint-disable
+      /* eslint-disable */
       const systemInfo = {
         browser: browserName,
         browser_version: fullBrowserVersion,
@@ -28,7 +28,7 @@ const store = rootStore.create(
         mobile_model: mobileModel,
         user_agent: userAgent,
       };
-      // eslint-enable
+      /* eslint-enable */
       const errorMsg = 'CLIENT HTTP ERROR BY AXIOS';
       return Axios.request({
         url, 
