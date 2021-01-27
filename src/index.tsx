@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { browserName, fullBrowserVersion, osName, osVersion, deviceType, mobileVendor, mobileModel } from 'react-device-detect';
 import 'mobx-react-lite/batchingForReactDom';
 import Axios, { Method } from 'axios';
 import moment from 'moment';
@@ -10,13 +11,13 @@ import { ExporterResponse } from './exporter/models/exporterStore';
 import EXPORTER_CONFIG from './common/config';
 import logger from './logger/logger';
 import './index.css';
-import { browserName, fullBrowserVersion, osName, osVersion, deviceType, mobileVendor, mobileModel } from 'react-device-detect';
 
 const store = rootStore.create(
   {},
   {
     fetch: async (url: string, method: Method, params: Record<string, unknown>) => {
       const { userAgent } = navigator as NavigatorID;
+      // eslint-disable
       const systemInfo = {
         browser: browserName,
         browser_version: fullBrowserVersion,
@@ -26,7 +27,8 @@ const store = rootStore.create(
         mobile_vendor: mobileVendor,
         mobile_model: mobileModel,
         user_agent: userAgent,
-      }
+      };
+      // eslint-enable
       const errorMsg = 'CLIENT HTTP ERROR BY AXIOS';
       return Axios.request({
         url, 
