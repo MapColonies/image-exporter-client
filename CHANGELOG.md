@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/MapColonies/image-exporter-client/compare/v0.1.1...v1.0.0) (2021-02-02)
+
+
+### Features
+
+* **logger:** client info extended ([#171](https://github.com/MapColonies/image-exporter-client/issues/171)) ([fe8b614](https://github.com/MapColonies/image-exporter-client/commit/fe8b614a92b99b1d9404aa99dc8871efd65d003e))
+* **rtl-dispaly-support:** added rtl table grid and progressbar display support ([#160](https://github.com/MapColonies/image-exporter-client/issues/160)) ([6dc432c](https://github.com/MapColonies/image-exporter-client/commit/6dc432c7a8720f5321308525ee8bf158ae31f918))
+
+
+### Bug Fixes
+
+* **number-field:** native html5 buttons enabled ([#163](https://github.com/MapColonies/image-exporter-client/issues/163)) ([e6050ce](https://github.com/MapColonies/image-exporter-client/commit/e6050ce07691bc4a73ca8a5e260b9fcc66c09f1e))
+* **unit-test:** act() warning refactor ([#165](https://github.com/MapColonies/image-exporter-client/issues/165)) ([0f09daf](https://github.com/MapColonies/image-exporter-client/commit/0f09daf11ce74f964ee61f1535ddb3abfc80ed69))
+* **zoom-resolution:** calculation instead of lookup ([#164](https://github.com/MapColonies/image-exporter-client/issues/164)) ([3374b3a](https://github.com/MapColonies/image-exporter-client/commit/3374b3a1481760f5691d5412881ec6c7142386df))
+* allow '0' number after decimal point with regex ([#170](https://github.com/MapColonies/image-exporter-client/issues/170)) ([25d6d96](https://github.com/MapColonies/image-exporter-client/commit/25d6d966d107707f4c337cec786249e118215d97))
+* fixed progress bar view while failed status ([#169](https://github.com/MapColonies/image-exporter-client/issues/169)) ([7382332](https://github.com/MapColonies/image-exporter-client/commit/7382332f938f67c88817f022fbd2b1afc296c75d))
+
 ### 0.1.1 (2021-01-06)
 
 
