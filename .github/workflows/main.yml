@@ -30,11 +30,11 @@ jobs:
         run: yarn test
       - name: Azure Pipelines Action
         env:
-          REPO: ${{ github.event.repository.name }} 
+          REPO: ${{ github.event.repository.name + "--CI"}}
         uses: Azure/pipelines@v1
         with:
           azure-devops-project-url: https://dev.azure.com/Libot-Mipui-Org/image-exporter-client
-          azure-pipeline-name: $REPO + "-CI"
+          azure-pipeline-name: $REPO
           azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
   security:
       runs-on: ubuntu-latest
