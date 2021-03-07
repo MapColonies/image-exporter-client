@@ -46,7 +46,7 @@ const EXPORTER_CONFIG = {
     ATTRIBUTIONS:
       `Tiles © <a href="${MAP_SERVER}/service?REQUEST=GetCapabilities">MapProxy</a>`,
     URL:
-      `${MAP_SERVER}/${ACTIVE_LAYER_PROPERTIES.urlPattern}`,
+      `${ACTIVE_LAYER_PROPERTIES.urlPattern}`,
     LAYER: `${PUBLISH_POINT}`,
     MATRIX_SET: `${ACTIVE_LAYER_PROPERTIES.urlPatternParams.matrixSet}`,
     STYLE: `${ACTIVE_LAYER_PROPERTIES.urlPatternParams.style}`,
